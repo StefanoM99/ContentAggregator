@@ -3589,3 +3589,97 @@ Completed 200 OK in 971ms (Views: 968.0ms | ActiveRecord: 2.2ms | Allocations: 7
   
 ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
   
+Started GET "/articles/new" for 127.0.0.1 at 2022-08-30 17:56:13 +0200
+  [1m[35m (15.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArticlesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (Duration: 179.3ms | Allocations: 5533)
+  Rendered articles/new.html.erb within layouts/application (Duration: 239.7ms | Allocations: 6150)
+  Rendered layout layouts/application.html.erb (Duration: 5721.3ms | Allocations: 56456)
+Completed 200 OK in 6042ms (Views: 5751.9ms | ActiveRecord: 25.8ms | Allocations: 69025)
+
+
+Started GET "/" for 127.0.0.1 at 2022-08-30 17:56:21 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 39.6ms | Allocations: 133)
+  Rendered layout layouts/application.html.erb (Duration: 1298.5ms | Allocations: 7708)
+Completed 200 OK in 1321ms (Views: 1313.3ms | ActiveRecord: 0.0ms | Allocations: 8587)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/" for 127.0.0.1 at 2022-08-30 17:56:40 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 15)
+  Rendered layout layouts/application.html.erb (Duration: 1332.1ms | Allocations: 7540)
+Completed 200 OK in 1335ms (Views: 1334.1ms | ActiveRecord: 0.0ms | Allocations: 7837)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/articles" for 127.0.0.1 at 2022-08-30 17:58:04 +0200
+Processing by ArticlesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (6.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:9
+  Rendered articles/_article.html.erb (Duration: 11.3ms | Allocations: 358)
+  Rendered articles/_article.html.erb (Duration: 0.3ms | Allocations: 44)
+  Rendered articles/index.html.erb within layouts/application (Duration: 390.2ms | Allocations: 5264)
+  Rendered layout layouts/application.html.erb (Duration: 1679.5ms | Allocations: 12621)
+Completed 200 OK in 1701ms (Views: 1675.0ms | ActiveRecord: 6.3ms | Allocations: 13063)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/" for 127.0.0.1 at 2022-08-30 18:14:40 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 220.3ms | Allocations: 1488)
+  Rendered layout layouts/application.html.erb (Duration: 1403.6ms | Allocations: 8260)
+Completed 200 OK in 1471ms (Views: 1441.3ms | Allocations: 9255)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/articles" for 127.0.0.1 at 2022-08-30 18:14:48 +0200
+Processing by ArticlesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering articles/index.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/articles/index.html.erb:9
+  [1m[36mArticle Load (6.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:9
+  Rendered articles/_article.html.erb (Duration: 21.9ms | Allocations: 325)
+  Rendered articles/_article.html.erb (Duration: 0.3ms | Allocations: 44)
+  Rendered articles/index.html.erb within layouts/application (Duration: 139.9ms | Allocations: 2578)
+  Rendered layout layouts/application.html.erb (Duration: 1302.1ms | Allocations: 8960)
+Completed 200 OK in 1329ms (Views: 1315.7ms | ActiveRecord: 11.2ms | Allocations: 9819)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
+Started GET "/" for 127.0.0.1 at 2022-08-30 18:19:50 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 188.1ms | Allocations: 1485)
+  Rendered layout layouts/application.html.erb (Duration: 1183.6ms | Allocations: 8273)
+Completed 200 OK in 1211ms (Views: 1202.5ms | ActiveRecord: 0.0ms | Allocations: 9269)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/application.js"):
+  
