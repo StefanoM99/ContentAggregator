@@ -1,0 +1,31 @@
+<div id="<%= dom_id article %>">
+  <img src="<%= article.image_url %>" class=img-fluid>
+  
+  <div class="card-title">
+    <small>
+      <strong>Source:</strong>
+      <%= article.source %>
+    </small>
+
+    <small>
+      <strong>Author:</strong>
+      <%= article.author %>
+    </small>
+
+    <h3>
+      <strong><%= article.title %></strong>
+    </h3>
+  </div>
+
+  <div class="card-body">  
+    <h5 class="card-text">
+      <%= article.description %><br>
+      <a href="<%= article.url %>"><%= article.url %></a>
+    </h5>
+
+    <small>
+      <strong>Publication:</strong>
+      <%= article.publication %>
+    </small>
+  </div>
+</div>
