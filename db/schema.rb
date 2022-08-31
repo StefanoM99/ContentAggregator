@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_130043) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_31_154229) do
   create_table "articles", force: :cascade do |t|
     t.string "source"
     t.string "author"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_130043) do
     t.text "media"
     t.string "country"
     t.string "language"
+    t.string "topic"
     t.string "tw_account"
     t.date "publication"
     t.datetime "created_at", null: false

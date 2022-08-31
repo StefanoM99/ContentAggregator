@@ -24,6 +24,7 @@ class Article < ApplicationRecord
             media: item["media"],
             country: item["country"],
             language: item["language"],
+            topic: item["topic"],
             tw_account: item["twitter_account"],
             publication: item["published_date"]
         )

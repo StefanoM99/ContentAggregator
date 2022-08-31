@@ -3,25 +3,30 @@
   
   <div class="card-title">
     <small>
+      <strong>Topic:</strong>
+      <%= article.topic %>
+    </small>
+    <br>
+    <small>
       <strong>Source:</strong>
       <%= article.source %>
     </small>
-
+    <br>
     <small>
       <strong>Author:</strong>
       <%= article.author %>
     </small>
-
+    <br>
     <small>
       <strong>Country:</strong>
       <%= article.country %>
     </small>
-
+    
     <small>
       <strong>Language:</strong>
       <%= article.language %>
     </small>
-
+    <br>
     <h3>
       <strong><%= article.title %></strong>
     </h3>
@@ -29,19 +34,22 @@
 
   <div class="card-body"> 
     <h4 class="card-text">
-      <%= article.description %><br>
+      <%= article.description %>
     </h4>
-    
+    <br>
     <h6 class="card-text">
-      <%= article.summary %><br>
-      <a href="<%= article.link %>"><%= article.link %></a>
+      <%= article.summary %>
     </h6>
-
+    <br>
+    <small>
+      <a href="<%= article.link %>"><%= article.link %></a>
+    </small>
+    <br>
     <small>
       <strong>Publication:</strong>
       <%= article.publication %>
     </small>
-
+    <br>
     <small>
       <strong>Twitter account:</strong>
       <%= article.tw_account %>

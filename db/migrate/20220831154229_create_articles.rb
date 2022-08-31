@@ -10,6 +10,7 @@ class CreateArticles < ActiveRecord::Migration[7.0]
       t.text :media
       t.string :country
       t.string :language
+      t.string :topic
       t.string :tw_account
       t.date :publication
 
