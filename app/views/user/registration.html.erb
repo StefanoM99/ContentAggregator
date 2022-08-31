@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ContentAggregator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </head>
+
+    <body>
+    <!-- > Inizio sezione header -->
+    <header class=" header-active" data-aos="fade-down">
+
+  
+    
+        
+          
+          <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto'%>
+          
+      
+      
+      
+  
+        
+
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  <!-- > Inizio sezione centrale -->
+  <div class = "container text-center" >
+   <div class="timeline" data-aos="fade-down">
+   <h1>Inserisci i tuoi dati:</h1>
+        <form>
+            <input type="text" class="form" placeholder="Nome" >
+            <input type="text" class="form" placeholder="Cognome">
+            <input type="text" class="form" placeholder="E-mail">
+            <input type="password" class="form" placeholder="Password"><br>
+            <input type="submit" class="buttonreg" value="Registrati" >
+        </form>
+    </div>
+  </div>
+    <script>
+     AOS.init();
+    </script>
+  </body>
+</html>
