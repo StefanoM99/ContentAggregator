@@ -5,8 +5,12 @@ class CreateArticles < ActiveRecord::Migration[7.0]
       t.string :author
       t.text :title
       t.text :description
-      t.text :url
-      t.text :image_url
+      t.text :summary
+      t.text :link
+      t.text :media
+      t.string :country
+      t.string :language
+      t.string :tw_account
       t.date :publication
 
       t.timestamps

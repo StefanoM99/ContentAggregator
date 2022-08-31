@@ -1,5 +1,5 @@
 <div id="<%= dom_id article %>">
-  <img src="<%= article.image_url %>" class=img-fluid>
+  <img src="<%= article.media %>" class=img-fluid>
   
   <div class="card-title">
     <small>
@@ -12,20 +12,39 @@
       <%= article.author %>
     </small>
 
+    <small>
+      <strong>Country:</strong>
+      <%= article.country %>
+    </small>
+
+    <small>
+      <strong>Language:</strong>
+      <%= article.language %>
+    </small>
+
     <h3>
       <strong><%= article.title %></strong>
     </h3>
   </div>
 
-  <div class="card-body">  
-    <h5 class="card-text">
+  <div class="card-body"> 
+    <h4 class="card-text">
       <%= article.description %><br>
-      <a href="<%= article.url %>"><%= article.url %></a>
-    </h5>
+    </h4>
+    
+    <h6 class="card-text">
+      <%= article.summary %><br>
+      <a href="<%= article.link %>"><%= article.link %></a>
+    </h6>
 
     <small>
       <strong>Publication:</strong>
       <%= article.publication %>
+    </small>
+
+    <small>
+      <strong>Twitter account:</strong>
+      <%= article.tw_account %>
     </small>
   </div>
 </div>
