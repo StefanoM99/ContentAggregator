@@ -10,19 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2022_08_31_130043) do
-=======
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_153837) do
-  create_table "users", force: :cascade do |t|
-    t.string "mail"
-    t.string "password"
-    t.string "name"
-    t.string "surname"
-=======
-ActiveRecord::Schema[7.0].define(version: 2022_08_29_141438) do
->>>>>>> bd54491f9d17eb0076e6f2629326763024ac9178
   create_table "articles", force: :cascade do |t|
     t.string "source"
     t.string "author"
@@ -35,7 +23,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_29_141438) do
     t.string "language"
     t.string "tw_account"
     t.date "publication"
->>>>>>> 72b556a2173dba29e12427ba6a89381658383a4c
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "mail"
+    t.string "password"
+    t.string "name"
+    t.string "surname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

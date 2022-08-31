@@ -1,47 +1,22 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ContentAggregator</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "main" %>
-    <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  </head>
 
   <body>
-  <!-- > Inizio sezione header -->
-     <header class=" header-active" data-aos="fade-down">
-
-  
-    
-        
-          
-          <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto'%>
-          
-      
-      
-      
-  
-        
-
+    <!-- > Inizio sezione header -->
+    <header class=" header-active" data-aos="fade-down">
+      <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto'%>
     </header>
 
-  <!-- > Inizio sezione centrale -->
-    <div class="container">
-    
-     
+    <!-- > Inizio sezione centrale -->
+    <div class="container">    
       <div class="row vh-100 align-items-center ">
         <div class="col-sm" style="text-align:center" data-aos="fade-right">
-           <%= image_tag "index.svg", height: 500,style: 'max-width:500px' %>
+          <%= image_tag "index.svg", height: 500,style: 'max-width:500px' %>
           <h1>Benvenuto su ContentAggregator!</h1>
           <br>
           <p>ContentAggregator è un'applicazione dove puoi trovare tutti i contenuti di tuo gradimento!<p>
         </div>
+        
         <div class="col" style="text-align:center"  data-aos="fade-left">
           <form >
             <input type="text" placeholder="Nome Utente" class="form">
@@ -60,16 +35,17 @@
         </div>
       </div>
     </div>
-       <script>
-  AOS.init();
-</script>
+    
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
-=======
+
 <!-- > Inizio sezione header -->
 <header data-aos="fade-down">
 
-<div class="container" style="padding-left:23%">
+  <div class="container" style="padding-left:23%">
     <div class="row " >
       <div class="col" >
         
@@ -78,44 +54,39 @@
       </div>
     
     </div>
-</div>
-      
-
+  </div>
 </header>
 
 <!-- > Inizio sezione centrale -->
 <div class="container">
-  
-   
-    <div class="row vh-100 align-items-center ">
-        <div class="col-sm" style="text-align:center" data-aos="fade-right">
-            <%= image_tag "index.svg", height: 500,style: 'max-width:500px' %>
-            <%= yield %>
-            <h1>Benvenuto su ContentAggregator</h1>
-            <br>
-            <p>ContentAggregator è un'applicazione dove puoi trovare tutti i contenuti di tuo gradimento!
+  <div class="row vh-100 align-items-center ">
+    <div class="col-sm" style="text-align:center" data-aos="fade-right">
+      <%= image_tag "index.svg", height: 500,style: 'max-width:500px' %>
+        <%= yield %>
+        <h1>Benvenuto su ContentAggregator</h1>
+        <br>
+        <p>ContentAggregator è un'applicazione dove puoi trovare tutti i contenuti di tuo gradimento!
     </div>
     
     <div class="col" style="text-align:center"  data-aos="fade-left">
-        <form >
-            <input type="text" placeholder="Nome Utente" class="form">
-            <br>
-            <input type="password" placeholder="Password" class="form">
-            <br>
-            <input type="submit" value="Accedi" class="button">
-        </form>
+      <form >
+        <input type="text" placeholder="Nome Utente" class="form">
         <br>
-        <p>Non hai ancora creato un account? Registrati ora!
+        <input type="password" placeholder="Password" class="form">
         <br>
-        <br>
-        <button class="buttonGoogle">Accedi con Google</button>
-        <br>
-        <button class="buttonFacebook">Accedi con Twitter</button>
+        <input type="submit" value="Accedi" class="button">
+      </form>
+      <br>
+      <p>Non hai ancora creato un account? Registrati ora!
+      <br>
+      <br>
+      <button class="buttonGoogle">Accedi con Google</button>
+      <br>
+      <button class="buttonFacebook">Accedi con Twitter</button>
     </div>
-</div>
+  </div>
 
-<script>
+  <script>
     AOS.init();
-</script>
-
->>>>>>> 72b556a2173dba29e12427ba6a89381658383a4c
+  </script>
+</div>
