@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Articles</h1>
+
+<%= link_to "New article", new_article_path %>
+
+<div class="container" id="articles">
+  <div class="row">
+    <% @articles.each do |article| %>
+      
+      <ul class="col-12 col-lg-4 col-sm-6">
+        <li class="card">
+          
+          <div class="card-body">
+            <%= render article %>
+          </div>
+      
+          <div class="card-footer">
+            <%= link_to 'Show', article %> |
+            <%= link_to 'Edit', edit_article_path(article) %> |
+            <%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+
+        </li>
+      </ul>
+    
+    <% end %>
+  </div>
+</div>
