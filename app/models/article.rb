@@ -1,32 +1,32 @@
 class Article < ApplicationRecord
-    require "uri"
-    require "net/http"
+    require 'open-uri'
+    
+    url = 'https://newsapi.org/v2/top-headlines?country=&category=&apiKey=77883b129afd489c8ce35414f8946f51'
+    uri = URI.parse(url)
+    query = Rack::Utils.parse_query(uri.query)
 
-    url = URI("https://api.newscatcherapi.com/v2/latest_headlines?countries=IT")
+    query["country"] = "it"
+    query["category"] = "general"
 
-    https = Net::HTTP.new(url.host, url.port)
-    https.use_ssl = true
+    uri.query = Rack::Utils.build_query(query)
+    optUrl = uri.to_s
 
-    request = Net::HTTP::Get.new(url)
-    request["X-API-KEY"] = "7edB6EcTDwhM1TGgc6C-XKuutBQPYC09ZJm31svNKs0"
-
-    response = https.request(request)
-    data = JSON.parse(response.read_body)
+    req = URI.open(optUrl)
+    response_body = req.read
+    data = JSON.parse(response_body)
 
     data["articles"].each do |item|
         Article.create(
-            source: item["clean_url"],
+            country: query["country"],
+            category: query["category"],
+            source: item["source"]["name"],
             author: item["author"],
             title: item["title"],
-            description: item["excerpt"],
-            summary: item["summary"],
-            link: item["link"],
-            media: item["media"],
-            country: item["country"],
-            language: item["language"],
-            topic: item["topic"],
-            tw_account: item["twitter_account"],
-            publication: item["published_date"]
+            description: item["description"],
+            summary: item["content"],
+            link: item["url"],
+            media: item["urlToImage"],
+            publication: item["publishedAt"]
         )
     end
 end
