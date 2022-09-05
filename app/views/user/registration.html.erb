@@ -39,13 +39,13 @@
   <div class = "container text-center" >
    <div class="timeline" data-aos="fade-down">
    <h1>Inserisci i tuoi dati:</h1>
-        <form>
-            <input type="text" class="form" placeholder="Nome" >
-            <input type="text" class="form" placeholder="Cognome">
-            <input type="text" class="form" placeholder="E-mail">
-            <input type="password" class="form" placeholder="Password"><br>
-            <input type="submit" class="buttonreg" value="Registrati" >
-        </form>
+       <%= form_with model: @user do |form| %>
+            <%= form.text_field :name ,class:"form",placeholder:"Nome"%>
+            <%= form.text_field :surname ,class:"form",placeholder:"Cognome"%>
+            <%= form.email_field :mail ,class:"form",placeholder:"E-Mail"%>
+            <%= form.password_field :password ,class:"form",placeholder:"Password"%><br>
+            <%= form.submit :class=> "button", :style=> "background-color:white", :value=>"Registrati"%> 
+       <% end %>
     </div>
   </div>
     <script>
