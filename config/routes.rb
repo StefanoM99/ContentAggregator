@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
 
-  get '/registration',to:"user#registration"
   get "/home", to: "home#index"
   root "home#index"
   
@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   get "/articles", to: "articles#index"
 
-  get "/", to: "home#index"
-  post "/registration", to:"user#create"
+  
+ 
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
