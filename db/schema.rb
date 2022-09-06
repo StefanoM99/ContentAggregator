@@ -10,15 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2022_09_05_152247) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2022_08_31_211911) do
+>>>>>>> 17be707624ffe9dc93677fb965f5d8465549e9fc
   create_table "articles", force: :cascade do |t|
+    t.string "country"
+    t.string "category"
     t.string "source"
     t.string "author"
     t.text "title"
     t.text "description"
-    t.text "url"
-    t.text "image_url"
+    t.text "summary"
+    t.text "link"
+    t.text "media"
     t.date "publication"
+<<<<<<< HEAD
+=======
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "mail"
+    t.string "password"
+    t.string "name"
+    t.string "surname"
+>>>>>>> 17be707624ffe9dc93677fb965f5d8465549e9fc
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

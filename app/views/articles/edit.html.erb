@@ -1,16 +1,17 @@
+<div class="container">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+    <h1 class="modal-title">Editing article</h1>
+  </div>
 
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-  <h1 class="modal-title">Editing article</h1>
-</div>
+  <div class="modal-body">
+    <%= render "form", article: @article %>
+  </div>
 
-<div class="modal-body">
-  <%= render "form", article: @article %>
-</div>
+  <br>
 
-<br>
-
-<div class="modal-footer">
-  <%= link_to "Show this article", @article %> |
-  <%= link_to "Back to articles", articles_path %>
+  <div class="modal-footer">
+    <%= link_to "Show this article", @article %> |
+    <%= link_to "Back to articles", articles_path %>
+  </div>
 </div>

@@ -1,28 +1,45 @@
 <div id="<%= dom_id article %>">
-  <img src="<%= article.image_url %>" class=img-fluid>
+  <img src="<%= article.media %>" class=img-fluid>
   
   <div class="card-title">
+    <small>
+      <strong>Country:</strong>
+      <%= article.country %>
+    </small>
+    <br>
+    <small>
+      <strong>Category:</strong>
+      <%= article.category %>
+    </small>
+    <br>
     <small>
       <strong>Source:</strong>
       <%= article.source %>
     </small>
-
+    <br>
     <small>
       <strong>Author:</strong>
       <%= article.author %>
     </small>
-
+    <br>
     <h3>
       <strong><%= article.title %></strong>
     </h3>
   </div>
 
-  <div class="card-body">  
-    <h5 class="card-text">
-      <%= article.description %><br>
-      <a href="<%= article.url %>"><%= article.url %></a>
-    </h5>
-
+  <div class="card-body"> 
+    <h4 class="card-text">
+      <%= article.description %>
+    </h4>
+    <br>
+    <h6 class="card-text">
+      <%= article.summary %>
+    </h6>
+    <br>
+    <small>
+      <a href="<%= article.link %>"><%= article.link %></a>
+    </small>
+    <br>
     <small>
       <strong>Publication:</strong>
       <%= article.publication %>

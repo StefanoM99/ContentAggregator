@@ -1,2 +1,23 @@
+<<<<<<< HEAD
 <%= yield %>
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+    <title>ContentAggregator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </head>
+>>>>>>> 17be707624ffe9dc93677fb965f5d8465549e9fc
 
+  <body>
+    <%= yield %>
+  </body>
+</html>
