@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container" id="forecasts">
+  <nav class="navbar" data-aos="fade-down">
+    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
+    <%= link_to "Home", "/" %>
+  </nav>
+
+  <div data-aos="fade-right">
+    <h1>Forecasts</h1>
+
+    <%= render "filter", article: @article %>
+    
+    <%= link_to "New forecast", new_forecast_path %>
+  </div>
+
+  <div class="row">
+    <% @forecasts.each do |forecast| %>
+
+      <ul class="col-12 col-lg-4 col-sm-6">
+        <li class="card" data-aos="flip-down">
+          
+          <div class="card-body">
+            <%= render forecast %>
+          </div>
+
+
+          <div class="card-footer">
+            <%= link_to "Show this forecast", forecast %>
+            <%= link_to 'Delete', forecast, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+  <script>
+    AOS.init();
+  </script>
+</div>

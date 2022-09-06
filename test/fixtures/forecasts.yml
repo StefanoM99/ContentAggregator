@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  place: MyString
+  lat: 1.5
+  lon: 1.5
+  weather: MyString
+  description: MyString
+  icon: MyString
+  temp: 1.5
+  temp_min: 1.5
+  temp_max: 1.5
+  pressure: 1
+  humidity: 1
+  sea_level: 1
+  grnd_level: 1
+
+two:
+  place: MyString
+  lat: 1.5
+  lon: 1.5
+  weather: MyString
+  description: MyString
+  icon: MyString
+  temp: 1.5
+  temp_min: 1.5
+  temp_max: 1.5
+  pressure: 1
+  humidity: 1
+  sea_level: 1
+  grnd_level: 1

@@ -1,0 +1,82 @@
+<%= form_with(model: forecast) do |form| %>
+  <% if forecast.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(forecast.errors.count, "error") %> prohibited this forecast from being saved:</h2>
+
+      <ul>
+        <% forecast.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :place, style: "display: block" %>
+    <%= form.text_field :place %>
+  </div>
+
+  <div>
+    <%= form.label :lat, style: "display: block" %>
+    <%= form.text_field :lat %>
+  </div>
+
+  <div>
+    <%= form.label :lon, style: "display: block" %>
+    <%= form.text_field :lon %>
+  </div>
+
+  <div>
+    <%= form.label :weather, style: "display: block" %>
+    <%= form.text_field :weather %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :icon, style: "display: block" %>
+    <%= form.text_field :icon %>
+  </div>
+
+  <div>
+    <%= form.label :temp, style: "display: block" %>
+    <%= form.text_field :temp %>
+  </div>
+
+  <div>
+    <%= form.label :temp_min, style: "display: block" %>
+    <%= form.text_field :temp_min %>
+  </div>
+
+  <div>
+    <%= form.label :temp_max, style: "display: block" %>
+    <%= form.text_field :temp_max %>
+  </div>
+
+  <div>
+    <%= form.label :pressure, style: "display: block" %>
+    <%= form.number_field :pressure %>
+  </div>
+
+  <div>
+    <%= form.label :humidity, style: "display: block" %>
+    <%= form.number_field :humidity %>
+  </div>
+
+  <div>
+    <%= form.label :sea_level, style: "display: block" %>
+    <%= form.number_field :sea_level %>
+  </div>
+
+  <div>
+    <%= form.label :grnd_level, style: "display: block" %>
+    <%= form.number_field :grnd_level %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

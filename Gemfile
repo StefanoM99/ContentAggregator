@@ -3,13 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
 
-<<<<<<< HEAD
 gem "http"
 gem "devise"
-=======
 gem "open-uri"
 
->>>>>>> 17be707624ffe9dc93677fb965f5d8465549e9fc
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
