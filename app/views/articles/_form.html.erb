@@ -12,6 +12,30 @@
   <% end %>
 
   <div>
+    <%= form.label :country, style: "display: block" %>
+    <%= form.select :country, [
+      ["de", "de"],
+      ["fr", "fr"], 
+      ["gb", "gb"], 
+      ["it", "it"], 
+      ["us", "us"]
+    ], :include_blank => true %>
+  </div>
+
+  <div>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.select :category, [
+      ["business", "business"],
+      ["entertainment", "entertainment"], 
+      ["general", "general"], 
+      ["health", "health"], 
+      ["science", "science"],
+      ["sports", "sports"],
+      ["technology", "technology"]
+    ], :include_blank => true %>
+  </div>
+
+  <div>
     <%= form.label :source, style: "display: block" %>
     <%= form.text_field :source %>
   </div>

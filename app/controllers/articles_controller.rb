@@ -3,11 +3,55 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    Article.destroy_all
+    
+    require 'open-uri'
+    
+    url = 'https://newsapi.org/v2/top-headlines'
+    uri = URI.parse(url)
+    query = Rack::Utils.parse_query(uri.query)
+    
+    if params[:country] == "" && params[:category] == ""
+      #set a default country value on setup
+      query["category"] = "general"
+    else
+      query["country"] = params[:country]
+      query["category"] = params[:category]
+    end
+
+    query["apiKey"] = "77883b129afd489c8ce35414f8946f51"
+
+    uri.query = Rack::Utils.build_query(query)
+    optUrl = uri.to_s
+
+    req = URI.open(optUrl)
+    response_body = req.read
+    data = JSON.parse(response_body)
+
+    data["articles"].each do |item|
+        Article.create(
+            country: query["country"],
+            category: query["category"],
+            source: item["source"]["name"],
+            author: item["author"],
+            title: item["title"],
+            description: item["description"],
+            summary: item["content"],
+            link: item["url"],
+            media: item["urlToImage"],
+            publication: item["publishedAt"]
+        )
+    end
+
+    @articles = Article.all.reverse()
   end
 
   # GET /articles/1 or /articles/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /articles/new
@@ -65,7 +109,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.fetch(:article, {}).permit(:country, :category, 
+      params.require(:article).permit(:country, :category, 
         :source, :author, :title, :description, 
         :summary, :link, :media, :publication)
     end

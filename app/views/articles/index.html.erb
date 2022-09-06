@@ -1,48 +1,38 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="container" id="articles">
-  <h1>Articles</h1>
+  <nav class="navbar" data-aos="fade-down">
+    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
+    <%= link_to "Home", "/" %>
+  </nav>
 
-  <%= form_with(model: @article) do |form| %>
-    <%= form.label :country, style: "display: block" %>
-    <%= form.select :country, [
-      ["-", ""],
-      ["de", "de"],
-      ["fr", "fr"], 
-      ["gb", "gb"], 
-      ["it", "it"], 
-      ["us", "us"]
-    ] %>
+  <div data-aos="fade-right">
+    <h1>Articles</h1>
 
-    <%= form.label :category, style: "display: block" %>
-    <%= form.select :category, [
-      ["-", ""],
-      ["business", "business"],
-      ["entertainment", "entertainment"], 
-      ["general", "general"], 
-      ["health", "health"], 
-      ["science", "science"],
-      ["sports", "sports"],
-      ["technology", "technology"]
-    ] %>
-    <%= form.submit "Submit" %>
-  <% end %>
+    <%= render "filter", article: @article %>
 
-
-  <%= link_to "New article", new_article_path %>
+    <%= link_to "New article", new_article_path %>
+  </div>
 
   <div class="row">
     <% @articles.each do |article| %>
       
       <ul class="col-12 col-lg-4 col-sm-6">
-        <li class="card">
+        <li class="card" data-aos="flip-down">
           
           <div class="card-body">
             <%= render article %>
           </div>
       
           <div class="card-footer">
-            <%= link_to 'Show', article %> |
+            <%= link_to 'Show', article, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+            
+            <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content"></div>
+              </div>
+            </div>      
+            |
             <%= link_to 'Edit', edit_article_path(article) %> |
             <%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' } %>
           </div>
@@ -52,4 +42,7 @@
     
     <% end %>
   </div>
+  <script>
+    AOS.init();
+  </script>
 </div>

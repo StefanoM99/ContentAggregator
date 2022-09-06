@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_211911) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_05_201443) do
   create_table "articles", force: :cascade do |t|
     t.string "country"
     t.string "category"
@@ -22,6 +22,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_211911) do
     t.text "link"
     t.text "media"
     t.date "publication"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "forecasts", force: :cascade do |t|
+    t.string "place"
+    t.float "lat"
+    t.float "lon"
+    t.string "weather"
+    t.string "description"
+    t.string "icon"
+    t.float "temp"
+    t.float "temp_min"
+    t.float "temp_max"
+    t.integer "pressure"
+    t.integer "humidity"
+    t.integer "sea_level"
+    t.integer "grnd_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
