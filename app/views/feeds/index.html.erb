@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container" id="feeds">
+  <nav class="navbar" data-aos="fade-down">
+    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
+    <%= link_to "Home", "/" %>
+  </nav>
+
+  <div data-aos="fade-right">
+    <h1>Feeds</h1>
+  </div>
+
+  <div class="row"id="feeds">
+    <% @feeds.each do |feed| %>
+
+      <ul class="col-12 col-lg-4 col-sm-6">
+        <li class="card" data-aos="flip-down">
+          
+          <div class="card-body">
+            <%= render feed %>
+          </div>
+        </li>
+      </ul>
+        
+    <% end %>
+  </div>
+  <script>
+    AOS.init();
+  </script>
+</div>
+
+

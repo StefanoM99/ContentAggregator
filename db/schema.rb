@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_201443) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_121058) do
   create_table "articles", force: :cascade do |t|
     t.string "country"
     t.string "category"
@@ -24,6 +24,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_201443) do
     t.date "publication"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "forecast_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_feeds_on_article_id"
+    t.index ["forecast_id"], name: "index_feeds_on_forecast_id"
+    t.index ["post_id"], name: "index_feeds_on_post_id"
   end
 
   create_table "forecasts", force: :cascade do |t|
@@ -44,6 +55,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_201443) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "author"
+    t.text "title"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "mail"
     t.string "password"
@@ -60,4 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_201443) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "feeds", "articles"
+  add_foreign_key "feeds", "forecasts"
+  add_foreign_key "feeds", "posts"
 end
