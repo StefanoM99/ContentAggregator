@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reported_post %>
+
+<div>
+  <%= link_to "Edit this reported post", edit_reported_post_path(@reported_post) %> |
+  <%= link_to "Back to reported posts", reported_posts_path %>
+
+  <%= button_to "Destroy this reported post", @reported_post, method: :delete %>
+</div>

@@ -3,17 +3,122 @@ class FeedsController < ApplicationController
 
   # GET /feeds or /feeds.json
   def index
-    for index_feeds_on_article_id in 0..Article.all.length-1 do
-      for index_feeds_on_forecast_id in 0..Forecast.all.length do
-        for index_feeds_on_post_id in 0..Post.all.length-1 do
-          @feeds = Feed.create(
-            article_id: Article.all[index_feeds_on_article_id].id, 
-            forecast_id: Forecast.all[index_feeds_on_forecast_id].id, 
-            post_id: Post.all[index_feeds_on_post_id].id
-          )
-        end
-      end
+    require 'open-uri'
+
+    Forecast.delete_all
+    ActiveRecord::Base.connection.execute(
+      "DELETE from sqlite_sequence where name = 'forecasts'"
+    )
+
+    Article.delete_all
+    ActiveRecord::Base.connection.execute(
+      "DELETE from sqlite_sequence where name = 'articles'"
+    )
+
+    #forecast controller
+    url = 'http://api.openweathermap.org/geo/1.0/direct'
+    uri = URI.parse(url)
+    query = Rack::Utils.parse_query(uri.query)
+
+    if params[:place] == nil
+      query["q"] = "Roma"
+    else
+      query["q"] = params[:place]
     end
+    
+    query["limit"] = "5"
+
+    query["appid"] = Rails.application.credentials.dig(:openweather, :apiKey)
+
+    uri.query = Rack::Utils.build_query(query)
+    optUrl = uri.to_s
+
+    req = URI.open(optUrl)
+    response_body = req.read
+    data = JSON.parse(response_body)
+
+    name = data[0]["name"]
+
+    lat = data[0]["lat"]
+    lon = data[0]["lon"]
+
+    url2 = 'https://api.openweathermap.org/data/2.5/weather'
+    uri2 = URI.parse(url2)
+    query2 = Rack::Utils.parse_query(uri2.query)
+
+    query2["lat"] = lat
+    query2["lon"] = lon
+
+    query2["appid"] = query["appid"]
+
+    uri2.query = Rack::Utils.build_query(query2)
+    optUrl2 = uri2.to_s
+
+    req2 = URI.open(optUrl2)
+    response_body2 = req2.read
+    data2 = JSON.parse(response_body2)
+
+    ow_icon = "http://openweathermap.org/img/wn/#{data2["weather"][0]["icon"]}@4x.png"
+    temp = (data2["main"]["temp"] - 273.15).round(1)
+    temp_min = (data2["main"]["temp_min"] - 273.15).round(1)
+    temp_max = (data2["main"]["temp_max"] - 273.15).round(1)
+
+    Forecast.create(
+      place: data[0]["name"],
+      lat: query2["lat"],
+      lon: query2["lon"],
+      weather: data2["weather"][0]["main"],
+      description: data2["weather"][0]["description"],
+      icon: ow_icon,
+      temp: temp,
+      temp_min: temp_min,
+      temp_max: temp_max,
+      pressure: data2["main"]["pressure"],
+      humidity: data2["main"]["humidity"],
+      sea_level: data2["main"]["sea_level"],
+      grnd_level: data2["main"]["grnd_level"]
+    )
+
+
+    #article controller
+    url = 'https://newsapi.org/v2/top-headlines'
+    uri = URI.parse(url)
+    query = Rack::Utils.parse_query(uri.query)
+    
+    if params[:country] == nil && params[:category] == nil
+      #set a default country value on setup
+      query["category"] = "general"
+    else
+      query["country"] = params[:country]
+      query["category"] = params[:category]
+    end
+
+    query["apiKey"] = Rails.application.credentials.dig(:newsapi, :apiKey)
+
+    uri.query = Rack::Utils.build_query(query)
+    optUrl = uri.to_s
+
+    req = URI.open(optUrl)
+    response_body = req.read
+    data = JSON.parse(response_body)
+
+    data["articles"].each do |item|
+      Article.create(
+        country: query["country"],
+        category: query["category"],
+        source: item["source"]["name"],
+        author: item["author"],
+        title: item["title"],
+        description: item["description"],
+        summary: item["content"],
+        link: item["url"],
+        media: item["urlToImage"],
+        publication: item["publishedAt"]
+      )
+    end
+
+
+    @feeds = Forecast.all.reverse() + Post.all + Article.all.reverse()
   end
 
   # GET /feeds/1 or /feeds/1.json
@@ -75,6 +180,6 @@ class FeedsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feed_params
-      params.require(:feed).permit(:article_id, :forecast_id, :post_id)
+      params.fetch(:feed, {}).permit(:article_id, :forecast_id, :post_id)
     end
 end

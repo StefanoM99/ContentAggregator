@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @starred_post %>
+
+<div>
+  <%= link_to "Edit this starred post", edit_starred_post_path(@starred_post) %> |
+  <%= link_to "Back to starred posts", starred_posts_path %>
+
+  <%= button_to "Destroy this starred post", @starred_post, method: :delete %>
+</div>

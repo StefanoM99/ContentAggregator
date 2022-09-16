@@ -3,7 +3,7 @@
 <div class="container" id="posts">
   <nav class="navbar" data-aos="fade-down">
     <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
-    <%= link_to "Home", "/" %>
+    <%= link_to "Home", root_path %>
   </nav>
 
   <div data-aos="fade-right">
@@ -11,22 +11,12 @@
     
     <%= link_to "New post", new_post_path %>
   </div>
-
+  <br>
   <div class="row" id="posts">
     <% @posts.each do |post| %>
-    
       <ul class="col-12 col-lg-4 col-sm-6">
         <li class="card" data-aos="flip-down">
-          
-          <div class="card-body"> 
-            <%= render post %>
-          </div>
-
-          <div class="card-footer">
-            <%= link_to "Show this post", post %> |
-            <%= link_to 'Edit', edit_post_path(post) %> |
-            <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </div>
+          <%= render post %>
         </li>
       </ul>
     <% end %>
@@ -36,4 +26,27 @@
   </script>
 </div>
 
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

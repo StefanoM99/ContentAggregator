@@ -3,25 +3,25 @@
 <div class="container" id="feeds">
   <nav class="navbar" data-aos="fade-down">
     <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
-    <%= link_to "Home", "/" %>
+    <%= link_to "Home", root_path %>
   </nav>
 
   <div data-aos="fade-right">
-    <h1>Feeds</h1>
+    <h1>Feed</h1>
+
+    <%= render "filter_article", feed: @feed %>
+    <%= render "filter_forecast", feed: @feed %>
+    <br>
+    <%= link_to "New post", new_post_path, class: 'btn btn-primary btn-lg pull-right' %>
   </div>
-
-  <div class="row"id="feeds">
+  <br>
+  <div class="row" id="feeds">
     <% @feeds.each do |feed| %>
-
       <ul class="col-12 col-lg-4 col-sm-6">
         <li class="card" data-aos="flip-down">
-          
-          <div class="card-body">
-            <%= render feed %>
-          </div>
+          <div><%= render feed %></div>
         </li>
-      </ul>
-        
+      </ul>   
     <% end %>
   </div>
   <script>
@@ -29,4 +29,28 @@
   </script>
 </div>
 
+<!-- The Modal -->
+<div class="modal fade" id="editPostModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+        <%= render "form_edit_post", feed: @feed %>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

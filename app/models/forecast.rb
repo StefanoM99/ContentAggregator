@@ -1,3 +1,3 @@
 class Forecast < ApplicationRecord
-    has_many :feeds
+    has_one :feed
 end

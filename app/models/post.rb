@@ -1,3 +1,6 @@
 class Post < ApplicationRecord
-    has_many :feeds
+    has_one :feed
+
+    has_one_attached :image
+    has_one_attached :video
 end

@@ -1,0 +1,2 @@
+module ReportedArticlesHelper
+end

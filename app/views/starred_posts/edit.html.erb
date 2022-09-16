@@ -1,0 +1,10 @@
+<h1>Editing starred post</h1>
+
+<%= render "form", starred_post: @starred_post %>
+
+<br>
+
+<div>
+  <%= link_to "Show this starred post", @starred_post %> |
+  <%= link_to "Back to starred posts", starred_posts_path %>
+</div>

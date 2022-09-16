@@ -1,67 +1,50 @@
 <div id="<%= dom_id forecast %>">
-  <p>
-    <strong>Place:</strong>
-    <%= forecast.place %>
-  </p>
+  
+  <div class="card-body">
+    <h1>
+      <img src="<%= forecast.icon %>" class="img-fluid">
+      <strong><%= forecast.temp %> °C</strong>
+    </h1>
+    <br>
+    <h1 class="card-title">
+      <strong><%= forecast.place %></strong>
+    </h1>
+    <small style="color:#8A8A8A">
+      <strong>Lat:</strong>
+      <%= forecast.lat %>
+      <strong>Lon:</strong>
+      <%= forecast.lon %>
+    </small>
+    <br>
+    <h3 class="card-title">
+      <strong><%= forecast.weather %></strong>
+    </h3>
+    <small class="card-text" style="color:#8A8A8A">
+      <strong>Description:</strong>
+      <%= forecast.description %>
+    </small>
+    <br>
+    <h5 class="card-text" style="color:#0099FF">
+      <strong>Min:</strong>
+      <%= forecast.temp_min %> °C
+    </h5>
+    <h5 class="card-text" style="color:#FF3300">
+      <strong>Max:</strong>
+      <%= forecast.temp_max %> °C
+    </h5>
+    <small style="color:#CACACA">
+      <strong>Pressure:</strong>
+      <%= forecast.pressure %> hPa
+    </small>
+    <br>
+    <small style="color:#CACACA">
+      <strong>Humidity:</strong>
+      <%= forecast.humidity %> %
+    </small>
+  </div>
 
-  <p>
-    <strong>Lat:</strong>
-    <%= forecast.lat %>
-  </p>
-
-  <p>
-    <strong>Lon:</strong>
-    <%= forecast.lon %>
-  </p>
-
-  <p>
-    <strong>Weather:</strong>
-    <%= forecast.weather %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= forecast.description %>
-  </p>
-
-  <p>
-    <strong>Icon:</strong>
-    <%= forecast.icon %>
-  </p>
-
-  <p>
-    <strong>Temp:</strong>
-    <%= forecast.temp %>
-  </p>
-
-  <p>
-    <strong>Temp min:</strong>
-    <%= forecast.temp_min %>
-  </p>
-
-  <p>
-    <strong>Temp max:</strong>
-    <%= forecast.temp_max %>
-  </p>
-
-  <p>
-    <strong>Pressure:</strong>
-    <%= forecast.pressure %>
-  </p>
-
-  <p>
-    <strong>Humidity:</strong>
-    <%= forecast.humidity %>
-  </p>
-
-  <p>
-    <strong>Sea level:</strong>
-    <%= forecast.sea_level %>
-  </p>
-
-  <p>
-    <strong>Grnd level:</strong>
-    <%= forecast.grnd_level %>
-  </p>
-
+  <!--<div class="card-footer">
+    <%= link_to "Show this forecast", forecast %>
+    <%= link_to 'Delete', forecast, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>-->
 </div>
