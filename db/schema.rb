@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
   end
 
   create_table "articles", force: :cascade do |t|
+    t.integer "feed_id"
     t.string "country"
     t.string "category"
     t.string "source"
@@ -52,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.date "publication"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_articles_on_feed_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -71,17 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
   end
 
   create_table "feeds", force: :cascade do |t|
-    t.integer "article_id"
-    t.integer "forecast_id"
-    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_feeds_on_article_id"
-    t.index ["forecast_id"], name: "index_feeds_on_forecast_id"
-    t.index ["post_id"], name: "index_feeds_on_post_id"
   end
 
   create_table "forecasts", force: :cascade do |t|
+    t.integer "feed_id"
     t.string "place"
     t.float "lat"
     t.float "lon"
@@ -97,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.integer "grnd_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_forecasts_on_feed_id"
   end
 
   create_table "my_posts", force: :cascade do |t|
@@ -110,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "feed_id"
     t.string "author"
     t.text "title"
     t.text "summary"
@@ -117,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.binary "video"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_posts_on_feed_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -204,9 +204,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "feeds", "articles"
-  add_foreign_key "feeds", "forecasts"
-  add_foreign_key "feeds", "posts"
+  add_foreign_key "articles", "feeds"
+  add_foreign_key "forecasts", "feeds"
+  add_foreign_key "posts", "feeds"
   add_foreign_key "profiles", "edited_posts"
   add_foreign_key "profiles", "my_posts"
   add_foreign_key "profiles", "reported_articles"

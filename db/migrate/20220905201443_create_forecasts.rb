@@ -1,6 +1,8 @@
 class CreateForecasts < ActiveRecord::Migration[7.0]
   def change
     create_table :forecasts do |t|
+      t.belongs_to :feed, index: true, foreign_key: true
+      
       t.string :place
       t.float :lat
       t.float :lon
