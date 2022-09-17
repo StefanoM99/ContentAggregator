@@ -9,8 +9,7 @@
   <div data-aos="fade-right">
     <h1>Feed</h1>
 
-    <%= render "filter_article", feed: @feed %>
-    <%= render "filter_forecast", feed: @feed %>
+    <%= render "filter", feed: @feed %>
     <br>
     <%= link_to "New post", new_post_path, class: 'btn btn-primary btn-lg pull-right' %>
   </div>
@@ -43,7 +42,6 @@
       <!-- Modal body -->
       <div class="modal-body">
         Modal body..
-        <%= render "form_edit_post", feed: @feed %>
       </div>
 
       <!-- Modal footer -->

@@ -1,0 +1,36 @@
+<%= form_with model: @feed, url: '/feed', method: :get do |form| %>
+  <div class="row">
+    <div class="col-md">
+      <%= form.label :country, style: "display: block" %>
+      <%= form.select :country, [
+        ["-", ""],
+        ["de", "de"],
+        ["fr", "fr"], 
+        ["gb", "gb"], 
+        ["it", "it"], 
+        ["us", "us"]
+      ] %>
+    </div>
+
+    <div class="col-md">
+      <%= form.label :category, style: "display: block" %>
+      <%= form.select :category, [
+        ["-", ""],
+        ["business", "business"],
+        ["entertainment", "entertainment"], 
+        ["general", "general"], 
+        ["health", "health"], 
+        ["science", "science"],
+        ["sports", "sports"],
+        ["technology", "technology"]
+      ] %>
+    </div>
+
+    <div class="col-md">
+      <%= form.label :place, style: "display: block" %>
+      <%= form.text_field :place %>
+      
+      <%= form.submit "Submit" %>
+    </div>
+  </div>
+<% end %>

@@ -20,7 +20,7 @@ class FeedsController < ApplicationController
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
 
-    if params[:place] == nil
+    if params[:place] == nil || params[:place] == ''
       query["q"] = "Roma"
     else
       query["q"] = params[:place]
@@ -85,7 +85,7 @@ class FeedsController < ApplicationController
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
     
-    if params[:country] == nil && params[:category] == nil
+    if (params[:country] == nil && params[:category] == nil) || (params[:country] == '' && params[:category] == '')
       #set a default country value on setup
       query["category"] = "general"
     else

@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
     
-    if params[:country] == nil && params[:category] == nil
+    if (params[:country] == nil && params[:category] == nil) || (params[:country] == '' && params[:category] == '')
       #set a default country value on setup
       query["category"] = "general"
     else
@@ -47,23 +47,6 @@ class ArticlesController < ApplicationController
     end
 
     @articles = Article.all.reverse()
-
-    require "#{Rails.root}/app/models/starred_article"
-
-    Article.all.each do |item|
-      StarredArticle.create(
-        country: item["country"],
-        category: item["category"],
-        source:  item["source"],
-        author: item["author"],
-        title: item["title"],
-        description: item["description"],
-        summary: item["summary"],
-        link: item["link"],
-        media: item["media"],
-        publication: item["publication"]
-      )
-    end
   end
 
   # GET /articles/1 or /articles/1.json
