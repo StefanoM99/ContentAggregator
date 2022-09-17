@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container" id="starred_articles">
+  <nav class="navbar" data-aos="fade-down">
+    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
+    <%= link_to "Home", root_path %>
+  </nav>
+
+  <div data-aos="fade-right">
+    <h1>Starred articles</h1>
+  </div>
+
+  <div class="row" id="starred_articles">
+    <% @starred_articles.each do |starred_article| %>
+      
+      <ul class="col-12 col-lg-4 col-sm-6">
+        <li class="card" data-aos="flip-down">
+          
+          <div class="card-body">
+            <%= render starred_article %>
+          </div>
+      
+          <div class="card-footer">
+            <%= link_to 'Show', starred_article, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+            
+            <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content"></div>
+              </div>
+            </div>
+            |
+            <%= link_to 'Delete', starred_article, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+
+        </li>
+      </ul>
+    
+    <% end %>
+  </div>
+  <script>
+    AOS.init();
+  </script>
+</div>

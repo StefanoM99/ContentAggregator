@@ -1,0 +1,41 @@
+<div id="<%= dom_id post %>">
+  <div class="card-body">
+    <small>
+      <strong>Author:</strong>
+      <%= post.author %>
+    </small>
+
+    <h3 class="card-title">
+      <strong><%= post.title %></strong>
+    </h3>
+
+    <h6 class="card-text" style="color:#8A8A8A">
+      <%= post.summary %>
+    </h6>
+
+    <!--<h6 class="card-text" style="color:#8A8A8A">
+      <img src="<%= post.image %>">
+    </h6>
+
+    <h6 class="card-text" style="color:#8A8A8A">
+      <video width="320" height="240" controls>
+        <source src="<%= post.video %>" type="video/mp4">
+      </video> 
+    </h6>-->
+  </div>
+
+  <div class="card-footer">
+    <%= link_to "Show this post", post %> |
+    <%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |
+    <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
+
+<!--<div class="container mt-3">
+  <h3>Fading Modal Example</h3>
+  <p>Click on the button to open the modal.</p>
+  
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button>
+</div>-->

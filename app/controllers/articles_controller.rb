@@ -3,7 +3,10 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    Article.destroy_all
+    Article.delete_all
+    ActiveRecord::Base.connection.execute(
+      "DELETE from sqlite_sequence where name = 'articles'"
+    )
     
     require 'open-uri'
     
@@ -11,7 +14,7 @@ class ArticlesController < ApplicationController
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
     
-    if params[:country] == "" && params[:category] == ""
+    if params[:country] == nil && params[:category] == nil
       #set a default country value on setup
       query["category"] = "general"
     else
@@ -19,7 +22,7 @@ class ArticlesController < ApplicationController
       query["category"] = params[:category]
     end
 
-    query["apiKey"] = "77883b129afd489c8ce35414f8946f51"
+    query["apiKey"] = Rails.application.credentials.dig(:newsapi, :apiKey)
 
     uri.query = Rack::Utils.build_query(query)
     optUrl = uri.to_s
@@ -29,21 +32,38 @@ class ArticlesController < ApplicationController
     data = JSON.parse(response_body)
 
     data["articles"].each do |item|
-        Article.create(
-            country: query["country"],
-            category: query["category"],
-            source: item["source"]["name"],
-            author: item["author"],
-            title: item["title"],
-            description: item["description"],
-            summary: item["content"],
-            link: item["url"],
-            media: item["urlToImage"],
-            publication: item["publishedAt"]
-        )
+      Article.create(
+        country: query["country"],
+        category: query["category"],
+        source: item["source"]["name"],
+        author: item["author"],
+        title: item["title"],
+        description: item["description"],
+        summary: item["content"],
+        link: item["url"],
+        media: item["urlToImage"],
+        publication: item["publishedAt"]
+      )
     end
 
     @articles = Article.all.reverse()
+
+    require "#{Rails.root}/app/models/starred_article"
+
+    Article.all.each do |item|
+      StarredArticle.create(
+        country: item["country"],
+        category: item["category"],
+        source:  item["source"],
+        author: item["author"],
+        title: item["title"],
+        description: item["description"],
+        summary: item["summary"],
+        link: item["link"],
+        media: item["media"],
+        publication: item["publication"]
+      )
+    end
   end
 
   # GET /articles/1 or /articles/1.json
@@ -109,7 +129,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:country, :category, 
+      params.fetch(:article, {}).permit(:country, :category, 
         :source, :author, :title, :description, 
         :summary, :link, :media, :publication)
     end

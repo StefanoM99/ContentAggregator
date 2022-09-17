@@ -1,0 +1,36 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container" id="my_posts">
+  <nav class="navbar" data-aos="fade-down">
+    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto' %>
+    <%= link_to "Home", root_path %>
+  </nav>
+
+  <div data-aos="fade-right">
+    <h1>My posts</h1>
+  </div>
+
+  <div class="row" id="my_posts">
+    <% @my_posts.each do |my_post| %>
+    
+      <ul class="col-12 col-lg-4 col-sm-6">
+        <li class="card" data-aos="flip-down">
+          
+          <div class="card-body"> 
+            <%= render my_post %>
+          </div>
+
+          <div class="card-footer">
+            <%= link_to "Show this post", my_post %> |
+            <%= link_to 'Delete', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+  <script>
+    AOS.init();
+  </script>
+</div>
+
+

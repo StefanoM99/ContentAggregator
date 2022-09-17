@@ -3,7 +3,10 @@ class ForecastsController < ApplicationController
 
   # GET /forecasts or /forecasts.json
   def index
-    Forecast.destroy_all
+    Forecast.delete_all
+    ActiveRecord::Base.connection.execute(
+      "DELETE from sqlite_sequence where name = 'forecasts'"
+    )
 
     require 'open-uri'
     
@@ -11,10 +14,15 @@ class ForecastsController < ApplicationController
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
 
-    query["q"] = params[:place]
+    if params[:place] == nil
+      query["q"] = "Roma"
+    else
+      query["q"] = params[:place]
+    end
+    
     query["limit"] = "5"
 
-    query["appid"] = "443334c3397d30c7ff80114badaab496"
+    query["appid"] = Rails.application.credentials.dig(:openweather, :apiKey)
 
     uri.query = Rack::Utils.build_query(query)
     optUrl = uri.to_s
@@ -44,6 +52,7 @@ class ForecastsController < ApplicationController
     response_body2 = req2.read
     data2 = JSON.parse(response_body2)
 
+    ow_icon = "http://openweathermap.org/img/wn/#{data2["weather"][0]["icon"]}@4x.png"
     temp = (data2["main"]["temp"] - 273.15).round(1)
     temp_min = (data2["main"]["temp_min"] - 273.15).round(1)
     temp_max = (data2["main"]["temp_max"] - 273.15).round(1)
@@ -54,7 +63,7 @@ class ForecastsController < ApplicationController
       lon: query2["lon"],
       weather: data2["weather"][0]["main"],
       description: data2["weather"][0]["description"],
-      icon: data2["weather"][0]["icon"],
+      icon: ow_icon,
       temp: temp,
       temp_min: temp_min,
       temp_max: temp_max,

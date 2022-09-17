@@ -1,0 +1,48 @@
+<div id="<%= dom_id starred_article %>">
+  <img src="<%= starred_article.media %>" class=img-fluid>
+  
+  <div class="card-title">
+    <small>
+      <strong>Country:</strong>
+      <%= starred_article.country %>
+    </small>
+    <br>
+    <small>
+      <strong>Category:</strong>
+      <%= starred_article.category %>
+    </small>
+    <br>
+    <small>
+      <strong>Source:</strong>
+      <%= starred_article.source %>
+    </small>
+    <br>
+    <small>
+      <strong>Author:</strong>
+      <%= starred_article.author %>
+    </small>
+    <br>
+    <h3>
+      <strong><%= starred_article.title %></strong>
+    </h3>
+  </div>
+
+  <div class="card-body"> 
+    <h4 class="card-text">
+      <%= starred_article.description %>
+    </h4>
+    <br>
+    <h6 class="card-text">
+      <%= starred_article.summary %>
+    </h6>
+    <br>
+    <small>
+      <a href="<%= starred_article.link %>"><%= starred_article.link %></a>
+    </small>
+    <br>
+    <small>
+      <strong>Publication:</strong>
+      <%= starred_article.publication %>
+    </small>
+  </div>
+</div>
