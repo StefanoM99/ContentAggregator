@@ -21,7 +21,8 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'""
   config.omniauth :google_oauth2,Rails.application.credentials.GOOGLE_OAUTH_CLIENT_ID, Rails.application.credentials.GOOGLE_OAUTH_CLIENT_SECRET, {provider_ignores_state: true, allowed_request_methods:  [:post, :get],scope: "email,profile"}
 
-  # ==> Mailer Configuration
+
+  config.omniauth :twitter,Rails.application.credentials.TWITTER_API_KEY, Rails.application.credentials.TWITTER_API_KEY_SECRET, {include_email: true,provider_ignores_state: true, allowed_request_methods:  [:post, :get],scope:"email,profile"}
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
