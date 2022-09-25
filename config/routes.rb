@@ -42,13 +42,12 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
  end
 
-  get "/home", to: "home#index"
   
   
 
   resources :articles
 
-  
+
   
   
   get "/articles", to: "articles#index"
