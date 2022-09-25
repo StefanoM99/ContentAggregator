@@ -15,12 +15,14 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '086196c59c48f01f883b9c2ce0160d3330538c07577d69c9a2af4300662e95f908dce2065b417ae2bf0bc66b1261ae424a90f6894f688470f5fedc4ca6db6132'
-
+ 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  # config.parent_controller = 'DeviseController'
+  # config.parent_controller = 'DeviseController'""
+  config.omniauth :google_oauth2,Rails.application.credentials.GOOGLE_OAUTH_CLIENT_ID, Rails.application.credentials.GOOGLE_OAUTH_CLIENT_SECRET, {provider_ignores_state: true, allowed_request_methods:  [:post, :get],scope: "email,profile"}
 
-  # ==> Mailer Configuration
+
+  config.omniauth :twitter,Rails.application.credentials.TWITTER_API_KEY, Rails.application.credentials.TWITTER_API_KEY_SECRET, {include_email: true,provider_ignores_state: true, allowed_request_methods:  [:post, :get],scope:"email,profile"}
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
@@ -244,7 +246,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

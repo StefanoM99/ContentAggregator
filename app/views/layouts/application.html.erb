@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> users
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,6 +20,10 @@
   </head>
 
   <body>
+  <% if user_signed_in? %>
+Logged in as <%= current_user.email%> [<%= link_to 'Logout',
+destroy_user_session_path, :method => :delete%>]
+<% end %>
     <%= yield %>
   </body>
 </html>

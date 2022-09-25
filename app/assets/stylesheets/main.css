@@ -1,3 +1,10 @@
+.LogLink {
+  float: right;
+
+  color: rgb(15, 14, 14);
+
+}
+
 header {
     width: 100%;
     position: fixed;
@@ -11,6 +18,7 @@ header {
     background:#fff;
     box-shadow: 0 .1rem .3rem rgba(0, 0, 0, .3);
     padding: .5rem 1rem;
+    overflow:"hidden"
   }
   
   header .container {
@@ -73,6 +81,7 @@ header {
     margin: 1rem 0;
   }
   
+
   .buttonreg {
     height: 3.5rem;
     width: 20rem;
@@ -115,12 +124,12 @@ header {
     margin: 1rem 0;
   }
   .logoHeader {
-    display: block;
+    display:block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
   }
-  
+
   .form{
     width: 50%;
     padding: 12px 20px;

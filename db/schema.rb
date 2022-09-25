@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +40,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+=======
+ActiveRecord::Schema[7.0].define(version: 2022_09_05_152247) do
+>>>>>>> users
   create_table "articles", force: :cascade do |t|
     t.integer "feed_id"
     t.string "country"
@@ -56,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.index ["feed_id"], name: "index_articles_on_feed_id"
   end
 
+<<<<<<< HEAD
   create_table "comments", force: :cascade do |t|
     t.text "field"
     t.datetime "created_at", null: false
@@ -193,12 +198,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.string "surname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+  create_table "users", force: :cascade do |t|
+>>>>>>> users
     t.string "email", default: "", null: false
+    t.string "name", default: "", null: false
+    t.string "surname"
+    t.string "full_name"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.string "avatar_url"
+    t.string "provider"
+    t.string "uid"
     t.datetime "remember_created_at"
-    t.index ["email"], name: "index_users_on_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
