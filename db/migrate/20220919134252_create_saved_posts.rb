@@ -1,6 +1,7 @@
-class CreateMyPosts < ActiveRecord::Migration[7.0]
+class CreateSavedPosts < ActiveRecord::Migration[7.0]
   def change
-    create_table :my_posts do |t|
+    create_table :saved_posts do |t|
+      t.string :type
       t.string :author
       t.text :title
       t.text :summary

@@ -1,0 +1,10 @@
+<h1>Editing saved post</h1>
+
+<%= render "form", saved_post: @saved_post %>
+
+<br>
+
+<div>
+  <%= link_to "Show this saved post", @saved_post %> |
+  <%= link_to "Back to saved posts", saved_posts_path %>
+</div>

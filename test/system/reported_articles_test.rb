@@ -14,16 +14,6 @@ class ReportedArticlesTest < ApplicationSystemTestCase
     visit reported_articles_url
     click_on "New reported article"
 
-    fill_in "Author", with: @reported_article.author
-    fill_in "Category", with: @reported_article.category
-    fill_in "Country", with: @reported_article.country
-    fill_in "Description", with: @reported_article.description
-    fill_in "Link", with: @reported_article.link
-    fill_in "Media", with: @reported_article.media
-    fill_in "Publication", with: @reported_article.publication
-    fill_in "Source", with: @reported_article.source
-    fill_in "Summary", with: @reported_article.summary
-    fill_in "Title", with: @reported_article.title
     click_on "Create Reported article"
 
     assert_text "Reported article was successfully created"
@@ -34,16 +24,6 @@ class ReportedArticlesTest < ApplicationSystemTestCase
     visit reported_article_url(@reported_article)
     click_on "Edit this reported article", match: :first
 
-    fill_in "Author", with: @reported_article.author
-    fill_in "Category", with: @reported_article.category
-    fill_in "Country", with: @reported_article.country
-    fill_in "Description", with: @reported_article.description
-    fill_in "Link", with: @reported_article.link
-    fill_in "Media", with: @reported_article.media
-    fill_in "Publication", with: @reported_article.publication
-    fill_in "Source", with: @reported_article.source
-    fill_in "Summary", with: @reported_article.summary
-    fill_in "Title", with: @reported_article.title
     click_on "Update Reported article"
 
     assert_text "Reported article was successfully updated"

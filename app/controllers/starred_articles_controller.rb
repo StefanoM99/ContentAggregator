@@ -21,8 +21,18 @@ class StarredArticlesController < ApplicationController
 
   # POST /starred_articles or /starred_articles.json
   def create
-    @starred_article = StarredArticle.new(starred_article_params)
-
+    @starred_article = StarredArticle.create(
+      country: params[:country], 
+      category: params[:category],
+      source: params[:source],
+      author: params[:author],
+      title: params[:title],
+      description: params[:description],
+      summary: params[:summary],
+      link: params[:link],
+      media: params[:media],
+      publication: params[:publication]
+    )
     respond_to do |format|
       if @starred_article.save
         format.html { redirect_to starred_article_url(@starred_article), notice: "Starred article was successfully created." }
@@ -65,6 +75,6 @@ class StarredArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def starred_article_params
-      params.require(:starred_article).permit(:country, :category, :source, :author, :title, :description, :summary, :link, :media, :publication)
+      params.fetch(:starred_article, {})
     end
 end

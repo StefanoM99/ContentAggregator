@@ -17,7 +17,7 @@ class ReportedPostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create reported_post" do
     assert_difference("ReportedPost.count") do
-      post reported_posts_url, params: { reported_post: { author: @reported_post.author, summary: @reported_post.summary, title: @reported_post.title } }
+      post reported_posts_url, params: { reported_post: {  } }
     end
 
     assert_redirected_to reported_post_url(ReportedPost.last)
@@ -34,7 +34,7 @@ class ReportedPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update reported_post" do
-    patch reported_post_url(@reported_post), params: { reported_post: { author: @reported_post.author, summary: @reported_post.summary, title: @reported_post.title } }
+    patch reported_post_url(@reported_post), params: { reported_post: {  } }
     assert_redirected_to reported_post_url(@reported_post)
   end
 

@@ -1,0 +1,2 @@
+class SavedArticle < ApplicationRecord
+end

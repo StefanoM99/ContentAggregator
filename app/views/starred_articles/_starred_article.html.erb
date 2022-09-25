@@ -1,17 +1,7 @@
 <div id="<%= dom_id starred_article %>">
-  <img src="<%= starred_article.media %>" class=img-fluid>
+  <img src="<%= starred_article.media %>" class="img-fluid card-img-top">
   
-  <div class="card-title">
-    <small>
-      <strong>Country:</strong>
-      <%= starred_article.country %>
-    </small>
-    <br>
-    <small>
-      <strong>Category:</strong>
-      <%= starred_article.category %>
-    </small>
-    <br>
+  <div class="card-body">
     <small>
       <strong>Source:</strong>
       <%= starred_article.source %>
@@ -22,17 +12,16 @@
       <%= starred_article.author %>
     </small>
     <br>
-    <h3>
+    <h3 class="card-title">
       <strong><%= starred_article.title %></strong>
     </h3>
-  </div>
 
-  <div class="card-body"> 
-    <h4 class="card-text">
+  
+    <h4 class="card-text" style="color:#8A8A8A">
       <%= starred_article.description %>
     </h4>
     <br>
-    <h6 class="card-text">
+    <h6 class="card-text" style="color:#CACACA">
       <%= starred_article.summary %>
     </h6>
     <br>
@@ -40,9 +29,21 @@
       <a href="<%= starred_article.link %>"><%= starred_article.link %></a>
     </small>
     <br>
-    <small>
+    <small style="color:#CACACA">
       <strong>Publication:</strong>
       <%= starred_article.publication %>
     </small>
+  </div>
+
+  <div class="card-footer">
+    <%= link_to 'Show', starred_article, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+            
+    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    
+    <%= link_to 'Delete', starred_article, method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
 </div>

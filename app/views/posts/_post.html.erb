@@ -28,6 +28,22 @@
     <%= link_to "Show this post", post %> |
     <%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |
     <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <%= button_to 'Star', starred_posts_path(
+      author: post.author,
+      title: post.title,
+      summary: post.summary,
+      image: post.image,
+      video: post.video
+    ) %>
+
+    <%= button_to 'Report', reported_posts_path(
+      author: post.author,
+      title: post.title,
+      summary: post.summary,
+      image: post.image,
+      video: post.video
+    ) %>
   </div>
 </div>
 

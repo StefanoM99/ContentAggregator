@@ -1,17 +1,39 @@
 <div id="<%= dom_id reported_post %>">
-  <p>
-    <strong>Author:</strong>
-    <%= reported_post.author %>
-  </p>
+  
+  <div class="card-body">
+    <small>
+      <strong>Author:</strong>
+      <%= reported_post.author %>
+    </small>
 
-  <p>
-    <strong>Title:</strong>
-    <%= reported_post.title %>
-  </p>
+    <h3 class="card-title">
+      <strong><%= reported_post.title %></strong>
+    </h3>
 
-  <p>
-    <strong>Summary:</strong>
-    <%= reported_post.summary %>
-  </p>
+    <h6 class="card-text" style="color:#8A8A8A">
+      <%= reported_post.summary %>
+    </h6>
 
+    <!--<h6 class="card-text" style="color:#8A8A8A">
+      <img src="<%= reported_post.image %>">
+    </h6>
+
+    <h6 class="card-text" style="color:#8A8A8A">
+      <video width="320" height="240" controls>
+        <source src="<%= reported_post.video %>" type="video/mp4">
+      </video> 
+    </h6>-->
+  </div>
+
+  <div class="card-footer">
+    <%= link_to 'Show', reported_post, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+            
+    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    
+    <%= link_to 'Delete', reported_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
 </div>

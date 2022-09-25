@@ -21,7 +21,18 @@ class ReportedArticlesController < ApplicationController
 
   # POST /reported_articles or /reported_articles.json
   def create
-    @reported_article = ReportedArticle.new(reported_article_params)
+    @reported_article = ReportedArticle.create(
+      country: params[:country], 
+      category: params[:category],
+      source: params[:source],
+      author: params[:author],
+      title: params[:title],
+      description: params[:description],
+      summary: params[:summary],
+      link: params[:link],
+      media: params[:media],
+      publication: params[:publication]
+    )
 
     respond_to do |format|
       if @reported_article.save
@@ -65,6 +76,6 @@ class ReportedArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reported_article_params
-      params.require(:reported_article).permit(:country, :category, :source, :author, :title, :description, :summary, :link, :media, :publication)
+      params.fetch(:reported_article, {})
     end
 end

@@ -1,3 +1,2 @@
-class ReportedArticle < ApplicationRecord
-    has_many :profiles
+class ReportedArticle < SavedArticle
 end

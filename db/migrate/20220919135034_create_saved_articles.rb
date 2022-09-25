@@ -1,6 +1,7 @@
-class CreateStarredArticles < ActiveRecord::Migration[7.0]
+class CreateSavedArticles < ActiveRecord::Migration[7.0]
   def change
-    create_table :starred_articles do |t|
+    create_table :saved_articles do |t|
+      t.string :type
       t.string :country
       t.string :category
       t.string :source

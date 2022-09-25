@@ -14,9 +14,6 @@ class StarredPostsTest < ApplicationSystemTestCase
     visit starred_posts_url
     click_on "New starred post"
 
-    fill_in "Author", with: @starred_post.author
-    fill_in "Summary", with: @starred_post.summary
-    fill_in "Title", with: @starred_post.title
     click_on "Create Starred post"
 
     assert_text "Starred post was successfully created"
@@ -27,9 +24,6 @@ class StarredPostsTest < ApplicationSystemTestCase
     visit starred_post_url(@starred_post)
     click_on "Edit this starred post", match: :first
 
-    fill_in "Author", with: @starred_post.author
-    fill_in "Summary", with: @starred_post.summary
-    fill_in "Title", with: @starred_post.title
     click_on "Update Starred post"
 
     assert_text "Starred post was successfully updated"

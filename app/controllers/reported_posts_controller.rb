@@ -21,7 +21,12 @@ class ReportedPostsController < ApplicationController
 
   # POST /reported_posts or /reported_posts.json
   def create
-    @reported_post = ReportedPost.new(reported_post_params)
+    @reported_post = ReportedPost.create(
+      author: params[:author],
+      title: params[:title],
+      summary: params[:summary],
+      image: params[:image],
+      video: params[:video]
 
     respond_to do |format|
       if @reported_post.save
@@ -65,6 +70,6 @@ class ReportedPostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reported_post_params
-      params.require(:reported_post).permit(:author, :title, :summary)
+      params.fetch(:reported_post, {})
     end
 end

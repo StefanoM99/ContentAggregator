@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_19_135034) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,16 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "edited_posts", force: :cascade do |t|
-    t.string "author"
-    t.text "title"
-    t.text "summary"
-    t.binary "image"
-    t.binary "video"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "feeds", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,16 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.index ["feed_id"], name: "index_forecasts_on_feed_id"
   end
 
-  create_table "my_posts", force: :cascade do |t|
-    t.string "author"
-    t.text "title"
-    t.text "summary"
-    t.binary "image"
-    t.binary "video"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.integer "feed_id"
     t.string "author"
@@ -120,23 +100,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer "my_post_id"
-    t.integer "edited_post_id"
-    t.integer "starred_post_id"
-    t.integer "reported_post_id"
-    t.integer "starred_article_id"
-    t.integer "reported_article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["edited_post_id"], name: "index_profiles_on_edited_post_id"
-    t.index ["my_post_id"], name: "index_profiles_on_my_post_id"
-    t.index ["reported_article_id"], name: "index_profiles_on_reported_article_id"
-    t.index ["reported_post_id"], name: "index_profiles_on_reported_post_id"
-    t.index ["starred_article_id"], name: "index_profiles_on_starred_article_id"
-    t.index ["starred_post_id"], name: "index_profiles_on_starred_post_id"
   end
 
-  create_table "reported_articles", force: :cascade do |t|
+  create_table "saved_articles", force: :cascade do |t|
+    t.string "type"
     t.string "country"
     t.string "category"
     t.string "source"
@@ -151,32 +120,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reported_posts", force: :cascade do |t|
-    t.string "author"
-    t.text "title"
-    t.text "summary"
-    t.binary "image"
-    t.binary "video"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "starred_articles", force: :cascade do |t|
-    t.string "country"
-    t.string "category"
-    t.string "source"
-    t.string "author"
-    t.text "title"
-    t.text "description"
-    t.text "summary"
-    t.text "link"
-    t.text "media"
-    t.date "publication"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "starred_posts", force: :cascade do |t|
+  create_table "saved_posts", force: :cascade do |t|
+    t.string "type"
     t.string "author"
     t.text "title"
     t.text "summary"
@@ -207,10 +152,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_211432) do
   add_foreign_key "articles", "feeds"
   add_foreign_key "forecasts", "feeds"
   add_foreign_key "posts", "feeds"
-  add_foreign_key "profiles", "edited_posts"
-  add_foreign_key "profiles", "my_posts"
-  add_foreign_key "profiles", "reported_articles"
-  add_foreign_key "profiles", "reported_posts"
-  add_foreign_key "profiles", "starred_articles"
-  add_foreign_key "profiles", "starred_posts"
 end

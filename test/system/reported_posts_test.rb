@@ -14,9 +14,6 @@ class ReportedPostsTest < ApplicationSystemTestCase
     visit reported_posts_url
     click_on "New reported post"
 
-    fill_in "Author", with: @reported_post.author
-    fill_in "Summary", with: @reported_post.summary
-    fill_in "Title", with: @reported_post.title
     click_on "Create Reported post"
 
     assert_text "Reported post was successfully created"
@@ -27,9 +24,6 @@ class ReportedPostsTest < ApplicationSystemTestCase
     visit reported_post_url(@reported_post)
     click_on "Edit this reported post", match: :first
 
-    fill_in "Author", with: @reported_post.author
-    fill_in "Summary", with: @reported_post.summary
-    fill_in "Title", with: @reported_post.title
     click_on "Update Reported post"
 
     assert_text "Reported post was successfully updated"

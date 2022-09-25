@@ -17,7 +17,7 @@ class MyPostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create my_post" do
     assert_difference("MyPost.count") do
-      post my_posts_url, params: { my_post: { author: @my_post.author, summary: @my_post.summary, title: @my_post.title } }
+      post my_posts_url, params: { my_post: {  } }
     end
 
     assert_redirected_to my_post_url(MyPost.last)
@@ -34,7 +34,7 @@ class MyPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update my_post" do
-    patch my_post_url(@my_post), params: { my_post: { author: @my_post.author, summary: @my_post.summary, title: @my_post.title } }
+    patch my_post_url(@my_post), params: { my_post: {  } }
     assert_redirected_to my_post_url(@my_post)
   end
 

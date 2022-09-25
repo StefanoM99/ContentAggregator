@@ -1,3 +1,2 @@
-class MyPost < ApplicationRecord
-    has_many :profiles
+class MyPost < SavedPost
 end

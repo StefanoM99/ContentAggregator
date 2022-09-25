@@ -17,7 +17,7 @@ class EditedPostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create edited_post" do
     assert_difference("EditedPost.count") do
-      post edited_posts_url, params: { edited_post: { author: @edited_post.author, summary: @edited_post.summary, title: @edited_post.title } }
+      post edited_posts_url, params: { edited_post: {  } }
     end
 
     assert_redirected_to edited_post_url(EditedPost.last)
@@ -34,7 +34,7 @@ class EditedPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update edited_post" do
-    patch edited_post_url(@edited_post), params: { edited_post: { author: @edited_post.author, summary: @edited_post.summary, title: @edited_post.title } }
+    patch edited_post_url(@edited_post), params: { edited_post: {  } }
     assert_redirected_to edited_post_url(@edited_post)
   end
 

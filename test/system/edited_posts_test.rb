@@ -14,9 +14,6 @@ class EditedPostsTest < ApplicationSystemTestCase
     visit edited_posts_url
     click_on "New edited post"
 
-    fill_in "Author", with: @edited_post.author
-    fill_in "Summary", with: @edited_post.summary
-    fill_in "Title", with: @edited_post.title
     click_on "Create Edited post"
 
     assert_text "Edited post was successfully created"
@@ -27,9 +24,6 @@ class EditedPostsTest < ApplicationSystemTestCase
     visit edited_post_url(@edited_post)
     click_on "Edit this edited post", match: :first
 
-    fill_in "Author", with: @edited_post.author
-    fill_in "Summary", with: @edited_post.summary
-    fill_in "Title", with: @edited_post.title
     click_on "Update Edited post"
 
     assert_text "Edited post was successfully updated"

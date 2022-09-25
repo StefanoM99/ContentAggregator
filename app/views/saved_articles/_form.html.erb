@@ -1,0 +1,72 @@
+<%= form_with(model: saved_article) do |form| %>
+  <% if saved_article.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(saved_article.errors.count, "error") %> prohibited this saved_article from being saved:</h2>
+
+      <ul>
+        <% saved_article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :type, style: "display: block" %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div>
+    <%= form.label :country, style: "display: block" %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.text_field :category %>
+  </div>
+
+  <div>
+    <%= form.label :source, style: "display: block" %>
+    <%= form.text_field :source %>
+  </div>
+
+  <div>
+    <%= form.label :author, style: "display: block" %>
+    <%= form.text_field :author %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_area :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :summary, style: "display: block" %>
+    <%= form.text_area :summary %>
+  </div>
+
+  <div>
+    <%= form.label :link, style: "display: block" %>
+    <%= form.text_area :link %>
+  </div>
+
+  <div>
+    <%= form.label :media, style: "display: block" %>
+    <%= form.text_area :media %>
+  </div>
+
+  <div>
+    <%= form.label :publication, style: "display: block" %>
+    <%= form.date_field :publication %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
