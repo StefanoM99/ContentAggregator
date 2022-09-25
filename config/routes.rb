@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  
+
   scope '/feed' do
     resources :articles, :posts, :forecasts
   end
@@ -9,8 +8,12 @@ Rails.application.routes.draw do
     resources :starred_articles, :reported_articles
     resources :my_posts, :edited_posts, :starred_posts, :reported_posts
   end
-
-  devise_for :users
+  devise_for :users , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+ 
+  devise_scope :user do  
+    get '/users/sign_out' => 'devise/sessions#destroy'     
+ end
+ 
 
   get "/home", to: "home#index"
   root "home#index"
@@ -35,26 +38,14 @@ Rails.application.routes.draw do
   get "/starred-posts", to: "starred_posts#index"
   get "/reported-posts", to: "reported_posts#index"
   
-=======
-  devise_for :users , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
- 
-  devise_scope :user do  
-    get '/users/sign_out' => 'devise/sessions#destroy'     
- end
 
   
   
 
-  resources :articles
 
 
+
   
-  
-  get "/articles", to: "articles#index"
-  
-  root "home#index"
-    
->>>>>>> users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 

@@ -6,15 +6,13 @@ ruby "3.0.0"
 gem "http"
 # Gems for users authentication
 gem "devise"
-<<<<<<< HEAD
+
 gem "open-uri"
 
-=======
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-twitter'
->>>>>>> users
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
