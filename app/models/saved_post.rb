@@ -1,0 +1,2 @@
+class SavedPost < ApplicationRecord
+end

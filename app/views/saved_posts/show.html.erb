@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @saved_post %>
+
+<div>
+  <%= link_to "Edit this saved post", edit_saved_post_path(@saved_post) %> |
+  <%= link_to "Back to saved posts", saved_posts_path %>
+
+  <%= button_to "Destroy this saved post", @saved_post, method: :delete %>
+</div>

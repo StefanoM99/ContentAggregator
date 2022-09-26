@@ -1,0 +1,2 @@
+class StarredPlaylist < SavedPlaylist
+end

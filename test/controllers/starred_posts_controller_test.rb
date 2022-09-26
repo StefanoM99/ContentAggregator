@@ -17,7 +17,7 @@ class StarredPostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create starred_post" do
     assert_difference("StarredPost.count") do
-      post starred_posts_url, params: { starred_post: { author: @starred_post.author, summary: @starred_post.summary, title: @starred_post.title } }
+      post starred_posts_url, params: { starred_post: {  } }
     end
 
     assert_redirected_to starred_post_url(StarredPost.last)
@@ -34,7 +34,7 @@ class StarredPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update starred_post" do
-    patch starred_post_url(@starred_post), params: { starred_post: { author: @starred_post.author, summary: @starred_post.summary, title: @starred_post.title } }
+    patch starred_post_url(@starred_post), params: { starred_post: {  } }
     assert_redirected_to starred_post_url(@starred_post)
   end
 

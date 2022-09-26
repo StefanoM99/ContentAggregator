@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @starred_playlist %>
+
+<div>
+  <%= link_to "Edit this starred playlist", edit_starred_playlist_path(@starred_playlist) %> |
+  <%= link_to "Back to starred playlists", starred_playlists_path %>
+
+  <%= button_to "Destroy this starred playlist", @starred_playlist, method: :delete %>
+</div>

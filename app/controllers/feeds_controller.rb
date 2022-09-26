@@ -118,7 +118,7 @@ class FeedsController < ApplicationController
     end
 
 
-    @feeds = Forecast.all.reverse() + Post.all + Article.all.reverse()
+    @feeds = Forecast.all.reverse() + Post.all.reverse() + Article.all.reverse()
   end
 
   # GET /feeds/1 or /feeds/1.json

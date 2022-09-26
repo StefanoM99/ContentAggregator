@@ -14,9 +14,6 @@ class MyPostsTest < ApplicationSystemTestCase
     visit my_posts_url
     click_on "New my post"
 
-    fill_in "Author", with: @my_post.author
-    fill_in "Summary", with: @my_post.summary
-    fill_in "Title", with: @my_post.title
     click_on "Create My post"
 
     assert_text "My post was successfully created"
@@ -27,9 +24,6 @@ class MyPostsTest < ApplicationSystemTestCase
     visit my_post_url(@my_post)
     click_on "Edit this my post", match: :first
 
-    fill_in "Author", with: @my_post.author
-    fill_in "Summary", with: @my_post.summary
-    fill_in "Title", with: @my_post.title
     click_on "Update My post"
 
     assert_text "My post was successfully updated"

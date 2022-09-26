@@ -17,7 +17,7 @@ class StarredArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create starred_article" do
     assert_difference("StarredArticle.count") do
-      post starred_articles_url, params: { starred_article: { author: @starred_article.author, category: @starred_article.category, country: @starred_article.country, description: @starred_article.description, link: @starred_article.link, media: @starred_article.media, publication: @starred_article.publication, source: @starred_article.source, summary: @starred_article.summary, title: @starred_article.title } }
+      post starred_articles_url, params: { starred_article: {  } }
     end
 
     assert_redirected_to starred_article_url(StarredArticle.last)
@@ -34,7 +34,7 @@ class StarredArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update starred_article" do
-    patch starred_article_url(@starred_article), params: { starred_article: { author: @starred_article.author, category: @starred_article.category, country: @starred_article.country, description: @starred_article.description, link: @starred_article.link, media: @starred_article.media, publication: @starred_article.publication, source: @starred_article.source, summary: @starred_article.summary, title: @starred_article.title } }
+    patch starred_article_url(@starred_article), params: { starred_article: {  } }
     assert_redirected_to starred_article_url(@starred_article)
   end
 

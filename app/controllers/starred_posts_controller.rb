@@ -21,7 +21,13 @@ class StarredPostsController < ApplicationController
 
   # POST /starred_posts or /starred_posts.json
   def create
-    @starred_post = StarredPost.new(starred_post_params)
+    @starred_post = StarredPost.create(
+      author: params[:author],
+      title: params[:title],
+      summary: params[:summary],
+      image: params[:image],
+      video: params[:video]
+    )
 
     respond_to do |format|
       if @starred_post.save
@@ -65,6 +71,6 @@ class StarredPostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def starred_post_params
-      params.require(:starred_post).permit(:author, :title, :summary)
+      params.fetch(:starred_post, {})
     end
 end

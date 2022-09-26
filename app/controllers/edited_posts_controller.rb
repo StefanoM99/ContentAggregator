@@ -65,6 +65,6 @@ class EditedPostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def edited_post_params
-      params.require(:edited_post).permit(:author, :title, :summary)
+      params.fetch(:edited_post, {})
     end
 end

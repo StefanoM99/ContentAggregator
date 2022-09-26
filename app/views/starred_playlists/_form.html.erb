@@ -1,0 +1,17 @@
+<%= form_with(model: starred_playlist) do |form| %>
+  <% if starred_playlist.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(starred_playlist.errors.count, "error") %> prohibited this starred_playlist from being saved:</h2>
+
+      <ul>
+        <% starred_playlist.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

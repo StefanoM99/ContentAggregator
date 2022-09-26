@@ -17,7 +17,7 @@ class ReportedArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create reported_article" do
     assert_difference("ReportedArticle.count") do
-      post reported_articles_url, params: { reported_article: { author: @reported_article.author, category: @reported_article.category, country: @reported_article.country, description: @reported_article.description, link: @reported_article.link, media: @reported_article.media, publication: @reported_article.publication, source: @reported_article.source, summary: @reported_article.summary, title: @reported_article.title } }
+      post reported_articles_url, params: { reported_article: {  } }
     end
 
     assert_redirected_to reported_article_url(ReportedArticle.last)
@@ -34,7 +34,7 @@ class ReportedArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update reported_article" do
-    patch reported_article_url(@reported_article), params: { reported_article: { author: @reported_article.author, category: @reported_article.category, country: @reported_article.country, description: @reported_article.description, link: @reported_article.link, media: @reported_article.media, publication: @reported_article.publication, source: @reported_article.source, summary: @reported_article.summary, title: @reported_article.title } }
+    patch reported_article_url(@reported_article), params: { reported_article: {  } }
     assert_redirected_to reported_article_url(@reported_article)
   end
 

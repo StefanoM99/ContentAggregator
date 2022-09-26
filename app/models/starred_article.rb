@@ -1,3 +1,2 @@
-class StarredArticle < ApplicationRecord
-    has_many :profiles
+class StarredArticle < SavedArticle
 end

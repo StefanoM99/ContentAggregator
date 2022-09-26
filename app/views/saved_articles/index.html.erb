@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Saved articles</h1>
+
+<div id="saved_articles">
+  <% @saved_articles.each do |saved_article| %>
+    <%= render saved_article %>
+    <p>
+      <%= link_to "Show this saved article", saved_article %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New saved article", new_saved_article_path %>

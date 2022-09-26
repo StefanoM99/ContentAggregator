@@ -1,3 +1,2 @@
-class ReportedPost < ApplicationRecord
-    has_many :profiles
+class ReportedPost < SavedPost
 end

@@ -1,3 +1,2 @@
-class EditedPost < ApplicationRecord
-    has_many :profiles
+class EditedPost < SavedPost
 end
