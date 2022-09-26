@@ -28,8 +28,8 @@ class PlaylistsController < ApplicationController
     #response_body = req.read
     #data = JSON.parse(response_body)
 
-    client_id = '7816f5dc7fed4bb7888164e319ee5efa'
-    client_secret = '398d427fa90c4b1291daa4145e28d33e'
+    client_id = ''
+    client_secret = ''
 
     client = OAuth2::Client.new('client_id', 'client_secret', site: 'https://accounts.spotify.com/api/token')
 
