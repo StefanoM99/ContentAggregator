@@ -1,29 +1,63 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ContentAggregator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </head>
+
+    <body>
+    <!-- > Inizio sezione header -->
+    <header class=" header-active" data-aos="fade-down">
+
+  
+    
+        
+          
+          <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto'%>
+          
+      
+      
+      
+  
+        
+
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  <!-- > Inizio sezione centrale -->
+  <div class = "container text-center" >
+   <div class="timeline" data-aos="fade-down">
+   <h1>Inserisci i tuoi dati:</h1>
+       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+            <%= form.text_field :name ,class:"form",placeholder:"Nome"%>
+            <%= form.text_field :surname ,class:"form",placeholder:"Cognome"%>
+            <%= form.email_field :email ,class:"form",placeholder:"E-Mail"%>
+            <% if @minimum_password_length %>
+    
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= form.password_field :password ,class:"form",placeholder:"Password (Minimo 6 caratteri)"%><br>
+             <%= form.password_field :password_confirmation ,class:"form",placeholder:"Conferma Password"%><br>
+            <%= form.submit :class=> "button", :style=> "background-color:white", :value=>"Registrati"%> 
+       <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+    <script>
+     AOS.init();
+    </script>
+  </body>
+</html>
