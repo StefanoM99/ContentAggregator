@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Saved playlists</h1>
+
+<div id="saved_playlists">
+  <% @saved_playlists.each do |saved_playlist| %>
+    <%= render saved_playlist %>
+    <p>
+      <%= link_to "Show this saved playlist", saved_playlist %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New saved playlist", new_saved_playlist_path %>

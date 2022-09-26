@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   
   scope '/feed' do
-    resources :articles, :posts, :forecasts
+    resources :articles, :posts, :forecasts, :playlists
   end
 
   scope '/profile' do
     resources :starred_articles, :reported_articles
-    resources :my_posts, :edited_posts, :starred_posts, :reported_posts
+    resources :my_posts, :edited_posts, :starred_posts, :reported_posts, :starred_playlists, :reported_playlists
   end
 
   devise_for :users
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "/articles", to: "articles#index"
   get "/posts", to: "posts#index"
   get "/forecasts", to: "forecasts#index"
+  get "/playlists", to: "playlists#index"
 
   get "/profile", to: "profiles#index"
   
@@ -33,6 +34,9 @@ Rails.application.routes.draw do
   get "/edited-posts", to: "edited_posts#index"
   get "/starred-posts", to: "starred_posts#index"
   get "/reported-posts", to: "reported_posts#index"
+
+  get "/starred-playlists", to: "starred_playlists#index"
+  get "/reported-playlists", to: "reported_playlists#index"
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

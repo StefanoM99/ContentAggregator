@@ -1,0 +1,10 @@
+<h1>Editing starred playlist</h1>
+
+<%= render "form", starred_playlist: @starred_playlist %>
+
+<br>
+
+<div>
+  <%= link_to "Show this starred playlist", @starred_playlist %> |
+  <%= link_to "Back to starred playlists", starred_playlists_path %>
+</div>

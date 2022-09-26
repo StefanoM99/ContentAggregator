@@ -1,0 +1,2 @@
+class ReportedPlaylist < SavedPlaylist
+end

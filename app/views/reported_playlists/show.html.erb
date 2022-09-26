@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reported_playlist %>
+
+<div>
+  <%= link_to "Edit this reported playlist", edit_reported_playlist_path(@reported_playlist) %> |
+  <%= link_to "Back to reported playlists", reported_playlists_path %>
+
+  <%= button_to "Destroy this reported playlist", @reported_playlist, method: :delete %>
+</div>

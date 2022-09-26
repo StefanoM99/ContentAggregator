@@ -26,7 +26,8 @@
 
   <div class="card-footer">
     <%= link_to "Show this post", post %> |
-    <%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |
+    <!--<%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |-->
+    <%= link_to 'Edit', edit_post_path(post) %> |
     <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
 
     <%= button_to 'Star', starred_posts_path(

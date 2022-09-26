@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_135034) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,6 +87,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_135034) do
     t.index ["feed_id"], name: "index_forecasts_on_feed_id"
   end
 
+  create_table "playlists", force: :cascade do |t|
+    t.string "country"
+    t.string "name"
+    t.text "description"
+    t.text "spotify_url"
+    t.text "spotify_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "feed_id"
     t.string "author"
@@ -116,6 +126,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_135034) do
     t.text "link"
     t.text "media"
     t.date "publication"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_playlists", force: :cascade do |t|
+    t.string "type"
+    t.string "country"
+    t.string "name"
+    t.text "description"
+    t.text "spotify_url"
+    t.text "spotify_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,10 @@
+<h1>Editing saved playlist</h1>
+
+<%= render "form", saved_playlist: @saved_playlist %>
+
+<br>
+
+<div>
+  <%= link_to "Show this saved playlist", @saved_playlist %> |
+  <%= link_to "Back to saved playlists", saved_playlists_path %>
+</div>

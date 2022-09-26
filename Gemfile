@@ -6,6 +6,7 @@ ruby "3.0.0"
 gem "http"
 gem "devise"
 gem "open-uri"
+gem "oauth2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
