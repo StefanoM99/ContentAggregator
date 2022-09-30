@@ -2,3 +2,37 @@
  *= require_self
  *= require_tree .
  */
+
+/* Evita l’inscurimento dello sfondo del modal */
+.modal-backdrop {
+    opacity: 0.2 !important;
+}
+.modal-backdrop+.modal-backdrop {
+    opacity : 0 !important;
+}
+/* TipeWriter Animation */
+.line-1 {
+    position: relative;
+    top: 50%; 
+    width: 24em;
+    margin: 0 auto;
+    margin-top: 35px !important;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 160%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%); 
+}
+.anim-typewriter {
+    animation:  typewriter 3s steps(26) 0.5s 1 normal both,
+                blinkTextCursor 750ms steps(26) infinite normal;
+}
+@keyframes typewriter {
+    from{width: 0;}
+    to{width: 16em;}
+}
+@keyframes blinkTextCursor {
+    from{border-right-color: rgba(0, 0, 0, 0.75);}
+    to{border-right-color: transparent;}
+}
