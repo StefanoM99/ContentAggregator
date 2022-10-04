@@ -6,3 +6,4 @@ Gemfile.lock
 config/credentials.yml.enc
 db/development.sqlite3
 tmp/cache/bootsnap/load-path-cache
+/config/master.key

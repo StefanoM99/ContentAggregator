@@ -8,53 +8,19 @@ class PlaylistsController < ApplicationController
       "DELETE from sqlite_sequence where name = 'playlists'"
     )
 
-    require 'open-uri'
-    require 'oauth2'
+    require 'rspotify'
 
-    #url = 'https://api.spotify.com/v1/browse/featured-playlists'
-    #uri = URI.parse(url)
-    #query = Rack::Utils.parse_query(uri.query)
+    featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
 
-  
-    #query["country"] = 'US'
-
-    #query["access_token"] = Rails.application.credentials.dig(:spotify, :apiKey)
-
-    #uri.query = Rack::Utils.build_query(query)
-    #optUrl = uri.to_s
-
-    #req = URI.open(optUrl)
-    
-    #response_body = req.read
-    #data = JSON.parse(response_body)
-
-    client_id = ''
-    client_secret = ''
-
-    client = OAuth2::Client.new('client_id', 'client_secret', site: 'https://accounts.spotify.com/api/token')
-
-    client.auth_code.authorize_url(redirect_uri: 'http://localhost:3000/oauth2/callback')
-
-    token = client.auth_code.get_token('authorization_code_value',
-      redirect_uri: 'http://localhost:3000/oauth2/callback',
-      headers: {'Authorization' => 'Basic client_id:client:secret'}
-    )
-
-    response = token.get('https://api.spotify.com/v1/browse/featured-playlists',
-      params: { 'country' => 'IT' },
-      headers: {'Content-type': 'application/json'}
-    )
-
-    response.body
-    data = response.parsed
-
-    data["playlists"]["items"].each do |item|
+    psize = featured_playlists.size-1
+    for i in 0..psize do
       Playlist.create(
-        country: query["country"],
-        name: item["name"],
-        description: item["description"],
-        spotify_url: item["external_urls"]["spotify"],
-        spotify_img: item["images"][0]["url"]
+        country: 'US',
+        name: featured_playlists[i].name,
+        description: featured_playlists[i].description,
+        spotify_url: featured_playlists[i].external_urls["spotify"],
+        spotify_img: featured_playlists[i].images[0]["url"],
+        tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
       )
     end
 

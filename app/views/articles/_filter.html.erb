@@ -1,17 +1,10 @@
 <%= form_with model: @article, url: '/articles', method: :get do |form| %>
   <%= form.label :country, style: "display: block" %>
-  <%= form.select :country, [
-    ["-", ""],
-    ["de", "de"],
-    ["fr", "fr"], 
-    ["gb", "gb"], 
-    ["it", "it"], 
-    ["us", "us"]
-  ] %>
+  <%= form.country_select :country, include_blank: 'Select a country', only: (['AE', 'AR', 'AT', 'AU', 'BE', 'BG', 'BR', 'CA', 'CH', 'CN', 'CO', 'CU', 'CZ', 'DE', 'EG', 'FR', 'GB', 'GR', 'HK', 'HU', 'ID', 'IE', 'IL', 'IN', 'IT', 'JP', 'KR', 'LT', 'LV', 'MA', 'MX', 'MY', 'NG', 'NL', 'NO', 'NZ', 'PH', 'PL', 'PT', 'RO', 'RS', 'RU', 'SA', 'SE', 'SG', 'SI', 'SK', 'TH', 'TR', 'TW', 'UA', 'US', 'VE', 'ZA']) %>
 
   <%= form.label :category, style: "display: block" %>
   <%= form.select :category, [
-    ["-", ""],
+    ["Select a category", ""],
     ["business", "business"],
     ["entertainment", "entertainment"], 
     ["general", "general"], 

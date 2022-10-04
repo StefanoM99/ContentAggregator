@@ -8,7 +8,9 @@ gem "http"
 gem "devise"
 
 gem "open-uri"
-gem "oauth2"
+gem "rspotify"
+
+gem 'country_select', '~> 6.0'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'

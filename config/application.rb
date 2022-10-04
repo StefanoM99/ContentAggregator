@@ -18,5 +18,8 @@ module ContentAggregator
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    require 'rspotify'
+    RSpotify::authenticate("7816f5dc7fed4bb7888164e319ee5efa", "398d427fa90c4b1291daa4145e28d33e")
   end
 end

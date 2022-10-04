@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.text "description"
     t.text "spotify_url"
     t.text "spotify_img"
+    t.text "tracks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -137,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.text "description"
     t.text "spotify_url"
     t.text "spotify_img"
+    t.text "tracks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

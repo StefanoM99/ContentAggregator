@@ -4,10 +4,17 @@ class FeedsController < ApplicationController
   # GET /feeds or /feeds.json
   def index
     require 'open-uri'
+    require 'country_select'
+    require 'rspotify'
 
     Forecast.delete_all
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'forecasts'"
+    )
+
+    Playlist.delete_all
+    ActiveRecord::Base.connection.execute(
+      "DELETE from sqlite_sequence where name = 'playlists'"
     )
 
     Article.delete_all
@@ -21,7 +28,7 @@ class FeedsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
 
     if params[:place] == nil || params[:place] == ''
-      query["q"] = "Roma"
+      query["q"] = "Washington"
     else
       query["q"] = params[:place]
     end
@@ -79,6 +86,25 @@ class FeedsController < ApplicationController
       grnd_level: data2["main"]["grnd_level"]
     )
 
+    #playlist controller
+    if params[:country] == nil || params[:country] == ''
+      featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+    else
+      featured_playlists = RSpotify::Playlist.browse_featured(country: params[:country])
+    end
+
+    psize = featured_playlists.size-1
+    
+    for i in 0..psize do
+      Playlist.create(
+        country: params[:country],
+        name: featured_playlists[i].name,
+        description: featured_playlists[i].description,
+        spotify_url: featured_playlists[i].external_urls["spotify"],
+        spotify_img: featured_playlists[i].images[0]["url"],
+        tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
+      )
+    end
 
     #article controller
     url = 'https://newsapi.org/v2/top-headlines'
@@ -118,7 +144,7 @@ class FeedsController < ApplicationController
     end
 
 
-    @feeds = Forecast.all.reverse() + Post.all.reverse() + Article.all.reverse()
+    @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.all.reverse()
   end
 
   # GET /feeds/1 or /feeds/1.json

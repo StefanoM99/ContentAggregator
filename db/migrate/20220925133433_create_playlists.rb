@@ -6,6 +6,7 @@ class CreatePlaylists < ActiveRecord::Migration[7.0]
       t.text :description
       t.text :spotify_url
       t.text :spotify_img
+      t.text :tracks, array: true
 
       t.timestamps
     end

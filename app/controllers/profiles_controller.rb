@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles or /profiles.json
   def index
-    @profiles = MyPost.all + EditedPost.all + StarredPost.all + ReportedPost.all + StarredArticle.all + ReportedArticle.all
+    @profiles = MyPost.all + EditedPost.all + StarredPost.all + ReportedPost.all + StarredArticle.all + ReportedArticle.all + StarredPlaylist.all + ReportedPlaylist.all
   end
 
   # GET /profiles/1 or /profiles/1.json
