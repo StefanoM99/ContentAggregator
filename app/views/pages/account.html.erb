@@ -1,0 +1,71 @@
+<div id="helpDiv">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li id="backBtn" class="breadcrumb-item" style="cursor: pointer;"><p>Help</p></li>
+            <li class="breadcrumb-item active" aria-current="page">Account</li>
+        </ol>
+    </nav>
+    <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
+    <div class="accordion accordion-flush" id="accountAccordionFlush">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                > Change my username
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accountAccordionFlush">
+                <div class="accordion-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="inputUsername" class="form-label">Enter the new username:</label>
+                            <input type="email" class="form-control" id="inputUsername" aria-describedby="emailHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                > Update my password
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accountAccordionFlush">
+                <div class="accordion-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="inputPassword1" class="form-label">Enter the old password:</label>
+                            <input type="password" class="form-control" id="inputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword2" class="form-label">Enter the new password:</label>
+                            <input type="password" class="form-control" id="inputPassword2">
+                            <div id="passwordHelpBlock" class="form-text">
+                            Your password must be 8-20 characters long.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                > Delete my account
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accountAccordionFlush">
+                <div class="accordion-body">
+                    <div class="text-danger font-monospace">
+                    <u>WARNING</u>: you are about to delete your account. Your name, public profile and username will no longer be available on the site.
+                    </div>
+                    <div class="d-grid gap-2 col-5 mx-auto my-3">
+                        <button type="button" class="btn btn-danger fw-semibold p-3">Delete account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

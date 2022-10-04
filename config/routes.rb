@@ -42,7 +42,13 @@ Rails.application.routes.draw do
   get "/starred-playlists", to: "starred_playlists#index"
   get "/reported-playlists", to: "reported_playlists#index"
   
-
+  # help
+  get "pages/help"
+  get "pages/account"
+  get "pages/profile"
+  get "pages/posts"
+  get "pages/users"
+  get "pages/contacts"
   
   
 
