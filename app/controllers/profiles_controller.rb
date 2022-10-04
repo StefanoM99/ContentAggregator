@@ -4,10 +4,12 @@ class ProfilesController < ApplicationController
   # GET /profiles or /profiles.json
   def index
     @profiles = MyPost.all + EditedPost.all + StarredPost.all + ReportedPost.all + StarredArticle.all + ReportedArticle.all + StarredPlaylist.all + ReportedPlaylist.all
+    
   end
 
   # GET /profiles/1 or /profiles/1.json
   def show
+   
   end
 
   # GET /profiles/new
@@ -60,7 +62,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = User.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -9,14 +9,15 @@ Rails.application.routes.draw do
     resources :my_posts, :edited_posts, :starred_posts, :reported_posts, :starred_playlists, :reported_playlists
   end
   devise_for :users , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
- 
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'     
  end
- 
+
 
   get "/home", to: "home#index"
   root "home#index"
+ 
+  resources :users
 
   get '/registration',to:"user#registration"
   
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
   get "/forecasts", to: "forecasts#index"
   get "/playlists", to: "playlists#index"
 
-  get "/profile", to: "profiles#index"
+  
   
   get "/comments", to: "comments#index"
 
