@@ -29,12 +29,12 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
 
     <!-- > Inizio sezione centrale -->
     <div class="container">    
-      <div class="row vh-100 align-items-center ">
-        <div class="col-sm" style="text-align:center" data-aos="fade-right">
-          <%= image_tag "index.svg", height: 500,style: 'max-width:500px' %>
-          <h1>Benvenuto su ContentAggregator!</h1>
+      <div class="row vh-100 align-items-center " >
+        <div class="col-sm" style="text-align:center;margin-bottom:110px" data-aos="fade-right">
+          <%= image_tag "index.svg", height: 600,style: 'max-width:700px' %>
+          <h1 >Benvenuto su ContentAggregator!</h1>
           <br>
-          <p>ContentAggregator è un'applicazione dove puoi trovare tutti i contenuti di tuo gradimento!<p>
+          <p style="font-size:20px">ContentAggregator è un'applicazione dove puoi trovare tutti i contenuti di tuo gradimento!<p>
         </div>
         
         <div class="col" style="text-align:center"  data-aos="fade-left">
@@ -69,11 +69,26 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
                   <%= f.submit "Accedi con Twitter", type: "image", src: url_for("assets/sign-in-with-twitter-gray.png.twimg.2560.png")%>
                   <% end %>
           <% end %>
+          <br>
+          <a href="/feed">Salta la registrazione</a>
         </div>
  
       </div>
     </div>
-    
+
+             <!-- > Inizio sezione footer -->
+
+        <footer data-aos="fade-down">
+        <div class="footer-content" >
+            <h3>© 2022 ContentAggregator ®</h3>
+            <p>Tutti i diritti
+            riservati.<br>Immagini da: Storyset<br><a
+                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
+         
+        </div>
+      
+
+    </footer>
     <script>
       AOS.init();
     </script>
