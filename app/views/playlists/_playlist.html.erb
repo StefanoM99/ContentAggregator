@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <%= button_to 'Star', current_user_starred_playlists(
+      <%= button_to 'Star', starred_playlists_path(
         country: playlist.country,
         name: playlist.name,
         description: playlist.description,
@@ -36,7 +36,7 @@
         spotify_img: playlist.spotify_img
       ) %>
 
-      <%= button_to 'Report', current_user_reported_playlists(
+      <%= button_to 'Report', reported_playlists_path(
         country: playlist.country,
         name: playlist.name,
         description: playlist.description,

@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <%= button_to 'Star', current_user_starred_articles(
+      <%= button_to 'Star', starred_articles_path(
         country: article.country, 
         category: article.category,
         source: article.source,
@@ -57,7 +57,7 @@
         publication: article.publication
       ) %>
 
-      <%= button_to 'Report', current_user_reported_articles(
+      <%= button_to 'Report', reported_articles_path(
         country: article.country, 
         category: article.category,
         source: article.source,

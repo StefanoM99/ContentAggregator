@@ -23,21 +23,21 @@ Rails.application.routes.draw do
   
   get "/feed", to: "feeds#index"
   
-  #get "/articles", to: "articles#index"
-  #get "/posts", to: "posts#index"
-  #get "/forecasts", to: "forecasts#index"
-  #get "/playlists", to: "playlists#index"
+  get "/articles", to: "articles#index"
+  get "/posts", to: "posts#index"
+  get "/forecasts", to: "forecasts#index"
+  get "/playlists", to: "playlists#index"
 
-  #get "/starred-articles", to: "starred_articles#index"
-  #get "/reported-articles", to: "reported_articles#index"
+  get "/starred-articles", to: "starred_articles#index"
+  get "/reported-articles", to: "reported_articles#index"
 
-  #get "/my-posts", to: "my_posts#index"
-  #get "/edited-posts", to: "edited_posts#index"
-  #get "/starred-posts", to: "starred_posts#index"
-  #get "/reported-posts", to: "reported_posts#index"
+  get "/my-posts", to: "my_posts#index"
+  get "/edited-posts", to: "edited_posts#index"
+  get "/starred-posts", to: "starred_posts#index"
+  get "/reported-posts", to: "reported_posts#index"
 
-  #get "/starred-playlists", to: "starred_playlists#index"
-  #get "/reported-playlists", to: "reported_playlists#index"
+  get "/starred-playlists", to: "starred_playlists#index"
+  get "/reported-playlists", to: "reported_playlists#index"
   
   # help
   get "pages/help"
