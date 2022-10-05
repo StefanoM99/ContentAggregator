@@ -7,7 +7,7 @@
       <ul class="navbar-nav">
         <li class="nav-item"><%= link_to "Home", root_path, class: 'nav-link' %></li>
         <li class="nav-item"><%= link_to "Go to feed", feed_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to "Go to profile", profile_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to "Go to profile", current_user, class: 'nav-link' %></li>
       </ul>
     </div>
   </nav>
