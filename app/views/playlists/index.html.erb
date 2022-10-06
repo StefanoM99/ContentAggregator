@@ -27,6 +27,8 @@
         <li><%= link_to "Forecast", forecasts_path, class: 'dropdown-item' %></li>
       </ul>
     </div>
+    <br>
+    <%= render "filter", playlist: @playlist %>
     <br><br>
     <div class="row" id="playlists">
       <% @playlists.each do |playlist| %>

@@ -28,7 +28,7 @@ resources :users
 
   get '/users/:id/my_posts', to: 'my_posts#index'  ,as: 'user_posts'
   get '/users/:id/edited_posts', to: 'edited_posts#index'  ,as: 'edited_user_posts'
-  get '/users/:id/starred_posts', to: 'starred#index'  ,as: 'starred_user_posts'
+  get '/users/:id/starred_posts', to: 'starred_posts#index'  ,as: 'starred_user_posts'
   get '/users/:id/reported_posts', to: 'reported_posts#index'  ,as: 'reported_user_posts'
   get '/users/:id/starred_articles', to: 'starred_articles#index'  ,as: 'starred_user_articles'
   get '/users/:id/reported_articles', to: 'reported_articles#index'  ,as: 'reported_user_articles'

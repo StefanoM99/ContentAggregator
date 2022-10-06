@@ -9,13 +9,15 @@ class ForecastsController < ApplicationController
     )
 
     require 'open-uri'
+    require 'geocoder'
     
     url = 'http://api.openweathermap.org/geo/1.0/direct'
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
 
     if params[:place] == nil || params[:place] == ''
-      query["q"] = "Washington"
+      remote_ip = URI.open('https://ident.me').read
+      query["q"] = Geocoder.search(remote_ip).first.city
     else
       query["q"] = params[:place]
     end

@@ -10,6 +10,7 @@ gem "devise"
 gem "open-uri"
 gem "rspotify"
 
+gem 'geocoder'
 gem 'country_select', '~> 6.0'
 
 gem 'omniauth'

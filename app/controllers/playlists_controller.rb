@@ -9,8 +9,13 @@ class PlaylistsController < ApplicationController
     )
 
     require 'rspotify'
-
-    featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+    RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
+    
+    if params[:country] == nil || params[:country] == ''
+      featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+    else
+      featured_playlists = RSpotify::Playlist.browse_featured(country: params[:country])
+    end
 
     psize = featured_playlists.size-1
     for i in 0..psize do

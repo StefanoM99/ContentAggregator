@@ -4,6 +4,7 @@ class FeedsController < ApplicationController
   # GET /feeds or /feeds.json
   def index
     require 'open-uri'
+    require 'geocoder'
     require 'country_select'
     require 'rspotify'
 
@@ -28,7 +29,8 @@ class FeedsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
 
     if params[:place] == nil || params[:place] == ''
-      query["q"] = "Washington"
+      remote_ip = URI.open('https://ident.me').read
+      query["q"] = Geocoder.search(remote_ip).first.city
     else
       query["q"] = params[:place]
     end
@@ -87,6 +89,8 @@ class FeedsController < ApplicationController
     )
 
     #playlist controller
+    RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
+    
     if params[:country] == nil || params[:country] == ''
       featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
     else
