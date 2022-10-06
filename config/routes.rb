@@ -11,13 +11,11 @@ Rails.application.routes.draw do
   devise_for :users , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'     
- end
+  end
 
 
   get "/home", to: "home#index"
   root "home#index"
- 
-  resources :users
 
   get '/registration',to:"user#registration"
   
@@ -47,12 +45,6 @@ Rails.application.routes.draw do
   get "pages/posts"
   get "pages/users"
   get "pages/contacts"
-  
-  
-
-
-
-
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
