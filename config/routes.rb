@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :articles, :posts, :forecasts, :playlists
   end
 
-
+   
     resources :starred_articles, :reported_articles
     resources :my_posts, :edited_posts, :starred_posts, :reported_posts, :starred_playlists, :reported_playlists
   
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
   end
 
-
+resources :users
   get "/home", to: "home#index"
   root "home#index"
 
