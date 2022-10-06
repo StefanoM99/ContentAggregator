@@ -15,7 +15,7 @@ class ForecastsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
 
     if params[:place] == nil || params[:place] == ''
-      query["q"] = "Roma"
+      query["q"] = "Washington"
     else
       query["q"] = params[:place]
     end

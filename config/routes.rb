@@ -34,9 +34,6 @@ resources :users
   get '/users/:id/reported_articles', to: 'reported_articles#index'  ,as: 'reported_user_articles'
   get '/users/:id/starred_playlists', to: 'starred_playlists#index'  ,as: 'starred_user_playlists'
   get '/users/:id/reported_playlists', to: 'reported_playlists#index'  ,as: 'reported_user_playlists'
-  
-  get "/comments", to: "comments#index"
-
 
   # help
   get "pages/help"

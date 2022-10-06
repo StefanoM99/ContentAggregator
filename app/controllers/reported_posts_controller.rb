@@ -26,7 +26,8 @@ class ReportedPostsController < ApplicationController
       title: params[:title],
       summary: params[:summary],
       image: params[:image],
-      video: params[:video])
+      video: params[:video]
+    )
 
     respond_to do |format|
       if @reported_post.save
