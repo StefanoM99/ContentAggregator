@@ -4,7 +4,7 @@ class MyPostsController < ApplicationController
   # GET /my_posts or /my_posts.json
   def index
     @my_posts = MyPost.all
-    @user = current_user
+  
   end
 
   # GET /my_posts/1 or /my_posts/1.json

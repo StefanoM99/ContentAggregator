@@ -12,8 +12,10 @@ class CreateSavedArticles < ActiveRecord::Migration[7.0]
       t.text :link
       t.text :media
       t.date :publication
-
+      t.references :user, null: false, foreign_key: true
+      t.references :article, null:false, foreign_key:true
       t.timestamps
     end
+    add_index :saved_articles, [:user_id, :article_id], unique: true
   end
 end

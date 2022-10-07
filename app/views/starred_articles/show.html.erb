@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to "Edit this starred article", edit_starred_article_path(@starred_article) %> |
-  <%= link_to "Back to starred articles", starred_articles_path %>
+  <%= link_to "Back to starred articles", starred_user_articles_path(:user_id) %>
 
   <%= button_to "Destroy this starred article", @starred_article, method: :delete %>
 </div>

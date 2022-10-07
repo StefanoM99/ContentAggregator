@@ -9,7 +9,8 @@ class User < ApplicationRecord
         validates :email, presence: true
         validates :encrypted_password, presence: true
       
-       
+      has_many :starred_articles
+      has_many :articles
         def self.from_omniauth(access_token)
           puts access_token.info
           where(email: access_token.info.email).first_or_create do |user|

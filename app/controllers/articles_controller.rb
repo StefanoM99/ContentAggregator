@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    Article.delete_all
+    
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'articles'"
     )
@@ -43,11 +43,13 @@ class ArticlesController < ApplicationController
         summary: item["content"],
         link: item["url"],
         media: item["urlToImage"],
-        publication: item["publishedAt"]
+        publication: item["publishedAt"],
+        
       )
     end
-
+    
     @articles = Article.all.reverse()
+    
   end
 
   # GET /articles/1 or /articles/1.json

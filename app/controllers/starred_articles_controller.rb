@@ -4,6 +4,7 @@ class StarredArticlesController < ApplicationController
   # GET /starred_articles or /starred_articles.json
   def index
     @starred_articles = StarredArticle.all
+    @user = current_user
   end
 
   # GET /starred_articles/1 or /starred_articles/1.json
@@ -21,18 +22,24 @@ class StarredArticlesController < ApplicationController
 
   # POST /starred_articles or /starred_articles.json
   def create
-    @starred_article = StarredArticle.create(
-      country: params[:country], 
-      category: params[:category],
-      source: params[:source],
-      author: params[:author],
-      title: params[:title],
-      description: params[:description],
-      summary: params[:summary],
-      link: params[:link],
-      media: params[:media],
-      publication: params[:publication]
-    )
+    puts("AOOOOOO \n")
+    
+   
+    @starred_article=StarredArticle.new(article_id:params[:article_id],
+                                        user_id:current_user.id,
+                                        country: params[:country], 
+                                        category: params[:category],
+                                        source: params[:source],
+                                        author: params[:author],
+                                        title: params[:title],
+                                        description: params[:description],
+                                        summary: params[:summary],
+                                        link: params[:link],
+                                        media: params[:media] ,
+                                        publication: params[:publication]
+                                      )
+ 
+
     respond_to do |format|
       if @starred_article.save
         format.html { redirect_to starred_article_url(@starred_article), notice: "Starred article was successfully created." }
@@ -75,6 +82,6 @@ class StarredArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def starred_article_params
-      params.fetch(:starred_article, {})
+      params.fetch(:starred_article, {}).permit(:article_id, :user_id)
     end
 end

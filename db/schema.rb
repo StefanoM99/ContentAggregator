@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "feed_id"
+    t.integer "user_id"
     t.string "country"
     t.string "category"
     t.string "source"
@@ -54,12 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_articles_on_feed_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.text "field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -110,11 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.index ["feed_id"], name: "index_posts_on_feed_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "saved_articles", force: :cascade do |t|
     t.string "type"
     t.string "country"
@@ -127,8 +118,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.text "link"
     t.text "media"
     t.date "publication"
+    t.integer "user_id", null: false
+    t.integer "article_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_saved_articles_on_article_id"
+    t.index ["user_id", "article_id"], name: "index_saved_articles_on_user_id_and_article_id", unique: true
+    t.index ["user_id"], name: "index_saved_articles_on_user_id"
   end
 
   create_table "saved_playlists", force: :cascade do |t|
@@ -175,6 +171,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "feeds"
+  add_foreign_key "articles", "users"
   add_foreign_key "forecasts", "feeds"
   add_foreign_key "posts", "feeds"
+  add_foreign_key "saved_articles", "articles"
+  add_foreign_key "saved_articles", "users"
 end

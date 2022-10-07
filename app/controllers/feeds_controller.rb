@@ -18,7 +18,7 @@ class FeedsController < ApplicationController
       "DELETE from sqlite_sequence where name = 'playlists'"
     )
 
-    Article.delete_all
+    
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'articles'"
     )

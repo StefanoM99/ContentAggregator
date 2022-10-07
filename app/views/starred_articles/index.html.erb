@@ -22,19 +22,20 @@
       </button>
       <ul class="dropdown-menu">
         <li><%= link_to "All", current_user, class: 'dropdown-item' %></li>
-        <li><%= link_to "My Posts", user_posts_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Edited Posts", edited_user_posts_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Starred Posts", starred_user_posts_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Reported Posts", reported_user_posts_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Starred Articles", starred_user_articles_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Reported Articles", reported_user_articles_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Starred Playlists", starred_user_playlists_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Reported Playlists", reported_user_playlists_path, class: 'dropdown-item' %></li>
+        <li><%= link_to "My Posts", user_posts_path(@user), class: 'dropdown-item' %></li>
+        <li><%= link_to "Edited Posts", edited_user_posts_path(@user), class: 'dropdown-item' %></li>
+        <li><%= link_to "Starred Posts", starred_user_posts_path(@user), class: 'dropdown-item' %></li>
+        <li><%= link_to "Reported Posts", reported_user_posts_path(@user), class: 'dropdown-item' %></li>
+        <li><%= link_to "Starred Articles", starred_user_articles_path(@user), class: 'dropdown-item' %></li>
+        <li><%= link_to "Reported Articles", reported_user_articles_path(@user) ,class: 'dropdown-item' %></li>
+        <li><%= link_to "Starred Playlists", starred_user_playlists_path(@user), class: 'dropdown-item' %></li>
+        <li><%= link_to "Reported Playlists", reported_user_playlists_path(@user), class: 'dropdown-item' %></li>
       </ul>
     </div>
     <br>
     <div class="row" id="starred_articles">
-      <% @starred_articles.each do |starred_article| %>
+    
+        <% SavedArticle.where(user_id: current_user).each do |starred_article| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render starred_article %>
