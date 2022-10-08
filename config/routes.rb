@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :starred_articles, :reported_articles, :articles
     resources :my_posts, :edited_posts, :starred_posts, :reported_posts
-    resources :starred_playlists, :reported_playlists
+    resources :starred_playlists, :reported_playlists, :playlists
   end 
   get "/home", to: "home#index"
   root "home#index"

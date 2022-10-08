@@ -8,7 +8,9 @@ class User < ApplicationRecord
         validates :surname, presence: true
         validates :email, presence: true
         validates :encrypted_password, presence: true
-      
+        
+      has_many :starred_playlists
+      has_many :playlists
       has_many :starred_articles
       has_many :articles
         def self.from_omniauth(access_token)

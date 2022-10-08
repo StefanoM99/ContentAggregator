@@ -22,11 +22,14 @@ class StarredPlaylistsController < ApplicationController
   # POST /starred_playlists or /starred_playlists.json
   def create
     @starred_playlist = StarredPlaylist.create(
-      country: params[:coutry],
+      country: params[:country],
       name: params[:name],
       description: params[:description],
       spotify_url: params[:spotify_url],
-      spotify_img: params[:spotify_img]
+      spotify_img: params[:spotify_img],
+      playlist_id: params[:playlist_id],
+      user: current_user
+     
     )
 
     respond_to do |format|

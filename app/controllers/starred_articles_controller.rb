@@ -37,6 +37,7 @@ class StarredArticlesController < ApplicationController
                                         link: params[:link],
                                         media: params[:media] ,
                                         publication: params[:publication]
+                                        
                                       )
  
 

@@ -8,8 +8,10 @@ class CreateSavedPlaylists < ActiveRecord::Migration[7.0]
       t.text :spotify_url
       t.text :spotify_img
       t.text :tracks, array: true
-
+      t.references :user, null: false, foreign_key: true
+      t.references :playlist, null:false, foreign_key:true
       t.timestamps
     end
+    add_index :saved_playlists, [:user_id, :playlist_id],unique: true
   end
 end

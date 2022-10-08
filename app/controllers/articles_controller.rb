@@ -44,6 +44,7 @@ class ArticlesController < ApplicationController
         link: item["url"],
         media: item["urlToImage"],
         publication: item["publishedAt"],
+        user: current_user
         
       )
     end
