@@ -22,7 +22,7 @@ class MyPostsController < ApplicationController
 
   # POST /my_posts or /my_posts.json
   def create
-    @my_post = MyPost.new(my_post_params)
+    @my_post = MyPost.new(post_id: my_post_params[:post_id])
 
     respond_to do |format|
       if @my_post.save

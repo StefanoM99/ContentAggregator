@@ -26,7 +26,9 @@ class ReportedPlaylistsController < ApplicationController
       name: params[:name],
       description: params[:description],
       spotify_url: params[:spotify_url],
-      spotify_img: params[:spotify_img]
+      spotify_img: params[:spotify_img],
+      user_id: current_user.id,
+      playlist_id: params[:playlist_id]
     )
 
     respond_to do |format|
@@ -71,6 +73,6 @@ class ReportedPlaylistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reported_playlist_params
-      params.fetch(:reported_playlist, {})
+      params.fetch(:reported_playlist, {}).permit(:playlist_id,:user_id)
     end
 end

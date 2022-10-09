@@ -8,7 +8,8 @@ class User < ApplicationRecord
         validates :surname, presence: true
         validates :email, presence: true
         validates :encrypted_password, presence: true
-        
+      has_many :reported_articles
+      has_many :reported_playlists  
       has_many :starred_playlists
       has_many :playlists
       has_many :starred_articles

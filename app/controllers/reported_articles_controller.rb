@@ -31,7 +31,9 @@ class ReportedArticlesController < ApplicationController
       summary: params[:summary],
       link: params[:link],
       media: params[:media],
-      publication: params[:publication]
+      publication: params[:publication],
+      article_id: params[:article_id],
+      user_id:current_user.id
     )
 
     respond_to do |format|
@@ -76,6 +78,6 @@ class ReportedArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reported_article_params
-      params.fetch(:reported_article, {})
+      params.fetch(:reported_article, {}).permit(:article_id)
     end
 end

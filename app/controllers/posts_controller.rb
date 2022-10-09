@@ -21,11 +21,28 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+  
+    @post = Post.new(user_id: current_user.id,
+      author: current_user.id,
+      title: post_params[:title],
+      summary: post_params[:summary],
+      image: post_params[:image],
+      video: post_params[:video]
+      
+      
+                    
+    )
 
     respond_to do |format|
       if @post.save
-        @my_post = MyPost.create(post_params)
+        @my_post = MyPost.create(user_id: current_user.id,
+          author: current_user.id,
+          title: post_params[:title],
+          summary: post_params[:summary],
+          image: post_params[:image],
+          video: post_params[:video],
+          post_id: post_params[:id]
+        )
 
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
@@ -38,9 +55,17 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    
     respond_to do |format|
       if @post.update(post_params)
-        @edited_post = EditedPost.create(post_params)
+        @edited_post = EditedPost.create(user_id: current_user.id,
+          author: current_user.id,
+          title: post_params[:title],
+          summary: post_params[:summary],
+          image: post_params[:image],
+          video: post_params[:video],
+          post_id: params[:id]
+        )
 
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
@@ -69,6 +94,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.fetch(:post, {}).permit(:author, :title, :summary)
+      params.fetch(:post, {}).permit(:author, :title, :summary, :image, :video, :id)
     end
 end

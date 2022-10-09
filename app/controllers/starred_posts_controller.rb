@@ -26,7 +26,9 @@ class StarredPostsController < ApplicationController
       title: params[:title],
       summary: params[:summary],
       image: params[:image],
-      video: params[:video]
+      video: params[:video],
+      user_id: current_user.id,
+      post_id: params[:post_id]
     )
 
     respond_to do |format|
@@ -71,6 +73,6 @@ class StarredPostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def starred_post_params
-      params.fetch(:starred_post, {})
+      params.fetch(:starred_post, {}).permit(:post_id)
     end
 end

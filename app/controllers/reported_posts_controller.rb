@@ -26,7 +26,9 @@ class ReportedPostsController < ApplicationController
       title: params[:title],
       summary: params[:summary],
       image: params[:image],
-      video: params[:video]
+      video: params[:video],
+      user_id: current_user.id,
+      post_id: params[:post_id]
     )
 
     respond_to do |format|

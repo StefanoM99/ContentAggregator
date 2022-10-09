@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_09_143628) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -98,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "feed_id"
+    t.integer "user_id"
     t.string "author"
     t.text "title"
     t.text "summary"
@@ -106,6 +107,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_posts_on_feed_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "reported_playlists", force: :cascade do |t|
+    t.string "type"
+    t.string "country"
+    t.string "name"
+    t.text "description"
+    t.text "spotify_url"
+    t.text "spotify_img"
+    t.text "tracks"
+    t.integer "user_id", null: false
+    t.integer "playlist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id"], name: "index_reported_playlists_on_playlist_id"
+    t.index ["user_id", "playlist_id"], name: "index_reported_playlists_on_user_id_and_playlist_id", unique: true
+    t.index ["user_id"], name: "index_reported_playlists_on_user_id"
   end
 
   create_table "saved_articles", force: :cascade do |t|
@@ -153,8 +172,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.text "summary"
     t.binary "image"
     t.binary "video"
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_saved_posts_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_saved_posts_on_user_id_and_post_id", unique: true
+    t.index ["user_id"], name: "index_saved_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -182,8 +206,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
   add_foreign_key "forecasts", "feeds"
   add_foreign_key "playlists", "users"
   add_foreign_key "posts", "feeds"
+  add_foreign_key "posts", "users"
+  add_foreign_key "reported_playlists", "playlists"
+  add_foreign_key "reported_playlists", "users"
   add_foreign_key "saved_articles", "articles"
   add_foreign_key "saved_articles", "users"
   add_foreign_key "saved_playlists", "playlists"
   add_foreign_key "saved_playlists", "users"
+  add_foreign_key "saved_posts", "posts"
+  add_foreign_key "saved_posts", "users"
 end
