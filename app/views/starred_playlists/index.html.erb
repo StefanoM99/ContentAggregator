@@ -34,7 +34,7 @@
     </div>
     <br>
     <div class="row" id="starred_playlists">
-      <% SavedPlaylist.where(user_id: current_user,type: "StarredPlaylist").each do |starred_playlist| %>
+      <% SavedPlaylist.where(user_id: params[:user_id],type: "StarredPlaylist").each do |starred_playlist| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render starred_playlist %>

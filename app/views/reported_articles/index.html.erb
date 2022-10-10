@@ -36,7 +36,7 @@
     </div>
     <br>
     <div class="row" id="reported_articles">
-     <% SavedArticle.where(user_id: current_user,type: "ReportedArticle").each do |reported_article| %>
+     <% SavedArticle.where(user_id: params[:user_id],type: "ReportedArticle").each do |reported_article| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_article %>

@@ -34,7 +34,7 @@
     </div>
     <br>
     <div class="row" id="starred_posts">
-      <% SavedPost.where(user_id: current_user,type: "StarredPost").each do |starred_post| %>
+      <% SavedPost.where(user_id: params[:user_id],type: "StarredPost").each do |starred_post| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render starred_post %>
