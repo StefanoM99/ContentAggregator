@@ -3,8 +3,8 @@
 <%= render @my_post %>
 
 <div>
-  <%= link_to "Edit this my post", edit_my_post_path(@my_post) %> |
-  <%= link_to "Back to my posts", my_posts_path %>
+  <%= link_to "Edit this my post", edit_my_post_path(@my_post.user_id) %> |
+  <%= link_to "Back to my posts", user_posts_path(@my_post.user_id) %>
 
-  <%= button_to "Destroy this my post", @my_post, method: :delete %>
+  <%= button_to "Destroy this my post", @my_post, method: :delete , params:{user_id: @my_post.user_id}%>
 </div>

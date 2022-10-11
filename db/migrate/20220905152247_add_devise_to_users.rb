@@ -20,7 +20,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.0]
       
       t.datetime :remember_created_at
       t.timestamps
-
+      t.integer :role, default: 0
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at

@@ -15,3 +15,4 @@ class CreateSavedPlaylists < ActiveRecord::Migration[7.0]
     add_index :saved_playlists, [:user_id, :playlist_id],unique: true
   end
 end
+

@@ -3,16 +3,18 @@ class StarredArticlesController < ApplicationController
 
   # GET /starred_articles or /starred_articles.json
   def index
-    @starred_articles = StarredArticle.all
-    @user = current_user
+   
+
   end
 
   # GET /starred_articles/1 or /starred_articles/1.json
   def show
+  
   end
 
   # GET /starred_articles/new
   def new
+  
     @starred_article = StarredArticle.new
   end
 
@@ -56,7 +58,7 @@ class StarredArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @starred_article.update(starred_article_params)
-        format.html { redirect_to starred_article_url(@starred_article), notice: "Starred article was successfully updated." }
+        format.html { redirect_to starred_article_url(:user_id => @starred_article.user_id), notice: "Starred article was successfully updated." }
         format.json { render :show, status: :ok, location: @starred_article }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -70,7 +72,7 @@ class StarredArticlesController < ApplicationController
     @starred_article.destroy
 
     respond_to do |format|
-      format.html { redirect_to starred_articles_url, notice: "Starred article was successfully destroyed." }
+      format.html { redirect_to starred_articles_url(:user_id => @starred_article.user_id), notice: "Starred article was successfully destroyed." }
       format.json { head :no_content }
     end
   end

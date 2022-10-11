@@ -39,15 +39,18 @@
       title: post.title,
       summary: post.summary,
       image: post.image,
-      video: post.video
-    ) %>
+      video: post.video,
+      post_id: post.id
+    )
+    %>
 
     <%= button_to 'Report', reported_posts_path(
       author: post.author,
       title: post.title,
       summary: post.summary,
       image: post.image,
-      video: post.video
+      video: post.video,
+      post_id: post.id
     ) %>
   </div>
 </div>

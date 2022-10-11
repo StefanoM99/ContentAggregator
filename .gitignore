@@ -11,3 +11,5 @@ tmp/cache/bootsnap/load-path-cache
 /config/master.key
 
 /config/master.key
+
+/tmp/

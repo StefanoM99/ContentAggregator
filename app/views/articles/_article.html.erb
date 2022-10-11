@@ -58,7 +58,7 @@
         publication: article.publication,
         article_id: article.id,
         user_id: current_user.id
-      ) %>
+      )%>
 
       <%= button_to 'Report', reported_articles_path(
         country: article.country, 
@@ -70,7 +70,9 @@
         summary: article.summary,
         link: article.link,
         media: article.media,
-        publication: article.publication
+        publication: article.publication,
+        article_id: article.id,
+        user_id: current_user.id
       ) %>
   </div>
 </div>

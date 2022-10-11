@@ -3,8 +3,8 @@
 <%= render @starred_article %>
 
 <div>
-  <%= link_to "Edit this starred article", edit_starred_article_path(@starred_article) %> |
-  <%= link_to "Back to starred articles", starred_user_articles_path(:user_id) %>
+  <%= link_to "Edit this starred article", edit_user_starred_article_path(@starred_article.user_id) %> |
+  <%= link_to "Back to starred articles", starred_user_articles_path(@starred_article.user_id) %>
 
-  <%= button_to "Destroy this starred article", @starred_article, method: :delete %>
+  <%= button_to "Destroy this starred article", @starred_article, method: :delete , params:{user_id: @starred_article.user_id}%>
 </div>
