@@ -38,7 +38,7 @@ class EditedPostsController < ApplicationController
   def update
     respond_to do |format|
       if @edited_post.update(edited_post_params)
-        format.html { redirect_to edited_post_url(@edited_post), notice: "Edited post was successfully updated." }
+        format.html { redirect_to edited_post_url(:user_id => @edited_post.user_id), notice: "Edited post was successfully updated." }
         format.json { render :show, status: :ok, location: @edited_post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class EditedPostsController < ApplicationController
     @edited_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to edited_posts_url, notice: "Edited post was successfully destroyed." }
+      format.html { redirect_to edited_posts_url(:user_id => @edited_post.user_id), notice: "Edited post was successfully destroyed." }
       format.json { head :no_content }
     end
   end

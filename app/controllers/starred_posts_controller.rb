@@ -46,7 +46,7 @@ class StarredPostsController < ApplicationController
   def update
     respond_to do |format|
       if @starred_post.update(starred_post_params)
-        format.html { redirect_to starred_post_url(@starred_post), notice: "Starred post was successfully updated." }
+        format.html { redirect_to starred_post_url(:user_id => @starred_post.user_id), notice: "Starred post was successfully updated." }
         format.json { render :show, status: :ok, location: @starred_post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class StarredPostsController < ApplicationController
     @starred_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to starred_posts_url, notice: "Starred post was successfully destroyed." }
+      format.html { redirect_to starred_posts_url(:user_id => @starred_post.user_id), notice: "Starred post was successfully destroyed." }
       format.json { head :no_content }
     end
   end

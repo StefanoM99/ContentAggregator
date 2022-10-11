@@ -46,7 +46,7 @@ class ReportedPlaylistsController < ApplicationController
   def update
     respond_to do |format|
       if @reported_playlist.update(reported_playlist_params)
-        format.html { redirect_to reported_playlist_url(@reported_playlist), notice: "Reported playlist was successfully updated." }
+        format.html { redirect_to reported_playlist_url(:user_id => @reported_playlist.user_id), notice: "Reported playlist was successfully updated." }
         format.json { render :show, status: :ok, location: @reported_playlist }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class ReportedPlaylistsController < ApplicationController
     @reported_playlist.destroy
 
     respond_to do |format|
-      format.html { redirect_to reported_playlists_url, notice: "Reported playlist was successfully destroyed." }
+      format.html { redirect_to reported_playlists_url(:user_id => @reported_playlist.user_id), notice: "Reported playlist was successfully destroyed." }
       format.json { head :no_content }
     end
   end

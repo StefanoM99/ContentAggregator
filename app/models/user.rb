@@ -4,16 +4,24 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2,:twitter]
    
-        validates :name, presence: true
-        validates :surname, presence: true
-        validates :email, presence: true
-        validates :encrypted_password, presence: true
-      has_many :reported_articles
-      has_many :reported_playlists  
-      has_many :starred_playlists
-      has_many :playlists
-      has_many :starred_articles
-      has_many :articles
+  validates :name, presence: true
+  validates :surname, presence: true
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
+      
+  has_many :reported_articles
+  has_many :reported_playlists  
+  has_many :starred_playlists
+  has_many :playlists
+  has_many :starred_articles
+  has_many :articles
+
+  enum role:[:user, :admin]
+  after_initialize :set_default_role, :if => :new_record?
+
+  def set_default_role
+    self.role ||= :user
+  end
         def self.from_omniauth(access_token)
           puts access_token.info
           where(email: access_token.info.email).first_or_create do |user|

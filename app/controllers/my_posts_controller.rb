@@ -39,7 +39,7 @@ class MyPostsController < ApplicationController
   def update
     respond_to do |format|
       if @my_post.update(my_post_params)
-        format.html { redirect_to my_post_url(@my_post), notice: "My post was successfully updated." }
+        format.html { redirect_to my_post_url(:user_id => @my_post.user_id), notice: "My post was successfully updated." }
         format.json { render :show, status: :ok, location: @my_post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class MyPostsController < ApplicationController
     @my_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to my_posts_url, notice: "My post was successfully destroyed." }
+      format.html { redirect_to my_posts_url(:user_id => my_post.user_id), notice: "My post was successfully destroyed." }
       format.json { head :no_content }
     end
   end

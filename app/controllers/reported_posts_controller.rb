@@ -46,7 +46,7 @@ class ReportedPostsController < ApplicationController
   def update
     respond_to do |format|
       if @reported_post.update(reported_post_params)
-        format.html { redirect_to reported_post_url(@reported_post), notice: "Reported post was successfully updated." }
+        format.html { redirect_to reported_post_url(:user_id => @reported_post.user_id), notice: "Reported post was successfully updated." }
         format.json { render :show, status: :ok, location: @reported_post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class ReportedPostsController < ApplicationController
     @reported_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to reported_posts_url, notice: "Reported post was successfully destroyed." }
+      format.html { redirect_to reported_posts_url(:user_id => @reported_post.user_id), notice: "Reported post was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -47,7 +47,7 @@ class StarredPlaylistsController < ApplicationController
   def update
     respond_to do |format|
       if @starred_playlist.update(starred_playlist_params)
-        format.html { redirect_to starred_playlist_url(@starred_playlist), notice: "Starred playlist was successfully updated." }
+        format.html { redirect_to starred_playlist_url(:user_id => starred_playlist.user_id), notice: "Starred playlist was successfully updated." }
         format.json { render :show, status: :ok, location: @starred_playlist }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class StarredPlaylistsController < ApplicationController
     @starred_playlist.destroy
 
     respond_to do |format|
-      format.html { redirect_to starred_playlists_url, notice: "Starred playlist was successfully destroyed." }
+      format.html { redirect_to starred_playlists_url(:user_id =>@starred_playlist.user_id), notice: "Starred playlist was successfully destroyed." }
       format.json { head :no_content }
     end
   end

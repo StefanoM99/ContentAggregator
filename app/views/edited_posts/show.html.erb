@@ -3,8 +3,8 @@
 <%= render @edited_post %>
 
 <div>
-  <%= link_to "Edit this edited post", edit_edited_post_path(@edited_post) %> |
-  <%= link_to "Back to edited posts", edited_posts_path %>
+  <%= link_to "Edit this edited post", edit_edited_post_path(@edited_post.user_id) %> |
+  <%= link_to "Back to edited posts", edited_user_posts_path(@edited_post.user_id) %>
 
-  <%= button_to "Destroy this edited post", @edited_post, method: :delete %>
+  <%= button_to "Destroy this edited post", @edited_post, method: :delete , params:{user_id: @edited_post.user_id}%>
 </div>

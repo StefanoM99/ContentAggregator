@@ -24,10 +24,10 @@ class PostsController < ApplicationController
   
     @post = Post.new(user_id: current_user.id,
       author: current_user.id,
-      title: post_params[:title],
-      summary: post_params[:summary],
-      image: post_params[:image],
-      video: post_params[:video]
+      title: params[:title],
+      summary: params[:summary],
+      image:params[:image],
+      video: params[:video]
       
       
                     
