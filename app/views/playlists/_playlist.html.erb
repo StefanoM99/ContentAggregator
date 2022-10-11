@@ -13,10 +13,41 @@
     <small>
       <a href="<%= playlist.spotify_url %>"><%= playlist.spotify_url %></a>
     </small>
-    <br>
-    <small>
-      <%= playlist.tracks %>
-    </small>
+    <br><br>
+    <div class="container mt-3">
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header">
+            <a class="btn" data-bs-toggle="collapse" href="#collapse_<%= playlist.id %>">
+              Show Tracks
+            </a>
+          </div>
+          <div id="collapse_<%= playlist.id %>" class="collapse" data-bs-parent="#accordion">
+            <div class="card-body">
+              <table style="border-collapse: collapse; width: 100%;">
+                <tr>
+                  <th style="border: 1px solid #dddddd;">Track</th>
+                  <th style="border: 1px solid #dddddd;">Artists</th>
+                </tr>
+                <% for i in 0..playlist.tracks.size-1 %>
+                  <tr>
+                    <small>
+                      <td style="border: 1px solid #dddddd;"><%= playlist.tracks[i][0] %></td>
+                      <td style="border: 1px solid #dddddd;">
+                        <% for j in 0..playlist.tracks[i][1].size-2 %>
+                          <%= playlist.tracks[i][1][j] %>,
+                        <% end %>
+                        <%= playlist.tracks[i][1][-1] %>
+                      </td>
+                    </small>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="card-footer">

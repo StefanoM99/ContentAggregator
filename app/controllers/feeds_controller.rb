@@ -8,6 +8,8 @@ class FeedsController < ApplicationController
     require 'country_select'
     require 'rspotify'
 
+    remote_ip = URI.open('https://ident.me').read
+
     Forecast.delete_all
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'forecasts'"
@@ -29,7 +31,6 @@ class FeedsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
 
     if params[:place] == nil || params[:place] == ''
-      remote_ip = URI.open('https://ident.me').read
       query["q"] = Geocoder.search(remote_ip).first.city
     else
       query["q"] = params[:place]
@@ -92,7 +93,7 @@ class FeedsController < ApplicationController
     RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
     
     if params[:country] == nil || params[:country] == ''
-      featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+      featured_playlists = RSpotify::Playlist.browse_featured(country: Geocoder.search(remote_ip).first.country_code)
     else
       featured_playlists = RSpotify::Playlist.browse_featured(country: params[:country])
     end
@@ -116,7 +117,7 @@ class FeedsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
     
     if (params[:country] == nil && params[:category] == nil) || (params[:country] == '' && params[:category] == '')
-      #set a default country value on setup
+      query["country"] = Geocoder.search(remote_ip).first.country_code
       query["category"] = "general"
     else
       query["country"] = params[:country]
