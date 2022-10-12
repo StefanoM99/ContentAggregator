@@ -18,7 +18,7 @@
   </head>
 
   <body>
-  <% if user_signed_in? %>
+  <% if user_signed_in? and not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/posts') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %>
 Logged in as <%= current_user.email%> [<%= link_to 'Logout',
 destroy_user_session_path, :method => :delete%>]
 <% end %>
