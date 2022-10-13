@@ -6,8 +6,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.string :author
       t.text :title
       t.text :summary
-      t.binary :image
-      t.binary :video
+      t.string :post_file
       
       t.timestamps
     end
