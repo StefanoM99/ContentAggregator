@@ -58,10 +58,18 @@ class ReportedPlaylistsController < ApplicationController
   # DELETE /reported_playlists/1 or /reported_playlists/1.json
   def destroy
     @reported_playlist.destroy
-
     respond_to do |format|
+    if current_user.admin?
+      @playlist = Playlist.find(@reported_playlist.playlist_id)
+      puts(@reported_playlist.playlist_id)
+      @playlist.destroy
+      format.html { redirect_to current_user, notice: "Reported Playlist was successfully destroyed." }
+      format.json { head :no_content }
+  else 
+    
       format.html { redirect_to reported_playlists_url(:user_id => @reported_playlist.user_id), notice: "Reported playlist was successfully destroyed." }
       format.json { head :no_content }
+    end
     end
   end
 

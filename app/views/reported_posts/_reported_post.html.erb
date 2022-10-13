@@ -1,5 +1,12 @@
 <div id="<%= dom_id reported_post %>">
-  
+  <% if reported_post.post_file.attached? %>
+    <% if reported_post.post_file.content_type.include?("image") %>
+      <%= image_tag url_for(reported_post.post_file), class: "img-fluid card-img-top" %>
+    <% else %>
+      <%= video_tag url_for(reported_post.post_file), controls: true, style: "width: 100%; height: auto;" %>
+    <% end %>
+  <% end %>
+
   <div class="card-body">
     <small>
       <strong>Author:</strong>
@@ -13,20 +20,6 @@
     <h6 class="card-text" style="color:#8A8A8A">
       <%= reported_post.summary %>
     </h6>
-
-    <% if reported_post.image != nil %>
-      <h6 class="card-text" style="color:#8A8A8A">
-        <img src="<%= reported_post.image %>">
-      </h6>
-    <% end %>
-
-    <% if reported_post.video != nil %>
-      <h6 class="card-text" style="color:#8A8A8A">
-        <video width="320" height="240" controls>
-          <source src="<%= reported_post.video %>" type="video/mp4">
-        </video> 
-      </h6>
-    <% end %>
   </div>
 
   <div class="card-footer">
@@ -37,7 +30,9 @@
         <div class="modal-content"></div>
       </div>
     </div>
-    
+    <%if (current_user.id == params[:user_id].to_i)%>
     <%= link_to 'Delete', reported_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%else%>
+    <%end%>
   </div>
 </div>

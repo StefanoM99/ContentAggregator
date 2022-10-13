@@ -12,7 +12,7 @@ class CreateSavedPlaylists < ActiveRecord::Migration[7.0]
       t.references :playlist, null:false, foreign_key:true
       t.timestamps
     end
-    add_index :saved_playlists, [:user_id, :playlist_id],unique: true
+    add_index :saved_playlists, [:user_id, :playlist_id,:type],unique: true
   end
 end
 

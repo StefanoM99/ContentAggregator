@@ -5,6 +5,7 @@
 <div>
   <%= link_to "Edit this starred playlist", edit_starred_playlist_path(@starred_playlist.user_id) %> |
   <%= link_to "Back to starred playlists", starred_user_playlists_path(@starred_playlist.user_id) %>
-
+  <%if current_user.id == @starred_playlist.user_id%>
   <%= button_to "Destroy this starred playlist", @starred_playlist, method: :delete,  params:{user_id: @starred_playlist.user_id}%>
+<%end%>
 </div>

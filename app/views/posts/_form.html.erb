@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :author, style: "display: block" %>
-    <%= form.text_field :author %>
-  </div>
-
-  <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_area :title %>
   </div>
@@ -27,14 +22,8 @@
   </div>
 
   <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.label :video, style: "display: block" %>
-    <%= form.file_field :video %>
-   
+    <%= form.label :post_file, style: "display: block" %>
+    <%= form.file_field :post_file %>
   </div>
 
   <div>

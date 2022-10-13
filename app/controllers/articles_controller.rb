@@ -4,19 +4,22 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
+    require 'open-uri'
+    require 'geocoder'
+
+    remote_ip = URI.open('https://ident.me').read
     
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'articles'"
     )
-    
-    require 'open-uri'
+      
     
     url = 'https://newsapi.org/v2/top-headlines'
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
     
     if (params[:country] == nil && params[:category] == nil) || (params[:country] == '' && params[:category] == '')
-      #set a default country value on setup
+      query["country"] = Geocoder.search(remote_ip).first.country_code
       query["category"] = "general"
     else
       query["country"] = params[:country]
@@ -44,7 +47,7 @@ class ArticlesController < ApplicationController
         link: item["url"],
         media: item["urlToImage"],
         publication: item["publishedAt"],
-        user: current_user
+        
         
       )
     end

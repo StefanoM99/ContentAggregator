@@ -3,8 +3,14 @@
 <%= render @reported_post %>
 
 <div>
-  <%= link_to "Edit this reported post", edit_reported_post_path(@reported_post) %> |
-  <%= link_to "Back to reported posts", reported_user_posts_path(@reported_post.user_id) %>
-
-  <%= button_to "Destroy this reported post", @reported_post, method: :delete, params:{user_id: @reported_post.user_id}%>
+  <%if current_user.id == 0%>
+    <%= button_to "Destroy this reported post", @reported_post, method: :delete , params:{user_id: 0}%>
+    <%= link_to "Back to reported posts",reported_user_posts_path(current_user.id) %>
+  <%else%>
+    <%= link_to "Back to reported articles", reported_user_posts_path(@reported_post.user_id) %>
+    
+  <%if current_user.id == @reported_post.user_id%>
+    <%= button_to "Destroy this reported post", @reported_post, method: :delete , params:{user_id: @reported_post.user_id}%>
+     <%end%> 
+  <%end%>
 </div>

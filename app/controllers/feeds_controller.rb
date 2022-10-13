@@ -3,10 +3,15 @@ class FeedsController < ApplicationController
 
   # GET /feeds or /feeds.json
   def index
+    if current_user.admin?
+      redirect_to current_user
+    else
     require 'open-uri'
     require 'geocoder'
     require 'country_select'
     require 'rspotify'
+
+    remote_ip = URI.open('https://ident.me').read
 
     Forecast.delete_all
     ActiveRecord::Base.connection.execute(
@@ -29,7 +34,6 @@ class FeedsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
 
     if params[:place] == nil || params[:place] == ''
-      remote_ip = URI.open('https://ident.me').read
       query["q"] = Geocoder.search(remote_ip).first.city
     else
       query["q"] = params[:place]
@@ -92,7 +96,7 @@ class FeedsController < ApplicationController
     RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
     
     if params[:country] == nil || params[:country] == ''
-      featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+      featured_playlists = RSpotify::Playlist.browse_featured(country: Geocoder.search(remote_ip).first.country_code)
     else
       featured_playlists = RSpotify::Playlist.browse_featured(country: params[:country])
     end
@@ -100,7 +104,7 @@ class FeedsController < ApplicationController
     psize = featured_playlists.size-1
     
     for i in 0..psize do
-      Playlist.create(
+       Playlist.create(
         country: params[:country],
         name: featured_playlists[i].name,
         description: featured_playlists[i].description,
@@ -108,6 +112,7 @@ class FeedsController < ApplicationController
         spotify_img: featured_playlists[i].images[0]["url"],
         tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
       )
+      
     end
 
     #article controller
@@ -116,7 +121,7 @@ class FeedsController < ApplicationController
     query = Rack::Utils.parse_query(uri.query)
     
     if (params[:country] == nil && params[:category] == nil) || (params[:country] == '' && params[:category] == '')
-      #set a default country value on setup
+      query["country"] = Geocoder.search(remote_ip).first.country_code
       query["category"] = "general"
     else
       query["country"] = params[:country]
@@ -149,6 +154,7 @@ class FeedsController < ApplicationController
 
 
     @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.all.reverse()
+  end
   end
 
   # GET /feeds/1 or /feeds/1.json

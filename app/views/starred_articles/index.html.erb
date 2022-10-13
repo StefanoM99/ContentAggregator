@@ -34,7 +34,7 @@
     </div>
     <br>
     <div class="row" id="starred_articles">
-    <%puts(:user_id)%>
+    
         <% SavedArticle.where(user_id: params[:user_id],type: "StarredArticle").each do |starred_article| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">

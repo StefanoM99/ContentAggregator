@@ -9,9 +9,9 @@
   <%= render @article %>
 </div>
 
-<div class="modal-footer">
-  <%= link_to "Edit this article", edit_article_path(@article) %> |
-  <%= link_to "Back to articles", articles_path %>
 
-  <%= button_to "Destroy this article", @article, method: :delete %>
-</div>
+  
+  <%= link_to "Back to articles", articles_path %>
+  <%= link_to "Back to feed", feed_path %>
+  
+

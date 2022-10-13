@@ -25,8 +25,7 @@ class ReportedPostsController < ApplicationController
       author: params[:author],
       title: params[:title],
       summary: params[:summary],
-      image: params[:image],
-      video: params[:video],
+      post_file: params[:post_file],
       user_id: current_user.id,
       post_id: params[:post_id]
     )
@@ -60,8 +59,16 @@ class ReportedPostsController < ApplicationController
     @reported_post.destroy
 
     respond_to do |format|
+      if current_user.admin?
+        @post = Post.find(@reported_post.post_id)
+        
+        @post.destroy
+        format.html { redirect_to current_user, notice: "Reported Post was successfully destroyed." }
+        format.json { head :no_content }
+    else 
       format.html { redirect_to reported_posts_url(:user_id => @reported_post.user_id), notice: "Reported post was successfully destroyed." }
       format.json { head :no_content }
+    end
     end
   end
 

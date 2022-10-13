@@ -1,5 +1,12 @@
 <div id="<%= dom_id my_post %>">
-  
+  <% if my_post.post_file.attached? %>
+    <% if my_post.post_file.content_type.include?("image") %>
+      <%= image_tag url_for(my_post.post_file), class: "img-fluid card-img-top" %>
+    <% else %>
+      <%= video_tag url_for(my_post.post_file), controls: true, style: "width: 100%; height: auto;" %>
+    <% end%>
+  <% end %>
+
   <div class="card-body">
     <small>
       <strong>Author:</strong>
@@ -13,20 +20,6 @@
     <h6 class="card-text" style="color:#8A8A8A">
       <%= my_post.summary %>
     </h6>
-
-    <% if my_post.image != nil %>
-      <h6 class="card-text" style="color:#8A8A8A">
-        <img src="<%= my_post.image %>">
-      </h6>
-    <% end %>
-
-    <% if my_post.video != nil %>
-      <h6 class="card-text" style="color:#8A8A8A">
-        <video width="320" height="240" controls>
-          <source src="<%= my_post.video %>" type="video/mp4">
-        </video> 
-      </h6>
-    <% end %>
   </div>
 
   <div class="card-footer">
@@ -37,7 +30,11 @@
         <div class="modal-content"></div>
       </div>
     </div>
-    
-    <%= link_to 'Delete', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+   
+  
+      <%if (current_user.id == params[:user_id].to_i)%>
+    <%= link_to 'DeleteEEEE', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%else%>
+    <%end%>
   </div>
 </div>

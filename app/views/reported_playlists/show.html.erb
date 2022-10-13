@@ -3,8 +3,20 @@
 <%= render @reported_playlist %>
 
 <div>
+  <%if current_user.admin?%>
+  <%= button_to "Destroy this reported playlist", @reported_playlist, method: :delete , params:{user_id: 0}%>
+  
+
+<%= link_to "Back to reported playlists", reported_user_playlists_path(current_user.id) %>
+  
+
+  
+  <%else%>
+  
   <%= link_to "Edit this reported playlist", edit_reported_playlist_path(@reported_playlist.user_id) %> |
   <%= link_to "Back to reported playlists", reported_user_playlists_path(@reported_playlist.user_id) %>
-
+  <%if current_user.id == @reported_playlist.user_id%>
   <%= button_to "Destroy this reported playlist", @reported_playlist, method: :delete , params:{user_id: @reported_playlist.user_id}%>
+  <%end%>
+  <%end%>
 </div>

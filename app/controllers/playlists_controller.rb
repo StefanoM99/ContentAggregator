@@ -3,16 +3,21 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists or /playlists.json
   def index
-    Playlist.delete_all
+    require 'open-uri'
+    require 'geocoder'
+    require 'rspotify'
+
+    remote_ip = URI.open('https://ident.me').read
+
+
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'playlists'"
     )
-
-    require 'rspotify'
+    
     RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
     
     if params[:country] == nil || params[:country] == ''
-      featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+      featured_playlists = RSpotify::Playlist.browse_featured(country: Geocoder.search(remote_ip).first.country_code)
     else
       featured_playlists = RSpotify::Playlist.browse_featured(country: params[:country])
     end
@@ -20,13 +25,13 @@ class PlaylistsController < ApplicationController
     psize = featured_playlists.size-1
     for i in 0..psize do
       Playlist.create(
-        country: 'US',
+        country: params[:country],
         name: featured_playlists[i].name,
         description: featured_playlists[i].description,
         spotify_url: featured_playlists[i].external_urls["spotify"],
         spotify_img: featured_playlists[i].images[0]["url"],
         tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]},
-        user: current_user
+        
       )
     end
 
