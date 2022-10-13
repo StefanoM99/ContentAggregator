@@ -126,7 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_saved_articles_on_article_id"
-    t.index ["user_id", "article_id"], name: "index_saved_articles_on_user_id_and_article_id", unique: true
+    t.index ["user_id", "article_id", "type"], name: "index_saved_articles_on_user_id_and_article_id_and_type", unique: true
     t.index ["user_id"], name: "index_saved_articles_on_user_id"
   end
 
@@ -143,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["playlist_id"], name: "index_saved_playlists_on_playlist_id"
-    t.index ["user_id", "playlist_id"], name: "index_saved_playlists_on_user_id_and_playlist_id", unique: true
+    t.index ["user_id", "playlist_id", "type"], name: "index_saved_playlists_on_user_id_and_playlist_id_and_type", unique: true
     t.index ["user_id"], name: "index_saved_playlists_on_user_id"
   end
 

@@ -2,9 +2,10 @@
 
 <%= render @starred_article %>
 
-<div>
-  <%= link_to "Edit this starred article", edit_user_starred_article_path(@starred_article.user_id) %> |
+<div>|
   <%= link_to "Back to starred articles", starred_user_articles_path(@starred_article.user_id) %>
 
+  <%if current_user.id == @starred_article.user_id%>
   <%= button_to "Destroy this starred article", @starred_article, method: :delete , params:{user_id: @starred_article.user_id}%>
+  <%end%>
 </div>

@@ -3,6 +3,9 @@ class FeedsController < ApplicationController
 
   # GET /feeds or /feeds.json
   def index
+    if current_user.admin?
+      redirect_to current_user
+    else
     require 'open-uri'
     require 'geocoder'
     require 'country_select'
@@ -101,7 +104,7 @@ class FeedsController < ApplicationController
     psize = featured_playlists.size-1
     
     for i in 0..psize do
-      Playlist.create(
+       Playlist.create(
         country: params[:country],
         name: featured_playlists[i].name,
         description: featured_playlists[i].description,
@@ -109,6 +112,7 @@ class FeedsController < ApplicationController
         spotify_img: featured_playlists[i].images[0]["url"],
         tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
       )
+      
     end
 
     #article controller
@@ -150,6 +154,7 @@ class FeedsController < ApplicationController
 
 
     @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.all.reverse()
+  end
   end
 
   # GET /feeds/1 or /feeds/1.json

@@ -30,7 +30,11 @@
         <div class="modal-content"></div>
       </div>
     </div>
-    
-    <%= link_to 'Delete', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+   
+  
+      <%if (current_user.id == params[:user_id].to_i)%>
+    <%= link_to 'DeleteEEEE', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%else%>
+    <%end%>
   </div>
 </div>

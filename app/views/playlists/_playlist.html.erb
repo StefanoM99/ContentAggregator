@@ -29,7 +29,7 @@
                   <th style="border: 1px solid #dddddd;">Track</th>
                   <th style="border: 1px solid #dddddd;">Artists</th>
                 </tr>
-                <% for i in 0..playlist.tracks.size-1 %>
+                <% for i in 0..playlist.tracks.size()-1 %>
                   <tr>
                     <small>
                       <td style="border: 1px solid #dddddd;"><%= playlist.tracks[i][0] %></td>

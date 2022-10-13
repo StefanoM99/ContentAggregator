@@ -65,8 +65,16 @@ class ReportedArticlesController < ApplicationController
     @reported_article.destroy
 
     respond_to do |format|
-      format.html { redirect_to reported_articles_url(:user_id => @reported_article.user_id), notice: "Reported article was successfully destroyed." }
-      format.json { head :no_content }
+      if current_user.admin?
+          @article = Article.find(@reported_article.article_id)
+          
+          @article.destroy
+          format.html { redirect_to current_user, notice: "Reported article was successfully destroyed." }
+          format.json { head :no_content }
+      else 
+          format.html { redirect_to reported_articles_url(:user_id => @reported_article.user_id), notice: "Reported article was successfully destroyed." }
+          format.json { head :no_content }
+      end
     end
   end
 

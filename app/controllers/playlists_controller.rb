@@ -9,7 +9,7 @@ class PlaylistsController < ApplicationController
 
     remote_ip = URI.open('https://ident.me').read
 
-    Playlist.delete_all
+
     ActiveRecord::Base.connection.execute(
       "DELETE from sqlite_sequence where name = 'playlists'"
     )
@@ -31,7 +31,7 @@ class PlaylistsController < ApplicationController
         spotify_url: featured_playlists[i].external_urls["spotify"],
         spotify_img: featured_playlists[i].images[0]["url"],
         tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]},
-        user: current_user
+        
       )
     end
 
