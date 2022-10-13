@@ -16,6 +16,6 @@ class CreateSavedArticles < ActiveRecord::Migration[7.0]
       t.references :article, null:false, foreign_key:true
       t.timestamps
     end
-    add_index :saved_articles, [:user_id, :article_id], unique: true
+    add_index :saved_articles, [:user_id, :article_id,:type], unique: true
   end
 end

@@ -1,3 +1,4 @@
+<% if current_user.user?%>
 <%= link_to "New reported article", new_reported_article_path %>
 
 <p style="color: green"><%= notice %></p>
@@ -50,3 +51,54 @@
     AOS.init();
   </script>
 </div>
+<%else%>
+<div class="container" id="profiles">
+  <nav class="navbar navbar-expand-sm">
+    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto', class: 'navbar-brand' %>
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+       
+      </ul>
+    </div>
+  </nav>
+  <br>
+  <div data-aos="fade-right">
+  
+    <h1 style='font-size:80px'><b>Articoli Segnalati:</b></h1>
+    <br>
+    <div class="dropdown">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+        Content Filter
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "All", current_user, class: 'dropdown-item' %></li>
+       
+    
+        <li><%= link_to "Reported Posts", reported_user_posts_path(params[:user_id]), class: 'dropdown-item' %></li>
+        
+        <li><%= link_to "Reported Articles", reported_user_articles_path(params[:user_id]), class: 'dropdown-item' %></li>
+        
+        <li><%= link_to "Reported Playlists", reported_user_playlists_path(params[:user_id]), class: 'dropdown-item' %></li>
+      </ul>
+    </div>
+    <br>
+  
+   <div class="row" id="reported_articles">
+     <% SavedArticle.where(type: "ReportedArticle").each do |reported_article| %>
+        <ul class="col-12 col-lg-4 col-sm-6">
+          <li class="card" data-aos="flip-down">
+            <%= render reported_article %>
+          </li>
+        </ul>
+      <% end %>
+    
+      
+    </div>
+  </div>
+   
+   
+  <script>
+    AOS.init();
+  </script>
+</div>
+<%end%>

@@ -37,7 +37,9 @@
         <div class="modal-content"></div>
       </div>
     </div>
-    
+    <%if (current_user.id == params[:user_id].to_i)%>
     <%= link_to 'Delete', reported_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%else%>
+    <%end%>
   </div>
 </div>

@@ -24,7 +24,7 @@ class StarredArticlesController < ApplicationController
 
   # POST /starred_articles or /starred_articles.json
   def create
-    puts("AOOOOOO \n")
+  
     
    
     @starred_article=StarredArticle.new(article_id:params[:article_id],

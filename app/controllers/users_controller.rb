@@ -3,7 +3,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @users = MyPost.all + EditedPost.all + StarredPost.all + ReportedPost.all + StarredArticle.all + ReportedArticle.all + StarredPlaylist.all + ReportedPlaylist.all
+    if @user.admin? && current_user.user?
+      redirect_to feed_path
+    end
   end
     
   # GET /users or /users.json
