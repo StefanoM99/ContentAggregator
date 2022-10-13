@@ -25,7 +25,6 @@ class StarredPostsController < ApplicationController
       author: params[:author],
       title: params[:title],
       summary: params[:summary],
-      post_file: params[:post_file],
       user_id: current_user.id,
       post_id: params[:post_id]
     )

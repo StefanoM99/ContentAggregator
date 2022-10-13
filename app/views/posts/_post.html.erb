@@ -26,14 +26,16 @@
     <%= link_to "Show this post", post %> |
     <!--<%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |-->
     
-    <%if (current_user.id == params[:user_id].to_i)%>
-    <%= link_to 'Edit', edit_post_path(post) %> |<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%else%>
-    <%end%>
+    <% if (current_user.id == params[:user_id].to_i)%>
+      <%= link_to 'Edit', edit_post_path(post) %> |<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% else %>
+    <% end %>
+    
     <%= button_to 'Star', starred_posts_path(
       author: post.author,
       title: post.title,
       summary: post.summary,
+      post_file: post.post_file,
       post_id: post.id
     ) %>
 
@@ -41,6 +43,7 @@
       author: post.author,
       title: post.title,
       summary: post.summary,
+      post_file: post.post_file,
       post_id: post.id
     ) %>
   </div>

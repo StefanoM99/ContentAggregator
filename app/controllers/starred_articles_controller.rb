@@ -25,23 +25,20 @@ class StarredArticlesController < ApplicationController
   # POST /starred_articles or /starred_articles.json
   def create
   
-    
-   
-    @starred_article=StarredArticle.new(article_id:params[:article_id],
-                                        user_id:current_user.id,
-                                        country: params[:country], 
-                                        category: params[:category],
-                                        source: params[:source],
-                                        author: params[:author],
-                                        title: params[:title],
-                                        description: params[:description],
-                                        summary: params[:summary],
-                                        link: params[:link],
-                                        media: params[:media] ,
-                                        publication: params[:publication]
-                                        
-                                      )
- 
+    @starred_article=StarredArticle.new(
+      article_id:params[:article_id],
+      user_id:current_user.id,
+      country: params[:country], 
+      category: params[:category],
+      source: params[:source],
+      author: params[:author],
+      title: params[:title],
+      description: params[:description],
+      summary: params[:summary],
+      link: params[:link],
+      media: params[:media] ,
+      publication: params[:publication]
+    )
 
     respond_to do |format|
       if @starred_article.save
