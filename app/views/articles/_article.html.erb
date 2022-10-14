@@ -37,17 +37,14 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Show', article, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+    <%= link_to 'Show', article, { class: 'btn btn-primary btn-lg'} %> 
             
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content"></div>
         </div>
       </div>
-     <%puts("AOOOO")%>
-     <%puts(params[:user_id])%>
-    
-     <%puts(current_user.id)%>
+
       <%if SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
       
       <%= button_to 'Star', starred_articles_path(
@@ -63,10 +60,11 @@
         publication: article.publication,
         article_id: article.id,
         user_id: current_user.id
-      )%>
+      )  ,{id:"starred"}  %>
       <%else%>
-      starrato
+      Salvato
       <%end%>
+       <%if SavedArticle.where(user_id: current_user.id,type: "ReportedArticle",article_id:article.id).empty?%>
       <%= button_to 'Report', reported_articles_path(
         country: article.country, 
         category: article.category,
@@ -80,6 +78,26 @@
         publication: article.publication,
         article_id: article.id,
         user_id: current_user.id
-      ) %>
+      ) ,{id:"reported"}%>
+      <%else%>
+      Segnalato
+      <%end%>
   </div>
 </div>
+<script>
+$(document).on('click', '#starred', function () { 
+  console.log("ciao")
+ 
+    console.log( $(this).parents('form:first'))
+    $(this).parents('form:first').submit()
+    $(this).replaceWith("Salvato");
+ });
+
+ $(document).on('click', '#reported', function () { 
+  console.log("ciao")
+ 
+    console.log( $(this).parents('form:first'))
+    $(this).parents('form:first').submit()
+    $(this).replaceWith("Segnalato");
+ });
+  </script>

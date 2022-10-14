@@ -115,6 +115,24 @@ destroy_user_session_path, :method => :delete%>]
         });
 
     });
+
+   
+$(document).on('click', '#starred', function () { 
+  console.log("ciao")
+ 
+    console.log( $(this).parents('form:first'))
+    $(this).parents('form:first').submit()
+    $(this).replaceWith("Salvato");
+ });
+
+ $(document).on('click', '#reported', function () { 
+  console.log("ciao")
+ 
+    console.log( $(this).parents('form:first'))
+    $(this).parents('form:first').submit()
+    $(this).replaceWith("Segnalato");
+ });
+ 
     </script>
     
   </body>

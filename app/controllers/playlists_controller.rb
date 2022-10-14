@@ -24,9 +24,9 @@ class PlaylistsController < ApplicationController
 
     psize = featured_playlists.size-1
     for i in 0..psize do
-      if Article.where(name: featured_playlists[i].name,
+      if Playlist.where(name: featured_playlists[i].name,
         spotify_url: featured_playlists[i].external_urls["spotify"],
-        description: featured_playlists[i].description) == nil
+        description: featured_playlists[i].description).empty?
       Playlist.create(
         country: params[:country],
         name: featured_playlists[i].name,

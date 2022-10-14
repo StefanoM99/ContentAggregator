@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -23,6 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-=======
-# ContentAggregator
->>>>>>> 49dfa5ef4906d13e891ac532d9e51385d2ca7e2d

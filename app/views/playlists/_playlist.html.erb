@@ -51,14 +51,14 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Show', playlist, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+    <%= link_to 'Show', playlist, { class: 'btn btn-primary btn-lg'} %> 
             
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content"></div>
         </div>
       </div>
-
+  <%if SavedPlaylist.where(user_id: current_user.id,type: "StarredPlaylist",playlist_id:playlist.id).empty?%>
       <%= button_to 'Star', starred_playlists_path(
         country: playlist.country,
         name: playlist.name,
@@ -67,8 +67,11 @@
         spotify_img: playlist.spotify_img,
         playlist_id: playlist.id,
         user_id: current_user.id
-      ) %>
-
+      ) ,{id:"starred"}%>
+      <%else%>
+      Salvato
+      <%end%>
+      <%if SavedPlaylist.where(user_id: current_user.id,type: "ReportedPlaylist",playlist_id:playlist.id).empty?%>
       <%= button_to 'Report', reported_playlists_path(
         country: playlist.country,
         name: playlist.name,
@@ -77,6 +80,10 @@
         spotify_img: playlist.spotify_img,
         playlist_id: playlist.id,
         user_id: current_user.id
-      ) %>
+      ),{id:"reported"} %>
+      <%else%>
+      Segnalato
+      <%end%>
+
   </div>
 </div>
