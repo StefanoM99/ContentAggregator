@@ -25,8 +25,6 @@ class StarredPostsController < ApplicationController
       author: params[:author],
       title: params[:title],
       summary: params[:summary],
-      image: params[:image],
-      video: params[:video],
       user_id: current_user.id,
       post_id: params[:post_id]
     )

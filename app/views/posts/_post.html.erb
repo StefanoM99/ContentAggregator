@@ -1,4 +1,12 @@
 <div id="<%= dom_id post %>">
+  <% if post.post_file.attached? %>
+    <% if post.post_file.content_type.include?("image") %>
+      <%= image_tag url_for(post.post_file), class: "img-fluid card-img-top" %>
+    <% else %>
+      <%= video_tag url_for(post.post_file), controls: true, style: "width: 100%; height: auto;" %>
+    <% end %>
+  <% end %>
+
   <div class="card-body">
     <small>
       <strong>Author:</strong>
@@ -12,20 +20,6 @@
     <h6 class="card-text" style="color:#8A8A8A">
       <%= post.summary %>
     </h6>
-
-    <% if post.image != nil %>
-      <h6 class="card-text" style="color:#8A8A8A">
-        <img src="<%= post.image %>">
-      </h6>
-    <% end %>
-
-    <% if post.video != nil %>
-      <h6 class="card-text" style="color:#8A8A8A">
-        <video width="320" height="240" controls>
-          <source src="<%= post.video %>" type="video/mp4">
-        </video> 
-      </h6>
-    <% end %>
   </div>
 
   <div class="card-footer">
@@ -40,18 +34,15 @@
       author: post.author,
       title: post.title,
       summary: post.summary,
-      image: post.image,
-      video: post.video,
+      post_file: post.post_file,
       post_id: post.id
-    )
-    %>
+    ) %>
 
     <%= button_to 'Report', reported_posts_path(
       author: post.author,
       title: post.title,
       summary: post.summary,
-      image: post.image,
-      video: post.video,
+      post_file: post.post_file,
       post_id: post.id
     ) %>
   </div>

@@ -23,24 +23,19 @@ class PostsController < ApplicationController
   def create
   
     @post = Post.new(user_id: current_user.id,
-      author: current_user.id,
+      author: current_user.name + ' ' + current_user.surname,
       title: post_params[:title],
-      summary: post_params[:summary],
-      image:post_params[:image],
-      video: post_params[:video]
-      
-      
-                    
+      summary: post_params[:summary], 
+      post_file: post_params[:post_file]  
     )
 
     respond_to do |format|
       if @post.save
         @my_post = MyPost.create(user_id: current_user.id,
-          author: current_user.id,
+          author: current_user.name + ' ' + current_user.surname,
           title: post_params[:title],
           summary: post_params[:summary],
-          image: post_params[:image],
-          video: post_params[:video],
+          post_file: post_params[:post_file],
           post_id: post_params[:id]
         )
 
@@ -59,11 +54,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         @edited_post = EditedPost.create(user_id: current_user.id,
-          author: current_user.id,
+          author: current_user.name + ' ' + current_user.surname,
           title: post_params[:title],
           summary: post_params[:summary],
-          image: post_params[:image],
-          video: post_params[:video],
+          post_file: post_params[:post_file],
           post_id: params[:id]
         )
 
@@ -94,6 +88,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.fetch(:post, {}).permit(:author, :title, :summary, :image, :video, :id)
+      params.fetch(:post, {}).permit(:author, :title, :summary, :post_file, :id)
     end
 end
