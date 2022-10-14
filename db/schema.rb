@@ -84,7 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
   end
 
   create_table "playlists", force: :cascade do |t|
-    t.integer "user_id"
     t.string "country"
     t.string "name"
     t.text "description"
@@ -93,7 +92,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.text "tracks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -187,7 +185,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
   add_foreign_key "articles", "feeds"
   add_foreign_key "articles", "users"
   add_foreign_key "forecasts", "feeds"
-  add_foreign_key "playlists", "users"
   add_foreign_key "posts", "feeds"
   add_foreign_key "posts", "users"
   add_foreign_key "saved_articles", "articles"

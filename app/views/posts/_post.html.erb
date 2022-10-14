@@ -32,7 +32,7 @@
     <%= link_to "Show this post", post %> |
     <!--<%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |-->
     
-    <%if (current_user.id == params[:user_id].to_i)%>
+    <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
     <%= link_to 'Edit', edit_post_path(post) %> |<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%else%>
     <%end%>

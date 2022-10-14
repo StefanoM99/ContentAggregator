@@ -44,7 +44,12 @@
           <div class="modal-content"></div>
         </div>
       </div>
-
+     <%puts("AOOOO")%>
+     <%puts(params[:user_id])%>
+    
+     <%puts(current_user.id)%>
+      <%if SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
+      
       <%= button_to 'Star', starred_articles_path(
         country: article.country, 
         category: article.category,
@@ -59,7 +64,9 @@
         article_id: article.id,
         user_id: current_user.id
       )%>
-
+      <%else%>
+      starrato
+      <%end%>
       <%= button_to 'Report', reported_articles_path(
         country: article.country, 
         category: article.category,

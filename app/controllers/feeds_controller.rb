@@ -104,6 +104,9 @@ class FeedsController < ApplicationController
     psize = featured_playlists.size-1
     
     for i in 0..psize do
+      if Article.where(name: featured_playlists[i].name,
+        spotify_url: featured_playlists[i].external_urls["spotify"],
+        description: featured_playlists[i].description) == nil
        Playlist.create(
         country: params[:country],
         name: featured_playlists[i].name,
@@ -112,7 +115,7 @@ class FeedsController < ApplicationController
         spotify_img: featured_playlists[i].images[0]["url"],
         tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
       )
-      
+    end
     end
 
     #article controller
@@ -138,6 +141,9 @@ class FeedsController < ApplicationController
     data = JSON.parse(response_body)
 
     data["articles"].each do |item|
+      if Article.where(author: item["author"],
+        title: item["title"],
+        description: item["description"]) == nil
       Article.create(
         country: query["country"],
         category: query["category"],
@@ -151,7 +157,7 @@ class FeedsController < ApplicationController
         publication: item["publishedAt"]
       )
     end
-
+  end
 
     @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.all.reverse()
   end

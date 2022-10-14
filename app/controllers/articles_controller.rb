@@ -36,6 +36,9 @@ class ArticlesController < ApplicationController
     data = JSON.parse(response_body)
 
     data["articles"].each do |item|
+      if Article.where(author: item["author"],
+        title: item["title"],
+        description: item["description"]) == nil
       Article.create(
         country: query["country"],
         category: query["category"],
@@ -51,7 +54,7 @@ class ArticlesController < ApplicationController
         
       )
     end
-    
+  end
     @articles = Article.all.reverse()
     
   end
