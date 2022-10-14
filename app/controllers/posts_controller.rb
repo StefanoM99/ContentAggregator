@@ -26,7 +26,8 @@ class PostsController < ApplicationController
       author: current_user.name + ' ' + current_user.surname,
       title: post_params[:title],
       summary: post_params[:summary], 
-      post_file: post_params[:post_file]  
+      post_file: post_params[:post_file],
+      user_id:current_user.id
     )
 
     respond_to do |format|

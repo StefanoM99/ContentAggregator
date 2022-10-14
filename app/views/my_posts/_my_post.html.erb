@@ -23,7 +23,7 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Show', my_post, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
+    <%= link_to 'Show', my_post, {class: 'btn btn-primary btn-lg'} %> 
             
     <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -32,8 +32,8 @@
     </div>
    
   
-      <%if (current_user.id == params[:user_id].to_i)%>
-    <%= link_to 'DeleteEEEE', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+     <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
+    <%= link_to 'Delete', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
     <%else%>
     <%end%>
   </div>
