@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
 
   # GET /feeds or /feeds.json
   def index
-    if current_user.admin?
+    if  current_user && current_user.admin?
       redirect_to current_user
     else
     require 'open-uri'

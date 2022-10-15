@@ -62,8 +62,13 @@ class ReportedArticlesController < ApplicationController
 
   # DELETE /reported_articles/1 or /reported_articles/1.json
   def destroy
+    if !SavedArticle.where(article_id:@reported_article.article_id,type:"StarredArticle").empty? && current_user.admin?
+      @saved_article = SavedArticle.where(article_id:@reported_article.article_id,type:"StarredArticle")
+      @saved_article.destroy_all
+    
+    
+    end
     @reported_article.destroy
-
     respond_to do |format|
       if current_user.admin?
           @article = Article.find(@reported_article.article_id)

@@ -44,8 +44,8 @@
           <div class="modal-content"></div>
         </div>
       </div>
-
-      <%if SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
+      <%if  current_user %>
+      <%if  current_user && SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
       
       <%= button_to 'Star', starred_articles_path(
         country: article.country, 
@@ -64,7 +64,7 @@
       <%else%>
       Salvato
       <%end%>
-       <%if SavedArticle.where(user_id: current_user.id,type: "ReportedArticle",article_id:article.id).empty?%>
+       <%if current_user  && SavedArticle.where(user_id: current_user.id,type: "ReportedArticle",article_id:article.id).empty?%>
       <%= button_to 'Report', reported_articles_path(
         country: article.country, 
         category: article.category,
@@ -82,22 +82,6 @@
       <%else%>
       Segnalato
       <%end%>
+      <%end%>
   </div>
 </div>
-<script>
-$(document).on('click', '#starred', function () { 
-  console.log("ciao")
- 
-    console.log( $(this).parents('form:first'))
-    $(this).parents('form:first').submit()
-    $(this).replaceWith("Salvato");
- });
-
- $(document).on('click', '#reported', function () { 
-  console.log("ciao")
- 
-    console.log( $(this).parents('form:first'))
-    $(this).parents('form:first').submit()
-    $(this).replaceWith("Segnalato");
- });
-  </script>

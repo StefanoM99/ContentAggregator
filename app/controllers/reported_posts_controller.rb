@@ -55,8 +55,17 @@ class ReportedPostsController < ApplicationController
 
   # DELETE /reported_posts/1 or /reported_posts/1.json
   def destroy
+    if !SavedPost.where(post_id:@reported_post.post_id,type:"StarredPost").empty? && current_user.admin?
+      @saved_post = SavedPost.where(post_id:@reported_post.post_id,type:"StarredPost")
+      @saved_post.destroy_all
+    
+    end
+    if !SavedPost.where(post_id:@reported_post.post_id,type:"EditedPost").empty? && current_user.admin?
+      @edited_post = SavedPost.where(post_id:@reported_post.post_id,type:"EditedPost")
+      @edited_post.destroy_all
+    
+    end
     @reported_post.destroy
-
     respond_to do |format|
       if current_user.admin?
         @post = Post.find(@reported_post.post_id)

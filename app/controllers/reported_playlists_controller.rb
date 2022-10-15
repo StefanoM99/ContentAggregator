@@ -57,6 +57,11 @@ class ReportedPlaylistsController < ApplicationController
 
   # DELETE /reported_playlists/1 or /reported_playlists/1.json
   def destroy
+    if !SavedPlaylist.where(playlist_id:@reported_playlist.playlist_id,type:"StarredPlaylist").empty? && current_user.admin?
+      @saved_playlist = SavedArticle.where(playlist_id:@reported_playlist.playlist_id,type:"StarredPlaylist")
+      @saved_playlist.destroy_all
+     
+    end
     @reported_playlist.destroy
     respond_to do |format|
     if current_user.admin?
