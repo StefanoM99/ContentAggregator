@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
     data["articles"].each do |item|
       if Article.where(author: item["author"],
         title: item["title"],
-        description: item["description"]).empty?
+        description: item["description"]).empty? && Blacklist.where( title: item["title"],description: item["description"],summary:item["content"]).empty?
       Article.create(
         country: query["country"],
         category: query["category"],

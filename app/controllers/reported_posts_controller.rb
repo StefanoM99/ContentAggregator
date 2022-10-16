@@ -29,14 +29,13 @@ class ReportedPostsController < ApplicationController
       post_id: params[:post_id]
     )
 
-    respond_to do |format|
+    
       if @reported_post.save
-        format.html { redirect_to reported_post_url(@reported_post), notice: "Reported post was successfully created." }
-        format.json { render :show, status: :created, location: @reported_post }
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reported_post.errors, status: :unprocessable_entity }
-      end
+     
     end
   end
 
@@ -63,6 +62,12 @@ class ReportedPostsController < ApplicationController
     if !SavedPost.where(post_id:@reported_post.post_id,type:"EditedPost").empty? && current_user.admin?
       @edited_post = SavedPost.where(post_id:@reported_post.post_id,type:"EditedPost")
       @edited_post.destroy_all
+    
+    end
+
+    if !SavedPost.where(post_id:@reported_post.post_id,type:"ReportedPost").empty? && current_user.admin?
+      @reported_posts = SavedPost.where(post_id:@reported_post.post_id,type:"ReportedPost")
+      @reported_posts.destroy_all
     
     end
     @reported_post.destroy

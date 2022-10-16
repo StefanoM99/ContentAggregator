@@ -145,26 +145,39 @@
     <br>
   
    <div class="row" id="reported_articles">
-     <% SavedArticle.where(type: "ReportedArticle").each do |reported_article| %>
+   <%@index = (SavedArticle.where(type: "ReportedArticle").distinct.pluck(:article_id))%>
+    <%puts(@index)%>
+     <% SavedArticle.where(type: "ReportedArticle",article_id:@index).each do |reported_article| %>
+     <%if @index.include? reported_article.article_id%>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_article %>
           </li>
         </ul>
+      <%end%>
+      <%@index.delete(reported_article.article_id)%>  
       <% end %>
-      <% SavedPlaylist.where(type: "ReportedPlaylist").each do |reported_playlist| %>
+      <%@index = (SavedPlaylist.where(type: "ReportedPlaylist").distinct.pluck(:playlist_id))%>
+      <% SavedPlaylist.where(type: "ReportedPlaylist",playlist_id:@index).each do |reported_playlist| %>
+      <%if @index.include? reported_playlist.playlist_id%>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_playlist %>
           </li>
         </ul>
+        <%end%>
+        <%@index.delete(reported_playlist.playlist_id)%>  
       <% end %>
-      <% SavedPost.where(type: "ReportedPost").each do |reported_post| %>
+      <%@index = (SavedPost.where(type: "ReportedPost").distinct.pluck(:post_id))%>
+      <% SavedPost.where(type: "ReportedPost",post_id:@index).each do |reported_post| %>
+      <%if @index.include? reported_post.post_id%>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_post %>
           </li>
         </ul>
+        <%end%>
+        <%@index.delete(reported_post.post_id)%>  
       <% end %>
     </div>
   </div>

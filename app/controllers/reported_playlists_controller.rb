@@ -22,7 +22,7 @@ class ReportedPlaylistsController < ApplicationController
   # POST /reported_playlists or /reported_playlists.json
   def create
     @reported_playlist = ReportedPlaylist.create(
-      country: params[:coutry],
+      country: params[:country],
       name: params[:name],
       description: params[:description],
       spotify_url: params[:spotify_url],
@@ -31,15 +31,14 @@ class ReportedPlaylistsController < ApplicationController
       playlist_id: params[:playlist_id]
     )
 
-    respond_to do |format|
+    
       if @reported_playlist.save
-        format.html { redirect_to reported_playlist_url(@reported_playlist), notice: "Reported playlist was successfully created." }
-        format.json { render :show, status: :created, location: @reported_playlist }
+     
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reported_playlist.errors, status: :unprocessable_entity }
       end
-    end
+    
   end
 
   # PATCH/PUT /reported_playlists/1 or /reported_playlists/1.json
@@ -58,15 +57,28 @@ class ReportedPlaylistsController < ApplicationController
   # DELETE /reported_playlists/1 or /reported_playlists/1.json
   def destroy
     if !SavedPlaylist.where(playlist_id:@reported_playlist.playlist_id,type:"StarredPlaylist").empty? && current_user.admin?
-      @saved_playlist = SavedArticle.where(playlist_id:@reported_playlist.playlist_id,type:"StarredPlaylist")
+      @saved_playlist = SavedPlaylist.where(playlist_id:@reported_playlist.playlist_id,type:"StarredPlaylist")
       @saved_playlist.destroy_all
      
     end
+
+    if !SavedPlaylist.where(playlist_id:@reported_playlist.playlist_id,type:"ReportedPlaylist").empty? && current_user.admin?
+      @reported_playlists = SavedPlaylist.where(playlist_id:@reported_playlist.playlist_id,type:"ReportedPlaylist")
+      @reported_playlists.destroy_all
+     
+    end
+
     @reported_playlist.destroy
     respond_to do |format|
     if current_user.admin?
       @playlist = Playlist.find(@reported_playlist.playlist_id)
-      puts(@reported_playlist.playlist_id)
+      
+      @blacklist = Blacklist.create(
+        name: @reported_playlist.name,    
+        spotify_url: @reported_playlist.spotify_url,
+        tipo: "Playlist"
+      )
+      
       @playlist.destroy
       format.html { redirect_to current_user, notice: "Reported Playlist was successfully destroyed." }
       format.json { head :no_content }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_16_093528) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_articles_on_feed_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "blacklists", force: :cascade do |t|
+    t.text "spotify_url"
+    t.string "name"
+    t.text "title"
+    t.text "description"
+    t.text "summary"
+    t.text "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feeds", force: :cascade do |t|

@@ -26,7 +26,7 @@ class PlaylistsController < ApplicationController
     for i in 0..psize do
       if Playlist.where(name: featured_playlists[i].name,
         spotify_url: featured_playlists[i].external_urls["spotify"],
-        description: featured_playlists[i].description).empty?
+        description: featured_playlists[i].description).empty? && Blacklist.where(name: featured_playlists[i].name,spotify_url: featured_playlists[i].external_urls["spotify"]).empty?
       Playlist.create(
         country: params[:country],
         name: featured_playlists[i].name,

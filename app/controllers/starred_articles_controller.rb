@@ -40,15 +40,14 @@ class StarredArticlesController < ApplicationController
       publication: params[:publication]
     )
 
-    respond_to do |format|
+    
       if @starred_article.save
-        format.html { redirect_to starred_article_url(@starred_article), notice: "Starred article was successfully created." }
-        format.json { render :show, status: :created, location: @starred_article }
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @starred_article.errors, status: :unprocessable_entity }
       end
-    end
+    
   end
 
   # PATCH/PUT /starred_articles/1 or /starred_articles/1.json
