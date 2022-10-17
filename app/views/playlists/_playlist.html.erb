@@ -58,7 +58,8 @@
           <div class="modal-content"></div>
         </div>
       </div>
-  <%if SavedPlaylist.where(user_id: current_user.id,type: "StarredPlaylist",playlist_id:playlist.id).empty?%>
+       <%if current_user%>
+  <%if  SavedPlaylist.where(user_id: current_user.id,type: "StarredPlaylist",playlist_id:playlist.id).empty?%>
       <%= button_to 'Star', starred_playlists_path(
         country: playlist.country,
         name: playlist.name,
@@ -69,9 +70,11 @@
         user_id: current_user.id
       ) ,{id:"starred"}%>
       <%else%>
+      
       Salvato
       <%end%>
-      <%if SavedPlaylist.where(user_id: current_user.id,type: "ReportedPlaylist",playlist_id:playlist.id).empty?%>
+
+      <%if current_user && SavedPlaylist.where(user_id: current_user.id,type: "ReportedPlaylist",playlist_id:playlist.id).empty?%>
       <%= button_to 'Report', reported_playlists_path(
         country: playlist.country,
         name: playlist.name,
@@ -84,6 +87,6 @@
       <%else%>
       Segnalato
       <%end%>
-
+  <%end%>
   </div>
 </div>

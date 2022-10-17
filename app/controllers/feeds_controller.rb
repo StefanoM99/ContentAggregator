@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
 
   # GET /feeds or /feeds.json
   def index
-    if current_user.admin?
+    if  current_user && current_user.admin?
       redirect_to current_user
     else
     require 'open-uri'
@@ -106,7 +106,7 @@ class FeedsController < ApplicationController
     for i in 0..psize do
       if Playlist.where(name: featured_playlists[i].name,
         spotify_url: featured_playlists[i].external_urls["spotify"],
-        description: featured_playlists[i].description).empty?
+        description: featured_playlists[i].description).empty? && Blacklist.where(name: featured_playlists[i].name,spotify_url: featured_playlists[i].external_urls["spotify"]).empty?
        Playlist.create(
         country: params[:country],
         name: featured_playlists[i].name,
@@ -143,7 +143,7 @@ class FeedsController < ApplicationController
     data["articles"].each do |item|
       if Article.where(author: item["author"],
         title: item["title"],
-        description: item["description"]).empty?
+        description: item["description"]).empty? && Blacklist.where( title: item["title"],description: item["description"],summary:item["content"]).empty?
       Article.create(
         country: query["country"],
         category: query["category"],
