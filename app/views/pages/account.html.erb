@@ -6,21 +6,24 @@
         </ol>
     </nav>
     <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
+    <%= form_with(model: current_user) do |form| %>
     <div class="accordion accordion-flush" id="accountAccordionFlush">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                > Change my username
+                > Update my email
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
                     <form>
                         <div class="mb-3">
-                            <label for="inputUsername" class="form-label">Enter the new username:</label>
-                            <input type="email" class="form-control" id="inputUsername" aria-describedby="emailHelp">
+                            <label for="inputEmail" class="form-label">Enter the new email:</label>
+                            <!--input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"-->
+                            <%= form.text_field :email, class: "form-control" %>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <!--button type="submit" class="btn btn-primary">Submit</!--button-->
+                        <%= form.submit class: "btn btn-primary" %>
                     </form>
                 </div>
             </div>
@@ -68,4 +71,5 @@
             </div>
         </div>
     </div>
+    <% end %>
 </div>
