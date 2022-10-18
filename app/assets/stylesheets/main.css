@@ -13,57 +13,16 @@ header {
     padding: 1rem 1rem;
     z-index: 1000;
     background: #fff;
+    display:flex
   }
   .header-active {
     background:#fff;
     box-shadow: 0 .1rem .3rem rgba(0, 0, 0, .3);
-    padding: .5rem 1rem;
+    padding: .7rem 2rem;
     overflow:"hidden"
   }
   
-  header .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  header a {
-    color: var(--bluScuro);
-  }
-  
-  header a:hover {
-    color: var(--bluChiaro);
-  }
-  
-  header .nav ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-  }
-  
-  header .nav ul li {
-    margin: 0 1rem;
-  }
-  
-  header .nav ul li a {
-    font-size: 2rem;
-  }
-
-  .heading {
-    text-align: center;
-    font-size: 4rem;
-    padding: 1rem;
-    padding-top: 8rem;
-    color: var(--bluScuro);
-  }
-  
-  .heading span {
-    color: var(--bluChiaro);
-    
-  }.fit-image{
+  .fit-image{
     width: 100%;
   }
 
@@ -368,7 +327,7 @@ header {
       display: none;
     }
   }
-  footer{
+  .homefooter {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -379,7 +338,20 @@ header {
     padding-top: 2px;
     color: #fff;
     
+  }
+  footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: auto;
+    width: 100%;
+    padding-top: 2px;
+    color: #fff;
+    
 }
+
 .footer-content{
   display: flex;
   align-items: center;
@@ -400,51 +372,20 @@ header {
   font-size: 20px;
   color: #cacdd2;
 }
-.footer-bottom{
-  background: #000;
-  width: 100vw;
-  padding: 20px;
-  padding-bottom: 40px;
-  text-align: center;
-}
-.footer-bottom p{
-  float: left;
-  font-size: 14px;
-  word-spacing: 2px;
-  text-transform: capitalize;
-}
-.footer-bottom p a{
- color:#44bae8;
- font-size: 16px;
- text-decoration: none;
-}
-.footer-bottom span{
-   text-transform: uppercase;
-   opacity: .4;
-   font-weight: 200;
-}
-.footer-menu{
-  float: right;
-}
 
-.footer-menu ul{
-  display: flex;
-}
-
-.footer-menu ul li{
-padding-right: 10px;
-display: block;
-}
-
-.footer-menu ul li a{
-  color: #cfd2d6;
-  text-decoration: none;
-}
-
-.footer-menu ul li a:hover{
-  color: #27bcda;
-}
-@media (max-width:1100px) {
+@media (max-width:1200px) {
+  .homefooter {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: auto;
+    width: 100vw;
+    padding-top: 20px;
+    color: #fff;
+    margin-top: 390px;
+  }
   .footer-menu ul{
     display: flex;
     margin-top: 10px;
@@ -463,3 +404,89 @@ display: block;
     margin-top: 390px;
 }
   }
+
+  .buttonclass {
+    display: flex;
+
+    padding: .75rem 1.25rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    
+    overflow: hidden;
+    z-index: 1;
+    background-color: green;
+    text-decoration:none; 
+    background: linear-gradient(to right, green 50%, black 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  
+  }
+
+    .buttonclass:hover {
+      color: white;
+      
+      transition: 0.4s;
+      background-position: left;
+      
+    }
+  
+
+    .buttonclassdis {
+      display: flex;
+      grid-template-columns: 0.01fr 0.01fr;
+      grid-gap: 0.01px;
+      padding: .75rem 1.25rem;
+      border-radius: 10rem;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: .15rem;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      background-color: black;
+      text-decoration:none; 
+    background-size: 200% 100%;
+    background-position: right;
+    opacity: 0.65; 
+    cursor: not-allowed;
+    
+    }
+    .card-footer {
+      display: flex;
+      justify-content: center;
+      row-gap: 10px;
+      column-gap: 10px;
+    }
+    .homebutton{
+      
+
+      padding: .75rem 1.25rem;
+      border-radius: 10rem;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: .15rem;
+      transition: all .3s;
+      
+      overflow: hidden;
+      z-index: 1;
+      background-color: green;
+      text-decoration:none; 
+      background: linear-gradient(to right, green 50%, black 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    }
+    
+    .homebutton:hover {
+      color: white;
+      
+      transition: 0.4s;
+      background-position: left;
+      
+    }

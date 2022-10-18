@@ -37,7 +37,7 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Show', article, { class: 'btn btn-primary btn-lg'} %> 
+    <%= link_to 'Visualizza', article, { class: 'buttonclass'} %> 
             
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -47,7 +47,7 @@
       <%if  current_user %>
       <%if  current_user && SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
       
-      <%= button_to 'Star', starred_articles_path(
+      <%= button_to 'Salva', starred_articles_path(
         country: article.country, 
         category: article.category,
         source: article.source,
@@ -60,12 +60,12 @@
         publication: article.publication,
         article_id: article.id,
         user_id: current_user.id
-      )  ,{id:"starred"}  %>
+      )  ,{id:"starred",class:"buttonclass"}  %>
       <%else%>
-      Salvato
+       <button disabled class = "buttonclassdis">Salva</button>
       <%end%>
        <%if current_user  && SavedArticle.where(user_id: current_user.id,type: "ReportedArticle",article_id:article.id).empty?%>
-      <%= button_to 'Report', reported_articles_path(
+      <%= button_to 'Segnala', reported_articles_path(
         country: article.country, 
         category: article.category,
         source: article.source,
@@ -78,9 +78,9 @@
         publication: article.publication,
         article_id: article.id,
         user_id: current_user.id
-      ) ,{id:"reported"}%>
+      ) ,{id:"reported",class:"buttonclass"}%>
       <%else%>
-      Segnalato
+       <button disabled class = "buttonclassdis">Segnala</button>
       <%end%>
       <%end%>
   </div>

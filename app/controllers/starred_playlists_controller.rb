@@ -32,15 +32,13 @@ class StarredPlaylistsController < ApplicationController
      
     )
 
-   
       if @starred_playlist.save
-     
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @starred_playlist.errors, status: :unprocessable_entity }
       end
-    
-  end
+    end
 
   # PATCH/PUT /starred_playlists/1 or /starred_playlists/1.json
   def update

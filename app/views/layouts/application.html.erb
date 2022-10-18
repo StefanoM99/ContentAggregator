@@ -18,10 +18,7 @@
   </head>
 
   <body>
-  <% if user_signed_in? %>
-Logged in as <%= current_user.email%> [<%= link_to 'Logout',
-destroy_user_session_path, :method => :delete%>]
-<% end %>
+
     <%= yield %>
     <!-- Se non sono in una delle seguenti pagine costruisco bottone e modal -->
     <% if not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/posts') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %> <!-- TODO: aggiungere i controlli delle altre pagine -->
@@ -122,7 +119,7 @@ $(document).on('click', '#starred', function () {
  
     console.log( $(this).parents('form:first'))
     $(this).parents('form:first').submit()
-    $(this).replaceWith("Salvato");
+    $(this).replaceWith(" <button disabled class = 'buttonclassdis'>Salva</button>");
  });
 
  $(document).on('click', '#reported', function () { 
@@ -130,7 +127,7 @@ $(document).on('click', '#starred', function () {
  
     console.log( $(this).parents('form:first'))
     $(this).parents('form:first').submit()
-    $(this).replaceWith("Segnalato");
+    $(this).replaceWith(" <button disabled class = 'buttonclassdis'>Segnala</button>");
  });
  
     </script>
