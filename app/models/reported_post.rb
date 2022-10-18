@@ -3,5 +3,5 @@ class ReportedPost < SavedPost
     belongs_to :post
     validates :user_id, uniqueness: {scope: :post_id}
 
-    has_one_attached :post_file
+    has_one_attached :post_file, :dependent => :destroy
 end
