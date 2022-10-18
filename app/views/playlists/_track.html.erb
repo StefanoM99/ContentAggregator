@@ -22,10 +22,14 @@
               <a href="<%= playlist.tracks[i][3] %>"><%= playlist.tracks[i][3] %></a>
             </small>
             <br><br>
-            Preview track:
-            <audio controls>
-              <source src="<%= playlist.tracks[i][4] %>">
-            </audio>
+            Track preview:
+            <% if playlist.tracks[i][4] != nil %>
+              <audio controls>
+                <source src="<%= playlist.tracks[i][4] %>">
+              </audio>
+            <% else %>
+              No preview available
+            <% end %>
           </div>
         </li>
       </ul>
