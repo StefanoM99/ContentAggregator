@@ -8,7 +8,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "main" %>
     <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "/../javascript/application.js", "data-turbo-track": "reload", defer: true %>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </head>
@@ -70,7 +70,7 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
                   <% end %>
           <% end %>
           <br>
-          <a href="/feed">Salta la registrazione</a>
+          <a href="/feed" class="homebutton">Salta la registrazione</a>
         </div>
  
       </div>
@@ -78,7 +78,7 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
 
              <!-- > Inizio sezione footer -->
 
-        <footer data-aos="fade-down">
+        <div data-aos="fade-down" class="homefooter">
         <div class="footer-content" >
             <h3>© 2022 ContentAggregator ®</h3>
             <p>Tutti i diritti
@@ -88,7 +88,7 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
         </div>
       
 
-    </footer>
+    </div>
     <script>
       AOS.init();
     </script>

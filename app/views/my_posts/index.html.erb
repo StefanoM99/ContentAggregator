@@ -34,7 +34,7 @@
     </div>
     <br>
     <div class="row" id="my_posts">
-      <% Post.where(author: params[:user_id]).each do |my_post| %>
+      <% Post.where(user_id: params[:user_id]).each do |my_post| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render my_post %>

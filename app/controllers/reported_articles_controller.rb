@@ -35,17 +35,19 @@ class ReportedArticlesController < ApplicationController
       article_id: params[:article_id],
       user_id:current_user.id
     )
-
-    respond_to do |format|
+  
+  
       if @reported_article.save
-        format.html { redirect_to reported_article_url(@reported_article), notice: "Reported article was successfully created." }
-        format.json { render :show, status: :created, location: @reported_article }
+       
+        
       else
+        
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reported_article.errors, status: :unprocessable_entity }
       end
-    end
+  
   end
+  
 
   # PATCH/PUT /reported_articles/1 or /reported_articles/1.json
   def update
@@ -62,11 +64,26 @@ class ReportedArticlesController < ApplicationController
 
   # DELETE /reported_articles/1 or /reported_articles/1.json
   def destroy
+    if !SavedArticle.where(article_id:@reported_article.article_id,type:"StarredArticle").empty? && current_user.admin?
+      @saved_article = SavedArticle.where(article_id:@reported_article.article_id,type:"StarredArticle")
+      @saved_article.destroy_all
+    
+    
+    end
+    if !SavedArticle.where(article_id:@reported_article.article_id,type:"ReportedArticle").empty? && current_user.admin?
+    @reported_articles = SavedArticle.where(article_id:@reported_article.article_id,type:"ReportedArticle")
+    @reported_articles.destroy_all
+    end
     @reported_article.destroy
-
     respond_to do |format|
       if current_user.admin?
           @article = Article.find(@reported_article.article_id)
+          @blacklist = Blacklist.create(
+            title: @reported_article.title,    
+            description: @reported_article.description,
+            summary: @reported_article.summary,
+            tipo: "Article"
+          )
           
           @article.destroy
           format.html { redirect_to current_user, notice: "Reported article was successfully destroyed." }

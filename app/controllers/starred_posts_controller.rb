@@ -25,20 +25,19 @@ class StarredPostsController < ApplicationController
       author: params[:author],
       title: params[:title],
       summary: params[:summary],
-      post_file: params[:post_file],
+      post_file: ActiveStorage::Blob.find_by(key: params[:post_file]),
       user_id: current_user.id,
       post_id: params[:post_id]
     )
 
-    respond_to do |format|
+   
       if @starred_post.save
-        format.html { redirect_to starred_post_url(@starred_post), notice: "Starred post was successfully created." }
-        format.json { render :show, status: :created, location: @starred_post }
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @starred_post.errors, status: :unprocessable_entity }
       end
-    end
+    
   end
 
   # PATCH/PUT /starred_posts/1 or /starred_posts/1.json

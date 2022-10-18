@@ -25,33 +25,29 @@ class StarredArticlesController < ApplicationController
   # POST /starred_articles or /starred_articles.json
   def create
   
-    
-   
-    @starred_article=StarredArticle.new(article_id:params[:article_id],
-                                        user_id:current_user.id,
-                                        country: params[:country], 
-                                        category: params[:category],
-                                        source: params[:source],
-                                        author: params[:author],
-                                        title: params[:title],
-                                        description: params[:description],
-                                        summary: params[:summary],
-                                        link: params[:link],
-                                        media: params[:media] ,
-                                        publication: params[:publication]
-                                        
-                                      )
- 
+    @starred_article=StarredArticle.new(
+      article_id:params[:article_id],
+      user_id:current_user.id,
+      country: params[:country], 
+      category: params[:category],
+      source: params[:source],
+      author: params[:author],
+      title: params[:title],
+      description: params[:description],
+      summary: params[:summary],
+      link: params[:link],
+      media: params[:media] ,
+      publication: params[:publication]
+    )
 
-    respond_to do |format|
+    
       if @starred_article.save
-        format.html { redirect_to starred_article_url(@starred_article), notice: "Starred article was successfully created." }
-        format.json { render :show, status: :created, location: @starred_article }
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @starred_article.errors, status: :unprocessable_entity }
       end
-    end
+    
   end
 
   # PATCH/PUT /starred_articles/1 or /starred_articles/1.json

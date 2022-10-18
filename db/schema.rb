@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_16_093528) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_articles_on_feed_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "blacklists", force: :cascade do |t|
+    t.text "spotify_url"
+    t.string "name"
+    t.text "title"
+    t.text "description"
+    t.text "summary"
+    t.text "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -126,7 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_saved_articles_on_article_id"
-    t.index ["user_id", "article_id", "type"], name: "index_saved_articles_on_user_id_and_article_id_and_type", unique: true
+    t.index ["user_id", "article_id"], name: "index_saved_articles_on_user_id_and_article_id", unique: true
     t.index ["user_id"], name: "index_saved_articles_on_user_id"
   end
 
@@ -143,7 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_133548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["playlist_id"], name: "index_saved_playlists_on_playlist_id"
-    t.index ["user_id", "playlist_id", "type"], name: "index_saved_playlists_on_user_id_and_playlist_id_and_type", unique: true
+    t.index ["user_id", "playlist_id"], name: "index_saved_playlists_on_user_id_and_playlist_id", unique: true
     t.index ["user_id"], name: "index_saved_playlists_on_user_id"
   end
 

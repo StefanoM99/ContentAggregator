@@ -51,15 +51,30 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Show', playlist, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'} %> 
-            
+    <%= link_to 'Visualizza', playlist, { class: 'buttonclass'} %> 
+                <%if current_user%>
+  <%if  current_user && SavedPlaylist.where(user_id: current_user.id,type: "StarredPlaylist",playlist_id:playlist.id).empty?%>
+      <%= button_to 'Salva', starred_playlists_path(
+        country: playlist.country,
+        name: playlist.name,
+        description: playlist.description,
+        spotify_url: playlist.spotify_url,
+        spotify_img: playlist.spotify_img,
+        playlist_id: playlist.id,
+        user_id: current_user.id
+      ) ,{id:"starred", class: 'buttonclass'}%>
+      <%else%>
+ <button disabled class = "buttonclassdis">Salva</button>
+      <%end%>
+      <%end%>
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content"></div>
         </div>
       </div>
-
-      <%= button_to 'Star', starred_playlists_path(
+   <%if current_user%>
+      <%if current_user && SavedPlaylist.where(user_id: current_user.id,type: "ReportedPlaylist",playlist_id:playlist.id).empty?%>
+      <%= button_to 'Segnala', reported_playlists_path(
         country: playlist.country,
         name: playlist.name,
         description: playlist.description,
@@ -67,16 +82,10 @@
         spotify_img: playlist.spotify_img,
         playlist_id: playlist.id,
         user_id: current_user.id
-      ) %>
-
-      <%= button_to 'Report', reported_playlists_path(
-        country: playlist.country,
-        name: playlist.name,
-        description: playlist.description,
-        spotify_url: playlist.spotify_url,
-        spotify_img: playlist.spotify_img,
-        playlist_id: playlist.id,
-        user_id: current_user.id
-      ) %>
+      ),{id:"reported",class: 'buttonclass'} %>
+      <%else%>
+      <button disabled class = "buttonclassdis">Segnala</button>
+      <%end%>
+  <%end%>
   </div>
 </div>

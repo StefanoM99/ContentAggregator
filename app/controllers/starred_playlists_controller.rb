@@ -32,16 +32,13 @@ class StarredPlaylistsController < ApplicationController
      
     )
 
-    respond_to do |format|
       if @starred_playlist.save
-        format.html { redirect_to starred_playlist_url(@starred_playlist), notice: "Starred playlist was successfully created." }
-        format.json { render :show, status: :created, location: @starred_playlist }
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @starred_playlist.errors, status: :unprocessable_entity }
       end
     end
-  end
 
   # PATCH/PUT /starred_playlists/1 or /starred_playlists/1.json
   def update

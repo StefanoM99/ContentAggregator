@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+ 
 
   # GET /articles or /articles.json
   def index
@@ -36,6 +36,9 @@ class ArticlesController < ApplicationController
     data = JSON.parse(response_body)
 
     data["articles"].each do |item|
+      if Article.where(author: item["author"],
+        title: item["title"],
+        description: item["description"]).empty? && Blacklist.where( title: item["title"],description: item["description"],summary:item["content"]).empty?
       Article.create(
         country: query["country"],
         category: query["category"],
@@ -51,7 +54,7 @@ class ArticlesController < ApplicationController
         
       )
     end
-    
+  end
     @articles = Article.all.reverse()
     
   end

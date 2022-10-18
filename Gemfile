@@ -13,6 +13,9 @@ gem "rspotify"
 gem 'geocoder'
 gem 'country_select', '~> 6.0'
 
+gem "image_processing", ">= 1.2"
+
+
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
@@ -87,4 +90,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+gem 'jquery-rails'
+gem "rails-ujs"
+
+gem 'turbolinks'
 end
