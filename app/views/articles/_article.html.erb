@@ -47,7 +47,6 @@
 
     <%if  current_user %>
       <%if  current_user && SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
-<<<<<<< HEAD
       
       <%= button_to 'Salva', starred_articles_path(
         country: article.country, 
@@ -85,49 +84,5 @@
        <button disabled class = "buttonclassdis">Segnala</button>
       <%end%>
       <%end%>
-=======
-       
-        <%= button_to 'Star', starred_articles_path(
-          country: article.country, 
-        country: article.country, 
-          country: article.country, 
-          category: article.category,
-          source: article.source,
-          author: article.author,
-          title: article.title,
-          description: article.description,
-          summary: article.summary,
-          link: article.link,
-          media: article.media,
-          publication: article.publication,
-          article_id: article.id,
-          user_id: current_user.id
-        ), {id: "starred", class: 'btn btn-primary'}  %>
-      <% else %>
-        Starred
-      <% end %>
-
-      <%if current_user  && SavedArticle.where(user_id: current_user.id,type: "ReportedArticle",article_id:article.id).empty?%>
-        <%= button_to 'Report', reported_articles_path(
-          country: article.country, 
-        country: article.country, 
-          country: article.country, 
-          category: article.category,
-          source: article.source,
-          author: article.author,
-          title: article.title,
-          description: article.description,
-          summary: article.summary,
-          link: article.link,
-          media: article.media,
-          publication: article.publication,
-          article_id: article.id,
-          user_id: current_user.id
-        ), {id: "reported", class: 'btn btn-primary'}%>
-      <% else %>
-        Reported
-      <% end %>
-    <% end %>
->>>>>>> 9833c7c27c38334d86c8a6436ad9cce0af4076e5
   </div>
 </div>
