@@ -5,6 +5,20 @@
 
 }
 
+#show, #starred, #reported {
+  background-color: #52fa68;
+  border-radius: 6px;
+  border-style: hidden;
+  padding: 2px 6px;
+  color: #505050;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  float: none;
+}
+
 header {
     width: 100%;
     position: fixed;

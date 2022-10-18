@@ -39,9 +39,9 @@
         summary: post.summary,
         post_file: post.post_file.key,
         post_id: post.id
-      ),{id:"starred"} %>
+      ), {id: "starred", class: 'btn btn-primary'} %>
     <% else %>
-      Salvato
+      Starred
     <% end %>
 
     <% if current_user && SavedPost.where(user_id: current_user.id, type: "ReportedPost", post_id: post.id).empty? %>
@@ -51,11 +51,11 @@
         summary: post.summary,
         post_file: post.post_file.key,
         post_id: post.id
-      ),{id:"reported"} %>
+      ), {id: "reported", class: 'btn btn-primary'} %>
     <% else %>
-      Segnalato
-    <%end%>
-  <%end%>
+      Reported
+    <% end %>
+  <% end %>
   </div>
 </div>
 
