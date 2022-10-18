@@ -33,8 +33,13 @@ class PlaylistsController < ApplicationController
         description: featured_playlists[i].description,
         spotify_url: featured_playlists[i].external_urls["spotify"],
         spotify_img: featured_playlists[i].images[0]["url"],
-        tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]},
-        
+        tracks: featured_playlists[i].tracks.map{|t| [
+          t.name,
+          t.artists.map{|a| a.name},
+          t.album.images[0]["url"],
+          t.external_urls["spotify"],
+          t.preview_url
+        ]}        
       )
     end
   end
