@@ -23,7 +23,7 @@
                             <%= form.text_field :email, class: "form-control" %>
                         </div>
                         <!--button type="submit" class="btn btn-primary">Submit</!--button-->
-                        <%= form.submit class: "btn btn-primary" %>
+                        <%= form.submit "Submit", class: "btn btn-primary" %>
                     </form>
                 </div>
             </div>
@@ -36,7 +36,18 @@
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
-                    <form>
+                    <div class="field mb-3">
+                        <%= form.label :password, "Enter new password" %><br />
+                        <%= form.password_field :password, :autocomplete => "off", class: "form-control" %>
+                    </div>
+                    <div class="field mb-3">
+                        <%= form.label :password_confirmation, "New password confirmation" %><br />
+                        <%= form.password_field :password_confirmation, class: "form-control" %>
+                    </div>
+                    <div class="action_container">
+                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                    </div>
+                    <!--form>
                         <div class="mb-3">
                             <label for="inputPassword1" class="form-label">Enter the old password:</label>
                             <input type="password" class="form-control" id="inputPassword1">
@@ -49,7 +60,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </!--form>-->
                 </div>
             </div>
         </div>

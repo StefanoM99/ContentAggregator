@@ -41,7 +41,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
     respond_to do |format|
-      if (@user.provider == nil) and @user.update(user_params) 
+      if (@user.provider == nil) and @user.update(user_params)  # controllo che l'account sia stato creato con username+psw
+        bypass_sign_in(@user)                                   # mantiene loggato l'utente dopo la modifica della password
         format.html { redirect_to "/feed", notice: "Profile was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
       end
     end
   end
-      
+
   # DELETE /profiles/1 or /profiles/1.json
   def destroy
     @user.destroy
@@ -74,6 +75,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end
