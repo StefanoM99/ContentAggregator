@@ -6,7 +6,7 @@
         </ol>
     </nav>
     <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
-    <%= form_with(model: current_user) do |form| %>
+    
     <div class="accordion accordion-flush" id="accountAccordionFlush">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
@@ -16,15 +16,13 @@
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
-                    <form>
+                    <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Enter the new email:</label>
-                            <!--input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"-->
-                            <%= form.text_field :email, class: "form-control" %>
+                            <%= form.text_field :email, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <!--button type="submit" class="btn btn-primary">Submit</!--button-->
-                        <%= form.submit "Submit", class: "btn btn-primary" %>
-                    </form>
+                        <%= form.submit "Submit", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -36,31 +34,19 @@
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
-                    <div class="field mb-3">
-                        <%= form.label :password, "Enter new password" %><br />
-                        <%= form.password_field :password, :autocomplete => "off", class: "form-control" %>
-                    </div>
-                    <div class="field mb-3">
-                        <%= form.label :password_confirmation, "New password confirmation" %><br />
-                        <%= form.password_field :password_confirmation, class: "form-control" %>
-                    </div>
-                    <div class="action_container">
-                        <%= form.submit "Submit", class: "btn btn-primary" %>
-                    </div>
-                    <!--form>
-                        <div class="mb-3">
-                            <label for="inputPassword1" class="form-label">Enter the old password:</label>
-                            <input type="password" class="form-control" id="inputPassword1">
+                    <%= form_with(model: current_user) do |form| %>
+                        <div class="field mb-3">
+                            <%= form.label :password, "Enter new password" %><br />
+                            <%= form.password_field :password, :autocomplete => "off", class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputPassword2" class="form-label">Enter the new password:</label>
-                            <input type="password" class="form-control" id="inputPassword2">
-                            <div id="passwordHelpBlock" class="form-text">
-                            Your password must be 8-20 characters long.
-                            </div>
+                        <div class="field mb-3">
+                            <%= form.label :password_confirmation, "New password confirmation" %><br />
+                            <%= form.password_field :password_confirmation, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </!--form>-->
+                        <div class="action_container">
+                            <%= form.submit "Submit", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -82,5 +68,4 @@
             </div>
         </div>
     </div>
-    <% end %>
 </div>
