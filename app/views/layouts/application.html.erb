@@ -18,7 +18,6 @@
   </head>
 
   <body>
-
     <%= yield %>
     <!-- Se non sono in una delle seguenti pagine costruisco bottone e modal -->
     <% if not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/posts') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %> <!-- TODO: aggiungere i controlli delle altre pagine -->

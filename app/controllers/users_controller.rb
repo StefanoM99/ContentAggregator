@@ -41,22 +41,27 @@ class UsersController < ApplicationController
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to profile_url(@user), notice: "Profile was successfully updated." }
+      if (@user.provider == nil) and @user.update(user_params)  # controllo che l'account sia stato creato con username+psw
+        bypass_sign_in(@user)                                   # mantiene loggato l'utente dopo la modifica della password
+        format.html { redirect_to user_url(@user), notice: "Account was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        if (@user.provider != nil)
+          format.html { redirect_to user_url(@user), alert: "Can't update provider's credentials." }
+        else
+          format.html { redirect_to user_url(@user), alert: @user.errors.full_messages.to_sentence }
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
-      
+
   # DELETE /profiles/1 or /profiles/1.json
   def destroy
     @user.destroy
       
     respond_to do |format|
-      format.html { redirect_to userss_url, notice: "Profile was successfully destroyed." }
+      format.html { redirect_to "/home", notice: "Profile was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -70,5 +75,9 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def profile_params
       params.fetch(:profile, {})
+    end
+
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end
