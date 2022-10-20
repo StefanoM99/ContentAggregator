@@ -43,11 +43,14 @@ class UsersController < ApplicationController
     respond_to do |format|
       if (@user.provider == nil) and @user.update(user_params)  # controllo che l'account sia stato creato con username+psw
         bypass_sign_in(@user)                                   # mantiene loggato l'utente dopo la modifica della password
-        format.html { redirect_to "/feed", notice: "Profile was successfully updated." }
+        format.html { redirect_to user_url(@user), notice: "Account was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
       else
-        #format.html { render :edit, status: :unprocessable_entity }
-        format.html {  }
+        if (@user.provider != nil)
+          format.html { redirect_to user_url(@user), alert: "Can't update provider's credentials." }
+        else
+          format.html { redirect_to user_url(@user), alert: @user.errors.full_messages.to_sentence }
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
