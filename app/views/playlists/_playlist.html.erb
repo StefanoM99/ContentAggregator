@@ -1,6 +1,6 @@
 <div id="<%= dom_id playlist %>">
   <img src="<%= playlist.spotify_img %>" class="img-fluid card-img-top">
-  
+ 
   <div class="card-body">
     <h3 class="card-title">
       <strong><%= playlist.name %></strong>
@@ -51,7 +51,7 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Visualizza', playlist, { class: 'buttonclass'} %> 
+    <%= link_to 'Visualizza', playlist, { id: "show",class: 'buttonclass'} %> 
                 <%if current_user%>
   <%if  current_user && SavedPlaylist.where(user_id: current_user.id,type: "StarredPlaylist",playlist_id:playlist.id).empty?%>
       <%= button_to 'Salva', starred_playlists_path(

@@ -47,9 +47,13 @@ class FeedsController < ApplicationController
     optUrl = uri.to_s
 
     req = URI.open(optUrl)
+   
     response_body = req.read
+    unless response_body == "[]"
+    puts(response_body)
+     
     data = JSON.parse(response_body)
-
+   
     name = data[0]["name"]
 
     lat = data[0]["lat"]
@@ -91,7 +95,7 @@ class FeedsController < ApplicationController
       sea_level: data2["main"]["sea_level"],
       grnd_level: data2["main"]["grnd_level"]
     )
-
+  end
     #playlist controller
     RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
     
@@ -113,8 +117,15 @@ class FeedsController < ApplicationController
         description: featured_playlists[i].description,
         spotify_url: featured_playlists[i].external_urls["spotify"],
         spotify_img: featured_playlists[i].images[0]["url"],
-        tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
+        tracks: featured_playlists[i].tracks.map{|t| [
+          t.name,
+          t.artists.map{|a| a.name},
+          t.album.images[0]["url"],
+          t.external_urls["spotify"],
+          t.preview_url,
+        ]}        
       )
+      
     end
     end
 
@@ -141,6 +152,7 @@ class FeedsController < ApplicationController
     data = JSON.parse(response_body)
 
     data["articles"].each do |item|
+    puts(params[:country])
       if Article.where(author: item["author"],
         title: item["title"],
         description: item["description"]).empty? && Blacklist.where( title: item["title"],description: item["description"],summary:item["content"]).empty?
@@ -158,10 +170,27 @@ class FeedsController < ApplicationController
       )
     end
   end
-
-    @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.all.reverse()
+    if params[:country] == nil && params[:category] == nil
+    @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.where(country: nil) + Article.where(category: "general").reverse()
+    @feeds= @feeds.shuffle()
+    else
+      if params[:country] == nil && params[:category] != nil
+       @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.where(category: query["category"]).reverse()  
+       @feeds= @feeds.shuffle()
+      else
+        if params[:country] != nil && params[:category] == nil
+          @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.where(country: query["country"])+ Article.where(country: query["country"]).reverse()  
+           @feeds= @feeds.shuffle()
+      else
+        if params[:country] != nil && params[:category] != nil
+          @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.where(country: query["country"])+ Article.where(country: query["country"],category: query["category"]).reverse() 
+          @feeds= @feeds.shuffle()
+        end 
+      end
+    end
   end
   end
+end
 
   # GET /feeds/1 or /feeds/1.json
   def show
