@@ -1,16 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <%if current_user.user?%>
 <div class="container" id="profiles">
-  <nav class="navbar navbar-expand-sm">
-    <%= image_tag "logo.png" , :align=> "left", style: 'max-width:350px;height: auto', class: 'navbar-brand' %>
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <li class="nav-item"><%= link_to "Home", root_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to "Go to feed", feed_path, class: 'nav-link' %></li>
-      </ul>
-    </div>
-  </nav>
-  <br>
+  <header class=" header-active" data-aos="fade-down">
+    
+     <div style="text-align:center"> <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%></div>
+      <ul><%= link_to "Vai al Feed", feed_path ,class: 'Loglink' %></ul>
+      <ul> <%= link_to 'Logout',
+destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+      </header>
+  <br><br><br>
   <div data-aos="fade-right">
   
     <h1 style='font-size:80px'><b>Profile</b></h1>

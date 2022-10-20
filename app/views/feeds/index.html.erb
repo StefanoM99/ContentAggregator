@@ -10,7 +10,11 @@
       
      <ul> <%= link_to 'Logout',
 destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+<ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
+<% else %>
 
+<ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
+<ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
 <% end %>
 </header>
   <br><br><br><br><br>
@@ -33,7 +37,9 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
     <div>
       <%= render "filter", feed: @feed %>
       <br>
-      <%= link_to "New post", new_post_path, class: 'btn btn-primary btn-lg pull-right' %>
+      <% if user_signed_in? %>
+      <%= link_to "New post", new_post_path, class: 'homebutton',style:"text-align:center" %>
+      <%end%>
     </div>
     <br><br>
     <div class="row" id="feeds">

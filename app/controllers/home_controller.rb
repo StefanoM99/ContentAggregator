@@ -13,6 +13,9 @@ class HomeController < ApplicationController
   end
   
   def index
+    if current_user
+      redirect_to feed_path
+    end
     @user = User.create(:email => 'admin@admin.com', :password => 'password', :password_confirmation => 'password', :name=>"admin",:surname =>"admin",:id=>0, :role=>1)
     
 

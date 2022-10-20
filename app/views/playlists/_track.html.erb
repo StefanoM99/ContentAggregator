@@ -1,7 +1,9 @@
 <div id="<%= dom_id playlist %>">
 
   <div class="row" id="tracks">
+  
     <% for i in 0..playlist.tracks.size()-1 %>
+    
       <ul class="col-12 col-lg-4 col-sm-6">
         <li class="card" data-aos="flip-down">
           <img src="<%= playlist.tracks[i][2] %>" class="img-fluid card-img-top">

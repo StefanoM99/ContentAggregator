@@ -23,7 +23,7 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Show', my_post, {class: 'btn btn-primary btn-lg'} %> 
+    <%= link_to 'Visualizza', my_post, {class: 'buttonclass'} %> 
             
     <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -33,7 +33,7 @@
    
   
      <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
-    <%= link_to 'Delete', my_post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Elimina', my_post, method: :delete, data: { confirm: 'Sei sicuro?' } ,class:"buttonclass"%>
     <%else%>
     <%end%>
   </div>
