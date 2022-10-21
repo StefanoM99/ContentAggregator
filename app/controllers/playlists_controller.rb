@@ -43,7 +43,7 @@ class PlaylistsController < ApplicationController
       )
     end
   end
-    @playlists = Playlist.all
+    @playlists = Playlist.allz
   end
 
   # GET /playlists/1 or /playlists/1.json

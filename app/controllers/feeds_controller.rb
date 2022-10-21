@@ -115,7 +115,7 @@ class FeedsController < ApplicationController
         spotify_img: featured_playlists[i].images[0]["url"],
         tracks: featured_playlists[i].tracks.map{|t| [t.name, t.artists.map{|a| a.name}]}
       )
-    end
+      end
     end
 
     #article controller
@@ -156,11 +156,11 @@ class FeedsController < ApplicationController
         media: item["urlToImage"],
         publication: item["publishedAt"]
       )
+      end
     end
-  end
 
-    @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all + Article.all.reverse()
-  end
+    @feeds = Forecast.all.reverse() + Post.all.reverse() + Playlist.all.reverse() + Article.all.reverse()
+    end
   end
 
   # GET /feeds/1 or /feeds/1.json

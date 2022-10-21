@@ -33,11 +33,12 @@
     </div>
     <br>
   
- <div class="row" id="reported_articles">
- <% if SavedArticle.where(user_id: params[:id],type: "ReportedArticle").exists?%>
- <h1 style='font-size:40px'> Articoli Segnalati:</h1> <br>
-<%end%>
-     <% SavedArticle.where(user_id: params[:id],type: "ReportedArticle").each do |reported_article| %>
+    <div class="row" id="reported_articles">
+      <% if SavedArticle.where(user_id: params[:id],type: "ReportedArticle").exists?%>
+        <h1 style='font-size:40px'> Articoli Segnalati:</h1> <br>
+      <%end%>
+      
+      <% SavedArticle.where(user_id: params[:id],type: "ReportedArticle").each do |reported_article| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_article %>
@@ -45,9 +46,10 @@
         </ul>
       <% end %>
       <br>
-          <% if SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").exists?%>
- <h1 style='font-size:40px'> Playlist Segnalate:</h1> <br>
-<%end%>
+      <% if SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").exists?%>
+        <h1 style='font-size:40px'> Playlist Segnalate:</h1> <br>
+      <%end%>
+      
       <% SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").each do |reported_playlist| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
@@ -55,9 +57,11 @@
           </li>
         </ul>
       <% end %>
-          <% if SavedPost.where(user_id: params[:id],type: "ReportedPost").exists?%>
- <h1 style='font-size:40px'> Post Segnalati:</h1> <br>
-<%end%>
+      
+      <% if SavedPost.where(user_id: params[:id],type: "ReportedPost").exists?%>
+        <h1 style='font-size:40px'> Post Segnalati:</h1> <br>
+      <%end%>
+      
       <% SavedPost.where(user_id: params[:id],type: "ReportedPost").each do |reported_post| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
@@ -65,40 +69,48 @@
           </li>
         </ul>
       <% end %>
-          <% if SavedArticle.where(user_id: params[:id],type: "StarredArticle").exists?%>
- <h1 style='font-size:40px'> Articoli Salvati:</h1> <br>
-<%end%>
-       <% SavedArticle.where(user_id: params[:id],type: "StarredArticle").each do |starred_article| %>
+      
+      <% if SavedArticle.where(user_id: params[:id],type: "StarredArticle").exists?%>
+        <h1 style='font-size:40px'> Articoli Salvati:</h1> <br>
+      <%end%>
+      
+      <% SavedArticle.where(user_id: params[:id],type: "StarredArticle").each do |starred_article| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render starred_article %>
           </li>
         </ul>
       <% end %>
-          <% if SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").exists?%>
- <h1 style='font-size:40px'> Playlists Salvate:</h1> <br>
-<%end%>
-       <% SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").each do |starred_playlist| %>
+      
+      <% if SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").exists?%>
+        <h1 style='font-size:40px'> Playlists Salvate:</h1> <br>
+      <%end%>
+      
+      <% SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").each do |starred_playlist| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render starred_playlist %>
           </li>
         </ul>
       <% end %>
-          <% if SavedPost.where(user_id: params[:id],type: "StarredPost").exists?%>
- <h1 style='font-size:40px'> Post Salvati:</h1> <br>
-<%end%>
-       <% SavedPost.where(user_id: params[:id],type: "StarredPost").each do |starred_post| %>
+      
+      <% if SavedPost.where(user_id: params[:id],type: "StarredPost").exists?%>
+        <h1 style='font-size:40px'> Post Salvati:</h1> <br>
+      <%end%>
+      
+      <% SavedPost.where(user_id: params[:id],type: "StarredPost").each do |starred_post| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render starred_post %>
           </li>
         </ul>
       <% end %>
-       <% if SavedPost.where(user_id: params[:id],type: "EditedPost").exists?%>
- <h1 style='font-size:40px'> Post Editati:</h1> <br>
-<%end%>
-       <% SavedPost.where(user_id: params[:id],type: "EditedPost").each do |edited_post| %>
+      
+      <% if SavedPost.where(user_id: params[:id],type: "EditedPost").exists?%>
+        <h1 style='font-size:40px'> Post Editati:</h1> <br>
+      <%end%>
+      
+      <% SavedPost.where(user_id: params[:id],type: "EditedPost").each do |edited_post| %>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render edited_post %>
@@ -145,42 +157,47 @@
     <br>
   
    <div class="row" id="reported_articles">
-   <%@index = (SavedArticle.where(type: "ReportedArticle").distinct.pluck(:article_id))%>
+    <%@index = (SavedArticle.where(type: "ReportedArticle").distinct.pluck(:article_id))%>
     <%puts(@index)%>
-     <% SavedArticle.where(type: "ReportedArticle",article_id:@index).each do |reported_article| %>
-     <%if @index.include? reported_article.article_id%>
+    <% SavedArticle.where(type: "ReportedArticle",article_id:@index).each do |reported_article| %>
+      <%if @index.include? reported_article.article_id%>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_article %>
           </li>
         </ul>
       <%end%>
+      
       <%@index.delete(reported_article.article_id)%>  
       <% end %>
+      
       <%@index = (SavedPlaylist.where(type: "ReportedPlaylist").distinct.pluck(:playlist_id))%>
       <% SavedPlaylist.where(type: "ReportedPlaylist",playlist_id:@index).each do |reported_playlist| %>
+      
       <%if @index.include? reported_playlist.playlist_id%>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_playlist %>
           </li>
         </ul>
-        <%end%>
-        <%@index.delete(reported_playlist.playlist_id)%>  
-      <% end %>
-      <%@index = (SavedPost.where(type: "ReportedPost").distinct.pluck(:post_id))%>
-      <% SavedPost.where(type: "ReportedPost",post_id:@index).each do |reported_post| %>
+      <%end%>
+      
+      <%@index.delete(reported_playlist.playlist_id)%>  
+    <% end %>
+    
+    <%@index = (SavedPost.where(type: "ReportedPost").distinct.pluck(:post_id))%>
+    <% SavedPost.where(type: "ReportedPost",post_id:@index).each do |reported_post| %>
       <%if @index.include? reported_post.post_id%>
         <ul class="col-12 col-lg-4 col-sm-6">
           <li class="card" data-aos="flip-down">
             <%= render reported_post %>
           </li>
         </ul>
-        <%end%>
-        <%@index.delete(reported_post.post_id)%>  
-      <% end %>
-    </div>
+      <%end%>
+      <%@index.delete(reported_post.post_id)%>  
+    <% end %>
   </div>
+</div>
    
    
   <script>
