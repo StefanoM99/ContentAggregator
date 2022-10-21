@@ -10,6 +10,19 @@ class UsersController < ApplicationController
     
   # GET /users or /users.json
   def index
+    (@filterrific = initialize_filterrific(
+      User,
+      params[:filterrific],
+      select_options: {
+        sorted_by: User.options_for_sorted_by,
+      },
+    )) || return
+    @users = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
       
   # GET /profiles/1 or /profiles/1.json

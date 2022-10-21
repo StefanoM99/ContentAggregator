@@ -3,20 +3,6 @@ class ReportedPlaylistsController < ApplicationController
 
   # GET /reported_playlists or /reported_playlists.json
   def index
-    @reported_playlists = ReportedPlaylist.all
-    @reported_playlist = ReportedPlaylist.create(
-      country: params[:country],
-      name: params[:name],
-      description: params[:description],
-      spotify_url: params[:spotify_url],
-      spotify_img: params[:spotify_img],
-      user_id: current_user.id,
-      playlist_id: params[:playlist_id]
-    )
-
-    
-       @reported_playlist.save
-     
   end
 
   # GET /reported_playlists/1 or /reported_playlists/1.json

@@ -1,5 +1,6 @@
 
 //= require rails-ujs
+//= require filterrific/filterrific-jquery
 
 1
 2
