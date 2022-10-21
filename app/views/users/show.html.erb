@@ -1,12 +1,14 @@
 <%if current_user.user?%>
 <div class="container" id="profiles">
+
   <header class=" header-active" data-aos="fade-down">
-    
-     <div style="text-align:center"> <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%></div>
-      <ul><%= link_to "Vai al Feed", feed_path ,class: 'Loglink' %></ul>
-      <ul> <%= link_to 'Logout',
-destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
-      </header>
+    <div style="text-align:center"> <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%></div>
+
+    <ul><%= link_to "Vai al Feed", feed_path ,class: 'Loglink' %></ul>
+    <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+    <ul><%= link_to "User search", "/users" ,class: 'Loglink' %></ul>
+  </header>
+
   <br><br><br>
   <div data-aos="fade-right">
   
