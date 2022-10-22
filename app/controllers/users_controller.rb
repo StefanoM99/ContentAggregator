@@ -3,8 +3,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if @user.admin? && current_user.user?
+    if current_user!=nil && @user.admin? && current_user.user?
       redirect_to feed_path
+    else
+      if !current_user
+        redirect_to feed_path
+      end
     end
   end
     

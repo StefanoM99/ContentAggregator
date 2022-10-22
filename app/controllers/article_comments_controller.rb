@@ -13,6 +13,7 @@ class ArticleCommentsController < ApplicationController
   # GET /article_comments/new
   def new
     @article_comment = ArticleComment.new
+    puts(params)
   end
 
   # GET /article_comments/1/edit
@@ -21,10 +22,11 @@ class ArticleCommentsController < ApplicationController
 
   # POST /article_comments or /article_comments.json
   def create
+    puts("daje")
     @article_comment = ArticleComment.new(
       author: current_user.name + ' ' + current_user.surname,
       description: article_comment_params[:description],
-      article_id: params[:article_id],
+      article_id: article_comment_params[:article_id],
       user_id: current_user.id
     )
 

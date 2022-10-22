@@ -14,6 +14,7 @@
   <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
+    <%= form.hidden_field :post_id, value:params[:post_id] %>
   </div>
 
   <div>

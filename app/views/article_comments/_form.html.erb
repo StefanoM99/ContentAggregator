@@ -14,9 +14,11 @@
   <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
+    <%= form.hidden_field :article_id, value:params[:article_id] %>
   </div>
 
   <div>
+    <% hidden_field_tag :article_id, '2' %>
     <%= form.submit %>
   </div>
 <% end %>

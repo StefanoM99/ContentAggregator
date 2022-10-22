@@ -24,7 +24,7 @@ class PostCommentsController < ApplicationController
     @post_comment = PostComment.new(
       author: current_user.name + ' ' + current_user.surname,
       description: post_comment_params[:description],
-      post_id: params[:post_id],
+      post_id: post_comment_params[:post_id],
       user_id: current_user.id,
     )
 

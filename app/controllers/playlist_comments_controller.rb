@@ -24,7 +24,7 @@ class PlaylistCommentsController < ApplicationController
     @playlist_comment = PlaylistComment.new(
       author: current_user.name + ' ' + current_user.surname,
       description: playlist_comment_params[:description],
-      playlist_id: params[:playlist_id],
+      playlist_id: playlist_comment_params[:playlist_id],
       user_id: current_user.id
     )
 

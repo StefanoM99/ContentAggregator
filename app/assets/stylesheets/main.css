@@ -459,12 +459,12 @@ header {
     
     }
     .card-footer {
-      display: flex;
+      display: inline-flex;
       justify-content: center;
       row-gap: 10px;
       column-gap: 10px;
-     
-     
+      flex-wrap: wrap;
+      flex-direction: row;
     
     }
     .card-footerpost {
