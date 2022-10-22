@@ -20,7 +20,7 @@
   <body>
     <%= yield %>
     <!-- Se non sono in una delle seguenti pagine costruisco bottone e modal -->
-    <% if not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/posts') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %> <!-- TODO: aggiungere i controlli delle altre pagine -->
+    <% if user_signed_in? and not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/posts') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %> <!-- TODO: aggiungere i controlli delle altre pagine -->
     <!-- Button trigger modal -->
     <button type="button" id="helpBtn" class="btn btn-primary rounded-pill position-fixed bottom-0 end-0 m-3" data-bs-toggle="modal" data-bs-target="#helpModal">
     Help!

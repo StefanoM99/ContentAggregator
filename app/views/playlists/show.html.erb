@@ -3,19 +3,21 @@
 <div class="container" id="tracks">
   
   <div class="wrap"> 
-   <header class=" header-active" data-aos="fade-down">
-      
+    <header class=" header-active" data-aos="fade-down"> 
       <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
-      <div class ="push"><ul><%= link_to "Vai al Feed", feed_path %></ul>
-      <%if current_user%>
-      <ul> <%= link_to 'Logout',
-destroy_user_session_path, :method => :delete %></ul>
- <ul class="nav-item"><%= link_to "Go to profile", current_user, class: 'nav-link' %></ul></div>
- <%end%>
-      </header>
+      
+      <div class ="push">
+        <ul><%= link_to "Vai al Feed", feed_path %></ul>
+        <%if current_user%>
+          <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete %></ul>
+          <ul class="nav-item"><%= link_to "Go to profile", current_user, class: 'nav-link' %></ul>
+        <%end%>
+        <ul><%= link_to "User search", "/users" ,class: 'Loglink' %></ul>
       </div>
-       <br><br><br>
-   
+    </header>
+  </div>
+  
+  <br><br><br>
 
   <div data-aos="fade-right">
     

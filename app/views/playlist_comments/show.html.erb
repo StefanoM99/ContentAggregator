@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @playlist_comment %>
+
+<div>
+  <%= link_to "Edit this playlist comment", edit_playlist_comment_path(@playlist_comment) %> |
+  <%= link_to "Back to playlist comments", playlist_comments_path %>
+
+  <%= button_to "Destroy this playlist comment", @playlist_comment, method: :delete %>
+</div>

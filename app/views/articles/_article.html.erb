@@ -37,7 +37,16 @@
   </div>
 
   <div class="card-footer">
+
+
     <%= link_to 'Visualizza', article, { class: 'buttonclass'} %> 
+    
+    <%if current_user%>
+      <%= link_to 'Commenta', new_article_comment_path(
+        user_id: current_user.id,
+        article_id: article.id
+      ), { class: 'buttonclass'} %> 
+    <%end%>
             
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
