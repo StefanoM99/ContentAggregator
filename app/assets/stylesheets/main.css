@@ -413,6 +413,7 @@ header {
     border-radius: 10rem;
     color: #fff;
     text-transform: uppercase;
+    text-align: center;
     font-size: 1rem;
     letter-spacing: .15rem;
     transition: all .3s;
@@ -422,8 +423,8 @@ header {
     background-color: green;
     text-decoration:none; 
     background: linear-gradient(to right, green 50%, black 50%);
-  background-size: 200% 100%;
-  background-position: right;
+    background-size: 200% 100%;
+    background-position: right;
   
   }
 

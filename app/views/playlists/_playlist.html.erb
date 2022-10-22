@@ -13,38 +13,72 @@
     <small>
       <a href="<%= playlist.spotify_url %>"><%= playlist.spotify_url %></a>
     </small>
+
     <br><br>
+    
     <div class="container mt-3">
       <div id="accordion">
-        <div class="card">
-          <div class="card-header">
-            <a class="btn" data-bs-toggle="collapse" href="#collapse_<%= playlist.id %>">
-              Show Tracks
-            </a>
-          </div>
-          <div id="collapse_<%= playlist.id %>" class="collapse" data-bs-parent="#accordion">
-            <div class="card-body">
-              <table style="border-collapse: collapse; width: 100%;">
+        <div class="d-grid">
+          <a class="buttonclass" data-bs-toggle="collapse" href="#trackcollapse_<%= playlist.id %>">
+            VISUALIZZA/NASCONDI TRACKLIST
+          </a>
+        </div>
+        <div id="trackcollapse_<%= playlist.id %>" class="collapse" data-bs-parent="#accordion">
+          <br>
+          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+            <thead style="background-color:green; color:white;">
+              <tr>
+                <th scope="col" style="border: 1px solid #dddddd;"> BRANO</th>
+                <th scope="col" style="border: 1px solid #dddddd;">ARTISTI</th>
+              </tr>
+            </thead>
+            <% for i in 0..playlist.tracks.size()-1 %>
+              <tbody>
                 <tr>
-                  <th style="border: 1px solid #dddddd;">Track</th>
-                  <th style="border: 1px solid #dddddd;">Artists</th>
+                  <small>
+                    <td style="border: 1px solid #dddddd;"><%= playlist.tracks[i][0] %></td>
+                    <td style="border: 1px solid #dddddd;">
+                      <% for j in 0..playlist.tracks[i][1].size-2 %>
+                        <%= playlist.tracks[i][1][j] %>,
+                      <% end %>
+                      <%= playlist.tracks[i][1][-1] %>
+                    </td>
+                  </small>
                 </tr>
-                <% for i in 0..playlist.tracks.size()-1 %>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <div id="accordion">
+        <div class="d-grid">
+          <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= playlist.id %>">
+            VISUALIZZA/NASCONDI COMMENTI
+          </a>
+        </div>
+        <div id="collapse_<%= playlist.id %>" class="collapse" data-bs-parent="#accordion">
+          <br>
+          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+            <thead style="background-color:green; color:white;">
+              <tr>
+                <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+                <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%if current_user && PlaylistComment.find_by(playlist_id: playlist.id)%>
+                <%PlaylistComment.where(playlist_id: playlist.id).each do |comment|%>
                   <tr>
-                    <small>
-                      <td style="border: 1px solid #dddddd;"><%= playlist.tracks[i][0] %></td>
-                      <td style="border: 1px solid #dddddd;">
-                        <% for j in 0..playlist.tracks[i][1].size-2 %>
-                          <%= playlist.tracks[i][1][j] %>,
-                        <% end %>
-                        <%= playlist.tracks[i][1][-1] %>
-                      </td>
-                    </small>
+                    <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
+                    <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                   </tr>
-                <% end %>
-              </table>
-            </div>
-          </div>
+                <%end%>
+              <%end%>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
