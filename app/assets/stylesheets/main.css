@@ -503,9 +503,20 @@ header {
       background-position: left;
       
     }
-    .wrap{
-      display:flexbox
-    }
+ 
    .push{
     display:inline-flex
    }
+
+.propic{
+  width:200px;
+  height:200px;
+  border-radius:100px;
+  text-align:center;
+}
+
+.articleimg{
+  width:900px;
+  height:550px;
+  border-radius:20px;
+}

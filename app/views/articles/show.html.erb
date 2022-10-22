@@ -1,17 +1,63 @@
+<div class="container">
+<header class=" header-active" data-aos="fade-down">
+    
+      <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
+      <% if user_signed_in? %>
+      
+     <ul> <%= link_to 'Logout',
+destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+<ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
+<% else %>
 
+<ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
+<ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
+<% end %>
+</header>
+<br><br><br>
 
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal"></button>
-  <h1 class="modal-title">Show article</h1>
+<div style="text-align:center" , data-aos="fade-up">
+   <h3 style="font-size:40px">
+      <strong><%= @article.title %></strong>
+      
+    </h3>
+    <br><br>
+  <%= image_tag @article.media, class:"articleimg" %>
+  <br><br>
+     <h4 class="card-text" >
+      <%= @article.description %>
+    </h4>
+    <br><br><br>
+    <h6 class="card-text" >
+      <%= @article.summary %>
+    </h6>
+    <br>
+    <small>
+      <a href="<%= @article.link %>"><%= @article.link %></a>
+    </small>
+    <br>
+    <small style="color:#CACACA">
+      <strong>Publication:</strong>
+      <%= @article.publication %>
+    </small>
+
+    <br><br>
+  <%= link_to "Torna agli articoli", articles_path,class:"homebutton" %>
+  <%= link_to "Torna al Feed", feed_path ,class:"homebutton"%>
 </div>
+<br><br>
 
-<div class="modal-body">
-  <%= render @article %>
 </div>
-
-
+  <footer data-aos="fade-down">
+        <div class="footer-content" >
+            <h3>© 2022 ContentAggregator ®</h3>
+            <p>Tutti i diritti
+            riservati.<br>Immagini da: Storyset<br><a
+                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
+         
+        </div>
+         </footer>
+      
   
-  <%= link_to "Back to articles", articles_path %>
-  <%= link_to "Back to feed", feed_path %>
-  
-
+<script>
+    AOS.init();
+</script>
