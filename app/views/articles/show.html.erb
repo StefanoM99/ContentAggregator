@@ -1,29 +1,26 @@
 <div class="container">
-<header class=" header-active" data-aos="fade-down">
+  <header class=" header-active" data-aos="fade-down">
     
-      <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
-      <% if user_signed_in? %>
-      
-     <ul> <%= link_to 'Logout',
-destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
-<ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
-<% else %>
+    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
+    <% if user_signed_in? %>      
+      <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+      <ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
+    <% else %>
+      <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
+      <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
+    <% end %>
+  </header>
+  <br><br><br>
 
-<ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
-<ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
-<% end %>
-</header>
-<br><br><br>
-
-<div style="text-align:center" , data-aos="fade-up">
-   <h3 style="font-size:40px">
+  <div style="text-align:center" , data-aos="fade-up">
+    <h3 style="font-size:40px">
       <strong><%= @article.title %></strong>
       
     </h3>
     <br><br>
-  <%= image_tag @article.media, class:"articleimg" %>
-  <br><br>
-     <h4 class="card-text" >
+    <%= image_tag @article.media, class:"articleimg" %>
+    <br><br>
+    <h4 class="card-text" >
       <%= @article.description %>
     </h4>
     <br><br><br>
@@ -41,23 +38,47 @@ destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
     </small>
 
     <br><br>
-  <%= link_to "Torna agli articoli", articles_path,class:"homebutton" %>
-  <%= link_to "Torna al Feed", feed_path ,class:"homebutton"%>
-</div>
-<br><br>
 
+    <div class="container mt-3">
+      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+        <thead style="background-color:green; color:white;">
+          <tr>
+            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%if current_user && ArticleComment.find_by(article_id: @article.id)%>
+            <%ArticleComment.where(article_id: @article.id).each do |comment|%>
+              <tr>
+                <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
+                <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
+              </tr>
+            <%end%>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+
+    <br><br>
+    <%= link_to "Torna agli articoli", articles_path,class:"homebutton" %>
+    <%= link_to "Torna al Feed", feed_path ,class:"homebutton"%>
+  </div>
+  <br><br>
 </div>
-  <footer data-aos="fade-down">
-        <div class="footer-content" >
-            <h3>© 2022 ContentAggregator ®</h3>
-            <p>Tutti i diritti
-            riservati.<br>Immagini da: Storyset<br><a
-                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
-         
-        </div>
-         </footer>
-      
-  
+
+<footer data-aos="fade-down">
+  <div class="footer-content" >
+    <h3>© 2022 ContentAggregator ®</h3>
+    <p>
+      Tutti i diritti riservati.<br>
+      Immagini da: Storyset<br>
+      <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+    </p>
+          
+  </div>
+</footer>
+        
 <script>
-    AOS.init();
+  AOS.init();
 </script>

@@ -22,39 +22,65 @@
   <div data-aos="fade-right">
     
     <div style="text-align:center"><h1 style='font-size:80px'><b><%= @playlist.name %></b></h1></div>
-    <br>
-    <div class="dropdown">
-      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-        Content Filter
-      </button>
-      <ul class="dropdown-menu">
-        <li><%= link_to "All Contents", feed_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Articles", articles_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Playlists", playlists_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Posts", posts_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Forecast", forecasts_path, class: 'dropdown-item' %></li>
-      </ul>
+      <br>
+      <div class="dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          Content Filter
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to "All Contents", feed_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Articles", articles_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Playlists", playlists_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Posts", posts_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Forecast", forecasts_path, class: 'dropdown-item' %></li>
+        </ul>
+      </div>
+      <br><br>
+      <%= render "track", playlist: @playlist %>
     </div>
+
     <br><br>
-    <%= render "track", playlist: @playlist %>
-  </div>
+
+    <div class="container mt-3">
+      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+        <thead style="background-color:green; color:white;">
+          <tr>
+            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%if current_user && PlaylistComment.find_by(playlist_id: @playlist.id)%>
+            <%PlaylistComment.where(playlist_id: @playlist.id).each do |comment|%>
+              <tr>
+                <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
+                <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
+              </tr>
+            <%end%>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
   
-  <script>
-    AOS.init();
-  </script>
+    <script>
+      AOS.init();
+    </script>
+  </div>
+  <br>
+  <div style="text-align:center">
+    <%= link_to "Torna alle playlists", playlists_path, class: 'homebutton',style:"text-align:center" %>
+    <%= link_to "Torna al feed", feed_path, class: 'homebutton',style:"text-align:center" %>
+  </div>
+  <br><br><br>
 </div>
-<br>
-<div style="text-align:center">
-  <%= link_to "Torna alle playlists", playlists_path, class: 'homebutton',style:"text-align:center" %>
-  <%= link_to "Torna al feed", feed_path, class: 'homebutton',style:"text-align:center" %>
-</div>
-<br><br><br>
+
 <footer data-aos="fade-down">
-        <div class="footer-content" >
-            <h3>© 2022 ContentAggregator ®</h3>
-            <p>Tutti i diritti
-            riservati.<br>Immagini da: Storyset<br><a
-                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
-         
-        </div>
-         </footer>
+  <div class="footer-content" >
+    <h3>© 2022 ContentAggregator ®</h3>
+      <p>
+        Tutti i diritti riservati.<br>
+        Immagini da: Storyset<br>
+        <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+      </p>
+  </div>
+</footer>
