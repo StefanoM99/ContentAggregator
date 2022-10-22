@@ -23,7 +23,9 @@ class PlaylistsController < ApplicationController
     end
 
     psize = featured_playlists.size-1
+    
     for i in 0..psize do
+      
       if Playlist.where(name: featured_playlists[i].name,
         spotify_url: featured_playlists[i].external_urls["spotify"],
         description: featured_playlists[i].description).empty? && Blacklist.where(name: featured_playlists[i].name,spotify_url: featured_playlists[i].external_urls["spotify"]).empty?
@@ -38,12 +40,17 @@ class PlaylistsController < ApplicationController
           t.artists.map{|a| a.name},
           t.album.images[0]["url"],
           t.external_urls["spotify"],
-          t.preview_url
+          t.preview_url,
         ]}        
       )
+      
     end
   end
-    @playlists = Playlist.allz
+  if params == nil
+    @playlists = Playlist.all
+  else
+    @playlists = Playlist.where(country: params[:country])
+  end
   end
 
   # GET /playlists/1 or /playlists/1.json

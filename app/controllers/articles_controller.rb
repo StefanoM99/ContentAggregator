@@ -55,8 +55,11 @@ class ArticlesController < ApplicationController
       )
     end
   end
+  if params == nil
     @articles = Article.all.reverse()
-    
+  else
+    @articles = Article.where(country: query["country"],category: query["category"]).reverse()
+  end
   end
 
   # GET /articles/1 or /articles/1.json

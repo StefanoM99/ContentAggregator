@@ -35,8 +35,8 @@
     <!--<%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |-->
     
     <%if current_user && (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
-      <%= link_to 'Modifica', edit_post_path(post) ,{ class: 'buttonclass'}%> |<%= link_to 'Elimina', post, method: :delete, data: { confirm: 'Are you sure?' },   class: 'buttonclass' %>
-    <%else%>
+    <%= link_to 'Modifica', edit_post_path(post) ,{ class: 'buttonclass'}%><%= link_to 'Elimina', post, method: :delete, data: { confirm: 'Sei sicuro?' },   class: 'buttonclass' %>
+<%else%>
     <%end%>
     
     <%if current_user %>

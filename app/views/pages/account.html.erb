@@ -6,22 +6,23 @@
         </ol>
     </nav>
     <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
+    
     <div class="accordion accordion-flush" id="accountAccordionFlush">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                > Change my username
+                > Update my email
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
-                    <form>
+                    <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputUsername" class="form-label">Enter the new username:</label>
-                            <input type="email" class="form-control" id="inputUsername" aria-describedby="emailHelp">
+                            <label for="inputEmail" class="form-label">Enter the new email:</label>
+                            <%= form.text_field :email, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        <%= form.submit "Submit", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -33,20 +34,19 @@
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="inputPassword1" class="form-label">Enter the old password:</label>
-                            <input type="password" class="form-control" id="inputPassword1">
+                    <%= form_with(model: current_user) do |form| %>
+                        <div class="field mb-3">
+                            <%= form.label :password, "Enter new password" %><br />
+                            <%= form.password_field :password, :autocomplete => "off", class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputPassword2" class="form-label">Enter the new password:</label>
-                            <input type="password" class="form-control" id="inputPassword2">
-                            <div id="passwordHelpBlock" class="form-text">
-                            Your password must be 8-20 characters long.
-                            </div>
+                        <div class="field mb-3">
+                            <%= form.label :password_confirmation, "New password confirmation" %><br />
+                            <%= form.password_field :password_confirmation, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        <div class="action_container">
+                            <%= form.submit "Submit", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                     <u>WARNING</u>: you are about to delete your account. Your name, public profile and username will no longer be available on the site.
                     </div>
                     <div class="d-grid gap-2 col-5 mx-auto my-3">
-                        <button type="button" class="btn btn-danger fw-semibold p-3">Delete account</button>
+                        <%= button_to "Delete account", current_user, method: :delete, class: "btn btn-danger fw-semibold p-3" %>
                     </div>
                 </div>
             </div>

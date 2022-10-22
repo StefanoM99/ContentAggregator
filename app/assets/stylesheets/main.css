@@ -5,20 +5,6 @@
 
 }
 
-#show, #starred, #reported {
-  background-color: #52fa68;
-  border-radius: 6px;
-  border-style: hidden;
-  padding: 2px 6px;
-  color: #505050;
-  font-size: 16px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
-  float: none;
-}
-
 header {
     width: 100%;
     position: fixed;
@@ -28,7 +14,7 @@ header {
     z-index: 1000;
     background: #fff;
     display:flex
-  }
+}
   .header-active {
     background:#fff;
     box-shadow: 0 .1rem .3rem rgba(0, 0, 0, .3);
@@ -97,10 +83,11 @@ header {
     margin: 1rem 0;
   }
   .logoHeader {
-    display:block;
-    margin-left: auto;
+    display:flex;
+    margin-left:auto;
     margin-right: auto;
     width: 50%;
+    justify-content: center;
   }
 
   .form{
@@ -476,6 +463,18 @@ header {
       justify-content: center;
       row-gap: 10px;
       column-gap: 10px;
+     
+     
+    
+    }
+    .card-footerpost {
+      display: inline-flex;
+      justify-content: center;
+      row-gap: 10px;
+      column-gap: 10px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      max-width: 790px;
     }
     .homebutton{
       
@@ -487,7 +486,7 @@ header {
       font-size: 1rem;
       letter-spacing: .15rem;
       transition: all .3s;
-      
+      text-align:center;
       overflow: hidden;
       z-index: 1;
       background-color: green;
@@ -504,3 +503,9 @@ header {
       background-position: left;
       
     }
+    .wrap{
+      display:flexbox
+    }
+   .push{
+    display:inline-flex
+   }

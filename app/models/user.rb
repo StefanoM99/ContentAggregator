@@ -9,12 +9,15 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :encrypted_password, presence: true
       
-  has_many :reported_articles
-  has_many :reported_playlists  
-  has_many :starred_playlists
+  has_many :posts, dependent: :destroy
+  has_many :starred_posts, dependent: :destroy
+  has_many :reported_posts, dependent: :destroy
   has_many :playlists
-  has_many :starred_articles
+  has_many :starred_playlists, dependent: :destroy
+  has_many :reported_playlists, dependent: :destroy
   has_many :articles
+  has_many :starred_articles, dependent: :destroy
+  has_many :reported_articles, dependent: :destroy
 
   enum role:[:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
