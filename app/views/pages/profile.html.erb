@@ -9,4 +9,43 @@
 
     <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
 
+    <div class="accordion accordion-flush" id="profileAccordionFlush">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                > Update my name
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#profileAccordionFlush">
+                <div class="accordion-body">
+                    <%= form_with(model: current_user) do |form| %>
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Enter the new name:</label>
+                            <%= form.text_field :name, class: "form-control" %>
+                        </div>
+                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                > Update my surname
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#profileAccordionFlush">
+                <div class="accordion-body">
+                    <%= form_with(model: current_user) do |form| %>
+                        <div class="mb-3">
+                            <label for="inputSurname" class="form-label">Enter the new surname:</label>
+                            <%= form.text_field :surname, class: "form-control" %>
+                        </div>
+                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div>
