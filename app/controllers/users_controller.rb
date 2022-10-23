@@ -58,7 +58,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
     respond_to do |format|
-      if (@user.provider == nil) and @user.update(user_params)  # controllo che l'account sia stato creato con username+psw
+      # controllo di non star modificando email/psw o che l'account sia stato creato con email+psw
+      if ((not (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)) or @user.provider == nil) and @user.update(user_params)
         bypass_sign_in(@user)                                   # mantiene loggato l'utente dopo la modifica della password
         format.html { redirect_to user_url(@user), notice: "Account was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
@@ -95,6 +96,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :surname)
     end
 end
