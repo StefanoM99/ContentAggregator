@@ -33,7 +33,7 @@ class User < ApplicationRecord
       user.name = access_token.info.first_name
       user.surname=access_token.info.last_name
       user.password =  Devise.friendly_token[0,20]
-      user.full_name = access_token.info.name
+      #user.full_name = access_token.info.name
       user.avatar_url = access_token.info.image
       user.uid = access_token.uid
       user.provider = access_token.provider
@@ -49,7 +49,7 @@ class User < ApplicationRecord
     user.password = Devise.friendly_token[0, 20]
     user.name = auth.info.name # assuming the user model has a name
     user.surname = auth.info.nickname 
-    user.full_name= auth.info.name
+    #user.full_name= auth.info.name
     user.uid = auth.uid
     user.avatar_url = auth.info.image
     user.provider = auth.provider# assuming the user model has a username
@@ -125,7 +125,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    [name, surname].compact.join(', ')
+    [name, surname].compact.join(' ')
   end
 
   def decorated_created_at
