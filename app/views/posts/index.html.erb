@@ -17,6 +17,7 @@
   
   <br><br><br><br><br>
   <div data-aos="fade-right">
+   <div style="text-align:center">
     <h1 style='font-size:80px'><b>Posts</b></h1>
     <br>
     <div class="dropdown">
@@ -31,8 +32,9 @@
         <li><%= link_to "Forecast", forecasts_path, class: 'dropdown-item' %></li>
       </ul>
     </div>
-    <br>
-    <%= link_to "New post", new_post_path %>
+    <br><br>
+   <%= link_to "New post", new_post_path,class:"homebutton" %></div>
+    <br><br>
     <div class="row" id="posts">
       <% @posts.each do |post| %>
         <ul class="col-12 col-lg-4 col-sm-6">

@@ -18,7 +18,9 @@
       
     </h3>
     <br><br>
+    <% if !@article.media.nil? %>
     <%= image_tag @article.media, class:"articleimg" %>
+    <%end%>
     <br><br>
     <h4 class="card-text" >
       <%= @article.description %>
@@ -67,7 +69,18 @@
   <br><br>
 </div>
 
-<footer data-aos="fade-down">
+<% if @article.media.nil? %>
+
+        <div data-aos="fade-down" class="homefooter">
+        <div class="footer-content" >
+            <h3>© 2022 ContentAggregator ®</h3>
+            <p>Tutti i diritti
+            riservati.<br>Immagini da: Storyset<br><a
+                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
+         
+        </div>
+<%else%>
+  <footer data-aos="fade-down">
   <div class="footer-content" >
     <h3>© 2022 ContentAggregator ®</h3>
     <p>
@@ -77,7 +90,8 @@
     </p>
           
   </div>
-</footer>
+</footer> 
+<%end%>
         
 <script>
   AOS.init();
