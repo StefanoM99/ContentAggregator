@@ -48,12 +48,12 @@
                             <li id="profileBtn" class="list-group-item">
                                 <p class="btn btn-link m-1">PROFILE</p>
                             </li>
-                            <li id="postsBtn" class="list-group-item">
-                                <p class="btn btn-link m-1">POSTS</p>
+                            <li id="infoBtn" class="list-group-item">
+                                <p class="btn btn-link m-1">INFO</p>
                             </li>
-                            <li id="usersBtn" class="list-group-item">
+                            <!--li id="usersBtn" class="list-group-item">
                                 <p class="btn btn-link m-1">USERS</p>
-                            </li>
+                            </!--li>-->
                             <li id="contactsBtn" class="list-group-item">
                                 <p class="btn btn-link m-1">CONTACTS</p>
                             </li>
@@ -84,17 +84,17 @@
             });
         });
 
-        $("#postsBtn").on("click", function(){
-            $.get("/pages/posts", function(data){
+        $("#infoBtn").on("click", function(){
+            $.get("/pages/info", function(data){
                 $("#helpDiv").replaceWith(data);
             });
         });
 
-        $("#usersBtn").on("click", function(){
+        /*$("#usersBtn").on("click", function(){
             $.get("/pages/users", function(data){
                 $("#helpDiv").replaceWith(data);
             });
-        });
+        });*/
 
         $("#contactsBtn").on("click", function(){
             $.get("/pages/contacts", function(data){

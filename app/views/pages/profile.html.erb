@@ -56,7 +56,7 @@
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputPicture" class="form-label">Enter the new picture url:</label>
+                            <label for="inputPicture" class="form-label">Enter the new picture's url:</label>
                             <%= form.text_field :avatar_url, class: "form-control" %>
                         </div>
                         <%= form.submit "Submit", class: "btn btn-primary" %>
