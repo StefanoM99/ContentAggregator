@@ -129,11 +129,13 @@
 
   <script>
     function articlecomment() {
+      <%if current_user%>
       page = document.getElementById("articlecomment_<%= article.id%>" class="collapse");
       page.innerHTML = <%= new_article_comment_path(
         user_id: current_user.id,
         article_id: article.id
       ) %>;
+      <%end%>
     }
   </script>
 

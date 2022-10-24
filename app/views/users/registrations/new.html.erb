@@ -40,7 +40,7 @@
   <!-- > Inizio sezione centrale -->
   <div class = "container text-center" >
    <div class="timeline" data-aos="fade-down">
-   <h1>Inserisci i tuoi dati:</h1>
+   <h1 style="font-size:70px">Inserisci i tuoi dati:</h1>
        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
   <%= render "devise/shared/error_messages", resource: resource %>
             <%= form.text_field :name ,class:"form",placeholder:"Nome"%>
