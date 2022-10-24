@@ -22,10 +22,6 @@
       <%= article.description %>
     </h4>
     <br>
-    <h6 class="card-text" style="color:#CACACA">
-      <%= article.summary %>
-    </h6>
-    <br>
     <small>
       <a href="<%= article.link %>"><%= article.link %></a>
     </small>
@@ -77,6 +73,10 @@
         user_id: current_user.id,
         article_id: article.id
       ), { class: 'buttonclass'} %> 
+
+      <a class="buttonclass" data-bs-toggle="collapse" href="#articlecomment_<%= article.id %>">
+        Commenta test
+      </a>
     <%end%>
             
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -84,7 +84,7 @@
           <div class="modal-content"></div>
         </div>
       </div>
-      <%if  current_user %>
+    <%if  current_user %>
       <%if  current_user && SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
       
       <%= button_to 'Salva', starred_articles_path(
@@ -122,6 +122,19 @@
       <%else%>
        <button disabled class = "buttonclassdis">Segnala</button>
       <%end%>
-      <%end%>
+      
+      <div id="articlecomment_<%= article.id%>" class="collapse"></div>
+    <%end%> 
   </div>
+
+  <script>
+    function articlecomment() {
+      page = document.getElementById("articlecomment_<%= article.id%>" class="collapse");
+      page.innerHTML = <%= new_article_comment_path(
+        user_id: current_user.id,
+        article_id: article.id
+      ) %>;
+    }
+  </script>
+
 </div>

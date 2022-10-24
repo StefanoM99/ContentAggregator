@@ -30,8 +30,9 @@ class PlaylistCommentsController < ApplicationController
 
     respond_to do |format|
       if @playlist_comment.save
-        format.html { redirect_to playlist_comment_url(@playlist_comment), notice: "Playlist comment was successfully created." }
+        format.html { redirect_to playlist_path(@playlist_comment.playlist.id), notice: "Playlist comment was successfully created." }
         format.json { render :show, status: :created, location: @playlist_comment }
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @playlist_comment.errors, status: :unprocessable_entity }

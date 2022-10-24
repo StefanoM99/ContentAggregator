@@ -32,8 +32,9 @@ class ArticleCommentsController < ApplicationController
 
     respond_to do |format|
       if @article_comment.save
-        format.html { redirect_to article_comment_url(@article_comment), notice: "Article comment was successfully created." }
+        format.html { redirect_to article_path(@article_comment.article.id), notice: "Article comment was successfully created." }
         format.json { render :show, status: :created, location: @article_comment }
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @article_comment.errors, status: :unprocessable_entity }
