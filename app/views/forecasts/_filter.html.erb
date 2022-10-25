@@ -1,5 +1,5 @@
 <%= form_with model: @forecast, url: '/forecasts', method: :get do |form| %>
-  <%= form.label :place, style: "display: block" %>
+  <%= form.label 'Luogo', style: "display: block" %>
   <%= form.text_field :place %>
   <%= form.submit "Submit" %>
 <% end %>

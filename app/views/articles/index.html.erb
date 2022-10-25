@@ -12,23 +12,23 @@
       <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
       <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
     <% end %>
-    <ul><%= link_to "User search", "/users" ,class: 'Loglink' %></ul>
+    <ul><%= link_to "Ricerca Utenti", "/users" ,class: 'Loglink' %></ul>
   </header>
   
   <br><br><br><br><br>
-  <div data-aos="fade-right">
-    <h1 style='font-size:80px'><b>Articles</b></h1>
+  <div data-aos="fade-right"  style="text-align:center">
+    <h1 style='font-size:80px'><b>Articoli</b></h1>
     <br>
     <div class="dropdown">
       <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-        Content Filter
+        Filtro Contenuti
       </button>
       <ul class="dropdown-menu">
-        <li><%= link_to "All Contents", feed_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Articles", articles_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Playlists", playlists_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Posts", posts_path, class: 'dropdown-item' %></li>
-        <li><%= link_to "Forecast", forecasts_path, class: 'dropdown-item' %></li>
+        <li><%= link_to "Tutti i Contenuti", feed_path, class: 'dropdown-item' %></li>
+        <li><%= link_to "Articoli", articles_path, class: 'dropdown-item' %></li>
+        <li><%= link_to "Playlist", playlists_path, class: 'dropdown-item' %></li>
+        <li><%= link_to "Post", posts_path, class: 'dropdown-item' %></li>
+        <li><%= link_to "Meteo", forecasts_path, class: 'dropdown-item' %></li>
       </ul>
     </div>
     <br>
