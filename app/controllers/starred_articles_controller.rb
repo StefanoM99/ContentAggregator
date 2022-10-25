@@ -4,12 +4,19 @@ class StarredArticlesController < ApplicationController
   # GET /starred_articles or /starred_articles.json
   def index
    
-
+    @user = User.find(params[:user_id])
+    if current_user!=nil && @user.admin? && current_user.user?
+      redirect_to feed_path
+    else
+      if !current_user  && @user.admin?
+        redirect_to feed_path
+      end
+    end
   end
 
   # GET /starred_articles/1 or /starred_articles/1.json
   def show
-  
+   
   end
 
   # GET /starred_articles/new

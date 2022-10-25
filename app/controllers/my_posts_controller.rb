@@ -4,11 +4,20 @@ class MyPostsController < ApplicationController
   # GET /my_posts or /my_posts.json
   def index
     @my_posts = MyPost.all
+    @user = User.find(params[:user_id])
+    if current_user!=nil && @user.admin? && current_user.user?
+      redirect_to feed_path
+    else
+      if !current_user  && @user.admin?
+        redirect_to feed_path
+      end
+    end
   
   end
 
   # GET /my_posts/1 or /my_posts/1.json
   def show
+ 
   end
 
   # GET /my_posts/new
