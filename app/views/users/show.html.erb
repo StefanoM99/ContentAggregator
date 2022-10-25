@@ -1,18 +1,31 @@
 <%if user_signed_in? and not current_user.user?%>
   <div class="container" id="profiles">
     
-    <header class=" header-active" data-aos="fade-down">  
-      <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader"%>
-      
-      <% if user_signed_in? %>      
-        <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
-        <ul><%= link_to "Vai al Feed", feed_path ,class: 'Loglink' %></ul>
-      <% else %>
-        <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
-        <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
-      <% end %>
-      <ul><%= link_to "User search", "/users" ,class: 'Loglink' %></ul>
-    </header>
+  <header class="header-active"> 
+    <%= image_tag "logo.png", :align=> "middle", class: "logoHeader" %>
+
+    <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Menu
+    </button>
+    <ul class="dropdown-menu">
+        <% if not current_page?(feed_path) %>
+            <li><%= link_to "Feed", feed_path ,class: 'dropdown-item' %></li>
+        <% end %>
+        <% if not current_page?("/users") %>
+            <li><%= link_to "Ricerca Utenti", "/users" ,class: 'dropdown-item' %></li>
+        <% end %>
+        <li><hr class="dropdown-divider"></li>
+        <% if user_signed_in? %>
+            <% if not current_page?(current_user) %>
+              <li><%= link_to "Profilo", current_user ,class: 'dropdown-item' %></li>
+            <% end %>
+            <li><%= link_to 'Esci', destroy_user_session_path, :method => :delete, class: "dropdown-item" %></li>
+        <% else %>
+            <li><%= link_to "Registrati", "users/sign_up" ,class: 'dropdown-item' %></li>
+            <li><%= link_to "Accedi", "/home" ,class: 'dropdown-item' %></li>
+        <% end %>
+    </ul>
+  </header>
   
     <br><br><br><br><br>
     <div data-aos="fade-right">
@@ -82,17 +95,33 @@
 <%else%>
 <div class="container" id="profiles">
 
-  <header class=" header-active" data-aos="fade-down">
-    <div style="text-align:center"> <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%></div>
+  <header class="header-active"> 
+    <%= image_tag "logo.png", :align=> "middle", class: "logoHeader" %>
 
-    <ul><%= link_to "Vai al Feed", feed_path ,class: 'Loglink' %></ul>
-    <% if user_signed_in? %>
-      <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
-    <% end %>
-    <ul><%= link_to "User search", "/users" ,class: 'Loglink' %></ul>
+    <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Menu
+    </button>
+    <ul class="dropdown-menu">
+        <% if not current_page?(feed_path) %>
+            <li><%= link_to "Feed", feed_path ,class: 'dropdown-item' %></li>
+        <% end %>
+        <% if not current_page?("/users") %>
+            <li><%= link_to "Ricerca Utenti", "/users" ,class: 'dropdown-item' %></li>
+        <% end %>
+        <li><hr class="dropdown-divider"></li>
+        <% if user_signed_in? %>
+            <% if not current_page?(current_user) %>
+              <li><%= link_to "Profilo", current_user ,class: 'dropdown-item' %></li>
+            <% end %>
+            <li><%= link_to 'Esci', destroy_user_session_path, :method => :delete, class: "dropdown-item" %></li>
+        <% else %>
+            <li><%= link_to "Registrati", "users/sign_up" ,class: 'dropdown-item' %></li>
+            <li><%= link_to "Accedi", "/home" ,class: 'dropdown-item' %></li>
+        <% end %>
+    </ul>
   </header>
 
-  <br><br><br>
+  <br><br><br><br>
   <div data-aos="fade-right">
 
     <%if current_user && current_user.id.to_i == params[:id].to_i%>
@@ -113,10 +142,12 @@
     <%end%>
     <h1 style='font-size:80px'><b> <%=User.find(params[:id].to_i).name + " " + User.find(params[:id].to_i).surname%></b></h1>
     <div>
-      <% if current_user.followees.include?(@user) %>
-        <h5><%= button_to "Seguito", unfollow_user_path, method: "POST", class: "btn btn-success" %></h5>
-      <% else %>
-        <h5><%= button_to "Segui", follow_user_path, method: "POST", class: "btn btn-secondary"  %></h5>
+      <% if user_signed_in? %>
+        <% if current_user.followees.include?(@user) %>
+          <h5><%= button_to "Seguito", unfollow_user_path, method: "POST", class: "btn btn-success" %></h5>
+        <% else %>
+          <h5><%= button_to "Segui", follow_user_path, method: "POST", class: "btn btn-secondary"  %></h5>
+        <% end %>
       <% end %>
     </div>
     </div>
