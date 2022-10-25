@@ -11,18 +11,26 @@
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Data di registrazione</th>
-                <% if current_user %>
+                <% if current_user and current_user.user? %>
                     <th>Ti segue</th>
                     <th>Segui</th>
+                <% elsif current_user %>
+                    <th></th>
                 <% end %>
             </tr>
             <% users.each do |user| %>
+                <!-- ometti l'admin -->
+                <% next if user.id==0 %>
                 <tr>
-                    <td><%= link_to(user.full_name, user_path(user)) %></td>
+                    <% if not current_user or current_user.user? %>
+                        <td><%= link_to(user.full_name, user_path(user)) %></td>
+                    <% else %>
+                        <td><%= user.full_name %></td>
+                    <% end %>
                     <td><%= user.email %></td>
                     <td><%= user.decorated_created_at %></td>
-                    <!-- se l'utente è loggato.. -->
-                    <% if current_user %>
+                    <!-- se l'utente è loggato e non è un admin.. -->
+                    <% if current_user and current_user.user? %>
                         <!-- ..e non possiede follower -->
                         <% if current_user.followers==[] %>
                             <td>No</td>
@@ -55,6 +63,8 @@
                                 <td>No</td>
                             <% end %>
                         <% end %>
+                    <% elsif current_user %>
+                        <td><%= link_to "Elimina account", user, method: :delete %></td>
                     <% end %>
                 </tr>
             <% end %>

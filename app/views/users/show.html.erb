@@ -8,19 +8,20 @@
         Menu
     </button>
     <ul class="dropdown-menu">
-        <% if not current_page?(feed_path) %>
+        <% if not current_page?(feed_path) and (not user_signed_in? or current_user.user?) %>
             <li><%= link_to "Feed", feed_path ,class: 'dropdown-item' %></li>
         <% end %>
         <% if not current_page?("/users") %>
             <li><%= link_to "Ricerca Utenti", "/users" ,class: 'dropdown-item' %></li>
         <% end %>
-        <li><hr class="dropdown-divider"></li>
         <% if user_signed_in? %>
             <% if not current_page?(current_user) %>
               <li><%= link_to "Profilo", current_user ,class: 'dropdown-item' %></li>
             <% end %>
+            <li><hr class="dropdown-divider"></li>
             <li><%= link_to 'Esci', destroy_user_session_path, :method => :delete, class: "dropdown-item" %></li>
         <% else %>
+            <li><hr class="dropdown-divider"></li>
             <li><%= link_to "Registrati", "users/sign_up" ,class: 'dropdown-item' %></li>
             <li><%= link_to "Accedi", "/home" ,class: 'dropdown-item' %></li>
         <% end %>
@@ -102,19 +103,20 @@
         Menu
     </button>
     <ul class="dropdown-menu">
-        <% if not current_page?(feed_path) %>
+        <% if not current_page?(feed_path) and (not user_signed_in? or current_user.user?) %>
             <li><%= link_to "Feed", feed_path ,class: 'dropdown-item' %></li>
         <% end %>
         <% if not current_page?("/users") %>
             <li><%= link_to "Ricerca Utenti", "/users" ,class: 'dropdown-item' %></li>
         <% end %>
-        <li><hr class="dropdown-divider"></li>
         <% if user_signed_in? %>
             <% if not current_page?(current_user) %>
               <li><%= link_to "Profilo", current_user ,class: 'dropdown-item' %></li>
             <% end %>
+            <li><hr class="dropdown-divider"></li>
             <li><%= link_to 'Esci', destroy_user_session_path, :method => :delete, class: "dropdown-item" %></li>
         <% else %>
+            <li><hr class="dropdown-divider"></li>
             <li><%= link_to "Registrati", "users/sign_up" ,class: 'dropdown-item' %></li>
             <li><%= link_to "Accedi", "/home" ,class: 'dropdown-item' %></li>
         <% end %>
