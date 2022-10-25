@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   get "pages/help"
   get "pages/account"
   get "pages/profile"
-  get "pages/posts"
+  get "pages/info"
   get "pages/users"
   get "pages/contacts"
   

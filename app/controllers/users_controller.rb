@@ -58,21 +58,25 @@ class UsersController < ApplicationController
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
     respond_to do |format|
-      # controllo di non star modificando email/psw o che l'account sia stato creato con email+psw
-      if ((not (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)) or @user.provider == nil) and @user.update(user_params)
-        bypass_sign_in(@user)                                   # mantiene loggato l'utente dopo la modifica della password
-        format.html { redirect_to user_url(@user), notice: "Account was successfully updated." }
-        format.json { render :show, status: :ok, location: @profile }
-      else
-        if (@user.provider != nil)
-          format.html { redirect_to user_url(@user), alert: "Can't update provider's credentials." }
+        # controllo di non star modificando email/psw o che l'account sia stato creato con email+psw
+        if (@user.provider == nil or not (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)) and (not user_params.key? :avatar_url or user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")) and @user.update(user_params)
+            bypass_sign_in(@user) # mantiene loggato l'utente dopo la modifica della password
+            format.html { redirect_to user_url(@user), notice: "Account was successfully updated." }
+            format.json { render :show, status: :ok, location: @profile }
         else
-          format.html { redirect_to user_url(@user), alert: @user.errors.full_messages.to_sentence }
+            # se l'account è stato creato tramite provider e sto cercando di modificarne email o psw
+            if (@user.provider != nil) and (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)
+                format.html { redirect_to user_url(@user), alert: "Can't update provider's credentials." }
+            # se invece sto cercando di mettere un link qualsiasi al posto dell'immagine di profilo
+            elsif user_params.key? :avatar_url and not user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")
+                format.html { redirect_to user_url(@user), alert: "Profile picture must be an image." }
+            else
+                format.html { redirect_to user_url(@user), alert: @user.errors.full_messages.to_sentence }
+            end
+            format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
     end
-  end
+end
 
   # DELETE /profiles/1 or /profiles/1.json
   def destroy
@@ -96,6 +100,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :surname)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :surname, :avatar_url)
     end
 end

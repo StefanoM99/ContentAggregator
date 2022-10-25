@@ -1,43 +1,85 @@
 <%# app/views/users/index.html.erb %>
-<h1>Users</h1>
 
-<%#
-    Filterrific adds the `form_for_filterrific` view helper:
-    * adds dom id 'filterrific_filter'
-    * applies javascript behaviors:
-        * AJAX form submission on change
-        * AJAX spinner while AJAX request is being processed
-    * sets form_for options like :url, :method and input name prefix
-%>
-<%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
-    <div>
-        Search
-        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <%= f.text_field(
-        :search_query,
-        class: 'filterrific-periodically-observed'
-        ) %>
-    </div>
-    <div>
-        Registered after
-        <%= f.text_field(:with_created_at_gte, class: 'js-datepicker') %>
-    </div>
-    <div>
-        Sorted by
-        <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-    </div>
-    <div>
-        <%= link_to(
-        'Reset filters',
-        reset_filterrific_url,
-        ) %>
-    </div>
-    <%# add an automated spinner to your form when the list is refreshed %>
-    <!--%= render_filterrific_spinner %-->
-    <%= f.submit 'Filter' %>
-<% end %>
+<header class="header-active">  
+    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
 
-<%= render(
-    partial: 'users/list',
-    locals: { users: @users }
-) %>
+    <% if user_signed_in? %>      
+        <ul><%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+        <ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
+    <% else %>
+        <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
+        <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
+    <% end %>
+    <ul><%= link_to "Vai al Feed", feed_path ,class: 'Loglink' %></ul>
+</header>
+
+<br><br><br><br>
+<div class="p-4">
+
+    <h1 class="text-center fw-bold" style="font-size:100px">Users</h1>
+
+    <%#
+        Filterrific adds the `form_for_filterrific` view helper:
+        * adds dom id 'filterrific_filter'
+        * applies javascript behaviors:
+            * AJAX form submission on change
+            * AJAX spinner while AJAX request is being processed
+        * sets form_for options like :url, :method and input name prefix
+    %>
+    <%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
+        
+        <div class="d-flex flex-row align-items-center flex-wrap justify-content-start">
+
+            <div class="d-flex flex-row align-items-center">
+                <div class="p-2">
+                    Search:
+                </div>
+                <div class="p-2">
+                    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+                    <%= f.text_field(
+                    :search_query,
+                    class: 'filterrific-periodically-observed form-text border border-success border-2 rounded'
+                    ) %>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center">
+                <div class="p-2">
+                    Registered after:
+                </div>
+                <div class="p-2">
+                    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker form-text border border-success border-2 rounded', placeholder: "aaaa-mm-dd") %>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center">
+                <div class="p-2">
+                    Sorted by:
+                </div>
+                <div class="p-2">
+                    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center">
+                <div class="px-4 py-2">
+                    <%= f.submit 'Filter', class: 'homebutton',style:"text-align:center" %>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="p-2">
+            <%= link_to(
+            'Reset filters',
+            reset_filterrific_url,
+            ) %>
+        </div>
+
+    <% end %>
+
+    <%= render(
+        partial: 'users/list',
+        locals: { users: @users }
+    ) %>
+</div>

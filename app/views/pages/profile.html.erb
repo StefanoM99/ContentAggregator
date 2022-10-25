@@ -46,6 +46,24 @@
                 </div>
             </div>
         </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                > Update my profile picture
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#profileAccordionFlush">
+                <div class="accordion-body">
+                    <%= form_with(model: current_user) do |form| %>
+                        <div class="mb-3">
+                            <label for="inputPicture" class="form-label">Enter the new picture's url:</label>
+                            <%= form.text_field :avatar_url, class: "form-control" %>
+                        </div>
+                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
     </div>
 
 <div>

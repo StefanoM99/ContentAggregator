@@ -20,9 +20,9 @@
   <body>
     <%= yield %>
     <!-- Se non sono in una delle seguenti pagine costruisco bottone e modal -->
-    <% if user_signed_in? and not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/posts') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %> <!-- TODO: aggiungere i controlli delle altre pagine -->
+    <% if user_signed_in? and not (current_page?('/pages/help') or current_page?('/pages/account') or current_page?('/pages/profile') or current_page?('/pages/info') or current_page?('/pages/users') or current_page?('/pages/contacts') or current_page?('/') or current_page?('/home') or current_page?('/users/sign_in')) %> <!-- TODO: aggiungere i controlli delle altre pagine -->
     <!-- Button trigger modal -->
-    <button type="button" id="helpBtn" class="btn btn-primary rounded-pill position-fixed bottom-0 end-0 m-3" data-bs-toggle="modal" data-bs-target="#helpModal">
+    <button type="button" id="helpBtn" class="btn btn-success rounded-pill position-fixed bottom-0 end-0 m-3" data-bs-toggle="modal" data-bs-target="#helpModal">
     Help!
     </button>
     <!-- Modal -->
@@ -43,19 +43,19 @@
                         <p class="line-1 anim-typewriter font-monospace pt-6">Hi! How can I help you? :)</p>
                         <ul class="list-group list-group-flush text-center font-monospace">
                             <li id="accountBtn" class="list-group-item">
-                                <p class="btn btn-link m-1">ACCOUNT</p>
+                                <p class="btn btn-link link-success m-1">ACCOUNT</p>
                             </li>
                             <li id="profileBtn" class="list-group-item">
-                                <p class="btn btn-link m-1">PROFILE</p>
+                                <p class="btn btn-link link-success m-1">PROFILE</p>
                             </li>
-                            <li id="postsBtn" class="list-group-item">
-                                <p class="btn btn-link m-1">POSTS</p>
+                            <li id="infoBtn" class="list-group-item">
+                                <p class="btn btn-link link-success m-1">INFO</p>
                             </li>
-                            <li id="usersBtn" class="list-group-item">
-                                <p class="btn btn-link m-1">USERS</p>
-                            </li>
+                            <!--li id="usersBtn" class="list-group-item">
+                                <p class="btn btn-link link-success m-1">USERS</p>
+                            </!--li>-->
                             <li id="contactsBtn" class="list-group-item">
-                                <p class="btn btn-link m-1">CONTACTS</p>
+                                <p class="btn btn-link link-success m-1">CONTACTS</p>
                             </li>
                         </ul>
                     </div>
@@ -84,17 +84,17 @@
             });
         });
 
-        $("#postsBtn").on("click", function(){
-            $.get("/pages/posts", function(data){
+        $("#infoBtn").on("click", function(){
+            $.get("/pages/info", function(data){
                 $("#helpDiv").replaceWith(data);
             });
         });
 
-        $("#usersBtn").on("click", function(){
+        /*$("#usersBtn").on("click", function(){
             $.get("/pages/users", function(data){
                 $("#helpDiv").replaceWith(data);
             });
-        });
+        });*/
 
         $("#contactsBtn").on("click", function(){
             $.get("/pages/contacts", function(data){
