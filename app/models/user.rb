@@ -70,7 +70,6 @@ class User < ApplicationRecord
     available_filters: [
       :sorted_by,
       :search_query,
-      :with_country_id,
       :with_created_at_gte,
     ],
   )

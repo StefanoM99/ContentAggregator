@@ -5,18 +5,49 @@
         <%= page_entries_info users %>
     </div>
 
-    <div>
+    <div class="overflow-auto">
         <table class="table table-bordered table-striped">
             <tr>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Registered at</th>
+                <% if current_user %>
+                    <th>Is a follower</th>
+                    <th>Is a followee</th>
+                <% end %>
             </tr>
             <% users.each do |user| %>
                 <tr>
                     <td><%= link_to(user.full_name, user_path(user)) %></td>
                     <td><%= user.email %></td>
                     <td><%= user.decorated_created_at %></td>
+                    <!-- se l'utente è loggato.. -->
+                    <% if current_user %>
+                        <!-- ..e non possiede follower -->
+                        <% if current_user.followers==[] %>
+                            <td>No</td>
+                        <% else %>
+                            <% current_user.followers.each do |f| %>
+                                <% if user.id==f.id %>
+                                    <td>Yes</td>
+                                <% else %>
+                                    <td>No</td>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <!-- ..e non followa nessuno -->
+                        <% if current_user.followees==[] %>
+                            <td>No</td>
+                        <% else %>
+                            <% current_user.followees.each do |f| %>
+                                <% if user.id==f.id %>
+                                    <td>Yes</td>
+                                <% else %>
+                                    <td>No</td>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
                 </tr>
             <% end %>
         </table>
