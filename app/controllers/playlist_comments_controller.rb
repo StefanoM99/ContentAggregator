@@ -44,7 +44,7 @@ class PlaylistCommentsController < ApplicationController
   def update
     respond_to do |format|
       if @playlist_comment.update(playlist_comment_params)
-        format.html { redirect_to playlist_comment_url(@playlist_comment), notice: "Playlist comment was successfully updated." }
+        format.html { redirect_to playlist_path(@playlist_comment.playlist.id), notice: "Playlist comment was successfully updated." }
         format.json { render :show, status: :ok, location: @playlist_comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class PlaylistCommentsController < ApplicationController
     @playlist_comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to playlist_comments_url, notice: "Playlist comment was successfully destroyed." }
+      format.html { redirect_to playlist_path(@playlist_comment.playlist.id), notice: "Playlist comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

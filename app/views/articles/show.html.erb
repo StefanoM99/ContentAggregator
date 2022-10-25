@@ -55,6 +55,8 @@
               <tr>
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                 <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
+                <td style="border: 1px solid #dddddd; width: 30px"><%= link_to "Modifica", edit_article_comment_path(comment), class: "buttonclass" %></td>
+                <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
           <%end%>
