@@ -72,18 +72,9 @@
       <%= link_to 'Commenta', new_article_comment_path(
         user_id: current_user.id,
         article_id: article.id
-      ), { class: 'buttonclass'} %> 
-
-      <a class="buttonclass" data-bs-toggle="collapse" href="#articlecomment_<%= article.id %>">
-        Commenta test
-      </a>
+      ), { class: 'buttonclass'} %>
     <%end%>
-            
-      <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content"></div>
-        </div>
-      </div>
+
     <%if  current_user %>
       <%if  current_user && SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
       

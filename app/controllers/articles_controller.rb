@@ -9,11 +9,6 @@ class ArticlesController < ApplicationController
 
     remote_ip = URI.open('https://ident.me').read
     
-    ActiveRecord::Base.connection.execute(
-      "DELETE from sqlite_sequence where name = 'articles'"
-    )
-      
-    
     url = 'https://newsapi.org/v2/top-headlines'
     uri = URI.parse(url)
     query = Rack::Utils.parse_query(uri.query)
