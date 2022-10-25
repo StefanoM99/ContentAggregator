@@ -14,51 +14,39 @@
   <div style="text-align:center" data-aos="fade-up">
    
     <br><br><br><br>
-  <% if @post.post_file.attached? %>
-    <% if @post.post_file.content_type.include?("image") %>
-      <%= image_tag url_for(@post.post_file), class: "articleimg" %>
-    <% else %>
-      <%= video_tag url_for(@post.post_file), controls: true, style: "width: 100%; height: auto;" %>
+    <% if @post.post_file.attached? %>
+      <% if @post.post_file.content_type.include?("image") %>
+        <%= image_tag url_for(@post.post_file), class: "articleimg" %>
+      <% else %>
+        <%= video_tag url_for(@post.post_file), controls: true, style: "width: 100%; height: auto;" %>
+      <% end %>
     <% end %>
-  <% end %>
     <br><br>
-        <h3 style="font-size:40px">
+    <h3 style="font-size:40px">
       <strong><%= @post.title %></strong>
-      
     </h3>
     <h4 class="card-text" >
       <%= @post.summary %>
     </h4>
-    <br>
-    <br>
- 
-      <h4 class="card-text" >
+    <br><br>
+    <h4 class="card-text" >
       <strong>Autore:</strong>
       <%= @post.author %>
     </h4>
-  <br><br>
-  
-  <%= link_to "Torna ai post", posts_path,class:"homebutton" %>
-   <br><br>
-<%if current_user &&  current_user.id == @post.user_id%>
-  <%= button_to "Elimina questo post", @post, method: :delete,class:"homebutton" %>
-  <br>
-   <%= link_to "Modifica questo post", edit_post_path(@post),class:"homebutton" %> 
-  <%end%>
- 
-  <br><br><br>
-</div>
 
-<div class="container mt-3" data-aos="fade-up">
-      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-        <thead style="background-color:green; color:white;">
-          <tr>
-            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%if current_user && PostComment.find_by(post_id: @post.id)%>
+    <br><br><br>
+    <div class="container mt-3" data-aos="fade-up">
+      <%if PostComment.find_by(post_id: @post.id)%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+          <thead style="background-color:green; color:white;">
+            <tr>
+              <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+              <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+            </tr>
+          </thead>
+          <tbody>   
             <%PostComment.where(post_id: @post.id).each do |comment|%>
               <tr>
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
@@ -67,34 +55,45 @@
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
-          <%end%>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      <%end%>
     </div>
-</div>
-<% if !@post.post_file.attached? %>
-
-        <div data-aos="fade-down" class="homefooter">
-        <div class="footer-content" >
-            <h3>© 2022 ContentAggregator ®</h3>
-            <p>Tutti i diritti
-            riservati.<br>Immagini da: Storyset<br><a
-                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
-         
-        </div>
-<%else%>
-  <footer data-aos="fade-down">
-  <div class="footer-content" >
-    <h3>© 2022 ContentAggregator ®</h3>
-    <p>
-      Tutti i diritti riservati.<br>
-      Immagini da: Storyset<br>
-      <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
-    </p>
-          
+    
+    <br><br>
+    
+    <%if current_user &&  current_user.id == @post.user_id%>
+      <%= button_to "Elimina questo post", @post, method: :delete,class:"homebutton" %>
+      <br>
+      <%= link_to "Modifica questo post", edit_post_path(@post),class:"homebutton" %> 
+    <%end%>
+    <br><br>
+    <%= link_to "Torna ai post", posts_path,class:"homebutton" %>
+    <%= link_to "Torna al feed", feed_path, class: 'homebutton',style:"text-align:center" %>
   </div>
-</footer> 
-<%end%>
-<script>
-  AOS.init();
-</script>
+
+  <% if !@post.post_file.attached? %>
+    <div data-aos="fade-down" class="homefooter">
+      <div class="footer-content" >
+        <h3>© 2022 ContentAggregator ®</h3>
+        <p>
+          Tutti i diritti riservati.<br>Immagini da: Storyset<br>
+          <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+        </p>
+      </div>
+    </div>
+  <%else%>
+    <footer data-aos="fade-down">
+      <div class="footer-content" >
+        <h3>© 2022 ContentAggregator ®</h3>
+        <p>
+          Tutti i diritti riservati.<br>Immagini da: Storyset<br>
+          <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+        </p>    
+      </div>
+    </footer> 
+  <%end%>
+  <script>
+    AOS.init();
+  </script>
+</div>

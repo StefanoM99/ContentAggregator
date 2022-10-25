@@ -24,34 +24,36 @@
     <br><br>
 
     <div class="container mt-3">
-      <div id="accordion">
-        <div class="d-grid">
-          <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= post.id %>">
-            VISUALIZZA/NASCONDI COMMENTI
-          </a>
-        </div>
-        <div id="collapse_<%= post.id %>" class="collapse" data-bs-parent="#accordion">
-          <br>
-          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-            <thead style="background-color:green; color:white;">
-              <tr>
-                <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-                <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if current_user && PostComment.find_by(post_id: post.id)%>
+      <%if PostComment.find_by(post_id: post.id).nil?%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <div id="accordion">
+          <div class="d-grid">
+            <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= post.id %>">
+              VISUALIZZA/NASCONDI COMMENTI
+            </a>
+          </div>
+          <div id="collapse_<%= post.id %>" class="collapse" data-bs-parent="#accordion">
+            <br>
+            <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+              <thead style="background-color:green; color:white;">
+                <tr>
+                  <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+                  <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+                </tr>
+              </thead>
+              <tbody>
                 <%PostComment.where(post_id: post.id).each do |comment|%>
                   <tr>
                     <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                     <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                   </tr>
                 <%end%>
-              <%end%>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      <%end%>
     </div>
   </div>
 

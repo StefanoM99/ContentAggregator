@@ -34,34 +34,36 @@
     <br><br>
 
     <div class="container mt-3">
-      <div id="accordion">
-        <div class="d-grid">
-          <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= article.id %>">
-            VISUALIZZA/NASCONDI COMMENTI
-          </a>
-        </div>
-        <div id="collapse_<%= article.id %>" class="collapse" data-bs-parent="#accordion">
-          <br>
-          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-            <thead style="background-color:green; color:white;">
-              <tr>
-                <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-                <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if current_user && ArticleComment.find_by(article_id: article.id)%>
+      <%if ArticleComment.find_by(article_id: article.id).nil?%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <div id="accordion">
+          <div class="d-grid">
+            <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= article.id %>">
+              VISUALIZZA/NASCONDI COMMENTI
+            </a>
+          </div>
+          <div id="collapse_<%= article.id %>" class="collapse" data-bs-parent="#accordion">
+            <br>          
+            <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+              <thead style="background-color:green; color:white;">
+                <tr>
+                  <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+                  <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+                </tr>
+              </thead>
+              <tbody>                
                 <%ArticleComment.where(article_id: article.id).each do |comment|%>
                   <tr>
                     <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                     <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                   </tr>
-                <%end%>
-              <%end%>
-            </tbody>
-          </table>
+                <%end%>                
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+        <%end%>
     </div>
   </div>
 
@@ -113,21 +115,6 @@
       <%else%>
        <button disabled class = "buttonclassdis">Segnala</button>
       <%end%>
-      
-      <div id="articlecomment_<%= article.id%>" class="collapse"></div>
     <%end%> 
   </div>
-
-  <script>
-    function articlecomment() {
-      <%if current_user%>
-      page = document.getElementById("articlecomment_<%= article.id%>" class="collapse");
-      page.innerHTML = <%= new_article_comment_path(
-        user_id: current_user.id,
-        article_id: article.id
-      ) %>;
-      <%end%>
-    }
-  </script>
-
 </div>

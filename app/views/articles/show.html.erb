@@ -42,15 +42,17 @@
     <br><br>
 
     <div class="container mt-3">
-      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-        <thead style="background-color:green; color:white;">
-          <tr>
-            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%if current_user && ArticleComment.find_by(article_id: @article.id)%>
+      <%if ArticleComment.find_by(article_id: @article.id).nil?%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+          <thead style="background-color:green; color:white;">
+            <tr>
+              <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+              <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+            </tr>
+          </thead>
+          <tbody>
             <%ArticleComment.where(article_id: @article.id).each do |comment|%>
               <tr>
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
@@ -59,12 +61,21 @@
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
-          <%end%>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      <%end%>
     </div>
 
-    <br><br>
+    <br>
+
+    <%if current_user%>
+      <%= link_to 'Commenta', new_article_comment_path(
+        user_id: current_user.id,
+        article_id: @article.id
+      ), { class: 'homebutton'} %>
+    <%end%>
+
+    <br><br><br>
     <%= link_to "Torna agli articoli", articles_path,class:"homebutton" %>
     <%= link_to "Torna al Feed", feed_path ,class:"homebutton"%>
   </div>

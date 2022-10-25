@@ -42,15 +42,17 @@
     <br><br>
 
     <div class="container mt-3">
-      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-        <thead style="background-color:green; color:white;">
-          <tr>
-            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%if current_user && PlaylistComment.find_by(playlist_id: @playlist.id)%>
+      <%if PlaylistComment.find_by(playlist_id: @playlist.id).nil?%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+          <thead style="background-color:green; color:white;">
+            <tr>
+              <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+              <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+            </tr>
+          </thead>
+          <tbody>
             <%PlaylistComment.where(playlist_id: @playlist.id).each do |comment|%>
               <tr>
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
@@ -59,9 +61,9 @@
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
-          <%end%>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      <%end%>
     </div>
   
     <script>
