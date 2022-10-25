@@ -44,7 +44,7 @@
                     <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
                     <%= f.text_field(
                     :search_query,
-                    class: 'filterrific-periodically-observed form-text border border-success border-2 rounded'
+                    class: 'filterrific-periodically-observed form-text border border-success border-2 rounded text-center'
                     ) %>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     Registered after:
                 </div>
                 <div class="p-2">
-                    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker form-text border border-success border-2 rounded', placeholder: "aaaa-mm-dd") %>
+                    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker form-text border border-success border-2 rounded text-center', placeholder: "aaaa-mm-dd") %>
                 </div>
             </div>
 

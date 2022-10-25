@@ -13,7 +13,7 @@
                 <th>Registered at</th>
                 <% if current_user %>
                     <th>Is a follower</th>
-                    <th>Is a followee</th>
+                    <th>Followed</th>
                 <% end %>
             </tr>
             <% users.each do |user| %>
@@ -27,24 +27,32 @@
                         <% if current_user.followers==[] %>
                             <td>No</td>
                         <% else %>
+                            <% var = false %>
                             <% current_user.followers.each do |f| %>
                                 <% if user.id==f.id %>
-                                    <td>Yes</td>
-                                <% else %>
-                                    <td>No</td>
+                                    <% var = true %>
                                 <% end %>
+                            <% end %>
+                            <% if var %>
+                                <td>Yes</td>
+                            <% else %>
+                                <td>No</td>
                             <% end %>
                         <% end %>
                         <!-- ..e non followa nessuno -->
                         <% if current_user.followees==[] %>
                             <td>No</td>
                         <% else %>
+                            <% var = false %>
                             <% current_user.followees.each do |f| %>
                                 <% if user.id==f.id %>
-                                    <td>Yes</td>
-                                <% else %>
-                                    <td>No</td>
+                                    <% var = true %>
                                 <% end %>
+                            <% end %>
+                            <% if var %>
+                                <td>Yes</td>
+                            <% else %>
+                                <td>No</td>
                             <% end %>
                         <% end %>
                     <% end %>
