@@ -8,6 +8,13 @@ class User < ApplicationRecord
   validates :surname, presence: true
   validates :email, presence: true
   validates :encrypted_password, presence: true
+
+  #validate :password_complexity
+  def password_complexity
+    if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
+      errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+    end
+  end
       
   has_many :posts, dependent: :destroy
   has_many :starred_posts, dependent: :destroy
