@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  #resources :follows
   resources :playlist_comments
   resources :article_comments
   resources :post_comments
+
+  # following users
+  post '/users/:id/follow', to: "users#follow", as: "follow_user"
+  post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
 
   scope '/feed' do
     resources :forecasts
@@ -28,6 +33,8 @@ Rails.application.routes.draw do
     resources :playlist_comments
     resources :article_comments
     resources :post_comments
+
+    resources :followers, :followees
   end 
 
   get "/home", to: "home#index"

@@ -1,24 +1,26 @@
-<%= form_with(model: article_comment) do |form| %>
-  <% if article_comment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(article_comment.errors.count, "error") %> prohibited this article_comment from being saved:</h2>
+<div id="commentDiv">
+  <%= form_with(model: article_comment) do |form| %>
+    <% if article_comment.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(article_comment.errors.count, "error") %> prohibited this article_comment from being saved:</h2>
 
-      <ul>
-        <% article_comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% article_comment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :description, style: "display: block" %>
+      <%= form.text_area :description %>
+      <%= form.hidden_field :article_id, value:params[:article_id] %>
+    </div>
+
+    <div>
+      <% hidden_field_tag :article_id, '2' %>
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-    <%= form.hidden_field :article_id, value:params[:article_id] %>
-  </div>
-
-  <div>
-    <% hidden_field_tag :article_id, '2' %>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

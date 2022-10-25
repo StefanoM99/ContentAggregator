@@ -18,16 +18,6 @@ class FeedsController < ApplicationController
       "DELETE from sqlite_sequence where name = 'forecasts'"
     )
 
-    
-    ActiveRecord::Base.connection.execute(
-      "DELETE from sqlite_sequence where name = 'playlists'"
-    )
-
-    
-    ActiveRecord::Base.connection.execute(
-      "DELETE from sqlite_sequence where name = 'articles'"
-    )
-
     #forecast controller
     url = 'http://api.openweathermap.org/geo/1.0/direct'
     uri = URI.parse(url)

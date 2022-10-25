@@ -8,11 +8,6 @@ class PlaylistsController < ApplicationController
     require 'rspotify'
 
     remote_ip = URI.open('https://ident.me').read
-
-
-    ActiveRecord::Base.connection.execute(
-      "DELETE from sqlite_sequence where name = 'playlists'"
-    )
     
     RSpotify::authenticate(Rails.application.credentials.dig(:spotify, :clientID), Rails.application.credentials.dig(:spotify, :clientSecret))
     
