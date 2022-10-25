@@ -1,19 +1,19 @@
 <%# app/views/users/_list.html.erb %>
 <div id="filterrific_results">
 
-    <div>
+    <!--div>
         <%= page_entries_info users %>
-    </div>
+    </!--div>-->
 
     <div class="overflow-auto">
         <table class="table table-bordered table-striped">
             <tr>
-                <th>Name</th>
+                <th>Nome</th>
                 <th>Email</th>
-                <th>Registered at</th>
+                <th>Data di registrazione</th>
                 <% if current_user %>
-                    <th>Is a follower</th>
-                    <th>Followed</th>
+                    <th>Ti segue</th>
+                    <th>Segui</th>
                 <% end %>
             </tr>
             <% users.each do |user| %>
@@ -34,7 +34,7 @@
                                 <% end %>
                             <% end %>
                             <% if var %>
-                                <td>Yes</td>
+                                <td>Sì</td>
                             <% else %>
                                 <td>No</td>
                             <% end %>
@@ -50,7 +50,7 @@
                                 <% end %>
                             <% end %>
                             <% if var %>
-                                <td>Yes</td>
+                                <td>Sì</td>
                             <% else %>
                                 <td>No</td>
                             <% end %>

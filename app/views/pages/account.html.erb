@@ -5,23 +5,23 @@
             <li class="breadcrumb-item active" aria-current="page">Account</li>
         </ol>
     </nav>
-    <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
+    <p class="line-1 anim-typewriter font-monospace pt-6">Ecco cosa posso fare per te :)</p>
     
     <div class="accordion accordion-flush" id="accountAccordionFlush">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                > Update my email
+                > Aggiorna la mia email
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Enter the new email:</label>
+                            <label for="inputEmail" class="form-label">Inserisci la nuova email:</label>
                             <%= form.text_field :email, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
-                        <%= form.submit "Submit", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
+                        <%= form.submit "Esegui", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
                     <% end %>
                 </div>
             </div>
@@ -29,22 +29,22 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingTwo">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                > Update my password
+                > Aggiorna la mia password
                 </button>
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="field mb-3">
-                            <%= form.label :password, "Enter new password" %><br />
+                            <%= form.label :password, "Inserisci la nuova password:" %><br />
                             <%= form.password_field :password, :autocomplete => "off", class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
                         <div class="field mb-3">
-                            <%= form.label :password_confirmation, "New password confirmation" %><br />
+                            <%= form.label :password_confirmation, "Conferma la nuova password:" %><br />
                             <%= form.password_field :password_confirmation, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
                         <div class="action_container">
-                            <%= form.submit "Submit", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
+                            <%= form.submit "Esegui", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
                         </div>
                     <% end %>
                 </div>
@@ -53,16 +53,16 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingThree">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                > Delete my account
+                > Cancella il mio account
                 </button>
             </h2>
             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
                     <div class="text-danger font-monospace">
-                    <u>WARNING</u>: you are about to delete your account. Your name, public profile and username will no longer be available on the site.
+                    <u>ATTENZIONE</u>: stai per cancellare il tuo account. Il tuo nome, il tuo profilo e i tuoi post non saranno più disponibili sul sito.
                     </div>
                     <div class="d-grid gap-2 col-5 mx-auto my-3">
-                        <%= button_to "Delete account", current_user, method: :delete, class: "btn btn-danger fw-semibold p-3" %>
+                        <%= button_to "Cancella account", current_user, method: :delete, class: "btn btn-danger fw-semibold p-3" %>
                     </div>
                 </div>
             </div>

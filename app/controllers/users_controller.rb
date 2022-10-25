@@ -61,15 +61,15 @@ class UsersController < ApplicationController
         # controllo di non star modificando email/psw o che l'account sia stato creato con email+psw
         if (@user.provider == nil or not (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)) and (not user_params.key? :avatar_url or user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")) and @user.update(user_params)
             bypass_sign_in(@user) # mantiene loggato l'utente dopo la modifica della password
-            format.html { redirect_to user_url(@user), notice: "Account was successfully updated." }
+            format.html { redirect_to user_url(@user), notice: "Account modificato correttamente." }
             format.json { render :show, status: :ok, location: @profile }
         else
             # se l'account è stato creato tramite provider e sto cercando di modificarne email o psw
             if (@user.provider != nil) and (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)
-                format.html { redirect_to user_url(@user), alert: "Can't update provider's credentials." }
+                format.html { redirect_to user_url(@user), alert: "Non possiamo modificare le credenziali del provider." }
             # se invece sto cercando di mettere un link qualsiasi al posto dell'immagine di profilo
             elsif user_params.key? :avatar_url and not user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")
-                format.html { redirect_to user_url(@user), alert: "Profile picture must be an image." }
+                format.html { redirect_to user_url(@user), alert: "L'url deve riferirsi ad un immagine ('.png', '.jpg', '.jpeg')." }
             else
                 format.html { redirect_to user_url(@user), alert: @user.errors.full_messages.to_sentence }
             end

@@ -12,7 +12,7 @@ class User < ApplicationRecord
   #validate :password_complexity
   def password_complexity
     if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
-      errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+      errors.add :password, "deve contenere almeno una lettera minuscola, una lettera maiuscola e un numero"
     end
   end
       
@@ -129,9 +129,9 @@ class User < ApplicationRecord
 
   def self.options_for_sorted_by
     [
-      ['Name (a-z)', 'name_asc'],
-      ['Registration date (newest first)', 'created_at_desc'],
-      ['Registration date (oldest first)', 'created_at_asc']
+      ['Nome (a-z)', 'name_asc'],
+      ['Data di registrazione (nuovi prima)', 'created_at_desc'],
+      ['Data di registrazione (vecchi prima)', 'created_at_asc']
     ]
   end
 

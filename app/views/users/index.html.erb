@@ -10,19 +10,20 @@
         <li><%= link_to "Feed", feed_path ,class: 'dropdown-item' %></li>
         <li><hr class="dropdown-divider"></li>
         <% if user_signed_in? %>
-            <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "dropdown-item" %></li>
-            <li><%= link_to "Profile", current_user ,class: 'dropdown-item' %></li>
+            <li><%= link_to "Profilo", current_user ,class: 'dropdown-item' %></li>
+            <li><%= link_to 'Esci', destroy_user_session_path, :method => :delete, class: "dropdown-item" %></li>
         <% else %>
-            <li><%= link_to "Sign up", "users/sign_up" ,class: 'dropdown-item' %></li>
-            <li><%= link_to "Sign in", "/home" ,class: 'dropdown-item' %></li>
+            <li><%= link_to "Registrati", "users/sign_up" ,class: 'dropdown-item' %></li>
+            <li><%= link_to "Accedi", "/home" ,class: 'dropdown-item' %></li>
         <% end %>
     </ul>
 </header>
 
-<br><br><br><br>
+<br><br>
+
 <div class="p-4">
 
-    <h1 class="text-center fw-bold" style="font-size:100px">Users</h1>
+    <h1 class="text-center fw-bold" style="font-size:100px">Utenti</h1>
 
     <%#
         Filterrific adds the `form_for_filterrific` view helper:
@@ -38,7 +39,7 @@
 
             <div class="d-flex flex-row align-items-center">
                 <div class="p-2">
-                    Search:
+                    Cerca:
                 </div>
                 <div class="p-2">
                     <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
@@ -51,16 +52,16 @@
 
             <div class="d-flex flex-row align-items-center">
                 <div class="p-2">
-                    Registered after:
+                    Registrato dopo:
                 </div>
                 <div class="p-2">
-                    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker form-text border border-success border-2 rounded text-center', placeholder: "aaaa-mm-dd") %>
+                    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker form-text border border-success border-2 rounded text-center', placeholder: "yyyy-mm-dd") %>
                 </div>
             </div>
 
             <div class="d-flex flex-row align-items-center">
                 <div class="p-2">
-                    Sorted by:
+                    Ordina per:
                 </div>
                 <div class="p-2">
                     <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
@@ -69,7 +70,7 @@
 
             <div class="d-flex flex-row align-items-center">
                 <div class="px-4 py-2">
-                    <%= f.submit 'Filter', class: 'homebutton',style:"text-align:center" %>
+                    <%= f.submit 'Filtra', class: 'homebutton',style:"text-align:center" %>
                 </div>
             </div>
 
@@ -77,7 +78,7 @@
 
         <div class="p-2">
             <%= link_to(
-            'Reset filters',
+            'Azzera filtri',
             reset_filterrific_url,
             ) %>
         </div>

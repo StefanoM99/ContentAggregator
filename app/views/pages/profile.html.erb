@@ -3,27 +3,27 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li id="backBtn" class="breadcrumb-item" style="cursor: pointer;"><p>Help</p></li>
-            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+            <li class="breadcrumb-item active" aria-current="page">Profilo</li>
         </ol>
     </nav>
 
-    <p class="line-1 anim-typewriter font-monospace pt-6">Here is what I can do :)</p>
+    <p class="line-1 anim-typewriter font-monospace pt-6">Ecco cosa posso fare per te :) :)</p>
 
     <div class="accordion accordion-flush" id="profileAccordionFlush">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                > Update my name
+                > Modifica il mio nome
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#profileAccordionFlush">
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputName" class="form-label">Enter the new name:</label>
+                            <label for="inputName" class="form-label">Inserisci il nuovo nome:</label>
                             <%= form.text_field :name, class: "form-control" %>
                         </div>
-                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                        <%= form.submit "Esegui", class: "btn btn-primary" %>
                     <% end %>
                 </div>
             </div>
@@ -31,17 +31,17 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingTwo">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                > Update my surname
+                > Modifica il mio cognome
                 </button>
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#profileAccordionFlush">
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputSurname" class="form-label">Enter the new surname:</label>
+                            <label for="inputSurname" class="form-label">Inserisci il nuovo cognome:</label>
                             <%= form.text_field :surname, class: "form-control" %>
                         </div>
-                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                        <%= form.submit "Esegui", class: "btn btn-primary" %>
                     <% end %>
                 </div>
             </div>
@@ -49,14 +49,14 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingThree">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                > Update my profile picture
+                > Aggiorna la mia immagine di profilo
                 </button>
             </h2>
             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#profileAccordionFlush">
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputPicture" class="form-label">Enter the new picture's url:</label>
+                            <label for="inputPicture" class="form-label">Inserisci l'url della nuova immagine di profilo:</label>
                             <%= form.text_field :avatar_url, class: "form-control" %>
                         </div>
                         <%= form.submit "Submit", class: "btn btn-primary" %>

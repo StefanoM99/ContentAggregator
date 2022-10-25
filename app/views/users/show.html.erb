@@ -114,9 +114,9 @@
     <h1 style='font-size:80px'><b> <%=User.find(params[:id].to_i).name + " " + User.find(params[:id].to_i).surname%></b></h1>
     <div>
       <% if current_user.followees.include?(@user) %>
-        <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST", class: "btn btn-success" %></h5>
+        <h5><%= button_to "Seguito", unfollow_user_path, method: "POST", class: "btn btn-success" %></h5>
       <% else %>
-        <h5><%= button_to "Follow", follow_user_path, method: "POST", class: "btn btn-secondary"  %></h5>
+        <h5><%= button_to "Segui", follow_user_path, method: "POST", class: "btn btn-secondary"  %></h5>
       <% end %>
     </div>
     </div>
