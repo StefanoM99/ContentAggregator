@@ -97,13 +97,12 @@
 
     <%if current_user && current_user.id.to_i == params[:id].to_i%>
     <div style="text-align:center">
-    <%if current_user.avatar_url == nil %>
-    <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",class:"propic"%>
-    <%else%>
-    
-    <%= image_tag current_user.avatar_url,class:"propic"%>
-    <%end%>
-    <h1 style='font-size:80px'><b>Ciao <%=current_user.name%></b></h1>
+      <%if current_user.avatar_url == nil %>
+        <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",class:"propic"%>
+      <%else%>
+        <%= image_tag current_user.avatar_url,class:"propic"%>
+      <%end%>
+      <h1 style='font-size:80px'><b>Ciao <%=current_user.name%></b></h1>
     </div>
     <%else%>
      <div style="text-align:center">
@@ -113,6 +112,13 @@
     <%= image_tag User.find(params[:id].to_i).avatar_url,class:"propic"%>
     <%end%>
     <h1 style='font-size:80px'><b> <%=User.find(params[:id].to_i).name + " " + User.find(params[:id].to_i).surname%></b></h1>
+    <div>
+      <% if current_user.followees.include?(@user) %>
+        <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST", class: "btn btn-success" %></h5>
+      <% else %>
+        <h5><%= button_to "Follow", follow_user_path, method: "POST", class: "btn btn-secondary"  %></h5>
+      <% end %>
+    </div>
     </div>
     <%end%>
     <p style="color: green"><%= notice %></p>

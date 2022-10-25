@@ -18,6 +18,11 @@ class User < ApplicationRecord
   has_many :articles
   has_many :starred_articles, dependent: :destroy
   has_many :reported_articles, dependent: :destroy
+  # following-users
+  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :followees, through: :followed_users
+  has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
+  has_many :followers, through: :following_users
 
   enum role:[:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -65,7 +70,6 @@ class User < ApplicationRecord
     available_filters: [
       :sorted_by,
       :search_query,
-      :with_country_id,
       :with_created_at_gte,
     ],
   )
