@@ -1,16 +1,98 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @reported_post %>
-
-<div>
-  <%if current_user.id == 0%>
-    <%= button_to "Destroy this reported post", @reported_post, method: :delete , params:{user_id: 0}%>
-    <%= link_to "Back to reported posts",reported_user_posts_path(current_user.id) %>
-  <%else%>
-    <%= link_to "Back to reported articles", reported_user_posts_path(@reported_post.user_id) %>
+<div class = "container">
+  <header class=" header-active" data-aos="fade-down" >
     
-  <%if current_user.id == @reported_post.user_id%>
-    <%= button_to "Destroy this reported post", @reported_post, method: :delete , params:{user_id: @reported_post.user_id}%>
-     <%end%> 
+    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
+    <% if user_signed_in? %>      
+      <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
+      <ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
+    <% else %>
+      <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
+      <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
+    <% end %>
+  </header>
+
+  <div style="text-align:center" data-aos="fade-up">
+   
+    <br><br><br><br>
+  <% if @reported_post.post_file.attached? %>
+    <% if @reported_post.post_file.content_type.include?("image") %>
+      <%= image_tag url_for(@reported_post.post_file), class: "articleimg" %>
+    <% else %>
+      <%= video_tag url_for(@reported_post.post_file), controls: true, style: "width: 100%; height: auto;" %>
+    <% end %>
+  <% end %>
+    <br><br>
+        <h3 style="font-size:40px">
+      <strong><%= @reported_post.title %></strong>
+      
+    </h3>
+    <h4 class="card-text" >
+      <%= @reported_post.summary %>
+    </h4>
+    <br>
+    <br>
+ 
+      <h4 class="card-text" >
+      <strong>Autore:</strong>
+      <%= @reported_post.author %>
+    </h4>
+  <br><br>
+  
+  <%= link_to "Torna ai post", posts_path,class:"homebutton" %>
+   <br><br>
+<%if current_user &&  current_user.id == @reported_post.user_id%>
+  <%= button_to "Elimina questo post", @reported_post, method: :delete,class:"homebutton" %>
+  <br>
+   <%= link_to "Modifica questo post", edit_post_path(@reported_post),class:"homebutton" %> 
   <%end%>
+ 
+  <br><br><br>
 </div>
+
+<div class="container mt-3" data-aos="fade-up">
+      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+        <thead style="background-color:green; color:white;">
+          <tr>
+            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%if current_user && PostComment.find_by(post_id: @reported_post.id)%>
+            <%PostComment.where(post_id: @reported_post.id).each do |comment|%>
+              <tr>
+                <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
+                <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
+              </tr>
+            <%end%>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+</div>
+<% if !@reported_post.post_file.attached? %>
+
+        <div data-aos="fade-down" class="homefooter">
+        <div class="footer-content" >
+            <h3>© 2022 ContentAggregator ®</h3>
+            <p>Tutti i diritti
+            riservati.<br>Immagini da: Storyset<br><a
+                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
+         
+        </div>
+<%else%>
+  <footer data-aos="fade-down">
+  <div class="footer-content" >
+    <h3>© 2022 ContentAggregator ®</h3>
+    <p>
+      Tutti i diritti riservati.<br>
+      Immagini da: Storyset<br>
+      <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+    </p>
+          
+  </div>
+</footer> 
+<%end%>
+<script>
+  AOS.init();
+</script>

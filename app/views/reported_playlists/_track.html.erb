@@ -1,0 +1,43 @@
+
+
+  <div class="row" id="tracks">
+  <%puts(playlist)%>
+  <%puts(@starred_playlist)%>
+  
+  <% @starred_playlist = Playlist.find(@reported_playlist.playlist_id)%>
+    <% for i in 0..@starred_playlist.tracks.size()-1 %>
+    
+      <ul class="col-12 col-lg-4 col-sm-6">
+        <li class="card" data-aos="flip-down">
+          <img src="<%= @starred_playlist.tracks[i][2] %>" class="img-fluid card-img-top">
+
+          <div class="card-body">
+            <h3 class="card-title">
+              <strong><%= @starred_playlist.tracks[i][0] %></strong>
+            </h3>
+            <br>
+            <h4 class="card-text" style="color:#8A8A8A">
+              <% for j in 0..@starred_playlist.tracks[i][1].size-2 %>
+                <%= @starred_playlist.tracks[i][1][j] %>,
+              <% end %>
+              <%= @starred_playlist.tracks[i][1][-1] %>
+            </h4>
+            <br>
+            <small>
+              <a href="<%= @starred_playlist.tracks[i][3] %>"><%= @starred_playlist.tracks[i][3] %></a>
+            </small>
+            <br><br>
+            Track preview:
+            <% if @starred_playlist.tracks[i][4] != nil %>
+              <audio controls>
+                <source src="<%= @starred_playlist.tracks[i][4] %>">
+              </audio>
+            <% else %>
+              No preview available
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>

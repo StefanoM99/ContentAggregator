@@ -1,5 +1,6 @@
 <div id="<%= dom_id edited_post %>">
   <% if edited_post.post_file.attached? %>
+ 
     <% if edited_post.post_file.content_type.include?("image") %>
       <%= image_tag url_for(edited_post.post_file), class: "img-fluid card-img-top" %>
     <% else %>
@@ -56,7 +57,7 @@
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Visualizza', edited_post, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'buttonclass'} %> 
+    
             
     <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

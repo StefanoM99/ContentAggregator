@@ -1,11 +1,86 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @starred_playlist %>
+<div class="container" id="tracks">
+  
+  <div class="wrap"> 
+    <header class=" header-active" data-aos="fade-down"> 
+      <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
+      
+      <div class ="push">
+        <ul><%= link_to "Vai al Feed", feed_path %></ul>
+        <%if current_user%>
+          <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete %></ul>
+          <ul class="nav-item"><%= link_to "Go to profile", current_user, class: 'nav-link' %></ul>
+        <%end%>
+        <ul><%= link_to "User search", "/users" ,class: 'Loglink' %></ul>
+      </div>
+    </header>
+  </div>
+  
+  <br><br><br>
 
-<div>
-  <%= link_to "Edit this starred playlist", edit_starred_playlist_path(@starred_playlist.user_id) %> |
-  <%= link_to "Back to starred playlists", starred_user_playlists_path(@starred_playlist.user_id) %>
-  <%if current_user.id == @starred_playlist.user_id%>
-  <%= button_to "Destroy this starred playlist", @starred_playlist, method: :delete,  params:{user_id: @starred_playlist.user_id}%>
-<%end%>
+  <div data-aos="fade-right">
+    
+    <div style="text-align:center"><h1 style='font-size:80px'><b><%= @starred_playlist.name %></b></h1></div>
+      <br>
+      <div class="dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          Content Filter
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to "All Contents", feed_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Articles", articles_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Playlists", playlists_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Posts", posts_path, class: 'dropdown-item' %></li>
+          <li><%= link_to "Forecast", forecasts_path, class: 'dropdown-item' %></li>
+        </ul>
+      </div>
+      <br><br>
+      <%= render "track", playlist: @starred_playlist %>
+    </div>
+
+    <br><br>
+
+    <div class="container mt-3">
+      <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+        <thead style="background-color:green; color:white;">
+          <tr>
+            <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+            <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%if current_user && PlaylistComment.find_by(playlist_id: @starred_playlist.id)%>
+            <%PlaylistComment.where(playlist_id: @starred_playlist.id).each do |comment|%>
+              <tr>
+                <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
+                <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
+              </tr>
+            <%end%>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  
+    <script>
+      AOS.init();
+    </script>
+  </div>
+  <br>
+  <div style="text-align:center">
+    <%= link_to "Torna alle playlists", playlists_path, class: 'homebutton',style:"text-align:center" %>
+    <%= link_to "Torna al feed", feed_path, class: 'homebutton',style:"text-align:center" %>
+  </div>
+  <br><br><br>
 </div>
+
+<footer data-aos="fade-down">
+  <div class="footer-content" >
+    <h3>© 2022 ContentAggregator ®</h3>
+      <p>
+        Tutti i diritti riservati.<br>
+        Immagini da: Storyset<br>
+        <a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+      </p>
+  </div>
+</footer>

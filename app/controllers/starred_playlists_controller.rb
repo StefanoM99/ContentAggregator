@@ -30,6 +30,8 @@ class StarredPlaylistsController < ApplicationController
 
   # POST /starred_playlists or /starred_playlists.json
   def create
+    puts("AOOOO")
+    puts(params[:tracks])
     @starred_playlist = StarredPlaylist.create(
       country: params[:country],
       name: params[:name],
@@ -37,7 +39,7 @@ class StarredPlaylistsController < ApplicationController
       spotify_url: params[:spotify_url],
       spotify_img: params[:spotify_img],
       playlist_id: params[:playlist_id],
-      user: current_user
+      user: current_user,
      
     )
 

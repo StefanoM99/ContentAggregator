@@ -31,6 +31,8 @@ class StarredPostsController < ApplicationController
 
   # POST /starred_posts or /starred_posts.json
   def create
+    
+    
     @starred_post = StarredPost.create(
       author: params[:author],
       title: params[:title],

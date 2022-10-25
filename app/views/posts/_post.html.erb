@@ -73,12 +73,13 @@
     <%end%>
     
     <%if current_user %>
+    
       <%if SavedPost.where(user_id: current_user.id,type: "StarredPost",post_id:post.id).empty?%>
         <%= button_to 'Salva', starred_posts_path(
           author: post.author,
           title: post.title,
           summary: post.summary,
-          post_file: post.post_file,
+          post_file: post.post_file.key,
           post_id: post.id
         ),{id:"starred",class:"buttonclass"} %>
       <%else%>
@@ -90,7 +91,7 @@
           author: post.author,
           title: post.title,
           summary: post.summary,
-          post_file: post.post_file,
+          post_file: post.post_file.key,
           post_id: post.id
         ),{id:"reported",class:"buttonclass"} %>
       <%else%>
