@@ -4,10 +4,19 @@ class EditedPostsController < ApplicationController
   # GET /edited_posts or /edited_posts.json
   def index
     @edited_posts = EditedPost.all
+    @user = User.find(params[:user_id])
+    if current_user!=nil && @user.admin? && current_user.user?
+      redirect_to feed_path
+    else
+      if !current_user  && @user.admin?
+        redirect_to feed_path
+      end
+    end
   end
 
   # GET /edited_posts/1 or /edited_posts/1.json
   def show
+
   end
 
   # GET /edited_posts/new

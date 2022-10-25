@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if current_user!=nil && @user.admin? && current_user.user?
       redirect_to feed_path
     else
-      if !current_user
+      if !current_user  && @user.admin?
         redirect_to feed_path
       end
     end

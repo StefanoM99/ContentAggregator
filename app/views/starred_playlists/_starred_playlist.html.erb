@@ -62,9 +62,11 @@
           <div class="modal-content"></div>
         </div>
       </div>
+      <%if current_user%>
      <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
       <%= link_to 'Elimina', starred_playlist, method: :delete, data: { confirm: 'Sei sicuro?' },class:"buttonclass" %>
       <%else%>
+    <%end%>
     <%end%>
   </div>
 </div>

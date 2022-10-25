@@ -3,10 +3,19 @@ class ReportedPlaylistsController < ApplicationController
 
   # GET /reported_playlists or /reported_playlists.json
   def index
+    @user = User.find(params[:user_id])
+    if current_user!=nil && @user.admin? && current_user.user?
+      redirect_to feed_path
+    else
+      if !current_user  && @user.admin?
+        redirect_to feed_path
+      end
+    end
   end
 
   # GET /reported_playlists/1 or /reported_playlists/1.json
   def show
+
   end
 
   # GET /reported_playlists/new
