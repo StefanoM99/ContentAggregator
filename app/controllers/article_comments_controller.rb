@@ -46,7 +46,7 @@ class ArticleCommentsController < ApplicationController
   def update
     respond_to do |format|
       if @article_comment.update(article_comment_params)
-        format.html { redirect_to article_comment_url(@article_comment), notice: "Article comment was successfully updated." }
+        format.html { redirect_to article_path(@article_comment.article.id), notice: "Article comment was successfully updated." }
         format.json { render :show, status: :ok, location: @article_comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class ArticleCommentsController < ApplicationController
     @article_comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to article_comments_url, notice: "Article comment was successfully destroyed." }
+      format.html { redirect_to article_path(@article_comment.article.id), notice: "Article comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end
