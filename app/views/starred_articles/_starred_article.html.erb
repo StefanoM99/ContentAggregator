@@ -35,53 +35,48 @@
     </small>
 
     <div class="container mt-3">
-      <div id="accordion">
-        <div class="d-grid">
-          <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= starred_article.id %>">
-            VISUALIZZA/NASCONDI COMMENTI
-          </a>
-        </div>
-        <div id="collapse_<%= starred_article.id %>" class="collapse" data-bs-parent="#accordion">
-          <br>
-          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-            <thead style="background-color:green; color:white;">
-              <tr>
-                <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-                <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if current_user && ArticleComment.find_by(article_id: starred_article.article_id)%>
+      <%if ArticleComment.find_by(article_id: starred_article.article_id)%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <div id="accordion">
+          <div class="d-grid">
+            <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= starred_article.id %>">
+              VISUALIZZA/NASCONDI COMMENTI
+            </a>
+          </div>
+          <div id="collapse_<%= starred_article.id %>" class="collapse" data-bs-parent="#accordion">
+            <br>
+            <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+              <thead style="background-color:green; color:white;">
+                <tr>
+                  <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+                  <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+                </tr>
+              </thead>
+              <tbody>
                 <%ArticleComment.where(article_id: starred_article.article_id).each do |comment|%>
                   <tr>
                     <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                     <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                   </tr>
-                  <%end%>
                 <%end%>
               </tbody>
             </table>
           </div>
         </div>
-      </div>
-    
-
+      <%end%>
+    </div>
   </div>
 
   <div class="card-footer">
-    <%= link_to 'Visualizza', starred_article, { class: 'buttonclass'} %> 
-            
-    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content"></div>
-      </div>
-    </div>
-  <%if current_user%>
-   <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
+    <%= link_to 'Visualizza', starred_article, { class: 'buttonclass'} %>
+
+    <%if current_user%>
+      <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
      
-    <%= link_to 'Elimina', starred_article, method: :delete, data: { confirm: 'Sei sicuro?' },class:"buttonclass"%>
-    <%else%>
-    <%end%>
+        <%= link_to 'Elimina', starred_article, method: :delete, data: { confirm: 'Sei sicuro?' },class:"buttonclass"%>
+      <%else%>
+      <%end%>
     <%end%>
   </div>
 </div>

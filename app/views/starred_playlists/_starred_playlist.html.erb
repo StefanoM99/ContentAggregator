@@ -23,50 +23,46 @@
   </div>
 
   <div class="container mt-3">
-    <div id="accordion">
-      <div class="d-grid">
-        <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= starred_playlist.id %>">
-          VISUALIZZA/NASCONDI COMMENTI
-        </a>
-      </div>
-      <div id="collapse_<%= starred_playlist.id %>" class="collapse" data-bs-parent="#accordion">
-        <br>
-        <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-          <thead style="background-color:green; color:white;">
-            <tr>
-              <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-              <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%if current_user && PlaylistComment.find_by(playlist_id: starred_playlist.playlist_id)%>
+    <%if PlaylistComment.find_by(playlist_id: starred_playlist.playlist_id)%>
+      <p><i>Nessun commento</i></p>
+    <%else%>
+      <div id="accordion">
+        <div class="d-grid">
+          <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= starred_playlist.id %>">
+            VISUALIZZA/NASCONDI COMMENTI
+          </a>
+        </div>
+        <div id="collapse_<%= starred_playlist.id %>" class="collapse" data-bs-parent="#accordion">
+          <br>
+          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+            <thead style="background-color:green; color:white;">
+              <tr>
+                <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+                <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+              </tr>
+            </thead>
+            <tbody>
               <%PlaylistComment.where(playlist_id: starred_playlist.playlist_id).each do |comment|%>
                 <tr>
                   <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                   <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                 </tr>
-                <%end%>
               <%end%>
             </tbody>
           </table>
         </div>
       </div>
-    
+    <%end%>    
   </div>
 
   <div class="card-footer">
     <%= link_to 'Visualizza', starred_playlist, { class: 'buttonclass'} %> 
-            
-      <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content"></div>
-        </div>
-      </div>
-      <%if current_user%>
-     <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
-      <%= link_to 'Elimina', starred_playlist, method: :delete, data: { confirm: 'Sei sicuro?' },class:"buttonclass" %>
+
+    <%if current_user%>
+      <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
+        <%= link_to 'Elimina', starred_playlist, method: :delete, data: { confirm: 'Sei sicuro?' },class:"buttonclass" %>
       <%else%>
-    <%end%>
+      <%end%>
     <%end%>
   </div>
 </div>
