@@ -4,16 +4,16 @@
 <div class="container" id="feeds">
 
   <header class=" header-active" data-aos="fade-down">  
-    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
+    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader"%>
     
     <% if user_signed_in? %>      
       <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
-      <ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
+      <ul><%= link_to "Vai al Profilo", current_user ,class: 'LogLink' %></ul>
     <% else %>
-      <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
-      <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
+      <ul><%= link_to "Registrati", "users/sign_up" ,class: 'LogLink' %></ul>
+      <ul><%= link_to "Accedi", "/home" ,class: 'LogLink' %></ul>
     <% end %>
-    <ul><%= link_to "Ricerca Utenti", "/users" ,class: 'Loglink' %></ul>
+    <ul><%= link_to "Ricerca Utenti", "/users" ,class: 'LogLink' %></ul>
   </header>
   
   <br><br><br><br><br>

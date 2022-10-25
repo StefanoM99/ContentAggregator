@@ -1,7 +1,7 @@
 <%if user_signed_in? and not current_user.user?%>
   <div class="container" id="profiles">
     <header class=" header-active" data-aos="fade-down">  
-    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto;overflow:hidden'%>
+    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader"%>
       
     <% if user_signed_in? %>      
       <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
