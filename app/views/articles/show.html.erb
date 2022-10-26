@@ -50,6 +50,11 @@
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                 <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                 <td style="border: 1px solid #dddddd; width: 30px"><%= link_to "Modifica", edit_article_comment_path(comment), class: "buttonclass" %></td>
+                <td style="border: 1px solid #dddddd; width: 30px">
+                  <button type="button" id="editArticleCommentBtn" class="buttonclass" data-bs-toggle="modal" data-bs-target="#editArticleCommentModal">
+                    Modifica test
+                  </button>
+                </td>
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
@@ -65,6 +70,9 @@
         user_id: current_user.id,
         article_id: @article.id
       ), { class: 'homebutton'} %>
+      <button type="button" id="newArticleCommentBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#newArticleCommentModal">
+        Commenta test
+      </button>
     <%end%>
 
     <br><br><br>
@@ -97,7 +105,61 @@
   </div>
 </footer> 
 <%end%>
+
+<!-- Modal -->
+  <div class="modal fade" id="newArticleCommentModal" tabindex="-1" aria-labelledby="newArticleCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="newArticleCommentModalLabel">Nuovo Commento Articolo</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="newArticleCommentDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal -->
+  <div class="modal fade" id="editArticleCommentModal" tabindex="-1" aria-labelledby="editArticleCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editArticleCommentModalLabel">Modifica Commento Articolo</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="editArticleCommentDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
         
+<script>
+  $(document).ready(function(){
+
+    $("#newArticleCommentBtn").on("click", function(){
+      $.get(new_article_comment_path(
+        user_id: current_user.id,
+        article_id: article.id
+        ), function(data){
+        $("#newArticleCommentDiv").replaceWith(data);
+      });
+    });
+
+    $("#editArticleCommentBtn").on("click", function(){
+      $.get(edit_article_comment_path(comment), function(data){
+        $("#editArticleCommentDiv").replaceWith(data);
+      });
+    });
+  });
+</script>
+
 <script>
   AOS.init();
 </script>

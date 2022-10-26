@@ -22,7 +22,12 @@
       </ul>
     </div>
     <br><br>
-   <%= link_to "New post", new_post_path,class:"homebutton" %></div>
+    <% if user_signed_in? %>
+      <%= link_to "Nuovo Post", new_post_path,class:"homebutton" %>
+      <button type="button" id="newPostBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#newPostModal">
+        Nuovo Post test
+      </button>
+    <%end%>
     <br><br>
     <div class="row" id="posts">
       <% @posts.each do |post| %>
@@ -35,7 +40,82 @@
     </div>
   </div>
   <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="newPostModalLabel">Nuovo Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="newPostDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editPostModalLabel">Modifica Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="editPostDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="newPostCommentModal" tabindex="-1" aria-labelledby="newPostCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="newPostCommentModalLabel">Nuovo Commento Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="newPostCommentDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
+  <script>
+    $(document).ready(function(){
+
+      $("#newPostBtn").on("click", function(){
+        $.get(new_post_path, function(data){
+          $("#newPostDiv").replaceWith(data);
+        });
+      });
+
+      $("#editPostBtn").on("click", function(){
+        $.get(edit_post_path(post), function(data){
+          $("#editPostDiv").replaceWith(data);
+        });
+      });
+
+      $("#newPostCommentBtn").on("click", function(){
+        $.get(new_post_comment_path(
+          user_id: current_user.id,
+          post_id: post.id
+          ), function(data){
+          $("#newPostCommentDiv").replaceWith(data);
+        });
+      });
+    });
+  </script>
+
   <script>
     AOS.init();
   </script>

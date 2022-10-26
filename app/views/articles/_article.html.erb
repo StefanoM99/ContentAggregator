@@ -77,6 +77,10 @@
       ), { class: 'buttonclass'} %>
     <%end%>
 
+    <button type="button" id="newArticleCommentBtn" class="buttonclass" data-bs-toggle="modal" data-bs-target="#newArticleCommentModal">
+      Commenta test
+    </button>
+
     <%if  current_user %>
       <%if  current_user && SavedArticle.where(user_id: current_user.id,type: "StarredArticle",article_id:article.id).empty?%>
       

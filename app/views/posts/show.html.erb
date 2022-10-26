@@ -43,6 +43,11 @@
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                 <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                 <td style="border: 1px solid #dddddd; width: 30px"><%= link_to "Modifica", edit_post_comment_path(comment), class: "buttonclass" %></td>
+                <td style="border: 1px solid #dddddd; width: 30px">
+                  <button type="button" id="editPostCommentBtn" class="buttonclass" data-bs-toggle="modal" data-bs-target="#editPostCommentModal">
+                    Modifica test
+                  </button>
+                </td>
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
@@ -52,6 +57,18 @@
     </div>
     
     <br><br>
+
+    <%if current_user%>
+      <%= link_to 'Commenta', new_post_comment_path(
+        user_id: current_user.id,
+        post_id: @post.id
+      ), { class: 'homebutton'} %>
+      <button type="button" id="newPostCommentBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#newPostCommentModal">
+        Commenta test
+      </button>
+    <%end%>
+
+    <br><br><br>
     
     <%if current_user &&  current_user.id == @post.user_id%>
       <%= button_to "Elimina questo post", @post, method: :delete,class:"homebutton" %>
@@ -84,7 +101,61 @@
       </div>
     </footer> 
   <%end%>
-  <script>
-    AOS.init();
-  </script>
+  
+  <div class="modal fade" id="newPostCommentModal" tabindex="-1" aria-labelledby="newPostCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="newPostCommentModalLabel">Nuovo Commento Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="newPostCommentDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="editPostCommentModal" tabindex="-1" aria-labelledby="editPostCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editPostCommentModalLabel">Modifica Commento Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="editPostCommentDiv">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+<script>
+  $(document).ready(function(){
+
+    $("#newPostCommentBtn").on("click", function(){
+        $.get(new_post_comment_path(
+          user_id: current_user.id,
+          post_id: post.id
+          ), function(data){
+          $("#newPostCommentDiv").replaceWith(data);
+        });
+      });
+
+    $("#editPostCommentBtn").on("click", function(){
+      $.get(edit_article_comment_path(comment), function(data){
+        $("#editPostCommentDiv").replaceWith(data);
+      });
+    });
+  });
+</script>
+  
+<script>
+  AOS.init();
+</script>
 </div>

@@ -96,6 +96,10 @@
         playlist_id: playlist.id
       ), { class: 'buttonclass'} %> 
     <%end%>
+
+    <button type="button" id="newPlaylistCommentBtn" class="buttonclass" data-bs-toggle="modal" data-bs-target="#newPlaylistCommentModal">
+      Commenta test
+    </button>
     
     <%if current_user%>
       <%if  current_user && SavedPlaylist.where(user_id: current_user.id,type: "StarredPlaylist",playlist_id:playlist.id).empty?%>
