@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
-  #resources :follows
+  
   resources :playlist_comments
   resources :article_comments
   resources :post_comments
-
-  # following users
-  post '/users/:id/follow', to: "users#follow", as: "follow_user"
-  post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
 
   scope '/feed' do
     resources :forecasts
@@ -33,7 +29,7 @@ Rails.application.routes.draw do
     resources :playlist_comments
     resources :article_comments
     resources :post_comments
-
+    # Ricerca Utenti
     resources :followers, :followees
   end 
 
@@ -60,13 +56,17 @@ Rails.application.routes.draw do
   get '/users/:user_id/article_comments', to: 'article_comments#index', as: 'article_user_comments'
   get '/users/:user_id/playlist_comments', to: 'playlist_comments#index', as: 'playlist_user_comments'
 
-  # help
+  # Help
   get "pages/help"
   get "pages/account"
   get "pages/profile"
   get "pages/info"
   get "pages/users"
   get "pages/contacts"
+  # Ricerca Utenti
+  post '/users/:id/follow', to: "users#follow", as: "follow_user"
+  post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
+  #resources :follows
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
