@@ -1,0 +1,45 @@
+<!-- Button trigger modal -->
+<button type="button" id="helpBtn" class="btn btn-success rounded-pill position-fixed bottom-0 end-0 m-3" data-bs-toggle="modal" data-bs-target="#helpModal">
+Help!
+</button>
+<!-- Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">Come posso aiutarti?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="helpModalBody" class="modal-body">
+                <div id="helpDiv">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Help</li>
+                        </ol>
+                    </nav>
+                    <p class="line-1 anim-typewriter font-monospace pt-6">Ciao! Come posso aiutarti? :)</p>
+                    <ul class="list-group list-group-flush text-center font-monospace">
+                        <li id="accountBtn" class="list-group-item">
+                            <p class="btn btn-link link-success m-1">ACCOUNT</p>
+                        </li>
+                        <li id="profileBtn" class="list-group-item">
+                            <p class="btn btn-link link-success m-1">PROFILO</p>
+                        </li>
+                        <li id="infoBtn" class="list-group-item">
+                            <p class="btn btn-link link-success m-1">INFO</p>
+                        </li>
+                        <!--li id="usersBtn" class="list-group-item">
+                            <p class="btn btn-link link-success m-1">USERS</p>
+                        </!--li>-->
+                        <li id="contactsBtn" class="list-group-item">
+                            <p class="btn btn-link link-success m-1">CONTATTI</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
