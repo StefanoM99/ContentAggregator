@@ -50,6 +50,41 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="newPostDiv">
+
+          <%= form_with(model: Post.new, multipart: true) do |form| %>
+            <% if Post.new.errors.any? %>
+              <div style="color: red">
+                <h2><%= pluralize(Post.new.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+                <ul>
+                  <% Post.new.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div>
+              <%= form.label :title, style: "display: block" %>
+              <%= form.text_area :title %>
+            </div>
+
+            <div>
+              <%= form.label :summary, style: "display: block" %>
+              <%= form.text_area :summary %>
+            </div>
+
+            <div>
+              <%= form.label :post_file, style: "display: block" %>
+              <%= form.file_field :post_file %>
+            </div>
+
+            <div>
+              <%= form.submit %>
+            </div>
+          <% end %>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -66,6 +101,41 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="editPostDiv">
+
+          <%= form_with(model: Post.new, multipart: true) do |form| %>
+            <% if Post.new.errors.any? %>
+              <div style="color: red">
+                <h2><%= pluralize(Post.new.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+                <ul>
+                  <% Post.new.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div>
+              <%= form.label :title, style: "display: block" %>
+              <%= form.text_area :title %>
+            </div>
+
+            <div>
+              <%= form.label :summary, style: "display: block" %>
+              <%= form.text_area :summary %>
+            </div>
+
+            <div>
+              <%= form.label :post_file, style: "display: block" %>
+              <%= form.file_field :post_file %>
+            </div>
+
+            <div>
+              <%= form.submit %>
+            </div>
+          <% end %>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -82,6 +152,31 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="newPostCommentDiv">
+
+          <%= form_with(model: PostComment.new) do |form| %>
+            <% if PostComment.new.errors.any? %>
+              <div style="color: red">
+                <h2><%= pluralize(PostComment.new.errors.count, "error") %> prohibited this post_comment from being saved:</h2>
+
+                <ul>
+                  <% PostComment.new.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div>
+              <%= form.label :description, style: "display: block" %>
+              <%= form.text_area :description %>
+              <%= form.hidden_field :post_id, value:params[:post_id] %>
+            </div>
+
+            <div>
+              <%= form.submit %>
+            </div>
+          <% end %>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -89,32 +184,6 @@
       </div>
     </div>
   </div>
-  
-  <script>
-    $(document).ready(function(){
-
-      $("#newPostBtn").on("click", function(){
-        $.get(new_post_path, function(data){
-          $("#newPostDiv").replaceWith(data);
-        });
-      });
-
-      $("#editPostBtn").on("click", function(){
-        $.get(edit_post_path(post), function(data){
-          $("#editPostDiv").replaceWith(data);
-        });
-      });
-
-      $("#newPostCommentBtn").on("click", function(){
-        $.get(new_post_comment_path(
-          user_id: current_user.id,
-          post_id: post.id
-          ), function(data){
-          $("#newPostCommentDiv").replaceWith(data);
-        });
-      });
-    });
-  </script>
 
   <script>
     AOS.init();

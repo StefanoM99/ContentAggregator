@@ -107,58 +107,88 @@
 <%end%>
 
 <!-- Modal -->
-  <div class="modal fade" id="newArticleCommentModal" tabindex="-1" aria-labelledby="newArticleCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="newArticleCommentModalLabel">Nuovo Commento Articolo</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="newArticleCommentDiv">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+<div class="modal fade" id="newArticleCommentModal" tabindex="-1" aria-labelledby="newArticleCommentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newArticleCommentModalLabel">Nuovo Commento Articolo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="newArticleCommentDiv">
+
+        <%= form_with(model: ArticleComment.new) do |form| %>
+          <% if ArticleComment.new.errors.any? %>
+            <div style="color: red">
+              <h2><%= pluralize(ArticleComment.new.errors.count, "error") %> prohibited this article_comment from being saved:</h2>
+
+              <ul>
+                <% ArticleComment.new.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div>
+            <%= form.label :description, style: "display: block" %>
+            <%= form.text_area :description %>
+            <%= form.hidden_field :article_id, value:params[:article_id] %>
+          </div>
+
+          <div>
+            <% hidden_field_tag :article_id, '2' %>
+            <%= form.submit %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
 <!-- Modal -->
-  <div class="modal fade" id="editArticleCommentModal" tabindex="-1" aria-labelledby="editArticleCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="editArticleCommentModalLabel">Modifica Commento Articolo</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="editArticleCommentDiv">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+<div class="modal fade" id="editArticleCommentModal" tabindex="-1" aria-labelledby="editArticleCommentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editArticleCommentModalLabel">Modifica Commento Articolo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="editArticleCommentDiv">
+
+        <%= form_with(model: ArticleComment.new) do |form| %>
+          <% if ArticleComment.new.errors.any? %>
+            <div style="color: red">
+              <h2><%= pluralize(ArticleComment.new.errors.count, "error") %> prohibited this article_comment from being saved:</h2>
+
+              <ul>
+                <% ArticleComment.new.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div>
+            <%= form.label :description, style: "display: block" %>
+            <%= form.text_area :description %>
+            <%= form.hidden_field :article_id, value:params[:article_id] %>
+          </div>
+
+          <div>
+            <% hidden_field_tag :article_id, '2' %>
+            <%= form.submit %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-        
-<script>
-  $(document).ready(function(){
-
-    $("#newArticleCommentBtn").on("click", function(){
-      $.get(new_article_comment_path(
-        user_id: current_user.id,
-        article_id: article.id
-        ), function(data){
-        $("#newArticleCommentDiv").replaceWith(data);
-      });
-    });
-
-    $("#editArticleCommentBtn").on("click", function(){
-      $.get(edit_article_comment_path(comment), function(data){
-        $("#editArticleCommentDiv").replaceWith(data);
-      });
-    });
-  });
-</script>
+</div>
 
 <script>
   AOS.init();
