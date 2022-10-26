@@ -74,6 +74,9 @@
       <%= button_to "Elimina questo post", @post, method: :delete,class:"homebutton" %>
       <br>
       <%= link_to "Modifica questo post", edit_post_path(@post),class:"homebutton" %> 
+      <button type="button" id="editPostBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#editPostModal">
+        Modifica Post test
+      </button>
     <%end%>
     <br><br>
     <%= link_to "Torna ai post", posts_path,class:"homebutton" %>
@@ -170,6 +173,56 @@
               <%= form.label :description, style: "display: block" %>
               <%= form.text_area :description %>
               <%= form.hidden_field :post_id, value:params[:post_id] %>
+            </div>
+
+            <div>
+              <%= form.submit %>
+            </div>
+          <% end %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editPostModalLabel">Modifica Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="newPostCommentDiv">
+
+          <%= form_with(model: Post.new, multipart: true) do |form| %>
+            <% if Post.new.errors.any? %>
+              <div style="color: red">
+                <h2><%= pluralize(Post.new.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+                <ul>
+                  <% Post.new.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div>
+              <%= form.label :title, style: "display: block" %>
+              <%= form.text_area :title %>
+            </div>
+
+            <div>
+              <%= form.label :summary, style: "display: block" %>
+              <%= form.text_area :summary %>
+            </div>
+
+            <div>
+              <%= form.label :post_file, style: "display: block" %>
+              <%= form.file_field :post_file %>
             </div>
 
             <div>
