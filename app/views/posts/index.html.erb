@@ -2,18 +2,7 @@
 
 <div class="container" id="posts">
   
-  <header class=" header-active" data-aos="fade-down">  
-    <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader"%>
-    
-    <% if user_signed_in? %>      
-      <ul> <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "LogLink" %></ul>
-      <ul><%= link_to "Vai al Profilo", current_user ,class: 'Loglink' %></ul>
-    <% else %>
-      <ul><%= link_to "Registrati", "users/sign_up" ,class: 'Loglink' %></ul>
-      <ul><%= link_to "Accedi", "/home" ,class: 'Loglink' %></ul>
-    <% end %>
-    <ul><%= link_to "Ricerca Utenti", "/users" ,class: 'Loglink' %></ul>
-  </header>
+  <%= render :partial => 'shared/header' %>
   
   <br><br><br><br><br>
   <div data-aos="fade-right" style="text-align:center">
