@@ -67,6 +67,9 @@ gem "bootsnap", require: false
 gem "filterrific"
 gem "will_paginate", "~> 3.3"
 
+# Give it an URL, and it lets you easily get its title, links, images, description...
+gem "metainspector"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

@@ -36,3 +36,28 @@
     from{border-right-color: rgba(0, 0, 0, 0.75);}
     to{border-right-color: transparent;}
 }
+
+.mia-card {
+    width: 20rem;
+    font-size: 0.8rem;
+}
+.collegamento-card {
+    color: lightslategray;
+    font-size: 0.7rem;
+    -webkit-line-clamp: 1; /* max 1 righe */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.titolo-card {
+    -webkit-line-clamp: 2; /* max 2 righe */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.descrizione-card {
+    -webkit-line-clamp: 4; /* max 4 righe */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

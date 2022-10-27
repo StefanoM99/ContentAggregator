@@ -21,7 +21,24 @@
       <%= post.summary %>
     </h6>
 
-    <br><br>
+    <br>
+
+    <% require 'metainspector' %>
+    <% no_errors=meta_inspector(post) %>
+    <% if URI.extract(post.summary)!=[] and no_errors %>
+    <div class="card">
+        <a href="<%= @page.url %>" class="stretched-link">
+            <img src="<%= @page.images.best %>" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <p class="card-text collegamento-card"><%= @page.url %></p>
+            <h5 class="card-title titolo-card"><%= @page.best_title %></h5>
+            <p class="card-text descrizione-card"><%= @page.best_description %></p>
+        </div>
+    </div>
+    <% end %>
+
+    <br>
 
     <div class="container mt-3">
       <%if PostComment.find_by(post_id: post.id).nil?%>
