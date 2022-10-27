@@ -43,11 +43,6 @@
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                 <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                 <td style="border: 1px solid #dddddd; width: 30px"><%= link_to "Modifica", edit_post_comment_path(comment), class: "buttonclass" %></td>
-                <td style="border: 1px solid #dddddd; width: 30px">
-                  <button type="button" id="editPostCommentBtn" class="buttonclass" data-bs-toggle="modal" data-bs-target="#editPostCommentModal">
-                    Modifica test
-                  </button>
-                </td>
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
@@ -57,26 +52,11 @@
     </div>
     
     <br><br>
-
-    <%if current_user%>
-      <%= link_to 'Commenta', new_post_comment_path(
-        user_id: current_user.id,
-        post_id: @post.id
-      ), { class: 'homebutton'} %>
-      <button type="button" id="newPostCommentBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#newPostCommentModal">
-        Commenta test
-      </button>
-    <%end%>
-
-    <br><br><br>
     
     <%if current_user &&  current_user.id == @post.user_id%>
       <%= button_to "Elimina questo post", @post, method: :delete,class:"homebutton" %>
       <br>
       <%= link_to "Modifica questo post", edit_post_path(@post),class:"homebutton" %> 
-      <button type="button" id="editPostBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#editPostModal">
-        Modifica Post test
-      </button>
     <%end%>
     <br><br>
     <%= link_to "Torna ai post", posts_path,class:"homebutton" %>
@@ -104,141 +84,7 @@
       </div>
     </footer> 
   <%end%>
-  
-  <div class="modal fade" id="newPostCommentModal" tabindex="-1" aria-labelledby="newPostCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="newPostCommentModalLabel">Nuovo Commento Post</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="newPostCommentDiv">
-
-          <%= form_with(model: PostComment.new) do |form| %>
-            <% if PostComment.new.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(PostComment.new.errors.count, "error") %> prohibited this post_comment from being saved:</h2>
-
-                <ul>
-                  <% PostComment.new.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <div>
-              <%= form.label :description, style: "display: block" %>
-              <%= form.text_area :description %>
-              <%= form.hidden_field :post_id, value:params[:post_id] %>
-            </div>
-
-            <div>
-              <%= form.submit %>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="editPostCommentModal" tabindex="-1" aria-labelledby="editPostCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="editPostCommentModalLabel">Modifica Commento Post</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="editPostCommentDiv">
-
-          <%= form_with(model: PostComment.new) do |form| %>
-            <% if PostComment.new.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(PostComment.new.errors.count, "error") %> prohibited this post_comment from being saved:</h2>
-
-                <ul>
-                  <% PostComment.new.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <div>
-              <%= form.label :description, style: "display: block" %>
-              <%= form.text_area :description %>
-              <%= form.hidden_field :post_id, value:params[:post_id] %>
-            </div>
-
-            <div>
-              <%= form.submit %>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="editPostModalLabel">Modifica Post</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="newPostCommentDiv">
-
-          <%= form_with(model: Post.new, multipart: true) do |form| %>
-            <% if Post.new.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(Post.new.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-                <ul>
-                  <% Post.new.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <div>
-              <%= form.label :title, style: "display: block" %>
-              <%= form.text_area :title %>
-            </div>
-
-            <div>
-              <%= form.label :summary, style: "display: block" %>
-              <%= form.text_area :summary %>
-            </div>
-
-            <div>
-              <%= form.label :post_file, style: "display: block" %>
-              <%= form.file_field :post_file %>
-            </div>
-
-            <div>
-              <%= form.submit %>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-<script>
-  AOS.init();
-</script>
+  <script>
+    AOS.init();
+  </script>
 </div>

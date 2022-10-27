@@ -33,50 +33,7 @@
       <% end %>
     </div>
   </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="newPlaylistCommentModal" tabindex="-1" aria-labelledby="newPlaylistCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="newPlaylistCommentModalLabel">Nuovo Commento Playlist</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="newPlaylistCommentDiv">
-
-          <%= form_with(model: PlaylistComment.new) do |form| %>
-            <% if PlaylistComment.new.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(PlaylistComment.new.errors.count, "error") %> prohibited this playlist_comment from being saved:</h2>
-
-                <ul>
-                  <% PlaylistComment.new.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <div>
-              <%= form.label :description, style: "display: block" %>
-              <%= form.text_area :description %>
-              <%= form.hidden_field :playlist_id, value:params[:playlist_id] %>
-            </div>
-
-            <div>
-              <%= form.submit %>
-            </div>
-          <% end %>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  
   <script>
     AOS.init();
   </script>

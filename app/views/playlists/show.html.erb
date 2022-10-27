@@ -47,11 +47,6 @@
                 <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                 <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                 <td style="border: 1px solid #dddddd; width: 30px"><%= link_to "Modifica", edit_playlist_comment_path(comment), class: "buttonclass" %></td>
-                <td style="border: 1px solid #dddddd; width: 30px">
-                  <button type="button" id="editPlaylistCommentBtn" class="buttonclass" data-bs-toggle="modal" data-bs-target="#editPlaylistCommentModal">
-                    Modifica test
-                  </button>
-                </td>
                 <td style="border: 1px solid #dddddd; width: 30px"><%= button_to "Elimina", comment, method: :delete, class: "buttonclass" %></td>
               </tr>
             <%end%>
@@ -59,20 +54,13 @@
         </table>
       <%end%>
     </div>
+  
+    <script>
+      AOS.init();
+    </script>
   </div>
   <br>
   <div style="text-align:center">
-    <%if current_user%>
-      <%= link_to 'Commenta', new_playlist_comment_path(
-        user_id: current_user.id,
-        playlist_id: @playlist.id
-      ), { class: 'homebutton'} %>
-      <button type="button" id="newPlaylistCommentBtn" class="homebutton" data-bs-toggle="modal" data-bs-target="#newPlaylistCommentModal">
-        Commenta test
-      </button>
-    <%end%>
-
-    <br><br><br>
     <%= link_to "Torna alle playlists", playlists_path, class: 'homebutton',style:"text-align:center" %>
     <%= link_to "Torna al feed", feed_path, class: 'homebutton',style:"text-align:center" %>
   </div>
@@ -89,91 +77,3 @@
       </p>
   </div>
 </footer>
-
-<!-- Modal -->
-  <div class="modal fade" id="newArticleCommentModal" tabindex="-1" aria-labelledby="newArticleCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="newArticleCommentModalLabel">Nuovo Commento Articolo</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="newArticleCommentDiv">
-
-          <%= form_with(model: PlaylistComment.new) do |form| %>
-            <% if PlaylistComment.new.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(PlaylistComment.new.errors.count, "error") %> prohibited this playlist_comment from being saved:</h2>
-
-                <ul>
-                  <% PlaylistComment.new.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <div>
-              <%= form.label :description, style: "display: block" %>
-              <%= form.text_area :description %>
-              <%= form.hidden_field :playlist_id, value:params[:playlist_id] %>
-            </div>
-
-            <div>
-              <%= form.submit %>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!-- Modal -->
-  <div class="modal fade" id="editPlaylistCommentModal" tabindex="-1" aria-labelledby="editPlaylistCommentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="editPlaylistCommentModalLabel">Modifica Commento Playlist</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="editPlaylistCommentDiv">
-
-          <%= form_with(model: PlaylistComment.new) do |form| %>
-            <% if PlaylistComment.new.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(PlaylistComment.new.errors.count, "error") %> prohibited this playlist_comment from being saved:</h2>
-
-                <ul>
-                  <% PlaylistComment.new.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <div>
-              <%= form.label :description, style: "display: block" %>
-              <%= form.text_area :description %>
-              <%= form.hidden_field :playlist_id, value:params[:playlist_id] %>
-            </div>
-
-            <div>
-              <%= form.submit %>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<script>
-  AOS.init();
-</script>
