@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  require "uri"
 
   # GET /posts or /posts.json
   def index
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
   
+    #puts URI.extract(post_params[:summary])
     @post = Post.new(
       user_id: current_user.id,
       author: current_user.name + ' ' + current_user.surname,
@@ -32,7 +34,15 @@ class PostsController < ApplicationController
     )
 
     respond_to do |format|
-      if @post.save
+
+      safe = true
+      URI.extract(post_params[:summary]).each do |u|
+        if not SafeBrowsing.is_it_safe?(u)
+          safe = false
+        end
+      end
+
+      if safe and @post.save
         @my_post = MyPost.create(user_id: current_user.id,
           author: current_user.name + ' ' + current_user.surname,
           title: post_params[:title],
@@ -44,7 +54,11 @@ class PostsController < ApplicationController
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        if not safe
+          format.html { redirect_to new_post_path(@post.id), alert: "Il post contiene un link pericoloso." }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +68,15 @@ class PostsController < ApplicationController
   def update
     
     respond_to do |format|
-      if @post.update(post_params)
+
+      safe = true
+      URI.extract(post_params[:summary]).each do |u|
+        if not SafeBrowsing.is_it_safe?(u)
+          safe = false
+        end
+      end
+
+      if safe and @post.update(post_params)
         @edited_post = EditedPost.create(user_id: current_user.id,
           author: current_user.name + ' ' + current_user.surname,
           title: post_params[:title],
@@ -66,7 +88,11 @@ class PostsController < ApplicationController
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        if not safe
+          format.html { redirect_to edit_post_path, alert: "Il post contiene un link pericoloso." }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+        end
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

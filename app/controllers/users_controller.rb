@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
         # controllo di non star modificando email/psw o che l'account sia stato creato con email+psw
-        if (@user.provider == nil or not (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)) and (not user_params.key? :avatar_url or user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")) and @user.update(user_params)
+        if (@user.provider == nil or not (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)) and (not user_params.key? :avatar_url or (user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg") and SafeBrowsing.is_it_safe?(user_params[:avatar_url]))) and @user.update(user_params)
             bypass_sign_in(@user) # mantiene loggato l'utente dopo la modifica della password
             format.html { redirect_to user_url(@user), notice: "Account modificato correttamente." }
             format.json { render :show, status: :ok, location: @profile }
@@ -68,8 +68,14 @@ class UsersController < ApplicationController
             if (@user.provider != nil) and (user_params.key? :email or user_params.key? :password or user_params.key? :password_confirmation)
                 format.html { redirect_to user_url(@user), alert: "Non possiamo modificare le credenziali del provider." }
             # se invece sto cercando di mettere un link qualsiasi al posto dell'immagine di profilo
-            elsif user_params.key? :avatar_url and not user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")
-                format.html { redirect_to user_url(@user), alert: "L'url deve riferirsi ad un immagine ('.png', '.jpg', '.jpeg')." }
+            elsif user_params.key? :avatar_url
+                if not user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg") and not SafeBrowsing.is_it_safe?(user_params[:avatar_url])
+                    format.html { redirect_to user_url(@user), alert: "L'url inserito non è un immagine ('.png', '.jpg', '.jpeg') ed è dannoso." }
+                elsif not user_params[:avatar_url].to_s.end_with?("png", "jpg", "jpeg")
+                    format.html { redirect_to user_url(@user), alert: "L'url inserito non è un immagine ('.png', '.jpg', '.jpeg')." }
+                elsif not SafeBrowsing.is_it_safe?(user_params[:avatar_url])
+                    format.html { redirect_to user_url(@user), alert: "L'url inserito è dannoso." }
+                end
             else
                 format.html { redirect_to user_url(@user), alert: @user.errors.full_messages.to_sentence }
             end
