@@ -95,10 +95,10 @@ class ReportedArticlesController < ApplicationController
           )
           
           @article.destroy
-          format.html { redirect_to current_user, notice: "Reported article was successfully destroyed." }
+          format.html {redirect_to request.referrer }
           format.json { head :no_content }
       else 
-          format.html { redirect_to reported_articles_url(:user_id => @reported_article.user_id), notice: "Reported article was successfully destroyed." }
+          format.html { redirect_to request.referrer}
           format.json { head :no_content }
       end
     end

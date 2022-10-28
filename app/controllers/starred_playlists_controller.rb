@@ -69,7 +69,7 @@ class StarredPlaylistsController < ApplicationController
     @starred_playlist.destroy
 
     respond_to do |format|
-      format.html { redirect_to starred_playlists_url(:user_id =>@starred_playlist.user_id), notice: "Starred playlist was successfully destroyed." }
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
   end

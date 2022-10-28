@@ -87,10 +87,10 @@ class ReportedPostsController < ApplicationController
         @post = Post.find(@reported_post.post_id)
         
         @post.destroy
-        format.html { redirect_to current_user, notice: "Reported Post was successfully destroyed." }
+        format.html { redirect_to request.referrer }
         format.json { head :no_content }
     else 
-      format.html { redirect_to reported_posts_url(:user_id => @reported_post.user_id), notice: "Reported post was successfully destroyed." }
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
     end

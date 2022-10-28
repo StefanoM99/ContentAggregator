@@ -70,7 +70,7 @@ class StarredPostsController < ApplicationController
     @starred_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to starred_posts_url(:user_id => @starred_post.user_id), notice: "Starred post was successfully destroyed." }
+      format.html { redirect_to request.referrer}
       format.json { head :no_content }
     end
   end

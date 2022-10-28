@@ -62,7 +62,7 @@ class MyPostsController < ApplicationController
     @my_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to my_posts_url(:user_id => my_post.user_id), notice: "My post was successfully destroyed." }
+      format.html { redirect_to request.referrer}
       format.json { head :no_content }
     end
   end

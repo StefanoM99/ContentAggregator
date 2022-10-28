@@ -88,11 +88,11 @@ class ReportedPlaylistsController < ApplicationController
       )
       
       @playlist.destroy
-      format.html { redirect_to current_user, notice: "Reported Playlist was successfully destroyed." }
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
   else 
     
-      format.html { redirect_to reported_playlists_url(:user_id => @reported_playlist.user_id), notice: "Reported playlist was successfully destroyed." }
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
     end

@@ -61,7 +61,7 @@ class EditedPostsController < ApplicationController
     @edited_post.destroy
 
     respond_to do |format|
-      format.html { redirect_to edited_posts_url(:user_id => @edited_post.user_id), notice: "Edited post was successfully destroyed." }
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
   end

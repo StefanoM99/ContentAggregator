@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../javascript/application.js"],
+  "sourcesContent": ["\n//= require rails-ujs\n//= require filterrific/filterrific-jquery\n\n1\n2\n3\n$( \"#lolid\" ).click(function() {\n    console.log(\"ciao\")\n    $(this).prop(\"disabled\", true);\n  });\n"],
+  "mappings": ";;AAOA,IAAG,QAAS,EAAE,MAAM,WAAW;AAC3B,YAAQ,IAAI,MAAM;AAClB,MAAE,IAAI,EAAE,KAAK,YAAY,IAAI;AAAA,EAC/B,CAAC;",
+  "names": []
+}

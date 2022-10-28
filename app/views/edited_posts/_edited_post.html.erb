@@ -62,7 +62,7 @@
    
     <%if current_user%>
       <%if (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
-        <%= link_to 'Elimina', edited_post, method: :delete, data: { confirm: 'Sei sicuro?' } ,class:"buttonclass"%>
+        <%= button_to 'Elimina', edited_post, method: :delete, class:"buttonclass"%>
       <%else%>
       <%end%>
     <%end%>
