@@ -7,4 +7,6 @@ class Post < ApplicationRecord
   has_many :post_comments
     
   has_one_attached :post_file, :dependent => :destroy
+
+  validates :title, presence: true
 end

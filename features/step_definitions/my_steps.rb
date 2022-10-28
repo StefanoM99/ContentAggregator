@@ -23,3 +23,23 @@ end
 Then('I should be logged in as "prova@gmail.com"') do
     @user = User.find_by email: 'prova@gmail.com'
 end
+
+When('I upload an image') do
+    page.attach_file('app/assets/images/logo.png') do
+        page.find('#post_post_file').click
+    end
+end
+
+Then('I should see the image I uploaded') do
+    page.find(class: 'articleimg')['src'].end_with?("logo.png")
+end
+
+When('I upload a video') do
+    page.attach_file('app/assets/videos/video.mp4') do
+        page.find('#post_post_file').click
+    end
+end
+
+Then('I should see the video I uploaded') do
+    page.find('video')['src'].end_with?("video.mp4")
+end

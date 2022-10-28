@@ -20,17 +20,46 @@ Feature: User creates a post
         And I should see "Mio titolo"
         And I should see "Mio riepilogo"
 
+    Scenario: User creates a post (Title+Summary+Image)
+        When I fill in "Title" with "Mio titolo"
+        And I fill in "Summary" with "Mio riepilogo"
+        And I upload an image
+        And I press "Create Post"
+        Then I should be on that post page
+        And I should see the image I uploaded
+        And I should see "Test Prova"
+        And I should see "Mio titolo"
+        And I should see "Mio riepilogo"
+
+    Scenario: User creates a post (Title+Summary+Video)
+        When I fill in "Title" with "Mio titolo"
+        And I fill in "Summary" with "Mio riepilogo"
+        And I upload a video
+        And I press "Create Post"
+        Then I should be on that post page
+        And I should see the video I uploaded
+        And I should see "Test Prova"
+        And I should see "Mio titolo"
+        And I should see "Mio riepilogo"
+
     Scenario: User tries to create a post with a malware link
         When I fill in "Title" with "Mio titolo"
-        And I fill in "Summary" with "Link malevolo: https://testsafebrowsing.appspot.com/s/malware.html"
+        And I fill in "Summary" with "Malevolo: https://testsafebrowsing.appspot.com/s/malware.html"
         And I press "Create Post"
         Then I should be on new-post page
         And I should see "Il post contiene un link pericoloso."
 
-    # Scenario: User tries to create a post w/out Title
-    #     When I press "Create Post"
-    #     Then I should be on new-post page
-    #     And I should see "Scrivere qui testo errore"
+    Scenario: User tries to create a post with a safe link and a malware link
+        When I fill in "Title" with "Mio titolo"
+        And I fill in "Summary" with "Innocuo: https://www.google.it Malevolo: https://testsafebrowsing.appspot.com/s/malware.html"
+        And I press "Create Post"
+        Then I should be on new-post page
+        And I should see "Il post contiene un link pericoloso."
+
+    Scenario: User tries to create a post w/out Title
+        When I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
 
     # Scenario: User signs up and creates a post
     #     Given I am on home page

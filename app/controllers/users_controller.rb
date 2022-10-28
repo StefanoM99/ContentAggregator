@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   # POST /profiles or /profiles.json
   def create
     @user = User.new(user_params)
-  puts(@user)
+    puts(@user)
     respond_to do |format|
       if @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }

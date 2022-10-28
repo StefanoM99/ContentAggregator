@@ -34,6 +34,9 @@ module NavigationHelpers
     when /^that post page/
       '/feed/posts/'+(Post.find_by user_id: @user.id).id.to_s
 
+    when /^posts page/
+      '/feed/posts'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
