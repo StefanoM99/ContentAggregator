@@ -1,7 +1,3 @@
-
-//= require rails-ujs
-//= require filterrific/filterrific-jquery
-
 (() => {
   // app/assets/javascript/application.js
   $("#lolid").click(function() {

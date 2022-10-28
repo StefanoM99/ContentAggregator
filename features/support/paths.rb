@@ -16,6 +16,24 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
+    when /^home page/
+      '/home'
+
+    when /^profile page/
+      '/users/'+@user.id.to_s
+
+    when /^sign-up page/
+      '/users/sign_up'
+
+    when /^feed page/
+      '/feed'
+
+    when /^new-post page/
+      '/feed/posts/new'
+
+    when /^that post page/
+      '/feed/posts/'+(Post.find_by user_id: @user.id).id.to_s
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

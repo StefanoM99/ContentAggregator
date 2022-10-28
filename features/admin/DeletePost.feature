@@ -1,0 +1,1 @@
+#Feature: Admin can delete a reported post 

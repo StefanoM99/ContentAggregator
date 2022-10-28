@@ -58,3 +58,11 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+#After do |scenario|
+#  if scenario.failed?
+#    path = “html-report/#{scenario.__id__}.html”
+#    page.driver.browser.save_screenshot(path)
+#    attach(path, “image/png”)
+#  end
+#end
+
