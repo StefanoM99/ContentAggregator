@@ -10,6 +10,7 @@ class UsersController < ApplicationController
         redirect_to feed_path
       end
     end
+    
   end
     
   # GET /users or /users.json

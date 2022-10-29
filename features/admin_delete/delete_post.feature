@@ -1,13 +1,16 @@
 Feature: Admin can delete a reported post 
 
-Background:
-    Given a user logged as admin
+Background: There is at least a reported post by logged user
+        Given I am registered
+        And I am logged in
+
 
     Scenario: Delete a reported post from profile page
-        Given i am on profile page
-        And there is at least a reported post
-        When i press "Elimina"
-        Then i should remove the post from db
-        And i should add the post in the blacklist
-        And i should go on profile page
+        Given I am on the ContentAggregator home page
+        When I fill in "E-Mail" with "admin@admin.com"
+        And I fill in "Password" with "password"
+        And I press "Accedi"
+        Then I should be on Admin profile page
+        When I press "ELIMINA"
+        Then I should be on ContentAggregator profile page
 

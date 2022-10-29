@@ -15,7 +15,12 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    
+    when /^the ContentAggregator home page/
+      '/'
 
+    when /^Admin profile page/
+      '/users/0'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

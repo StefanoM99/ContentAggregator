@@ -45,6 +45,23 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+Given /^I am registered$/ do
+  @i = User.create(:email => 'test@test.com', :password => 'password', :password_confirmation => 'password', :name=>"prova",:surname =>"prova", :role=>0)
+  @i.save
+  puts(@i)
+end
+
+Given /^I am logged in$/ do
+  step("I am on the ContentAggregator home page")
+  steps %{
+    I fill in 'E-Mail' with 'test@test.com'
+    I fill in 'Password' with 'password'
+    I press 'Accedi'
+  }
+  
+  
+end
+
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
