@@ -43,3 +43,9 @@ end
 Then('I should see the video I uploaded') do
     page.find('video')['src'].end_with?("video.mp4")
 end
+
+When('I upload a text file') do
+    page.attach_file('app/assets/file.txt') do
+        page.find('#post_post_file').click
+    end
+end

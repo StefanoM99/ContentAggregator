@@ -12,17 +12,17 @@
   <% end %>
 
   <div>
-    <%= form.label 'Titolo', style: "display: block" %>
+    <%= form.label :title, "Titolo", style: "display: block" %>
     <%= form.text_area :title %>
   </div>
 
   <div>
-    <%= form.label "Sommario", style: "display: block" %>
+    <%= form.label :summary, "Sommario", style: "display: block" %>
     <%= form.text_area :summary %>
   </div>
 
   <div>
-    <%= form.label 'Inserisci foto (jpeg o png)', style: "display: block" %>
+    <%= form.label :post_file, "Inserisci foto (jpeg o png)", style: "display: block" %>
     <%= form.file_field :post_file, accept: 'image/jpeg,image/png' %>
   </div>
 
