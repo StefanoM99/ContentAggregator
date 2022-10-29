@@ -2,8 +2,6 @@
   <% if my_post.post_file.attached? %>
     <% if my_post.post_file.content_type.include?("image") %>
       <%= image_tag url_for(my_post.post_file), class: "img-fluid card-img-top" %>
-    <% else %>
-      <%= video_tag url_for(my_post.post_file), controls: true, style: "width: 100%; height: auto;" %>
     <% end%>
   <% end %>
 
