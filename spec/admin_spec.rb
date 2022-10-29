@@ -30,7 +30,7 @@ end
 RSpec.describe PostsController, type: :controller do
 
   context "create a post" do
-    let(:post) { Post.create }
+    let(:post) { Post.create(title:"Test") }
     it "return a success response" do
 
       expect(post.save!).to eq (true)
@@ -38,7 +38,7 @@ RSpec.describe PostsController, type: :controller do
   end 
   
   context "delete a post" do
-    let(:post) { Post.create }
+    let(:post) { Post.create(title:"Test") }
    
     it "return a success response" do
       post.save!
@@ -53,7 +53,7 @@ RSpec.describe ReportedPostsController, type: :controller do
 
   context "create a reported post" do
     let(:user) { User.create(:email => 'testo@test.com', :password => 'password', :password_confirmation => 'password', :name=>"test",:surname =>"test") }
-    let(:post) { Post.create }
+    let(:post) { Post.create(title:"Test") }
     it "return a success response" do
       
       @reported_post = SavedPost.create(title:post.title,post_id:  post.id, user_id: user.id)
@@ -65,7 +65,7 @@ RSpec.describe ReportedPostsController, type: :controller do
 
   context "delete a reported post" do
     let(:user) { User.create(:email => 'testo@test.com', :password => 'password', :password_confirmation => 'password', :name=>"test",:surname =>"test") }
-    let(:post) { Post.create }
+    let(:post) { Post.create(title:"Test") }
     
     let(:reported_post) { SavedPost.create(type:"ReportedPost",post_id:post.id,user_id:user.id) }
     it "return a success response" do
