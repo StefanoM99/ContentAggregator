@@ -27,7 +27,7 @@
 
     <br><br><br>
     <div class="container mt-3" data-aos="fade-up">
-      <%if PostComment.find_by(post_id: @post.id)%>
+      <%if PostComment.find_by(post_id: @post.id).nil?%>
         <p><i>Nessun commento</i></p>
       <%else%>
         <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">

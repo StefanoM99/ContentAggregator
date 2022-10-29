@@ -46,8 +46,7 @@ class PostsController < ApplicationController
         if (
           post_params[:post_file].nil? || 
           post_params[:post_file].content_type == "image/png" ||
-          post_params[:post_file].content_type == "image/jpeg" ||
-          post_params[:post_file].content_type == "video/mp4"
+          post_params[:post_file].content_type == "image/jpeg"
         )
           if safe and @post.save
             @my_post = MyPost.create(user_id: current_user.id,
@@ -69,7 +68,7 @@ class PostsController < ApplicationController
             format.json { render json: @post.errors, status: :unprocessable_entity }
           end
         else
-          format.html { redirect_to new_post_path(@post.id), alert: "Post non valido. File supportati: jpeg, png, mp4" }
+          format.html { redirect_to new_post_path(@post.id), alert: "Post non valido. File supportati: jpeg, png" }
         end
       else
         format.html { redirect_to new_post_path(@post.id), alert: "Post non valido. Deve essere presente un titolo." }
