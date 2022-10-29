@@ -12,12 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label 'Commento', style: "display: block" %>
-    <%= form.text_area :description %>
+      <h1>Commento</h1>
+      <%= form.text_area :description,style: "width: 500px" %>
+    
     <%= form.hidden_field :post_id, value:params[:post_id] %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit :class=>"button" ,style:"background-color:white"%>
   </div>
 <% end %>

@@ -56,10 +56,11 @@ RSpec.describe ReportedPostsController, type: :controller do
     let(:post) { Post.create(title:"Test") }
     it "return a success response" do
       
-      @reported_post = SavedPost.create(title:post.title,post_id:  post.id, user_id: user.id)
+      @reported_post = SavedPost.create(type:"ReportedPost",title:post.title,post_id:  post.id, user_id: user.id)
       @reported_post.save!
       
       expect(@reported_post.save!).to eq (true)
+      expect(SavedPost.where(type:"ReportedPost")).to include(@reported_post)
     end
   end  
 
@@ -71,6 +72,7 @@ RSpec.describe ReportedPostsController, type: :controller do
     it "return a success response" do
       reported_post.save!
       expect{reported_post.destroy!}.to change { SavedPost.count }.by(-1)
+      expect(SavedPost.all).not_to include(reported_post)
     end
   end  
 
