@@ -6,40 +6,40 @@ Feature: User creates a post
 
     Scenario: User tries to create a blank post
         When I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
+        Then I should be on new-post page
+        And I should see "Post non valido. Deve essere presente un titolo."
 
     Scenario: User tries to create a post w/out Title (Summary)
         When I fill in "Summary" with "Mio riepilogo"
         And I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
+        Then I should be on new-post page
+        And I should see "Post non valido. Deve essere presente un titolo."
 
     Scenario: User tries to create a post w/out Title (Image)
         When I upload an image
         And I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
+        Then I should be on new-post page
+        And I should see "Post non valido. Deve essere presente un titolo."
 
     Scenario: User tries to create a post w/out Title (Video)
         When I upload a video
         And I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
+        Then I should be on new-post page
+        And I should see "Post non valido. Deve essere presente un titolo."
 
     Scenario: User tries to create a post w/out Title (Summary+Image)
         When I fill in "Summary" with "Mio riepilogo"
         And I upload an image
         And I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
+        Then I should be on new-post page
+        And I should see "Post non valido. Deve essere presente un titolo."
 
     Scenario: User tries to create a post w/out Title (Summary+Video)
         When I fill in "Summary" with "Mio riepilogo"
         And I upload a video
         And I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
+        Then I should be on new-post page
+        And I should see "Post non valido. Deve essere presente un titolo."
 
     Scenario: User creates a post (Title)
         When I fill in "Title" with "Mio titolo"
@@ -69,6 +69,7 @@ Feature: User creates a post
     Scenario: User creates a post (Title+Video)
         When I fill in "Title" with "Mio titolo"
         And I upload a video
+        #And I attach the file "app/assets/videos/video.mp4" to "post_post_file"
         And I press "Create Post"
         Then I should be on that post's page
         And I should see the video I uploaded
@@ -123,6 +124,8 @@ Feature: User creates a post
         And I press "Create Post"
         Then I should be on new-post page
         And I should see "Il post contiene un link pericoloso."
+
+
 
     # Scenario: User signs up and creates a post
     #     Given I am on home page
