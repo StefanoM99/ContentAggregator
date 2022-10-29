@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
     end
     
   def after_sign_in_path_for(resource)
-     
+    
     if (current_user.user?)
-     feed_path
-    else
-     current_user
+    #   feed_path
+    # else
+      current_user
     end
   end
   end
