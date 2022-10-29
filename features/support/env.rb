@@ -66,3 +66,5 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 #  end
 #end
 
+include Capybara::RSpecMatchers
+World(Capybara::RSpecMatchers)

@@ -30,7 +30,7 @@ class ReportedPostsController < ApplicationController
 
   # POST /reported_posts or /reported_posts.json
   def create
-    puts(params[:post_file])
+    #puts(params[:post_file])
     @reported_post = ReportedPost.create(
       author: params[:author],
       title: params[:title],
