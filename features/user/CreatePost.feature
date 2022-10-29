@@ -4,10 +4,47 @@ Feature: User creates a post
         Given I signed in as "prova@gmail.com"
         And I am on new-post page
 
+    Scenario: User tries to create a blank post
+        When I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
+
+    Scenario: User tries to create a post w/out Title (Summary)
+        When I fill in "Summary" with "Mio riepilogo"
+        And I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
+
+    Scenario: User tries to create a post w/out Title (Image)
+        When I upload an image
+        And I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
+
+    Scenario: User tries to create a post w/out Title (Video)
+        When I upload a video
+        And I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
+
+    Scenario: User tries to create a post w/out Title (Summary+Image)
+        When I fill in "Summary" with "Mio riepilogo"
+        And I upload an image
+        And I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
+
+    Scenario: User tries to create a post w/out Title (Summary+Video)
+        When I fill in "Summary" with "Mio riepilogo"
+        And I upload a video
+        And I press "Create Post"
+        Then I should be on posts page
+        And I should see "Title can't be blank"
+
     Scenario: User creates a post (Title)
         When I fill in "Title" with "Mio titolo"
         And I press "Create Post"
-        Then I should be on that post page
+        Then I should be on that post's page
         And I should see "Test Prova"
         And I should see "Mio titolo"
 
@@ -15,17 +52,35 @@ Feature: User creates a post
         When I fill in "Title" with "Mio titolo"
         And I fill in "Summary" with "Mio riepilogo"
         And I press "Create Post"
-        Then I should be on that post page
+        Then I should be on that post's page
         And I should see "Test Prova"
         And I should see "Mio titolo"
         And I should see "Mio riepilogo"
+
+    Scenario: User creates a post (Title+Image)
+        When I fill in "Title" with "Mio titolo"
+        And I upload an image
+        And I press "Create Post"
+        Then I should be on that post's page
+        And I should see the image I uploaded
+        And I should see "Test Prova"
+        And I should see "Mio titolo"
+
+    Scenario: User creates a post (Title+Video)
+        When I fill in "Title" with "Mio titolo"
+        And I upload a video
+        And I press "Create Post"
+        Then I should be on that post's page
+        And I should see the video I uploaded
+        And I should see "Test Prova"
+        And I should see "Mio titolo"
 
     Scenario: User creates a post (Title+Summary+Image)
         When I fill in "Title" with "Mio titolo"
         And I fill in "Summary" with "Mio riepilogo"
         And I upload an image
         And I press "Create Post"
-        Then I should be on that post page
+        Then I should be on that post's page
         And I should see the image I uploaded
         And I should see "Test Prova"
         And I should see "Mio titolo"
@@ -36,30 +91,38 @@ Feature: User creates a post
         And I fill in "Summary" with "Mio riepilogo"
         And I upload a video
         And I press "Create Post"
-        Then I should be on that post page
+        Then I should be on that post's page
         And I should see the video I uploaded
         And I should see "Test Prova"
         And I should see "Mio titolo"
         And I should see "Mio riepilogo"
 
+    #Scenario: User tries to create a post uploading something else (Title+File)
+
+    #Scenario: User tries to create a post uploading something else (Title+Summary+File)
+
+    Scenario: User creates a post with a safe link
+        When I fill in "Title" with "Mio titolo"
+        And I fill in "Summary" with "Innocuo https://www.google.it"
+        And I press "Create Post"
+        Then I should be on that post's page
+        And I should see "Test Prova"
+        And I should see "Mio titolo"
+        And I should see "Innocuo https://www.google.it"
+
     Scenario: User tries to create a post with a malware link
         When I fill in "Title" with "Mio titolo"
-        And I fill in "Summary" with "Malevolo: https://testsafebrowsing.appspot.com/s/malware.html"
+        And I fill in "Summary" with "Malevolo https://testsafebrowsing.appspot.com/s/malware.html"
         And I press "Create Post"
         Then I should be on new-post page
         And I should see "Il post contiene un link pericoloso."
 
     Scenario: User tries to create a post with a safe link and a malware link
         When I fill in "Title" with "Mio titolo"
-        And I fill in "Summary" with "Innocuo: https://www.google.it Malevolo: https://testsafebrowsing.appspot.com/s/malware.html"
+        And I fill in "Summary" with "Innocuo https://www.google.it Malevolo https://testsafebrowsing.appspot.com/s/malware.html"
         And I press "Create Post"
         Then I should be on new-post page
         And I should see "Il post contiene un link pericoloso."
-
-    Scenario: User tries to create a post w/out Title
-        When I press "Create Post"
-        Then I should be on posts page
-        And I should see "Title can't be blank"
 
     # Scenario: User signs up and creates a post
     #     Given I am on home page
@@ -78,7 +141,7 @@ Feature: User creates a post
     #     When I fill in "Title" with "Mio titolo"
     #     And I fill in "Summary" with "Mio riepilogo"
     #     And I press "Create Post"
-    #     Then I should be on that post page
+    #     Then I should be on that post's page
     #     And I should see "Autore: Prova Test"
     #     And I should see "Mio titolo"
     #     And I should see "Mio riepilogo"
@@ -96,7 +159,7 @@ Feature: User creates a post
     #     When I fill in "Title" with "Mio titolo"
     #     And I fill in "Summary" with "Mio riepilogo"
     #     And I press "Create Post"
-    #     Then I should be on that post page
+    #     Then I should be on that post's page
     #     And I should see "Test Prova"
     #     And I should see "Mio titolo"
     #     And I should see "Mio riepilogo"

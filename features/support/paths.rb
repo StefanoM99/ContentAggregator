@@ -31,7 +31,7 @@ module NavigationHelpers
     when /^new-post page/
       '/feed/posts/new'
 
-    when /^that post page/
+    when /^that post's page/
       '/feed/posts/'+(Post.find_by user_id: @user.id).id.to_s
 
     when /^posts page/
