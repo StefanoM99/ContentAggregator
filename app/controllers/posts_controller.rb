@@ -42,24 +42,37 @@ class PostsController < ApplicationController
         end
       end
 
-      if safe and @post.save
-        @my_post = MyPost.create(user_id: current_user.id,
-          author: current_user.name + ' ' + current_user.surname,
-          title: post_params[:title],
-          summary: post_params[:summary],
-          post_file: post_params[:post_file],
-          post_id: post_params[:id]
+      if post_params[:title].present?
+        if (
+          post_params[:post_file].nil? || 
+          post_params[:post_file].content_type == "image/png" ||
+          post_params[:post_file].content_type == "image/jpeg" ||
+          post_params[:post_file].content_type == "video/mp4"
         )
+          if safe and @post.save
+            @my_post = MyPost.create(user_id: current_user.id,
+              author: current_user.name + ' ' + current_user.surname,
+              title: post_params[:title],
+              summary: post_params[:summary],
+              post_file: post_params[:post_file],
+              post_id: post_params[:id]
+            )
 
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        if not safe
-          format.html { redirect_to new_post_path(@post.id), alert: "Il post contiene un link pericoloso." }
+            format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+            format.json { render :show, status: :created, location: @post }
+          else
+            if not safe
+              format.html { redirect_to new_post_path(@post.id), alert: "Il post contiene un link pericoloso." }
+            else
+              format.html { render :new, status: :unprocessable_entity }
+            end
+            format.json { render json: @post.errors, status: :unprocessable_entity }
+          end
         else
-          format.html { render :new, status: :unprocessable_entity }
+          format.html { redirect_to new_post_path(@post.id), alert: "Post non valido. File supportati: jpeg, png, mp4" }
         end
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to new_post_path(@post.id), alert: "Post non valido. Deve essere presente un titolo." }
       end
     end
   end
