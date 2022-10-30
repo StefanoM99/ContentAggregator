@@ -15,6 +15,9 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    
+    when /^the ContentAggregator home page/
+      '/'
 
     when /^home page/
       '/home'

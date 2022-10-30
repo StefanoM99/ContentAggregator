@@ -36,7 +36,7 @@
       </button>
       <ul class="dropdown-menu">
         <li><%= link_to "Tutto", user_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Miei Post", user_posts_path(params[:user_id]), class: 'dropdown-item' %></li>
+        <li><%= link_to "I tuoi Post", user_posts_path(params[:user_id]), class: 'dropdown-item' %></li>
         <li><%= link_to "Post MOdificati", edited_user_posts_path(params[:user_id]), class: 'dropdown-item' %></li>
         <li><%= link_to "Post Salvati", starred_user_posts_path(params[:user_id]), class: 'dropdown-item' %></li>
         <li><%= link_to "Post Segnalati", reported_user_posts_path(params[:user_id]), class: 'dropdown-item' %></li>

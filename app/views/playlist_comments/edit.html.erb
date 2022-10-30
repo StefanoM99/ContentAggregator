@@ -1,10 +1,82 @@
-<h1>Editing playlist comment</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ContentAggregator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </head>
 
-<%= render "form", playlist_comment: @playlist_comment %>
+    <body>
+    <!-- > Inizio sezione header -->
+    <header class=" header-active" data-aos="fade-down">
 
-<br>
+  
+    
+        
+          
+          <%= image_tag "logo.png" , :align=> "middle", class: "logoHeader",style: 'max-width:350px;height: auto'%>
+          
+      
+      
+      
+  
+        
 
-<div>
-  <%= link_to "Show this playlist comment", @playlist_comment %> |
-  <%= link_to "Back to playlist comments", playlist_comments_path %>
-</div>
+    </header>
+    <br>
+    <br>
+    <br>
+    
+    <div style="text-align:center" data-aos="fade-down"><h1 style="font-size:80px">Nuovo commento</h1></div>
+    <p style="color: red"><%= alert %></p>
+    <br>
+  <!-- > Inizio sezione centrale -->
+  <div class = "container text-center" >
+   <div class="timeline" data-aos="fade-down">
+   
+  
+<%= render "form", playlist_comment: @playlist_comment,params:{playlist_id: @playlist_comment.playlist_id} %>
+    </div>
+  </div>
+   
+
+    </div>
+    <script>
+     AOS.init();
+    </script>
+  </body>
+</html>
+
+
+
+   <div data-aos="fade-down" class="homefooter">
+        <div class="footer-content" >
+            <h3>© 2022 ContentAggregator ®</h3>
+            <p>Tutti i diritti
+            riservati.<br>Immagini da: Storyset<br><a
+                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
+         
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

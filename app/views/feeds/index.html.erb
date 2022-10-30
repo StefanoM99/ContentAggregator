@@ -23,7 +23,9 @@
     </div>
     <br>
     <div>
-      <%= render "filter", feed: @feed %>
+      <div style="background: #12a112;border-radius: 1rem;padding: 1rem;">
+        <%= render "filter", feed: @feed %>
+      </div>
       <br>
       <% if user_signed_in? %>
       <%= link_to "Nuovo post", new_post_path, class: 'homebutton',style:"text-align:center" %>
@@ -48,13 +50,3 @@
     AOS.init();
   </script>
 </div>
-    <footer data-aos="fade-down">
-        <div class="footer-content" >
-            <h3>© 2022 ContentAggregator ®</h3>
-            <p>Tutti i diritti
-            riservati.<br>Immagini da: Storyset<br><a
-                href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a></p>
-         
-        </div>
-         </footer>
-

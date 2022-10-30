@@ -8,8 +8,6 @@
   <% if @reported_post.post_file.attached? %>
     <% if @reported_post.post_file.content_type.include?("image") %>
       <%= image_tag url_for(@reported_post.post_file), class: "articleimg" %>
-    <% else %>
-      <%= video_tag url_for(@reported_post.post_file), controls: true, style: "width: 100%; height: auto;" %>
     <% end %>
   <% end %>
     <br><br>

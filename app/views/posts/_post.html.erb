@@ -82,7 +82,6 @@
         post_id: post.id
       ), { class: 'buttonclass'} %>  
     <%end%>
-    <!--<%= link_to 'Edit', edit_post_path(post), {class: "btn btn-primary", 'data-bs-toggle'=>"modal", 'data-bs-target'=>"#editPostModal"} %> |-->
     
     <%if current_user && (current_user.id == params[:user_id].to_i || current_user.id == params[:id].to_i )%>
     <%= link_to 'Modifica', edit_post_path(post) ,{ class: 'buttonclass'}%><%= link_to 'Elimina', post, method: :delete, data: { confirm: 'Sei sicuro?' },   class: 'buttonclass' %>
@@ -117,12 +116,3 @@
     <%end%>
   </div>
 </div>
-
-<!--<div class="container mt-3">
-  <h3>Fading Modal Example</h3>
-  <p>Click on the button to open the modal.</p>
-  
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    Open modal
-  </button>
-</div>-->

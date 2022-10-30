@@ -21,14 +21,14 @@
 
     <div class="col-md">
       <%= form.label 'Luogo', style: "display: block" %>
-      <%= form.text_field :place %>
+      <%= form.text_field :place, placeholder: "Inserisci una Città" %>
     </div>
     <br>
   </div>
   <br>
   <div class="row">
     <div class="col-md">
-      <%= form.submit "Submit" %>
+      <%= form.submit "Cerca", :class=>"button" ,style:"background-color:white"%>
     </div>
   </div>
 <% end %>

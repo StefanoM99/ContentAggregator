@@ -106,109 +106,123 @@
     <%end%>
     <p style="color: green"><%= notice %></p>
     <p style="color: red"><%= alert %></p>
-    <br>
-    <div class="dropdown">
-      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-        Content Filter
-      </button>
-      <ul class="dropdown-menu">
-        <li><%= link_to "All", user_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "My Posts", user_posts_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Edited Posts", edited_user_posts_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Starred Posts", starred_user_posts_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Reported Posts", reported_user_posts_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Starred Articles", starred_user_articles_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Reported Articles", reported_user_articles_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Starred Playlists", starred_user_playlists_path(@user), class: 'dropdown-item' %></li>
-        <li><%= link_to "Reported Playlists", reported_user_playlists_path(@user), class: 'dropdown-item' %></li>
-      </ul>
-    </div>
-    <br>
-  
-    <div class="row" id="reported_articles">
-      <% if SavedArticle.where(user_id: params[:id],type: "ReportedArticle").exists?%>
-        <h1 style='font-size:40px'> Articoli Segnalati:</h1> <br>
-      <%end%>
-      
-      <% SavedArticle.where(user_id: params[:id],type: "ReportedArticle").each do |reported_article| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render reported_article %>
-          </li>
-        </ul>
-      <% end %>
+    <div data-aos="fade-right"  style="text-align:center">
       <br>
-      <% if SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").exists?%>
-        <h1 style='font-size:40px'> Playlist Segnalate:</h1> <br>
-      <%end%>
-      
-      <% SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").each do |reported_playlist| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render reported_playlist %>
-          </li>
+      <div class="dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          Filtro Contenuti
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Tutto", user_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "I tuoi Post", user_posts_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Post Modificati", edited_user_posts_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Post Salvati", starred_user_posts_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Post Segnalati", reported_user_posts_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Articoli Salvati", starred_user_articles_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Articoli Segnalati", reported_user_articles_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Playlist Salvate", starred_user_playlists_path(@user), class: 'dropdown-item' %></li>
+          <li><%= link_to "Playlist Segnalate", reported_user_playlists_path(@user), class: 'dropdown-item' %></li>
         </ul>
-      <% end %>
-      
-      <% if SavedPost.where(user_id: params[:id],type: "ReportedPost").exists?%>
-        <h1 style='font-size:40px'> Post Segnalati:</h1> <br>
-      <%end%>
-      
-      <% SavedPost.where(user_id: params[:id],type: "ReportedPost").each do |reported_post| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render reported_post %>
-          </li>
-        </ul>
-      <% end %>
-      
-      <% if SavedArticle.where(user_id: params[:id],type: "StarredArticle").exists?%>
-        <h1 style='font-size:40px'> Articoli Salvati:</h1> <br>
-      <%end%>
-      
-      <% SavedArticle.where(user_id: params[:id],type: "StarredArticle").each do |starred_article| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render starred_article %>
-          </li>
-        </ul>
-      <% end %>
-      
-      <% if SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").exists?%>
-        <h1 style='font-size:40px'> Playlists Salvate:</h1> <br>
-      <%end%>
-      
-      <% SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").each do |starred_playlist| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render starred_playlist %>
-          </li>
-        </ul>
-      <% end %>
-      
-      <% if SavedPost.where(user_id: params[:id],type: "StarredPost").exists?%>
-        <h1 style='font-size:40px'> Post Salvati:</h1> <br>
-      <%end%>
-      
-      <% SavedPost.where(user_id: params[:id],type: "StarredPost").each do |starred_post| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render starred_post %>
-          </li>
-        </ul>
-      <% end %>
-      
-      <% if SavedPost.where(user_id: params[:id],type: "EditedPost").exists?%>
-        <h1 style='font-size:40px'> Post Editati:</h1> <br>
-      <%end%>
-      
-      <% SavedPost.where(user_id: params[:id],type: "EditedPost").each do |edited_post| %>
-        <ul class="col-12 col-lg-4 col-sm-6">
-          <li class="card" data-aos="flip-down">
-            <%= render edited_post %>
-          </li>
-        </ul>
-      <% end %>
+      </div>
+      <br>
+    
+      <div class="row" id="reported_articles">
+        <% if SavedArticle.where(user_id: params[:id],type: "ReportedArticle").exists?%>
+          <h1 style='font-size:40px'> Articoli Segnalati:</h1> <br>
+        <%end%>
+        
+        <% SavedArticle.where(user_id: params[:id],type: "ReportedArticle").each do |reported_article| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render reported_article %>
+            </li>
+          </ul>
+        <% end %>
+        <br>
+        <% if SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").exists?%>
+          <h1 style='font-size:40px'> Playlist Segnalate:</h1> <br>
+        <%end%>
+        
+        <% SavedPlaylist.where(user_id: params[:id],type: "ReportedPlaylist").each do |reported_playlist| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render reported_playlist %>
+            </li>
+          </ul>
+        <% end %>
+        
+        <% if SavedPost.where(user_id: params[:id],type: "ReportedPost").exists?%>
+          <h1 style='font-size:40px'> Post Segnalati:</h1> <br>
+        <%end%>
+        
+        <% SavedPost.where(user_id: params[:id],type: "ReportedPost").each do |reported_post| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render reported_post %>
+            </li>
+          </ul>
+        <% end %>
+        
+        <% if SavedArticle.where(user_id: params[:id],type: "StarredArticle").exists?%>
+          <h1 style='font-size:40px'> Articoli Salvati:</h1> <br>
+        <%end%>
+        
+        <% SavedArticle.where(user_id: params[:id],type: "StarredArticle").each do |starred_article| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render starred_article %>
+            </li>
+          </ul>
+        <% end %>
+        
+        <% if SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").exists?%>
+          <h1 style='font-size:40px'> Playlists Salvate:</h1> <br>
+        <%end%>
+        
+        <% SavedPlaylist.where(user_id: params[:id],type: "StarredPlaylist").each do |starred_playlist| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render starred_playlist %>
+            </li>
+          </ul>
+        <% end %>
+        
+        <% if SavedPost.where(user_id: params[:id],type: "StarredPost").exists?%>
+          <h1 style='font-size:40px'> Post Salvati:</h1> <br>
+        <%end%>
+        
+        <% SavedPost.where(user_id: params[:id],type: "StarredPost").each do |starred_post| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render starred_post %>
+            </li>
+          </ul>
+        <% end %>
+        
+        <% if SavedPost.where(user_id: params[:id],type: "EditedPost").exists?%>
+          <h1 style='font-size:40px'> Post Editati:</h1> <br>
+        <%end%>
+        
+        <% SavedPost.where(user_id: params[:id],type: "EditedPost").each do |edited_post| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render edited_post %>
+            </li>
+          </ul>
+        <% end %>
+
+        <% if Post.where(user_id: params[:id]).exists?%>
+          <h1 style='font-size:40px'> I tuoi post:</h1> <br>
+        <%end%>
+
+        <% Post.where(user_id: params[:id]).each do |my_post| %>
+          <ul class="col-12 col-lg-4 col-sm-6">
+            <li class="card" data-aos="flip-down">
+              <%= render my_post %>
+            </li>
+          </ul>
+        <% end %>
+      </div>
     </div>
   </div>
   

@@ -13,14 +13,14 @@
     <% end %>
 
     <div>
-      <%= form.label 'Commento', style: "display: block" %>
-      <%= form.text_area :description %>
+        <h1>Commento</h1>
+      <%= form.text_area :description,style: "width: 500px" %>
       <%= form.hidden_field :article_id, value:params[:article_id] %>
     </div>
-
+  <br>
     <div>
       <% hidden_field_tag :article_id, '2' %>
-      <%= form.submit %>
+      <%= form.submit :class=>"button" ,style:"background-color:white"%>
     </div>
   <% end %>
 </div>

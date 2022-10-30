@@ -1,6 +1,6 @@
 <%= form_with(model: post, multipart: true) do |form| %>
   <% if post.errors.any? %>
-    <div style="color: red">
+    <div style="color: red;text-align:center">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
@@ -15,18 +15,18 @@
     <%= form.label :title, "Titolo", style: "display: block" %>
     <%= form.text_area :title %>
   </div>
-
+<br><br>
   <div>
     <%= form.label :summary, "Sommario", style: "display: block" %>
     <%= form.text_area :summary %>
   </div>
-
+<br>
   <div>
     <%= form.label :post_file, "Inserisci foto (jpeg o png)", style: "display: block" %>
     <%= form.file_field :post_file, accept: 'image/jpeg,image/png' %>
   </div>
-
+  <br><br>
   <div>
-    <%= form.submit %>
+    <%= form.submit :class=>"button" ,style:"background-color:white"%>
   </div>
 <% end %>

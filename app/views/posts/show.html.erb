@@ -8,8 +8,6 @@
     <% if @post.post_file.attached? %>
       <% if @post.post_file.content_type.include?("image") %>
         <%= image_tag url_for(@post.post_file), class: "articleimg" %>
-      <% else %>
-        <%= video_tag url_for(@post.post_file), controls: true, style: "width: 100%; height: auto;" %>
       <% end %>
     <% end %>
     <br><br>
@@ -52,6 +50,15 @@
     </div>
     
     <br><br>
+
+    <%if current_user%>
+      <%= link_to 'Commenta', new_post_comment_path(
+        user_id: current_user.id,
+        post_id: @post.id
+      ), { class: 'homebutton'} %>  
+    <%end%>
+
+    <br><br>
     
     <%if current_user &&  current_user.id == @post.user_id%>
       <%= button_to "Elimina questo post", @post, method: :delete,class:"homebutton" %>
@@ -74,6 +81,8 @@
       </div>
     </div>
   <%else%>
+  <br><br>
+  </div>
     <footer data-aos="fade-down">
       <div class="footer-content" >
         <h3>© 2022 ContentAggregator ®</h3>
@@ -87,4 +96,4 @@
   <script>
     AOS.init();
   </script>
-</div>
+
