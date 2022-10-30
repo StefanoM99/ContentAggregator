@@ -10,14 +10,14 @@ ContentAggregator è un’applicazione che punta ad aggregare contenuti fruibili
 identificabili tramite URL, possono essere di diversa tipologia (video, immagini, articoli, ecc.) e di diversa categoria (notizie, 
 cucina, sport, tecnologia, ecc.). Possono essere filtrati in base alla tipologia, alla categoria e al luogo di interesse.
 L’app prevede tre diversi __ruoli__:
-- <u>utente non registrato</u>: può visualizzare parte dei contenuti senza poterci interagire; può registrarsi
+- _utente non registrato_: può visualizzare parte dei contenuti senza poterci interagire; può registrarsi
 al servizio attraverso il servizio stesso oppure mediante Google o Twitter (tramite __OAuth__);
-- <u>utente registrato</u>: ha la possibilità di modificare le informazioni del proprio profilo e di eliminarlo;
+- _utente registrato_: ha la possibilità di modificare le informazioni del proprio profilo e di eliminarlo;
 può creare post, visualizzabili nella home e nella propria pagina profilo, e interagire con essi
 attraverso operazioni di modifica ed eliminazione; può inoltre interagire con i post di qualsiasi
 utente mediante le operazioni di aggiunta ai preferiti (che li renderà visibili nella propria pagina di
 profilo), segnalazione e commento;
-- <u>admin</u>: ha la possibilità di visualizzare i post segnalati e di eliminarli.
+- _admin_: ha la possibilità di visualizzare i post segnalati e di eliminarli.
 
 L’app prevede la possibilità di effettuare una ricerca degli utenti registrati e l’interazione tra essi
 mediante l’operazione “segui”, che renderà i post dell’utente seguito visualizzabili nella propria
