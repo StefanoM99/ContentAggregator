@@ -37,6 +37,9 @@ module NavigationHelpers
     when /^posts page/
       '/feed/posts'
 
+    when /^reported-posts page/
+      '/users/0/reported_posts'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
