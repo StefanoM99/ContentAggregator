@@ -31,8 +31,10 @@
                     <td><%= user.decorated_created_at %></td>
                     <!-- se l'utente è loggato e non è un admin.. -->
                     <% if current_user and current_user.user? %>
-                        <!-- ..e non possiede follower -->
-                        <% if current_user.followers==[] %>
+                        <!-- Follower -->
+                        <% if current_user == user %>
+                            <td></td>
+                        <% elsif current_user.followers==[] %>
                             <td>No</td>
                         <% else %>
                             <% var = false %>
@@ -47,8 +49,10 @@
                                 <td>No</td>
                             <% end %>
                         <% end %>
-                        <!-- ..e non followa nessuno -->
-                        <% if current_user.followees==[] %>
+                        <!-- Followees -->
+                        <% if current_user == user %>
+                            <td></td>
+                        <% elsif current_user.followees==[] %>
                             <td>No</td>
                         <% else %>
                             <% var = false %>
