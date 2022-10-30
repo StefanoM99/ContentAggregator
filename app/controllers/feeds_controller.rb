@@ -97,26 +97,29 @@ class FeedsController < ApplicationController
 
     psize = featured_playlists.size-1
     
-    for i in 0..psize do
-      if Playlist.where(name: featured_playlists[i].name,
-        spotify_url: featured_playlists[i].external_urls["spotify"],
-        description: featured_playlists[i].description).empty? && Blacklist.where(name: featured_playlists[i].name,spotify_url: featured_playlists[i].external_urls["spotify"]).empty?
-       Playlist.create(
-        country: params[:country],
-        name: featured_playlists[i].name,
-        description: featured_playlists[i].description,
-        spotify_url: featured_playlists[i].external_urls["spotify"],
-        spotify_img: featured_playlists[i].images[0]["url"],
-        tracks: featured_playlists[i].tracks.map{|t| [
-          t.name,
-          t.artists.map{|a| a.name},
-          t.album.images[0]["url"],
-          t.external_urls["spotify"],
-          t.preview_url,
-        ]}        
-      )
-      
-    end
+    begin
+      for i in 0..psize do
+        if Playlist.where(name: featured_playlists[i].name,
+          spotify_url: featured_playlists[i].external_urls["spotify"],
+          description: featured_playlists[i].description).empty? && Blacklist.where(name: featured_playlists[i].name,spotify_url: featured_playlists[i].external_urls["spotify"]).empty?
+            Playlist.create(
+            country: params[:country],
+            name: featured_playlists[i].name,
+            description: featured_playlists[i].description,
+            spotify_url: featured_playlists[i].external_urls["spotify"],
+            spotify_img: featured_playlists[i].images[0]["url"],
+            tracks: featured_playlists[i].tracks.map{|t| [
+              t.name,
+              t.artists.map{|a| a.name},
+              t.album.images[0]["url"],
+              t.external_urls["spotify"],
+              t.preview_url,
+            ]}        
+          )
+        end
+      end
+    rescue RestClient::ServiceUnavailable
+      redirect_to "/pages/err_503"
     end
 
     #article controller
