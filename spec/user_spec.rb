@@ -15,7 +15,7 @@ end
 
 RSpec.describe UsersController, type: :controller do
     context "GET /show user and admin" do
-        let(:user) { User.create(:email => 'testo@test.com', :password => 'password', :password_confirmation => 'password', :name=>"Prova",:surname =>"Test") }
+        let(:user) { User.create(:email => 'testo@test.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"Prova",:surname =>"Test") }
             it "return a success response" do 
       
             sign_in user

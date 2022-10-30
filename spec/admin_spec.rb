@@ -14,7 +14,7 @@ end
 
 RSpec.describe UsersController, type: :controller do
   context "GET /show user and admin" do
-    let(:user) { User.create(:email => 'testo@test.com', :password => 'password', :password_confirmation => 'password', :name=>"test",:surname =>"test") }
+    let(:user) { User.create(:email => 'testo@test.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test") }
     it "return a success response" do 
       
       sign_in user
@@ -52,7 +52,7 @@ end
 RSpec.describe ReportedPostsController, type: :controller do
 
   context "create a reported post" do
-    let(:user) { User.create(:email => 'testo@test.com', :password => 'password', :password_confirmation => 'password', :name=>"test",:surname =>"test") }
+    let(:user) { User.create(:email => 'testo@test.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test") }
     let(:post) { Post.create(title:"Test") }
     it "return a success response" do
       
@@ -65,7 +65,7 @@ RSpec.describe ReportedPostsController, type: :controller do
   end  
 
   context "delete a reported post" do
-    let(:user) { User.create(:email => 'testo@test.com', :password => 'password', :password_confirmation => 'password', :name=>"test",:surname =>"test") }
+    let(:user) { User.create(:email => 'testo@test.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test") }
     let(:post) { Post.create(title:"Test") }
     
     let(:reported_post) { SavedPost.create(type:"ReportedPost",post_id:post.id,user_id:user.id) }

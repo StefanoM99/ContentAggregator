@@ -19,7 +19,7 @@ Given('I signed in as {string}') do |email|
         end
     rescue
     ensure
-        @user = User.new(:name => 'Test', :surname => 'Prova', :email => email, :password => 'password', :password_confirmation => 'password')
+        @user = User.new(:name => 'Test', :surname => 'Prova', :email => email, :password => 'P4ssword', :password_confirmation => 'P4ssword')
         @user.save
         visit path_to("home page")
         fill_in('E-Mail', :with => @user.email)
@@ -44,7 +44,7 @@ Given('I signed in as admin') do
         end
     rescue
     ensure
-        @user = User.create(:name=>'admin', :surname =>'admin', :email => 'admin@admin.com', :password => 'password', :password_confirmation => 'password', :id=>0, :role=>1)
+        @user = User.create(:name=>'admin', :surname =>'admin', :email => 'admin@admin.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :id=>0, :role=>1)
         @user.save
         visit path_to("home page")
         fill_in('E-Mail', :with => @user.email)
@@ -92,7 +92,7 @@ Given('there is 1 reported post by {string} with title {string} and summary {str
         end
     rescue
     ensure
-        @author = User.new(:name => name, :surname => surname, :email => name+surname+'@gmail.com', :password => 'password', :password_confirmation => 'password')
+        @author = User.new(:name => name, :surname => surname, :email => name+surname+'@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
         @author.save
         @post = Post.new(author: @author.name+" "+@author.surname, title: title, summary: summary, post_file: nil, user_id: @author.id)
         @post.save
@@ -139,7 +139,7 @@ Given('there are {int} reported posts by {string}') do |int, full_name|
         end
     rescue
     ensure
-        @author = User.new(:name => name, :surname => surname, :email => name+surname+'@gmail.com', :password => 'password', :password_confirmation => 'password')
+        @author = User.new(:name => name, :surname => surname, :email => name+surname+'@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
         @author.save
         for i in 1..int do
             @post = Post.new(author: @author.name+" "+@author.surname, title: 'Titolo '+(i).to_s+' post ', summary: 'Sommario', post_file: nil, user_id: @author.id)
@@ -196,7 +196,7 @@ Given('there is 1 reported post by {string} and 9 other reported posts') do |ful
         end
     rescue
     ensure
-        @author = User.new(:name => name, :surname => surname, :email => name+surname+'@gmail.com', :password => 'password', :password_confirmation => 'password')
+        @author = User.new(:name => name, :surname => surname, :email => name+surname+'@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
         @author.save
         @post = Post.new(author: @author.name+" "+@author.surname, title: "Titolo", summary: "Sommario", post_file: nil, user_id: @author.id)
         @post.save
@@ -209,7 +209,7 @@ Given('there is 1 reported post by {string} and 9 other reported posts') do |ful
         end
     rescue
     ensure
-        @author2 = User.new(:name => "Altro", :surname => "Autore", :email => "Altro"+"Autore"+'@gmail.com', :password => 'password', :password_confirmation => 'password')
+        @author2 = User.new(:name => "Altro", :surname => "Autore", :email => "Altro"+"Autore"+'@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
         @author2.save
         for i in 1..9 do
             @post2 = Post.new(author: @author2.name+" "+@author2.surname, title: 'Titolo '+(i).to_s+' post ', summary: 'Sommario', post_file: nil, user_id: @author2.id)

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :encrypted_password, presence: true
 
-  #validate :password_complexity
+  validate :password_complexity
   def password_complexity
     if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
       errors.add :password, "deve contenere almeno una lettera minuscola, una lettera maiuscola e un numero"
