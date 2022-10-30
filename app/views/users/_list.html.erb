@@ -64,7 +64,7 @@
                             <% end %>
                         <% end %>
                     <% elsif current_user %>
-                        <td><%= link_to "Elimina account", user, method: :delete %></td>
+                        <td><%= button_to "Elimina account", user, method: :delete, class: "btn btn-sm btn-outline-danger" %></td>
                     <% end %>
                 </tr>
             <% end %>
