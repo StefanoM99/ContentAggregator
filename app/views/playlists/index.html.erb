@@ -21,7 +21,9 @@
       </ul>
     </div>
     <br>
-    <%= render "filter", playlist: @playlist %>
+    <div style="background: #12a112;border-radius: 1rem;padding: 1rem;">
+      <%= render "filter", playlist: @playlist %>
+    </div>
     <br><br>
     <div class="row" id="playlists">
       <% @playlists.each do |playlist| %>

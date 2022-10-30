@@ -1,5 +1,5 @@
 <%= form_with model: @forecast, url: '/forecasts', method: :get do |form| %>
   <%= form.label 'Luogo', style: "display: block" %>
-  <%= form.text_field :place %>
-  <%= form.submit "Submit" %>
+  <%= form.text_field :place, placeholder: "Inserisci una Città" %>
+  <%= form.submit "Cerca", :class=>"button" ,style:"background-color:white" %>
 <% end %>

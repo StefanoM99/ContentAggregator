@@ -21,7 +21,9 @@
       </ul>
     </div>
     <br>
-    <%= render "filter", forecast: @forecast %>
+    <div style="background: #12a112;border-radius: 1rem;padding: 1rem;">
+      <%= render "filter", forecast: @forecast %>
+    </div>
     <br>
     <div class="row" id="forecasts">
       <% @forecasts.each do |forecast| %>

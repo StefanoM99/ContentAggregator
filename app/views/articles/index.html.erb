@@ -21,7 +21,9 @@
       </ul>
     </div>
     <br>
-    <%= render "filter", article: @article %>
+    <div style="background: #12a112;border-radius: 1rem;padding: 1rem;">
+      <%= render "filter", article: @article %>
+    </div>
     <br><br>
     <div class="row" id="articles">
       <% @articles.each do |article| %>

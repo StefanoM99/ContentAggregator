@@ -8,8 +8,6 @@
     <% if @post.post_file.attached? %>
       <% if @post.post_file.content_type.include?("image") %>
         <%= image_tag url_for(@post.post_file), class: "articleimg" %>
-      <% else %>
-        <%= video_tag url_for(@post.post_file), controls: true, style: "width: 100%; height: auto;" %>
       <% end %>
     <% end %>
     <br><br>
@@ -51,6 +49,15 @@
       <%end%>
     </div>
     
+    <br><br>
+
+    <%if current_user%>
+      <%= link_to 'Commenta', new_post_comment_path(
+        user_id: current_user.id,
+        post_id: @post.id
+      ), { class: 'homebutton'} %>  
+    <%end%>
+
     <br><br>
     
     <%if current_user &&  current_user.id == @post.user_id%>

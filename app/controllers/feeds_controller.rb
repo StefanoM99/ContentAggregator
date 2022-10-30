@@ -166,20 +166,32 @@ class FeedsController < ApplicationController
     followee = User.all.pluck(:id)
     end
   if params[:country] == nil && params[:category] == nil
-    @feeds = Forecast.all.reverse() + Post.where(user_id: followee).reverse() + Playlist.where(country: nil) + Article.where(category: "general").reverse()
-    @feeds= @feeds.shuffle()
+    @feeds = Forecast.all.reverse() + (
+      Post.where(user_id: followee).reverse() + 
+      Playlist.where(country: nil) + 
+      Article.where(category: "general").reverse()
+    ).shuffle()
     else
       if params[:country] == nil && params[:category] != nil
-       @feeds = Forecast.all.reverse() + Post.where(user_id: followee).reverse() + Playlist.all + Article.where(category: query["category"]).reverse()  
-       @feeds= @feeds.shuffle()
+       @feeds = Forecast.all.reverse() + (
+        Post.where(user_id: followee).reverse() + 
+        Playlist.all + 
+        Article.where(category: query["category"]).reverse()
+      ).shuffle()
       else
         if params[:country] != nil && params[:category] == nil
-          @feeds = Forecast.all.reverse() + Post.where(user_id: followee).reverse() + Playlist.where(country: query["country"])+ Article.where(country: query["country"]).reverse()  
-           @feeds= @feeds.shuffle()
+          @feeds = Forecast.all.reverse() + (
+            Post.where(user_id: followee).reverse() + 
+            Playlist.where(country: query["country"])+ 
+            Article.where(country: query["country"]).reverse()
+          ).shuffle()
       else
         if params[:country] != nil && params[:category] != nil
-          @feeds = Forecast.all.reverse() +Post.where(user_id: followee).reverse() + Playlist.where(country: query["country"])+ Article.where(country: query["country"],category: query["category"]).reverse() 
-          @feeds= @feeds.shuffle()
+          @feeds = Forecast.all.reverse() + (
+            Post.where(user_id: followee).reverse() + 
+            Playlist.where(country: query["country"])+ 
+            Article.where(country: query["country"],category: query["category"]).reverse()
+          ).shuffle()
         end 
       end
     end
