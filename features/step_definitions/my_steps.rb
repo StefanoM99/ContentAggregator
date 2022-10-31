@@ -22,7 +22,7 @@ Given('I signed in as {string}') do |email|
         @user = User.new(:name => 'Test', :surname => 'Prova', :email => email, :password => 'P4ssword', :password_confirmation => 'P4ssword')
         @user.save
         visit path_to("home page")
-        fill_in('E-Mail', :with => @user.email)
+        fill_in('Username', :with => @user.email)
         fill_in('Password', :with => @user.password)
         click_button('Accedi')
     end
@@ -47,7 +47,7 @@ Given('I signed in as admin') do
         @user = User.create(:name=>'admin', :surname =>'admin', :email => 'admin@admin.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :id=>0, :role=>1)
         @user.save
         visit path_to("home page")
-        fill_in('E-Mail', :with => @user.email)
+        fill_in('Username', :with => @user.email)
         fill_in('Password', :with => @user.password)
         click_button('Accedi')
     end

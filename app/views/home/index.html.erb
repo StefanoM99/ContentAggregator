@@ -37,7 +37,7 @@
         
         <div class="col" style="text-align:center"  data-aos="fade-left">
           <%= form_for(:user,  url: session_path(:user)) do |form| %>
-           <%= form.email_field :email ,class:"form",placeholder:"E-Mail"%>
+           <%= form.text_field :email ,class:"form",placeholder:"Username"%>
             <br>
             <%= form.password_field :password ,class:"form",placeholder:"Password"%>
             <br>

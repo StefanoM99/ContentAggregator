@@ -13,14 +13,14 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                > Aggiorna la mia email
+                > Aggiorna il mio username
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accountAccordionFlush">
                 <div class="accordion-body">
                     <%= form_with(model: current_user) do |form| %>
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Inserisci la nuova email:</label>
+                            <label for="inputEmail" class="form-label">Inserisci il nuovo username:</label>
                             <%= form.text_field :email, class: "form-control", :disabled => (current_user.provider!=nil) %>
                         </div>
                         <%= form.submit "Esegui", class: "btn btn-primary", :disabled => (current_user.provider!=nil) %>
