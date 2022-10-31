@@ -25,7 +25,7 @@
     </small>
 
     <div class="container mt-3">
-      <%if PlaylistComment.find_by(playlist_id: reported_playlist.playlist_id)%>
+      <%if PlaylistComment.find_by(playlist_id: reported_playlist.playlist_id).nil?%>
         <p><i>Nessun commento</i></p>
       <%else%>
         <div id="accordion">

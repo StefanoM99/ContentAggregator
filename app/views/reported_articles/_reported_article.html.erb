@@ -35,7 +35,7 @@
     </small>
 
     <div class="container mt-3">
-      <%if ArticleComment.find_by(article_id: reported_article.article_id)%>
+      <%if ArticleComment.find_by(article_id: reported_article.article_id).nil?%>
         <p><i>Nessun commento</i></p>
       <%else%>
         <div id="accordion">

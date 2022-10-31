@@ -35,37 +35,37 @@
     </small>
 
     <div class="container mt-3">
-      <div id="accordion">
-        <div class="d-grid">
-          <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= starred_article.id %>">
-            VISUALIZZA/NASCONDI COMMENTI
-          </a>
-        </div>
-        <div id="collapse_<%= starred_article.id %>" class="collapse" data-bs-parent="#accordion">
-          <br>
-          <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
-            <thead style="background-color:green; color:white;">
-              <tr>
-                <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
-                <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if current_user && ArticleComment.find_by(article_id: starred_article.article_id)%>
+      <%if ArticleComment.find_by(article_id: starred_article.article_id).nil?%>
+        <p><i>Nessun commento</i></p>
+      <%else%>
+        <div id="accordion">
+          <div class="d-grid">
+            <a class="buttonclass" data-bs-toggle="collapse" href="#collapse_<%= starred_article.id %>">
+              VISUALIZZA/NASCONDI COMMENTI
+            </a>
+          </div>
+          <div id="collapse_<%= starred_article.id %>" class="collapse" data-bs-parent="#accordion">
+            <br>
+            <table class="table table-hover table-sm" style="border-collapse: collapse; width: 100%;">
+              <thead style="background-color:green; color:white;">
+                <tr>
+                  <th scope="col" style="border: 1px solid #dddddd;">AUTORE</th>
+                  <th scope="col" style="border: 1px solid #dddddd;">COMMENTO</th>
+                </tr>
+              </thead>
+              <tbody>
                 <%ArticleComment.where(article_id: starred_article.article_id).each do |comment|%>
                   <tr>
                     <td style="border: 1px solid #dddddd;"><%= comment.author %></td>
                     <td style="border: 1px solid #dddddd;"><%= comment.description %></td> 
                   </tr>
-                  <%end%>
                 <%end%>
               </tbody>
             </table>
           </div>
         </div>
-      </div>
-    
-
+      <%end%>
+    </div>
   </div>
 
   <div class="card-footer">
