@@ -99,6 +99,14 @@ rails db:migrate
 ```
 
 ```bash
+rails db:seed
+```
+
+```bash
+rails db:reset
+```
+
+```bash
 rails server
 ```
 

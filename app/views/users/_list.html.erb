@@ -20,7 +20,7 @@
             </tr>
             <% users.each do |user| %>
                 <!-- ometti l'admin -->
-                <% next if user.id==0 %>
+                <% next if user.role=="admin" %>
                 <tr>
                     <% if not current_user or current_user.user? %>
                         <td><%= link_to(user.full_name, user_path(user)) %></td>
