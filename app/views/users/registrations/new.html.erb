@@ -45,7 +45,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
             <%= form.text_field :name ,class:"form",placeholder:"Nome"%>
             <%= form.text_field :surname ,class:"form",placeholder:"Cognome"%>
-            <%= form.email_field :email ,class:"form",placeholder:"E-Mail"%>
+            <%= form.text_field :email ,class:"form",placeholder:"Username"%>
             
             <% if @minimum_password_length %>
     
