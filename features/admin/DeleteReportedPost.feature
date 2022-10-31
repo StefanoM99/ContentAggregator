@@ -1,4 +1,4 @@
-@admin
+@admin @post
 Feature: Admin deletes a reported post
 
     Background:
@@ -58,4 +58,3 @@ Feature: Admin deletes a reported post
         Then I should be on reported-posts page
         And I should not see "Autore DelPost"
         And I should see 9 "Elimina"
-

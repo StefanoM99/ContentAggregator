@@ -43,6 +43,12 @@ module NavigationHelpers
     when /^reported-posts page/
       '/users/0/reported_posts'
 
+    when /^reported-playlists page/
+      '/users/0/reported_playlists'
+
+    when /^reported-articles page/
+      '/users/0/reported_articles'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

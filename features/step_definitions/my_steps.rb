@@ -101,6 +101,48 @@ Given('there is 1 reported post by {string} with title {string} and summary {str
     end
 end
 
+Given('there is 1 reported playlist with the url {string}') do |url|
+    if (ReportedPlaylist.all != {})
+        ReportedPlaylist.all.each do |rep_playlist|
+            rep_playlist.destroy
+        end
+    end
+    begin
+        if (User.find_by email: ('reporter@gmail.com')) != {}
+            (User.find_by email: ('reporter@gmail.com')).destroy
+        end
+    rescue
+    ensure
+        @reporter = User.new(:name => "Reporter", :surname => "DellaPlaylist", :email => 'reporter@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
+        @reporter.save
+        @playlist = Playlist.new(spotify_url: url)
+        @playlist.save
+        @reported_playlist = ReportedPlaylist.new(spotify_url: @playlist.spotify_url, playlist_id: @playlist.id, user_id: @reporter.id)
+        @reported_playlist.save
+    end
+end
+
+Given('there is 1 reported article with title {string} and description {string}') do |title, description|
+    if (ReportedArticle.all != {})
+        ReportedArticle.all.each do |rep_article|
+            rep_article.destroy
+        end
+    end
+    begin
+        if (User.find_by email: ('reporter@gmail.com')) != {}
+            (User.find_by email: ('reporter@gmail.com')).destroy
+        end
+    rescue
+    ensure
+        @reporter = User.new(:name => "Reporter", :surname => "DellaPlaylist", :email => 'reporter@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
+        @reporter.save
+        @article = Article.new(title: title, description: description)
+        @article.save
+        @reported_article = ReportedArticle.new(title: @article.title, description: @article.description, user_id: @reporter.id, article_id: @article.id)
+        @reported_article.save
+    end
+end
+
 # Given('there are 2 reported posts by "Autore DelPost"') do
 #     @author = User.new(:name => 'Autore', :surname => 'DelPost', :email => 'autore@gmail.com', :password => 'password', :password_confirmation => 'password')
 #     @author.save
@@ -216,6 +258,60 @@ Given('there is 1 reported post by {string} and 9 other reported posts') do |ful
             @post2.save
             @reported_post2 = ReportedPost.new(author: @author2.name+" "+@author2.surname, title: 'Titolo '+(i).to_s+' post ', summary: 'Sommario', post_file: nil, user_id: 1, post_id: @post2.id)
             @reported_post2.save
+        end
+    end
+end
+
+Given('there is 1 reported playlist with the url {string} and {int} other') do |url, int|
+    if (ReportedPlaylist.all != {})
+        ReportedPlaylist.all.each do |rep_playlist|
+            rep_playlist.destroy
+        end
+    end
+    begin
+        if (User.find_by email: ('reporter@gmail.com')) != {}
+            (User.find_by email: ('reporter@gmail.com')).destroy
+        end
+    rescue
+    ensure
+        @reporter = User.new(:name => "Reporter", :surname => "DellaPlaylist", :email => 'reporter@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
+        @reporter.save
+        @playlist = Playlist.new(spotify_url: url)
+        @playlist.save
+        @reported_playlist = ReportedPlaylist.new(spotify_url: @playlist.spotify_url, playlist_id: @playlist.id, user_id: @reporter.id)
+        @reported_playlist.save
+        for i in 1..int do
+            @playlist2 = Playlist.new(spotify_url: "https://open.spotify.com/playlist/"+i.to_s+"esempio")
+            @playlist2.save
+            @reported_playlist2 = ReportedPlaylist.new(spotify_url: @playlist2.spotify_url, playlist_id: @playlist2.id, user_id: @reporter.id)
+            @reported_playlist2.save
+        end
+    end
+end
+    
+Given('there is 1 reported article with title {string} and description {string} and {int} other') do |title, description, int|
+    if (ReportedArticle.all != {})
+        ReportedArticle.all.each do |rep_article|
+            rep_article.destroy
+        end
+    end
+    begin
+        if (User.find_by email: ('reporter@gmail.com')) != {}
+            (User.find_by email: ('reporter@gmail.com')).destroy
+        end
+    rescue
+    ensure
+        @reporter = User.new(:name => "Reporter", :surname => "DellaPlaylist", :email => 'reporter@gmail.com', :password => 'P4ssword', :password_confirmation => 'P4ssword')
+        @reporter.save
+        @article = Article.new(title: title, description: description)
+        @article.save
+        @reported_article = ReportedArticle.new(title: @article.title, description: @article.description, user_id: @reporter.id, article_id: @article.id)
+        @reported_article.save
+        for i in 1..int do
+            @article2 = Article.new(title: "Altro "+i.to_s, description: "Articolo "+i.to_s)
+            @article2.save
+            @reported_article2 = ReportedArticle.new(title: @article2.title, description: @article2.description, user_id: @reporter.id, article_id: @article2.id)
+            @reported_article2.save
         end
     end
 end
