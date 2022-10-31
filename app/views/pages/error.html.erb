@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+ 
+    <head>
+        <title>ContentAggregator</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_link_tag "main" %>
+        <%= stylesheet_link_tag "application.js", "data-turbo-track": "reload" %>
+        <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    </head>
+
+    <body>
+        <%= render :partial => 'shared/header' %>
+
+        <!-- > Inizio sezione centrale -->
+        <div class="container">    
+            <div class="row vh-100 align-items-center ">
+                <div class="col-sm" style="text-align:center;margin-bottom:200px" data-aos="fade-right" >
+                    <%= image_tag "Computer troubleshooting-bro.svg", height: 600,style: 'max-width:600px' %>
+                </div>
+                <div class="col" style="text-align:center"  data-aos="fade-left">
+                    <h1 style="font-size:80px">Qualcosa è andato storto!</h1><br>
+                </div>
+            </div>
+        </div>
+            <!-- > Inizio sezione footer -->
+        <div class="homefooter" data-aos="fade-down">
+            <div class="footer-content" >
+                <h3>© 2022 ContentAggregator ®</h3>
+                <p>
+                    Tutti i diritti riservati.
+                    <br>Immagini da: Storyset
+                    <br><a href="https://github.com/StefanoM99/ContentAggregator">github.com/StefanoM99/ContentAggregator</a>
+                </p>
+            </div>
+        </div>
+    
+        <script>
+            AOS.init();
+        </script>
+    </body>
+
+</html>

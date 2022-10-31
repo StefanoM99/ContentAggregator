@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get "pages/users"
   get "pages/contacts"
   get "pages/err_503"
+  get "pages/error"
   # Ricerca Utenti
   post '/users/:id/follow', to: "users#follow", as: "follow_user"
   post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"

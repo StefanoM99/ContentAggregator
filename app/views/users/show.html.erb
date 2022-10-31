@@ -78,16 +78,16 @@
 
     <%if current_user && current_user.id.to_i == params[:id].to_i%>
     <div style="text-align:center">
-      <%if current_user.avatar_url == nil %>
+      <%if current_user.avatar_url == nil or current_user.avatar_url = "" %>
         <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",class:"propic"%>
       <%else%>
         <%= image_tag current_user.avatar_url,class:"propic"%>
       <%end%>
-      <h1 style='font-size:80px'><b>Ciao <%=current_user.name%></b></h1>
+      <h1 style='font-size:80px'><b>Ciao <%=current_user.full_name%></b></h1>
     </div>
     <%else%>
      <div style="text-align:center">
-     <%if User.find(params[:id].to_i).avatar_url == nil %>
+     <%if User.find(params[:id].to_i).avatar_url == nil or User.find(params[:id].to_i).avatar_url == "" %>
      <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",class:"propic"%>
       <%else%>
     <%= image_tag User.find(params[:id].to_i).avatar_url,class:"propic"%>
