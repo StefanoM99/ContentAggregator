@@ -51,8 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
   end
 
   create_table "articles", force: :cascade do |t|
-    t.integer "feed_id"
-    t.integer "user_id"
     t.string "country"
     t.string "category"
     t.string "source"
@@ -65,8 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
     t.date "publication"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["feed_id"], name: "index_articles_on_feed_id"
-    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "blacklists", force: :cascade do |t|
@@ -80,11 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "feeds", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followee_id"
@@ -93,7 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
   end
 
   create_table "forecasts", force: :cascade do |t|
-    t.integer "feed_id"
     t.string "place"
     t.float "lat"
     t.float "lon"
@@ -109,7 +99,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
     t.integer "grnd_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["feed_id"], name: "index_forecasts_on_feed_id"
   end
 
   create_table "playlist_comments", force: :cascade do |t|
@@ -124,8 +113,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
   end
 
   create_table "playlists", force: :cascade do |t|
-    t.integer "feed_id"
-    t.integer "user_id"
     t.string "country"
     t.string "name"
     t.text "description"
@@ -134,8 +121,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
     t.text "tracks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["feed_id"], name: "index_playlists_on_feed_id"
-    t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -150,7 +135,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "feed_id"
     t.integer "user_id"
     t.string "author"
     t.text "title"
@@ -158,7 +142,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
     t.string "post_file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["feed_id"], name: "index_posts_on_feed_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -237,16 +220,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_113312) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "article_comments", "articles"
   add_foreign_key "article_comments", "users"
-  add_foreign_key "articles", "feeds"
-  add_foreign_key "articles", "users"
-  add_foreign_key "forecasts", "feeds"
   add_foreign_key "playlist_comments", "playlists"
   add_foreign_key "playlist_comments", "users"
-  add_foreign_key "playlists", "feeds"
-  add_foreign_key "playlists", "users"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "post_comments", "users"
-  add_foreign_key "posts", "feeds"
   add_foreign_key "posts", "users"
   add_foreign_key "saved_articles", "articles"
   add_foreign_key "saved_articles", "users"

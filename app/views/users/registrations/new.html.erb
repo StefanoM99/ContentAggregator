@@ -50,7 +50,7 @@
             <% if @minimum_password_length %>
     
     <% end %><br />
-            <%= form.password_field :password ,class:"form",placeholder:"Password (Minimo 6 caratteri)"%><br>
+            <%= form.password_field :password ,class:"form",placeholder:"Password (Minimo 6 caratteri,1 numero,1 maiuscola)"%><br>
              <%= form.password_field :password_confirmation ,class:"form",placeholder:"Conferma Password"%><br>
             <%= form.submit :class=> "button", :style=> "background-color:white", :value=>"Registrati"%> 
        <% end %>

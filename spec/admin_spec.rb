@@ -1,5 +1,7 @@
 require 'rails_helper'
-
+require 'spec_helper'
+include Warden::Test::Helpers
+Warden.test_mode!
 RSpec.describe HomeController, type: :controller do
   context "GET /index" do
     it "return a success response" do 
@@ -76,6 +78,56 @@ RSpec.describe ReportedPostsController, type: :controller do
     end
   end  
 
- 
 
 end 
+
+
+RSpec.describe UsersController, type: :controller do
+  context "delete a reported article" do
+  let(:admin) {User.create(:email => 'admin@admin.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test",:role=>1)}
+  let(:userr) {User.create(:email => 'test@test.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test")}
+  let(:article) { Article.create }
+  let(:reported_article) { SavedArticle.create(type:"ReportedArticle",article_id:article.id,user_id:userr.id) }
+  
+ 
+  it "return a success response " do
+
+    reported_article.save!
+    
+    expect(response).to have_http_status(:ok)
+    expect{reported_article.destroy!}.to change { SavedArticle.count }.by(-1)
+  end
+  
+  it "add it to blacklist" do 
+    blacklist = Blacklist.create
+    blacklist.save!
+    expect{blacklist.destroy!}.to change { Blacklist.count }.by(-1)
+  end
+end
+
+
+context "delete a reported playlist" do
+  let(:admin) {User.create(:email => 'admin@admin.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test",:role=>1)}
+  let(:userr) {User.create(:email => 'test@test.com', :password => 'P4ssword', :password_confirmation => 'P4ssword', :name=>"test",:surname =>"test")}
+  let(:playlist) { Playlist.create }
+  let(:reported_playlist) { SavedPlaylist.create(type:"ReportedPlaylist",playlist_id:playlist.id,user_id:userr.id) }
+  
+ 
+  it "return a success response " do
+
+    reported_playlist.save!
+    
+    expect(response).to have_http_status(:ok)
+    expect{reported_playlist.destroy!}.to change { SavedPlaylist.count }.by(-1)
+  end
+  
+  it "add it to blacklist" do 
+    blacklist = Blacklist.create
+    blacklist.save!
+    expect{blacklist.destroy!}.to change { Blacklist.count }.by(-1)
+  end
+end
+
+
+
+end
